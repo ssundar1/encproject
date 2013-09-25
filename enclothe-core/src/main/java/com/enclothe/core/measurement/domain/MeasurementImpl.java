@@ -50,7 +50,7 @@ public class MeasurementImpl implements Measurement {
         strategy="org.broadleafcommerce.common.persistence.IdOverrideTableGenerator",
         parameters = {
             @Parameter(name="segment_value", value="MeasurementImpl"),
-            @Parameter(name="entity_name", value="org.broadleafcommerce.core.catalog.domain.MeasurementImpl")
+            @Parameter(name="entity_name", value="com.enclothe.core.measurement.domain.MeasurementImpl")
         }
     )
     @AdminPresentation(friendlyName = "MeasurementImpl_Measurement_Id", group = "MeasurementImpl_Primary_Key",
