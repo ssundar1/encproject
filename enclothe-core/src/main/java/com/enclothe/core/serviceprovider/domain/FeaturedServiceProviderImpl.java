@@ -20,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Parameter;
 
-
+ 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "ENC_SERVICE_PROVIDER_FEATURED")
