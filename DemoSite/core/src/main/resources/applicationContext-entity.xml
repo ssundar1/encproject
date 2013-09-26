@@ -28,5 +28,16 @@
         <bean id="com.enclothe.core.measurement.domain.Measurement" 
         class="com.enclothe.core.measurement.domain.MeasurementImpl" 
         scope="prototype"/>   
-        
+        <bean id="com.enclothe.core.dm.order.domain.EncOrderItemStates" 
+        class="com.enclothe.core.order.domain.EncOrderItemStatesImpl" 
+        scope="prototype"/>  
+        <bean id="org.broadleafcommerce.core.order.domain.OrderItem" 
+        class="com.enclothe.core.dm.order.domain.EncOrderItemImpl" 
+        scope="prototype"/>  
+        <bean id="com.enclothe.core.dm.order.domain.EncOrderItemStateDetail" 
+        class="com.enclothe.core.dm.order.domain.EncOrderItemStateDetailImpl" 
+        scope="prototype"/>  
+       <bean id="com.enclothe.core.common.domain.UserCategory" 
+        class="com.enclothe.core.common.domain.UserCategoryImpl" 
+        scope="prototype"/>  
 </beans>
