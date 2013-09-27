@@ -45,12 +45,13 @@ public class EncOrderItemStateDetailImpl  implements EncOrderItemStateDetail
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_currentOwner", order=10, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected Long currentOwner;
 
-  @Column(name="ORDER_ITEM_ID", nullable=true)
-  @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_orderItemId", order=30, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
-  protected Long orderItemId;
+  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemImpl.class, optional=false)
+  @JoinColumn(name="ORDER_ITEM_ID")
+  @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_orderItemId", order=20, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
+  protected EncOrderItem orderItem;
 
-  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemStates.class, optional=false)
-  @JoinColumn(name="CURRENT_STATE_ID", referencedColumnName="ORDER_ITEM_STATE_ID")
+ @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemStatesImpl.class, optional=false)
+  @JoinColumn(name="ORDER_ITEM_STATE_ID")
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_currentStateId", order=30, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected EncOrderItemStates orderItemState;
 
@@ -58,12 +59,12 @@ public class EncOrderItemStateDetailImpl  implements EncOrderItemStateDetail
   protected Auditable auditable = new Auditable();
 
   @Column(name="EXPECTED_DELIVERY_DATE")
-  @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_expectedDeliverDate", order=200, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
+  @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_expectedDeliverDate", order=40, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected Date expectedDeliverDate;
 
   @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=UserCategoryImpl.class, optional=false)
   @JoinColumn(name="OWNER_CATEGORY_ID", referencedColumnName="USER_CATEGORY_ID")
-  @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_userCategory", order=200, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
+  @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_userCategory", order=50, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected UserCategory userCategory;
 
   public Long getId()
@@ -83,14 +84,14 @@ public class EncOrderItemStateDetailImpl  implements EncOrderItemStateDetail
     this.currentOwner = currentOwner;
   }
 
-  public Long getOrderItemId()
-  {
-    return this.orderItemId;
-  }
-
-  public void setOrderItemId(Long orderItemId) {
-    this.orderItemId = orderItemId;
-  }
+//  public Long getOrderItemId()
+//  {
+//    return this.orderItemId;
+//  }
+//
+//  public void setOrderItemId(Long orderItemId) {
+//    this.orderItemId = orderItemId;
+//  }
 
   public Date getExpectedDeliverDate()
   {
@@ -116,4 +117,12 @@ public class EncOrderItemStateDetailImpl  implements EncOrderItemStateDetail
   public void setOrderItemState(EncOrderItemStates orderItemState) {
     this.orderItemState = orderItemState;
   }
+  
+  public EncOrderItem getOrderItem() {
+	    return this.orderItem;
+	  }
+
+	  public void setOrderItem(EncOrderItem orderItem) {
+	    this.orderItem = orderItem;
+	  }
 }

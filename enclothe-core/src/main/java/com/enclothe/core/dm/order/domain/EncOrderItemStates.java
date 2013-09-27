@@ -5,9 +5,9 @@ import java.util.Date;
 
 public abstract interface EncOrderItemStates extends Serializable
 {
-  public abstract Long getOrderStateName();
+  public abstract String getOrderStateName();
 
-  public abstract void setOrderStateName(Long paramLong);
+  public abstract void setOrderStateName(String paramLong);
 
   public abstract String getOrderItemStateshortDesc();
 

@@ -14,8 +14,8 @@ public abstract interface EncOrderItemStateDetail extends Serializable
 
   public abstract void setCurrentOwner(Long paramLong);
 
-  public abstract void setOrderItemId(Long paramLong);
-
+  public EncOrderItem getOrderItem();
+  public void setOrderItem(EncOrderItem orderItem);
   public abstract Date getExpectedDeliverDate();
 
   public abstract void setExpectedDeliverDate(Date paramDate);

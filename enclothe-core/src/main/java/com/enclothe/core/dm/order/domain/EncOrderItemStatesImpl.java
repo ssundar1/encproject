@@ -18,27 +18,31 @@ import org.broadleafcommerce.common.presentation.client.VisibilityEnum;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+
+@Entity
 @EntityListeners({AuditableListener.class})
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="ENC_ORDER_ITEM_STATES")
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
 @AdminPresentationClass(populateToOneFields=PopulateToOneFieldsEnum.TRUE, friendlyName="OrderItemStatesImpl_base")
-public class EncOrderItemStatesImpl
-  implements EncOrderItemStates
-{
+public class EncOrderItemStatesImpl  implements EncOrderItemStates{
   private static final long serialVersionUID = -7172331591443319429L;
 
   @Id
   @GeneratedValue(generator="OrderItemStatesId")
-  @GenericGenerator(name="OrderItemStatesId", strategy="org.broadleafcommerce.common.persistence.IdOverrideTableGenerator", parameters={@org.hibernate.annotations.Parameter(name="segment_value", value="OrderItemStatesImpl"), @org.hibernate.annotations.Parameter(name="entity_name", value="com.enclothe.core.order.domain.OrderItemStatesImpl")})
+  @GenericGenerator(name="OrderItemStatesId", strategy="org.broadleafcommerce.common.persistence.IdOverrideTableGenerator", parameters={@org.hibernate.annotations.Parameter(name="segment_value", value="OrderItemStatesImpl"), @org.hibernate.annotations.Parameter(name="entity_name", value="com.enclothe.core.dm.order.domain.OrderItemStatesImpl")})
   @AdminPresentation(friendlyName="OrderItemStatesImpl_Id", group="OrderItemStatesImpl_Primary_Key", visibility=VisibilityEnum.HIDDEN_ALL)
   @Column(name="ORDER_ITEM_STATE_ID", nullable=false)
   protected Long id;
 
   @Column(name="ORDER_ITEM_STATE_NAME")
   @AdminPresentation(friendlyName="OrderItemStatesImpl_orderStateName", order=20, group="OrderItemStatesImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
-  protected Long orderStateName;
+  protected String orderStateName;
 
   @Column(name="ORDER_ITEM_STATE_SHORT_DESC")
   @AdminPresentation(friendlyName="OrderItemStatesImpl_OrderItemStateshortDesc", order=30, group="OrderItemStatesImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
@@ -55,12 +59,12 @@ public class EncOrderItemStatesImpl
   @Embedded
   protected Auditable auditable = new Auditable();
 
-  public Long getOrderStateName()
+  public String getOrderStateName()
   {
     return this.orderStateName;
   }
 
-  public void setOrderStateName(Long orderStateName) {
+  public void setOrderStateName(String orderStateName) {
     this.orderStateName = orderStateName;
   }
 

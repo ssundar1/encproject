@@ -59,12 +59,13 @@ public class EncOrderItemStateTransitionImpl
   @AdminPresentation(friendlyName="EncOrderItemStateTransitionImpl_prevOwnerCategory", order=200, group="EncOrderItemStateTransitionImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected UserCategory prevOwnerCategory;
 
-  @Column(name="ORDER_ITEM_ID", nullable=true)
-  @AdminPresentation(friendlyName="EncOrderItemStateTransitionImpl_orderItemId", order=30, group="EncOrderItemStateTransitionImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
-  protected Long orderItemId;
+  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemImpl.class, optional=false)
+  @JoinColumn(name="ORDER_ITEM_ID")
+  @AdminPresentation(friendlyName="EncOrderItemStateTransitionImpl_orderItemId", order=20, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
+  protected EncOrderItem orderItem;
 
-  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemStates.class, optional=false)
-  @JoinColumn(name="ORDER_STATE_ID", referencedColumnName="ORDER_ITEM_STATE_ID")
+  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemStatesImpl.class, optional=false)
+  @JoinColumn(name="ORDER_ITEM_STATE_ID")
   @AdminPresentation(friendlyName="EncOrderItemStateTransitionImpl_orderItemState", order=30, group="EncOrderItemStateTransitionImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected EncOrderItemStates orderItemState;
 
@@ -125,13 +126,13 @@ public class EncOrderItemStateTransitionImpl
     this.prevOwnerCategory = prevOwnerCategory;
   }
 
-  public Long getOrderItemId() {
-    return this.orderItemId;
-  }
+  public EncOrderItem getOrderItem() {
+	    return this.orderItem;
+	  }
 
-  public void setOrderItemId(Long orderItemId) {
-    this.orderItemId = orderItemId;
-  }
+	  public void setOrderItem(EncOrderItem orderItem) {
+	    this.orderItem = orderItem;
+	  }
 
   public EncOrderItemStates getOrderItemState()
   {

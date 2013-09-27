@@ -6,12 +6,13 @@
              
     <persistence-unit name="blPU" transaction-type="RESOURCE_LOCAL">
         <non-jta-data-source>jdbc/web</non-jta-data-source>
-        <class>com.enclothe.core.customer.domain.EncCustomerImpl</class>
+       <class>com.enclothe.core.customer.domain.EncCustomerImpl</class>
         <class>com.enclothe.core.measurement.domain.MeasurementImpl</class>
-        <class>com.enclothe.core.dm.order.domain.EncOrderItemImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStatesImpl</class>
+        <class>com.enclothe.core.dm.order.domain.EncOrderItemImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStateDetailImpl</class>
         <class>com.enclothe.core.common.domain.UserCategoryImpl</class>
+        <class>com.enclothe.core.dm.order.domain.EncOrderItemStateTransitionImpl</class>
         
         <exclude-unlisted-classes/>
     </persistence-unit>

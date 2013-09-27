@@ -25,9 +25,8 @@ public abstract interface EncOrderItemStateTransition extends Serializable
 
   public abstract void setPrevOwnerCategory(UserCategory paramUserCategory);
 
-  public abstract Long getOrderItemId();
-
-  public abstract void setOrderItemId(Long paramLong);
+  public EncOrderItem getOrderItem();
+  public void setOrderItem(EncOrderItem orderItem);
 
   public abstract EncOrderItemStates getOrderItemState();
 
