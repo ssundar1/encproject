@@ -2,20 +2,26 @@ package com.enclothe.core.dm.order.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
-public interface EncOrderItemStates extends  Serializable  {
+public abstract interface EncOrderItemStates extends Serializable
+{
+  public abstract Long getOrderStateName();
 
-	public Long getOrderStateName(); 
-	public void setOrderStateName(Long orderItemStateName);
-	public String getOrderItemStateshortDesc(); 
-	public void setOrderItemStateshortDesc(String orderItemStateShortDesc) ;
-	public String getOrderItemStateLongDesc(); 
-	public void setOrderStateItemLongDesc(String orderStateItemLongDesc) ;
-public Long getId() ;
-public void setId(Long id) ;
-public Date getEndDate();
-public void setEndDate(Date endDate);
-	
+  public abstract void setOrderStateName(Long paramLong);
 
+  public abstract String getOrderItemStateshortDesc();
+
+  public abstract void setOrderItemStateshortDesc(String paramString);
+
+  public abstract String getOrderItemStateLongDesc();
+
+  public abstract void setOrderStateItemLongDesc(String paramString);
+
+  public abstract Long getId();
+
+  public abstract void setId(Long paramLong);
+
+  public abstract Date getEndDate();
+
+  public abstract void setEndDate(Date paramDate);
 }
