@@ -11,16 +11,21 @@ import javax.persistence.Table;
 
 import org.broadleafcommerce.common.presentation.AdminPresentationCollection;
 import org.broadleafcommerce.common.presentation.client.AddMethodType;
+import org.broadleafcommerce.core.order.domain.DiscreteOrderItemImpl;
 import org.broadleafcommerce.core.order.domain.OrderItemImpl;
 
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
+import com.enclothe.core.product.domain.EncDesign;
+import com.enclothe.core.product.domain.EncDesignImpl;
+import com.enclothe.core.product.domain.EncMaterial;
+import com.enclothe.core.product.domain.EncMaterialImpl;
 
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="ENC_ORDER_ITEM")
-public class EncOrderItemImpl extends OrderItemImpl implements EncOrderItem{
+public class EncOrderItemImpl extends DiscreteOrderItemImpl implements EncOrderItem{
   private static final long serialVersionUID = 6545097668293683751L;
 
   @OneToOne(targetEntity=EncOrderItemStatesImpl.class, optional=false)
@@ -38,7 +43,32 @@ public class EncOrderItemImpl extends OrderItemImpl implements EncOrderItem{
   @AdminPresentationCollection(friendlyName="EncOrderItemImpl_state_detail", order=20, addType=AddMethodType.PERSIST, tab="EncOrderItemImpl_Advanced_Tab", tabOrder=3000)
   protected Measurement measurement;
 
-  @Override
+  @OneToOne(targetEntity=EncMaterialImpl.class, optional=false)
+  @JoinColumn(name="ORDER_ITEM_MATERIAL_ID")
+  @AdminPresentationCollection(friendlyName="EncOrderItemImpl_state_detail", order=30, addType=AddMethodType.PERSIST, tab="EncOrderItemImpl_Advanced_Tab", tabOrder=3000)
+  protected EncMaterial material;
+  
+  @OneToOne(targetEntity=EncDesignImpl.class, optional=false)
+  @JoinColumn(name="ORDER_ITEM_DESIGN_ID")
+  @AdminPresentationCollection(friendlyName="EncOrderItemImpl_state_detail", order=40, addType=AddMethodType.PERSIST, tab="EncOrderItemImpl_Advanced_Tab", tabOrder=3000)
+  protected EncDesign design;
+  
+  public EncMaterial getMaterial() {
+	return material;
+}
+public void setMaterial(EncMaterial material) {
+	this.material = material;
+}
+public EncDesign getDesign() {
+	return design;
+}
+public void setDesign(EncDesign design) {
+	this.design = design;
+}
+public void setOrderItemStateDetail(EncOrderItemStateDetail orderItemStateDetail) {
+	this.orderItemStateDetail = orderItemStateDetail;
+}
+@Override
   public Measurement getMeasurement() {
 	return measurement;
 }
@@ -62,10 +92,6 @@ public void setMeasurement(Measurement measurement) {
       return this.orderItemStateDetail;
   }
 
-  @Override
-  public void setOrderItemState(EncOrderItemStateDetail orderItemStateDetail) {
-	   this.orderItemStateDetail = orderItemStateDetail;
-  }
   
   
   public static class Presentation
