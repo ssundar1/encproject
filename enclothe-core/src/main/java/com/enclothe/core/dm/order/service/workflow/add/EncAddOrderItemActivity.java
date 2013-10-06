@@ -21,7 +21,9 @@ import org.broadleafcommerce.core.order.service.workflow.add.AddOrderItemActivit
 import com.enclothe.core.dm.order.domain.EncOrderItem;
 import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
+import com.enclothe.core.dm.order.service.EncOrderItemRequest;
 import com.enclothe.core.dm.order.service.EncOrderItemService;
+import com.enclothe.core.product.domain.EncDesign;
 
 public class EncAddOrderItemActivity extends AddOrderItemActivity {
 	 EncOrderItem item;
@@ -46,9 +48,17 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         Order order = request.getOrder();
         Sku sku = catalogService.findSkuById(orderItemRequestDTO.getSkuId());
         
+        Sku designSku =null;               
+        
         Product product = null;
         if (orderItemRequestDTO.getProductId() != null) {
             product = catalogService.findProductById(orderItemRequestDTO.getProductId());
+        }
+        
+        Product encDesign = null;
+        if (orderItemRequestDTO.getDesignId() !=  null) {
+        	encDesign = catalogService.findProductById(orderItemRequestDTO.getDesignId());
+        	designSku = catalogService.findSkuById(orderItemRequestDTO.getDesignSkuId());
         }
         
         Category category = null;
@@ -62,15 +72,18 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
 
         EncOrderItem item;
         if (product == null || !(product instanceof ProductBundle)) {
-            DiscreteOrderItemRequest itemRequest = new DiscreteOrderItemRequest();
+            EncOrderItemRequest itemRequest = new EncOrderItemRequest();
             itemRequest.setCategory(category);
             itemRequest.setProduct(product);
             itemRequest.setSku(sku);
             itemRequest.setQuantity(orderItemRequestDTO.getQuantity());
+            
             itemRequest.setItemAttributes(orderItemRequestDTO.getItemAttributes());
             itemRequest.setOrder(order);
             itemRequest.setSalePriceOverride(orderItemRequestDTO.getOverrideSalePrice());
             itemRequest.setRetailPriceOverride(orderItemRequestDTO.getOverrideRetailPrice());
+            itemRequest.setDesign((EncDesign) encDesign);
+            itemRequest.setDesignSku(designSku);
             item = (EncOrderItem) orderItemService.createDiscreteOrderItem(itemRequest);
         } else {
             ProductBundleOrderItemRequest bundleItemRequest = new ProductBundleOrderItemRequest();

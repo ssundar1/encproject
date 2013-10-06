@@ -19,12 +19,12 @@ import org.broadleafcommerce.common.presentation.client.AddMethodType;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.broadleafcommerce.core.order.domain.OrderItemImpl;
+import org.broadleafcommerce.core.order.domain.DiscreteOrderItemImpl;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "ENC_ORDER_ITEM")
-public class EncOrderItemImpl extends OrderItemImpl implements EncOrderItem {
+public class EncOrderItemImpl extends DiscreteOrderItemImpl implements EncOrderItem {
 
 	private static final long serialVersionUID = 6545097668293683751L;
 	

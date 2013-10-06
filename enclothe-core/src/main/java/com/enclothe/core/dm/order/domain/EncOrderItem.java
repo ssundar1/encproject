@@ -2,8 +2,10 @@ package com.enclothe.core.dm.order.domain;
 
 
 
+import org.broadleafcommerce.core.catalog.domain.Sku;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.domain.OrderItem;
+
 
 
 
@@ -27,8 +29,11 @@ public interface EncOrderItem extends DiscreteOrderItem{
 	Measurement getMeasurement();
 
 	void setMeasurement(Measurement measurement);
-	 public EncMaterial getMaterial();
-		public void setMaterial(EncMaterial material) ;
+//	 public EncMaterial getMaterial();
+//		public void setMaterial(EncMaterial material) ;
 		public EncDesign getDesign() ;
 		public void setDesign(EncDesign design);
+		
+		public Sku getDesignSku();
+		public void setDesignSku(Sku designSku);
 }

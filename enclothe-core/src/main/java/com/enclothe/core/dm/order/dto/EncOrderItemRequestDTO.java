@@ -10,57 +10,71 @@ package com.enclothe.core.dm.order.dto;
 //import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.order.service.call.OrderItemRequestDTO;
 import org.broadleafcommerce.core.order.service.call.ProductBundleOrderItemRequest;
+import org.broadleafcommerce.core.web.order.model.AddToCartItem;
 
 import com.enclothe.core.dm.order.domain.EncOrderItem;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncMaterial;
 
-public class EncOrderItemRequestDTO extends OrderItemRequestDTO{
+public class EncOrderItemRequestDTO extends AddToCartItem{
 
 	    
-    protected EncMaterial material;
-    protected EncDesign design;
-    protected Measurement measurement;
-//    protected EncOrderItem encOrderItem;
-//    
-//
-//	public EncOrderItem getEncOrderItem() {
-//		return encOrderItem;
-//	}
-//
-//	public void setEncOrderItem(EncOrderItem encOrderItem) {
-//		this.encOrderItem = encOrderItem;
-//	}
+   // protected EncMaterial material;
+    protected Long designId;
+    protected Long measurementId;
+    protected Long designSkuId;
 
-	public Measurement getMeasurement() {
-		return measurement;
+	public Long getDesignSkuId() {
+		return designSkuId;
 	}
 
-	public void setMeasurement(Measurement measurement) {
-		this.measurement = measurement;
+	public void setDesignSkuId(Long designSkuId) {
+		this.designSkuId = designSkuId;
 	}
 
 	EncOrderItemRequestDTO()
     {
     	super();
     }
-    
-    public EncMaterial getMaterial() {
-		return material;
-	}
-	public void setMaterial(EncMaterial material) {
-		this.material = material;
-	}
-	
-	 public EncDesign getDesign() {
-			return design;
-		}
 
-		public void setDesign(EncDesign design) {
-			this.design = design;
-		}
+	public Long getDesignId() {
+		return designId;
+	}
+
+	public void setDesignId(Long designId) {
+		this.designId = designId;
+	}
+
+	public Long getMeasurementId() {
+		return measurementId;
+	}
+
+	public void setMeasurementId(Long measurementId) {
+		this.measurementId = measurementId;
+	}
+
+	@Override
+	public String toString() {
+		return "EncOrderItemRequestDTO [designId=" + designId
+				+ ", measurementId=" + measurementId + ", getSkuId()="
+				+ getSkuId() + ", getCategoryId()=" + getCategoryId()
+				+ ", getProductId()=" + getProductId() + ", getQuantity()="
+				+ getQuantity() + ", getItemAttributes()="
+				+ getItemAttributes() + ", getOrderItemId()="
+				+ getOrderItemId() + ", getOverrideSalePrice()="
+				+ getOverrideSalePrice() + ", getOverrideRetailPrice()="
+				+ getOverrideRetailPrice() + "]";
+	}
     
+//    public EncMaterial getMaterial() {
+//		return material;
+//	}
+//	public void setMaterial(EncMaterial material) {
+//		this.material = material;
+//	}
+	
+	
     
     
 }

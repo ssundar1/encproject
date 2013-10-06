@@ -3,6 +3,7 @@ package com.enclothe.core.dm.order.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.broadleafcommerce.core.catalog.domain.Sku;
 import org.broadleafcommerce.core.order.domain.BundleOrderItem;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItemFeePrice;
 import org.broadleafcommerce.core.order.service.call.AbstractOrderItemRequest;
@@ -14,15 +15,23 @@ import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncMaterial;
 
 
-	public class EncOrderItemRequest extends AbstractOrderItemRequest {
+	public class EncOrderItemRequest extends DiscreteOrderItemRequest {
 
-	    protected EncOrderItem encOrderItem;
-	    protected EncMaterial material;
+	    protected EncOrderItem encOrderItem;	    
 	    protected EncDesign design;
 	    protected Measurement measurement;
+	    protected Sku designSku;
 	    
 	    public Measurement getMeasurement() {
 			return measurement;
+		}
+
+		public Sku getDesignSku() {
+			return designSku;
+		}
+
+		public void setDesignSku(Sku designSku) {
+			this.designSku = designSku;
 		}
 
 		public void setMeasurement(Measurement measurement) {
@@ -36,15 +45,7 @@ import com.enclothe.core.product.domain.EncMaterial;
 	    }
 
 	    public EncOrderItemRequest(AbstractOrderItemRequest request) {
-	        setCategory(request.getCategory());
-	        setItemAttributes(request.getItemAttributes());
-	        setPersonalMessage(request.getPersonalMessage());
-	        setProduct(request.getProduct());
-	        setQuantity(request.getQuantity());
-	        setSku(request.getSku());
-	        setOrder(request.getOrder());
-	        setSalePriceOverride(request.getSalePriceOverride());
-	        setRetailPriceOverride(request.getRetailPriceOverride());
+	        super(request);
 	    }
 
 
@@ -55,12 +56,7 @@ import com.enclothe.core.product.domain.EncMaterial;
 	        returnRequest.setDiscreteOrderItemFeePrices(discreteOrderItemFeePrices);
 	        return returnRequest;
 	    }
-	    public EncMaterial getMaterial() {
-			return material;
-		}
-		public void setMaterial(EncMaterial material) {
-			this.material = material;
-		}
+
 		
 		 public EncDesign getDesign() {
 				return design;
@@ -77,12 +73,5 @@ import com.enclothe.core.product.domain.EncMaterial;
 	        this.encOrderItem = bundleOrderItem;
 	    }
 
-	    public List<DiscreteOrderItemFeePrice> getDiscreteOrderItemFeePrices() {
-	        return discreteOrderItemFeePrices;
-	    }
-
-	    public void setDiscreteOrderItemFeePrices(
-	            List<DiscreteOrderItemFeePrice> discreteOrderItemFeePrices) {
-	        this.discreteOrderItemFeePrices = discreteOrderItemFeePrices;
-	    }
+	   
 }
