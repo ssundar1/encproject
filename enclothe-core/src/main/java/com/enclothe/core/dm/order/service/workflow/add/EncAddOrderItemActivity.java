@@ -106,24 +106,6 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         request.setOrder(order);
         request.setAddedOrderItem(item);
         
-        
-       
-		
-		
-		if(orderItemRequestDTO.getDesign() == null && orderItemRequestDTO.getMaterial() == null)
-			 super.execute(context);
-		 else
-		 {
-			 item = new EncOrderItemImpl();
-		item.setDesign(orderItemRequestDTO.getDesign());
-		item.setMaterial(orderItemRequestDTO.getMaterial());
-		request.setAddedOrderItem(item);
-		super.execute(context);
-		 }
         return context;
-		 
-		
-		
-			
 		}
 }
