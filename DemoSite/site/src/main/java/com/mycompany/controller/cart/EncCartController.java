@@ -17,26 +17,18 @@
 package com.mycompany.controller.cart;
 
 
-import org.broadleafcommerce.core.catalog.domain.Product;
 import org.broadleafcommerce.core.order.service.exception.AddToCartException;
-import org.broadleafcommerce.core.order.service.exception.ProductOptionValidationException;
-import org.broadleafcommerce.core.order.service.exception.RemoveFromCartException;
-import org.broadleafcommerce.core.order.service.exception.RequiredAttributeNotProvidedException;
-import org.broadleafcommerce.core.order.service.exception.UpdateCartException;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
-import org.broadleafcommerce.core.web.controller.cart.BroadleafCartController;
-import org.broadleafcommerce.core.web.order.CartState;
-import org.broadleafcommerce.core.web.order.model.AddToCartItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
+
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,11 +54,10 @@ public class EncCartController extends CartController {
     @RequestMapping(value = "/add", produces = "application/json")
     public @ResponseBody Map<String, Object> addJson(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
-        Map<String, Object> responseMap = new HashMap<String, Object>();
-        try {
-            return super.add(request, response, model, addToCartItem);
-
+       
+        return super.addJson(request, response, model, addToCartItem);
     }
+    
     
     /*
      * The Heat Clinic does not support adding products with required product options from a category browse page
@@ -76,12 +67,8 @@ public class EncCartController extends CartController {
     @RequestMapping(value = "/add", produces = { "text/html", "*/*" })
     public String add(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
-        try {
+
             return super.add(request, response, model, addToCartItem);
-        } catch (AddToCartException e) {
-            Product product = catalogService.findProductById(addToCartItem.getProductId());
-            return "redirect:" + product.getUrl();
-        }
     }
     
  
