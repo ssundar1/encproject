@@ -29,8 +29,7 @@ public interface EncOrderItem extends DiscreteOrderItem{
 	Measurement getMeasurement();
 
 	void setMeasurement(Measurement measurement);
-//	 public EncMaterial getMaterial();
-//		public void setMaterial(EncMaterial material) ;
+
 		public EncDesign getDesign() ;
 		public void setDesign(EncDesign design);
 		

@@ -8,10 +8,7 @@ import javax.annotation.Resource;
 import org.broadleafcommerce.common.money.Money;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItemFeePrice;
-import org.broadleafcommerce.core.order.domain.OrderItemAttribute;
-import org.broadleafcommerce.core.order.domain.OrderItemAttributeImpl;
 import org.broadleafcommerce.core.order.service.OrderItemServiceImpl;
-import org.broadleafcommerce.core.order.service.call.AbstractOrderItemRequest;
 import org.broadleafcommerce.core.order.service.type.OrderItemType;
 
 import com.enclothe.core.dm.order.dao.EncOrderItemDao;
@@ -36,12 +33,12 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	        //final EncOrderItem item = (EncOrderItem) orderItemDao.create();
 	       populateDiscreteOrderItem(item, itemRequest);
 	        
-	       Money matMoney = itemRequest.getSku().getSalePrice();
-	       Money desMoney = itemRequest.getDesignSku().getSalePrice();
+	       Money matSalePrice = itemRequest.getSku().getSalePrice();
+	       Money desSalePrice = itemRequest.getDesignSku().getSalePrice();
 	       Money matRetailPrice = itemRequest.getSku().getRetailPrice();
 	       Money desRetailPrice = itemRequest.getDesignSku().getRetailPrice();
 	        
-	        item.setBaseSalePrice(itemRequest.getSalePriceOverride()==null?(matMoney.add(desMoney)):itemRequest.getSalePriceOverride());
+	        item.setBaseSalePrice(itemRequest.getSalePriceOverride()==null?(matSalePrice.add(desSalePrice)):itemRequest.getSalePriceOverride());
 	        item.setBaseRetailPrice(matRetailPrice.add(desRetailPrice));
 	        item.setDiscreteOrderItemFeePrices(itemRequest.getDiscreteOrderItemFeePrices());
 

@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mycompany</groupId>
-    <artifactId>ecommerce-website</artifactId>
+    <artifactId>Demosite</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>ecommerce</name>
+    <name>Demosite</name>
     <url>http://www.blc-archetype.com</url>
     <properties>
         <blc.version>3.0.0-GA</blc.version>
