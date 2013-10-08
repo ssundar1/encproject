@@ -8,18 +8,13 @@ import org.broadleafcommerce.core.catalog.domain.ProductBundle;
 import org.broadleafcommerce.core.catalog.domain.Sku;
 import org.broadleafcommerce.core.catalog.service.CatalogService;
 import org.broadleafcommerce.core.order.domain.Order;
-import org.broadleafcommerce.core.order.domain.OrderItem;
-import org.broadleafcommerce.core.order.service.OrderItemService;
 import org.broadleafcommerce.core.order.service.OrderService;
-import org.broadleafcommerce.core.order.service.call.DiscreteOrderItemRequest;
-import org.broadleafcommerce.core.order.service.call.OrderItemRequestDTO;
 import org.broadleafcommerce.core.order.service.call.ProductBundleOrderItemRequest;
 import org.broadleafcommerce.core.order.service.workflow.CartOperationContext;
 import org.broadleafcommerce.core.order.service.workflow.CartOperationRequest;
 import org.broadleafcommerce.core.order.service.workflow.add.AddOrderItemActivity;
 
 import com.enclothe.core.dm.order.domain.EncOrderItem;
-import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.dm.order.service.EncOrderItemRequest;
 import com.enclothe.core.dm.order.service.EncOrderItemService;
