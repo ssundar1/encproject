@@ -13,7 +13,10 @@
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStateDetailImpl</class>
         <class>com.enclothe.core.common.domain.UserCategoryImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStateTransitionImpl</class>
-        
+        <class>com.enclothe.core.dm.order.domain.EncMaterialOrderItemImpl</class>
+        <class>com.enclothe.core.dm.order.domain.EncOrderItemImpl</class>        
+        <class>com.enclothe.core.product.domain.EncDesignImpl</class>        
+        <class>com.enclothe.core.product.domain.EncMaterialImpl</class>       
         <exclude-unlisted-classes/>
     </persistence-unit>
     

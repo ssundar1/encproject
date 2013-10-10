@@ -1,0 +1,8 @@
+    <div class="add_to_cart">
+        <blc:form method="POST" th:action="@{/enccart/addmaterial}">
+            <input type="hidden" name="productId" value="1" />
+            <input type="hidden" name="quantity" value="1" />
+            <input type="hidden" name="designId" value="2" />
+            <input type="submit" class="addToCart" th:value="#{product.buyNow}"/>
+        </blc:form>
+    </div>
