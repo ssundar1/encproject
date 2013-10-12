@@ -4,6 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
+
+
+
+
+
+
+
+
+
 //import org.hibernate.annotations.QueryHints;
 import org.hibernate.ejb.QueryHints;
 import org.junit.Test;
@@ -14,6 +25,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -36,6 +58,7 @@ import javax.persistence.criteria.Root;
 import javax.annotation.Resource;
 
 import org.broadleafcommerce.common.money.Money;
+import org.broadleafcommerce.common.persistence.EntityConfiguration;
 import org.broadleafcommerce.core.catalog.dao.ProductDao;
 import org.broadleafcommerce.core.catalog.domain.Category;
 import org.broadleafcommerce.core.catalog.domain.CategoryImpl;
@@ -47,6 +70,16 @@ import org.broadleafcommerce.core.catalog.service.CatalogService;
 import org.broadleafcommerce.core.catalog.service.CatalogServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.enclothe.core.dispute.dao.DisputeChannelDao;
+import com.enclothe.core.dispute.dao.DisputeChannelDaoImpl;
+import com.enclothe.core.dispute.dao.DisputeStateDao;
+import com.enclothe.core.dispute.dao.DisputeStateDaoImpl;
+import com.enclothe.core.dispute.domain.DisputeChannel;
+import com.enclothe.core.dispute.domain.DisputeChannelImpl;
+import com.enclothe.core.dispute.domain.DisputeState;
+import com.enclothe.core.dispute.domain.DisputeStateImpl;
+import com.enclothe.core.dispute.service.DisputeStateService;
+import com.enclothe.core.dispute.service.DisputeStateServiceImpl;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncDesignImpl;
 import com.enclothe.core.product.domain.EncMaterial;
@@ -57,12 +90,17 @@ import com.enclothe.core.product.domain.EncMaterialImpl;
 public class EncCatalogServiceImpl extends CatalogServiceImpl {
 	@PersistenceContext(unitName="blPU")
     protected EntityManager em;
-	 
-	@Test
+	
+	@Resource(name = "blEntityConfiguration")
+    protected EntityConfiguration entityConfiguration;
+	
+	
+
+//	@Autowired
+	//DisputeChannelDao dao;
+	
+	/*@Test
 @Transactional
-
-
-
     public void saveProduct(){
 		
         Calendar activeStartCal = Calendar.getInstance();
@@ -101,7 +139,7 @@ public class EncCatalogServiceImpl extends CatalogServiceImpl {
 	        newProduct = saveProduct(newProduct);
 	        design = saveProduct(design);
 	        
-	        Product prod = findProductById((long) 10302);
+	     /*   Product prod = findProductById((long) 10302);
 	        EncDesign des = (EncDesign) prod;
 	        System.out.println("find prod test"+prod.getClass()+"test coloumn"+des.getTest());
 	        
@@ -123,14 +161,40 @@ public class EncCatalogServiceImpl extends CatalogServiceImpl {
 	        System.out.println("inside loop"+des1.getTest());
 	        }
 		
-		System.out.println("test" + newProduct)	;			
+		//System.out.println("test" + newProduct)	;			
 		
-    	System.out.println("test2"+design.getName())	;		
+    //	System.out.println("test2"+design.getName())	;		
     	
     	System.out.println("table loaded");
+    }*/
+    
+    @Test
+    @Transactional
+    public void TestDisputeState()
+    {
+    	
+    	System.out.println("test started");
+    	/*DisputeStateService service = new DisputeStateServiceImpl();
+    	DisputeState disputeState = new DisputeStateImpl();
+    	disputeState.setName("Name");
+    	disputeState.setShortDescription("Desc");
+    	service.saveDisputeState(disputeState);*/
+    	
+//    	DisputeChannelDao dao = new DisputeChannelDaoImpl();
+//    	DisputeChannelImpl disputeChannel = new DisputeChannelImpl();
+//    	disputeChannel.setName("test");
+//    	disputeChannel.setShortDescription("testdesc");
+//    	disputeChannel.setLongDescription("long desc");
+    	
+    	//DisputeChannel disputechannel =em.merge(disputeChannel);
+    	//DisputeChannel disputechannel =dao.save(disputeChannel);
+    	
+    	DisputeState disputeState = new DisputeStateImpl();
+    	disputeState.setName("Name");
+    	disputeState.setShortDescription("Desc");
+    	em.merge(disputeState);
+    	System.out.println("test channel id : " + disputeState.getId());
     }
-    
-    
     
     
 

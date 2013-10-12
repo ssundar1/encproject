@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.broadleafcommerce.common.audit.Auditable;
-import org.broadleafcommerce.profile.core.domain.Customer;
 
 public interface DisputeState extends Serializable {
 	
