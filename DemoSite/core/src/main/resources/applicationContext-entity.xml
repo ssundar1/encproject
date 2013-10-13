@@ -42,5 +42,8 @@
         scope="prototype"/>  
          <bean id="com.enclothe.core.dm.order.domain.EncOrderItemStateTransition" 
         class="com.enclothe.core.dm.order.domain.EncOrderItemStateTransitionImpl" 
-        scope="prototype"/>   
+        scope="prototype"/> 
+        <bean id="com.enclothe.core.dm.order.domain.EncOrderItem"
+         class="com.enclothe.core.dm.order.domain.EncOrderItemImpl"
+         scope="prototype" />  
 </beans>

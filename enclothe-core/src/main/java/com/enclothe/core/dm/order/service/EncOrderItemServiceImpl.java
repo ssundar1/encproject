@@ -38,7 +38,10 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	       Money matRetailPrice = itemRequest.getSku().getRetailPrice();
 	       Money desRetailPrice = itemRequest.getDesignSku().getRetailPrice();
 	        
+	       if(matSalePrice !=null)
 	        item.setBaseSalePrice(itemRequest.getSalePriceOverride()==null?(matSalePrice.add(desSalePrice)):itemRequest.getSalePriceOverride());
+	       
+	       if(matRetailPrice != null)
 	        item.setBaseRetailPrice(matRetailPrice.add(desRetailPrice));
 	        item.setDiscreteOrderItemFeePrices(itemRequest.getDiscreteOrderItemFeePrices());
 

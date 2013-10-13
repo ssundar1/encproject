@@ -19,21 +19,8 @@
         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
         
         <!-- Shared properties between admin and site go here -->
-        <bean p:order="1100" id="blEncValidateAddRequestActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncValidateAddRequestActivity"/>   
-        <bean p:order="2100" id="blEncAddOrderItemActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncAddOrderItemActivity"/>
-        <bean id="blAddItemWorkflow" class="org.broadleafcommerce.core.workflow.SequenceProcessor">
-        <property name="processContextFactory">
-            <bean class="org.broadleafcommerce.core.order.service.workflow.CartOperationProcessContextFactory"/>
-        </property>
-        <property name="activities">
-            <list>
-                <ref bean="blEncValidateAddRequestActivity" />
-                <ref bean="blEncAddOrderItemActivity" />
-                <ref bean="blAddFulfillmentGroupItemActivity" />
-                <ref bean="blAddWorkflowPriceOrderIfNecessaryActivity" />
-                <ref bean="blAddWorkflowVerifyFulfillmentGroupItemsActivity" />
-            </list>
-        </property>
-        <property name="defaultErrorHandler" ref="blDefaultErrorHandler"/>
-    </bean>
+        <bean p:order="1000" id="blValidateAddRequestActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncValidateAddRequestActivity"/>
+        <bean p:order="2000" id="blAddOrderItemActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncAddOrderItemActivity"/>   
+		<bean id="blEncOrderItemService" class="com.enclothe.core.dm.order.service.EncOrderItemServiceImpl"/>
+		<bean id="encOrderItemDao" class="com.enclothe.core.dm.order.dao.EncOrderItemDaoImpl"/>		
 </beans>

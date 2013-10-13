@@ -26,7 +26,7 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
 	    @Resource(name = "blOrderService")
 	    protected OrderService orderService;
 	    
-	    @Resource(name = "encOrderItemService")
+	    @Resource(name = "blEncOrderItemService")
 	    protected EncOrderItemService orderItemService;
 	    
 	    @Resource(name = "blCatalogService")

@@ -9,6 +9,7 @@ import org.broadleafcommerce.core.catalog.service.CatalogService;
 import org.broadleafcommerce.core.order.service.OrderService;
 import org.broadleafcommerce.core.order.service.ProductOptionValidationService;
 import org.broadleafcommerce.core.order.service.workflow.CartOperationContext;
+import org.broadleafcommerce.core.order.service.workflow.CartOperationRequest;
 import org.broadleafcommerce.core.order.service.workflow.add.ValidateAddRequestActivity;
 
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
@@ -29,8 +30,8 @@ public class EncValidateAddRequestActivity extends ValidateAddRequestActivity {
     public CartOperationContext execute(CartOperationContext context) throws Exception {
     	
     	super.execute(context);
-    	EncCartOperationRequest request = (EncCartOperationRequest) context.getSeedData();
-    	EncOrderItemRequestDTO orderItemRequestDTO = request.getItemRequest();
+    	CartOperationRequest request =  context.getSeedData();
+    	EncOrderItemRequestDTO orderItemRequestDTO = (EncOrderItemRequestDTO) request.getItemRequest();
     	
         // Validate that if the user specified a productId, it is a legitimate productId
         EncDesign design = null;
@@ -59,7 +60,7 @@ public class EncValidateAddRequestActivity extends ValidateAddRequestActivity {
         } else {
             // We know definitively which sku we're going to add, so we can set this
             // value with certainty
-            request.getItemRequest().setDesignSkuId(designSku.getId());
+        	orderItemRequestDTO.setDesignSkuId(designSku.getId());
         }    	
     	return context;
     }
