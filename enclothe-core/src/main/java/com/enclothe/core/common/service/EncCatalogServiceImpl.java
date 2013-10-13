@@ -94,10 +94,11 @@ public class EncCatalogServiceImpl extends CatalogServiceImpl {
 	@Resource(name = "blEntityConfiguration")
     protected EntityConfiguration entityConfiguration;
 	
-	
+    @Resource(name="blProductDao")
+    protected ProductDao productDao;
 
-//	@Autowired
-	//DisputeChannelDao dao;
+	@Autowired
+	protected DisputeStateService dss;
 	
 	/*@Test
 @Transactional
@@ -174,11 +175,11 @@ public class EncCatalogServiceImpl extends CatalogServiceImpl {
     {
     	
     	System.out.println("test started");
-    	/*DisputeStateService service = new DisputeStateServiceImpl();
+    	//DisputeStateService service = new DisputeStateServiceImpl();
     	DisputeState disputeState = new DisputeStateImpl();
     	disputeState.setName("Name");
     	disputeState.setShortDescription("Desc");
-    	service.saveDisputeState(disputeState);*/
+    	dss.saveDisputeState(disputeState);
     	
 //    	DisputeChannelDao dao = new DisputeChannelDaoImpl();
 //    	DisputeChannelImpl disputeChannel = new DisputeChannelImpl();
@@ -189,11 +190,11 @@ public class EncCatalogServiceImpl extends CatalogServiceImpl {
     	//DisputeChannel disputechannel =em.merge(disputeChannel);
     	//DisputeChannel disputechannel =dao.save(disputeChannel);
     	
-    	DisputeState disputeState = new DisputeStateImpl();
+    /*	DisputeState disputeState = new DisputeStateImpl();
     	disputeState.setName("Name");
     	disputeState.setShortDescription("Desc");
     	em.merge(disputeState);
-    	System.out.println("test channel id : " + disputeState.getId());
+    	System.out.println("test channel id : " + disputeState.getId());*/
     }
     
     

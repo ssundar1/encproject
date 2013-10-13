@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.enclothe.core.dispute.domain.DisputeState;
 
-@Repository("blDisputeStateDao")
+@Repository("blDisputeStateTransitionDao")
 public class DisputeStateTransitionDaoImpl implements DisputeStateDao {
 
 	@PersistenceContext(unitName = "blPU")

@@ -15,9 +15,11 @@
     
    
     
-   
+<context:component-scan base-package="org.broadleafcommerce.profile.core"/>   
 <context:component-scan base-package="org.broadleafcommerce.core.catalog"/>
-
+<context:component-scan base-package="org.broadleafcommerce.common"/> 
+<context:component-scan base-package="org.broadleafcommerce.profile.core.service"/>   
+<context:component-scan base-package="com.enclothe.core"/>
 
     <bean id="blMergedEntityContexts" class="org.springframework.beans.factory.config.ListFactoryBean">
         <property name="sourceList">
@@ -26,7 +28,44 @@
             </list>
         </property>
     </bean>
-    
+    <bean id="blConfiguration" class="org.broadleafcommerce.common.config.RuntimeEnvironmentPropertiesConfigurer">
+           <property name="propertyLocations"  value="config/bc/"/>
+    </bean>
+    <bean id="blSiteResolver" class="org.broadleafcommerce.common.web.NullBroadleafSiteResolver" />
+     <bean id="blThemeResolver" class="org.broadleafcommerce.common.web.NullBroadleafThemeResolver" />
+        
+           <bean id="blJsLocations" class="org.springframework.beans.factory.config.ListFactoryBean" >
+	        <property name="sourceList">
+	            <list>
+	                <value>classpath:/common_js/</value>
+	                <value>classpath:/extensions/js/</value><!-- To allow a common place for modules or extensions to put js files. -->
+	            </list>
+	        </property>
+	    </bean>
+	    
+	    <bean id="blCssLocations" class="org.springframework.beans.factory.config.ListFactoryBean" >
+	        <property name="sourceList">
+	            <list>
+	            </list>
+	        </property>
+	    </bean>
+	    
+	    <bean id="blJsFileList" class="org.springframework.beans.factory.config.ListFactoryBean" >
+	        <property name="sourceList">
+	            <list>
+	            </list>
+	        </property>
+    </bean>
+      <bean id="blVariableExpressions" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <bean class="org.broadleafcommerce.common.web.expression.NullBroadleafVariableExpression" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="blDefaultErrorHandler" class="org.broadleafcommerce.core.workflow.SilentErrorHandler"/>
+
     
     <bean id="blTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -71,13 +110,21 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/broadleaf"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="admin"/>
         
        
     </bean>
-    
+        <bean id="blAddressVerificationProviders" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list/>
+        </property>
+    </bean>
+        <bean id="blPasswordEncoder" class="org.springframework.security.authentication.encoding.PlaintextPasswordEncoder"/>
+    <bean id="blAdminPasswordEncoder" class="org.springframework.security.authentication.encoding.PlaintextPasswordEncoder"/>
      <bean id="blJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-
+    <bean id="blIdGenerationDao" class="org.broadleafcommerce.profile.core.dao.IdGenerationDaoImpl" />
+	<bean id="blIdGenerationService" class="org.broadleafcommerce.profile.core.service.IdGenerationServiceImpl"></bean>
+	<bean id="blOrderItemDao" class="org.broadleafcommerce.core.order.dao.OrderItemDaoImpl" />
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="blCacheManager">
         <property name="jpaVendorAdapter" ref="blJpaVendorAdapter"/>
         <property name="persistenceUnitManager" ref="blPersistenceUnitManager"/>
@@ -106,5 +153,61 @@
     <bean id="blEntityConfiguration" class="org.broadleafcommerce.common.persistence.EntityConfiguration"/>
     
 
-   
+       <bean id="blServerInfo" class="org.broadleafcommerce.common.email.service.info.ServerInfo">
+        <property name="serverName" value="localhost"/>
+        <property name="serverPort" value="8080"/>
+    </bean>
+
+    <bean id="blMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host"><value>localhost</value></property>
+        <property name="port"><value>25</value></property>
+        <property name="protocol"><value>smtp</value></property>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="blVelocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <property name="velocityProperties">
+         <value>
+            resource.loader=class
+            class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+            <!-- class.resource.loader.path=classpath:/config/velocity/templates/ -->
+            <!-- Note that jar specification for the .path configuration property conforms to the same rules for the java.net.JarUrlConnection class-->
+            <!-- jar.resource.loader.class =org.apache.velocity.runtime.resource.loader.JarResourceLoader
+            jar.resource.loader.path = jar:file:/broadleaf-profile.jar/emailTemplates
+            file.resource.loader.class=org.apache.velocity.runtime.resource.loader.FileResourceLoader
+            file.resource.loader.cache = false
+            file.resource.loader.path=${file.root}/WEB-INF/config/velocity/templates-->
+         </value>
+      </property>
+   </bean>
+      <bean id="blMessageCreator" class="org.broadleafcommerce.common.email.service.message.NullMessageCreator">
+        <constructor-arg ref="blMailSender"/>
+    </bean>
+
+    <bean id="serviceStatusEmail"
+          class="org.broadleafcommerce.common.email.service.info.EmailInfo"
+          parent="baseEmailInfo">
+    </bean>
+       <bean id="baseEmailInfo" abstract="true">
+        <property name="sendEmailReliableAsync" value="false"/>
+        <property name="fromAddress" value="test@broadleafcommerce.org"/>
+        <property name="sendAsyncPriority" value="8"/>
+    </bean>
+    <bean id="blNullEmailInfo" class="org.broadleafcommerce.common.email.service.info.NullEmailInfo" />
+    <bean id="blRegistrationEmailInfo" parent="blNullEmailInfo" />
+    <bean id="blForgotPasswordEmailInfo" parent="blNullEmailInfo" />
+    <bean id="blForgotUsernameEmailInfo" parent="blNullEmailInfo" />
+    <bean id="blChangePasswordEmailInfo" parent="blNullEmailInfo" /> 
+
+    <bean id="blServiceMonitor" class="org.broadleafcommerce.common.vendor.service.monitor.ServiceMonitor" init-method="init"/>
+    
+    <bean id="springAppContext" class="org.broadleafcommerce.common.util.SpringAppContext"/>
+    
+    <bean id="blEncryptionModule" class="org.broadleafcommerce.common.encryption.PassthroughEncryptionModule"/>
+      
 </beans>
