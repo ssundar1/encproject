@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_ID" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.id = :id</query>
+    </named-query>
+
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_FIRST_NAME" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.firstName = :firstName</query>
+    </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_LAST_NAME" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.lastName = :lastName</query>
+    </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_FIRM_NAME" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.firmName = :firmName</query>
+    </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_EMAIL" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.emailAddres = :emailAddres</query>
+    </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_REGISTERED" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.registered = :registered</query>
+    </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_USER_CATEGORY" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.userCategory = :userCategory</query>
+    </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDER_BY_USER_NAME" >
+        <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
+        WHERE serviceprovider.userName = :userName</query>
+    </named-query>
+</entity-mappings>

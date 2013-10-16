@@ -42,10 +42,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Parameter;
-import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 
 import com.enclothe.core.common.domain.UserCategory;
 import com.enclothe.core.common.domain.UserCategoryImpl;
+import org.broadleafcommerce.core.order.domain.OrderImpl;
 
 
 @Entity
@@ -55,7 +55,7 @@ import com.enclothe.core.common.domain.UserCategoryImpl;
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
 @AdminPresentationClass(populateToOneFields = PopulateToOneFieldsEnum.TRUE, friendlyName = "ServiceProviderImpl_base")
 
-public class ServiceProviderImpl extends CustomerImpl implements ServiceProvider{
+public class ServiceProviderImpl extends OrderImpl implements ServiceProvider{
 
 	private static final long serialVersionUID = -2667332421333264215L;
 
@@ -474,8 +474,7 @@ public class ServiceProviderImpl extends CustomerImpl implements ServiceProvider
         }
 	}    
 	
-	@Override
-    public void setDeactivated(boolean deactivated) {
+	public void setDeactivated(boolean deactivated) {
         this.deactivated = Boolean.valueOf(deactivated);
     }
 	
@@ -487,5 +486,25 @@ public class ServiceProviderImpl extends CustomerImpl implements ServiceProvider
             return deactivated.booleanValue();
         }
     }
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Override
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	@Override
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;		
+	}
 	
 }
