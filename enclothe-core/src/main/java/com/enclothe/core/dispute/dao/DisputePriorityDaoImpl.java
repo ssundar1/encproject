@@ -23,7 +23,7 @@ public class DisputePriorityDaoImpl implements DisputePriorityDao {
     protected EntityConfiguration entityConfiguration;
 	
 	@Override
-	public DisputePriority readDisputeStateById(Long DisputePriorityId) {
+	public DisputePriority readDisputePriorityById(Long DisputePriorityId) {
 		DisputePriority disputePriority = null;
 		final Query query = em.createNamedQuery("BC_READ_DISPUTEPRIORITY_BY_ID",DisputePriority.class);
         query.setParameter("id", DisputePriorityId);

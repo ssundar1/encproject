@@ -176,11 +176,21 @@ public class EncCatalogServiceImpl extends CatalogServiceImpl {
     	
     	System.out.println("test started");
     	//DisputeStateService service = new DisputeStateServiceImpl();
-    	DisputeState disputeState = new DisputeStateImpl();
-    	disputeState.setName("Name");
-    	disputeState.setShortDescription("Desc");
-    	dss.saveDisputeState(disputeState);
-    	
+//    	DisputeState disputeState = new DisputeStateImpl();
+//    	disputeState.setName("Name");
+//    	disputeState.setShortDescription("Desc1");
+//    	dss.saveDisputeState(disputeState);
+    	long disputeId = 301;
+    	DisputeState disputeState = dss.readDisputeStateById(disputeId);
+    	if(disputeState == null)
+    		System.out.println("No Record");
+    	else
+    	{
+    	System.out.println("name : " + disputeState.getName());
+    	System.out.println("Short Description : " + disputeState.getShortDescription());
+    	}
+    	//dss.DeleteDisputeState(disputeState);
+    	//System.out.println("Deleted Successfully");
 //    	DisputeChannelDao dao = new DisputeChannelDaoImpl();
 //    	DisputeChannelImpl disputeChannel = new DisputeChannelImpl();
 //    	disputeChannel.setName("test");

@@ -4,7 +4,7 @@ import com.enclothe.core.dispute.domain.DisputePriority;
 
 public interface DisputePriorityDao {
 
-	DisputePriority readDisputeStateById(Long DisputePriorityId);
+	DisputePriority readDisputePriorityById(Long DisputePriorityId);
 
 	DisputePriority save(DisputePriority disputePriority);
 

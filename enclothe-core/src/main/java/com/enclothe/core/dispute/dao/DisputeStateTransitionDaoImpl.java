@@ -12,9 +12,10 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import com.enclothe.core.dispute.domain.DisputeState;
+import com.enclothe.core.dispute.domain.DisputeStateTransition;
 
 @Repository("blDisputeStateTransitionDao")
-public class DisputeStateTransitionDaoImpl implements DisputeStateDao {
+public class DisputeStateTransitionDaoImpl implements DisputeStateTransitionDao {
 
 	@PersistenceContext(unitName = "blPU")
     protected EntityManager em;
@@ -23,31 +24,25 @@ public class DisputeStateTransitionDaoImpl implements DisputeStateDao {
     protected EntityConfiguration entityConfiguration;
 	
 	@Override
-	public DisputeState	readDisputeStateById(Long DisputeStateId) {
-		DisputeState disputeState = null;
-		final Query query = em.createNamedQuery("BC_READ_DISPUTESTATE_BY_ID",DisputeState.class);
-        query.setParameter("id", DisputeStateId);
+	public DisputeStateTransition readDisputeStateTransitionById(Long DisputeStateTransitionId) {
+		DisputeStateTransition disputeStateTransition = null;
+		final Query query = em.createNamedQuery("BC_READ_DISPUTESTATETransition_BY_ID",DisputeStateTransition.class);
+        query.setParameter("id", DisputeStateTransitionId);
         @SuppressWarnings("rawtypes")
         final List temp = query.getResultList();
         if (temp != null && !temp.isEmpty()) {
-        	disputeState = (DisputeState) temp.get(0);
+        	disputeStateTransition = (DisputeStateTransition) temp.get(0);
         }
-        return disputeState;
+        return disputeStateTransition;
 	}		
 	
 	@Override
-    public DisputeState save(DisputeState disputeState) {
-        return em.merge(disputeState);
+    public DisputeStateTransition save(DisputeStateTransition disputeStateTransition) {
+        return em.merge(disputeStateTransition);
     }
-	
-	@Override
-	public void delete(DisputeState disputeState){
-		disputeState.setEndDate(DateTime.now().toDate());
-		em.merge(disputeState);
-	}
 
     @Override
-    public DisputeState create() {
-    	return (DisputeState) entityConfiguration.createEntityInstance("com.enclothe.core.dispute.domain.DisputeState");
+    public DisputeStateTransition create() {
+    	return (DisputeStateTransition) entityConfiguration.createEntityInstance("com.enclothe.core.dispute.domain.DisputeStateTransition");
     }
 }

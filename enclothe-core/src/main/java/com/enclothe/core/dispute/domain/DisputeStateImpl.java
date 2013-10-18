@@ -50,10 +50,10 @@ public class DisputeStateImpl implements DisputeState {
 	@Column(name = "DISPUTE_STATE_NAME", nullable=false)
     protected String name;
 	
-	@Column(name = "DISPUTE_STATE_SHORT_DESC", nullable=false)
+	@Column(name = "DISPUTE_STATE_SHORT_DESC", nullable=true)
     protected String shortDescription;
 	
-	@Column(name = "DISPUTE_STATE_LONG_DESC", nullable=false)
+	@Column(name = "DISPUTE_STATE_LONG_DESC", nullable=true)
     protected String longDescription;
 
 	@Column(name = "END_DATE")

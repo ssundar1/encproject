@@ -24,7 +24,9 @@ import org.springframework.stereotype.Service;
 import org.broadleafcommerce.profile.core.service.IdGenerationService;
 
 import com.enclothe.core.dispute.dao.DisputeStateDao;
+import com.enclothe.core.dispute.dao.DisputeStateTransitionDao;
 import com.enclothe.core.dispute.domain.DisputeState;
+import com.enclothe.core.dispute.domain.DisputeStateTransition;
 import com.enclothe.core.serviceprovider.domain.ServiceProvider;
 
 import javax.annotation.Resource;
@@ -35,60 +37,54 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-@Service("blDisputeStateService")
-public class DisputeStateServiceImpl implements DisputeStateService {
+@Service("blDisputeStateTransitionService")
+public class DisputeStateTransitionServiceImpl implements DisputeStateTransitionService {
 	
-private static final Log LOG = LogFactory.getLog(DisputeStateServiceImpl.class);
+private static final Log LOG = LogFactory.getLog(DisputeStateTransitionServiceImpl.class);
     
-    @Resource(name="blDisputeStateDao")
-    protected DisputeStateDao disputeStateDao;
+    @Resource(name="blDisputeStateTransitionDao")
+    protected DisputeStateTransitionDao disputeStateTransitionDao;
     
     @Resource(name="blIdGenerationService")
     protected IdGenerationService idGenerationService;
 
     @Override
-	public DisputeState createDisputeState() {
-		return createDisputeStateFromId(null);
+	public DisputeStateTransition createDisputeStateTransition() {
+		return createDisputeStateTransitionFromId(null);
 	}
 
 	@Override
-	public DisputeState createDisputeStateFromId(Long disputeStateId) {
-		DisputeState disputeState = disputeStateId != null ? readDisputeStateById(disputeStateId) : null;
-        if (disputeState == null) {
-        	disputeState = disputeStateDao.create();
-            if (disputeStateId != null) {
-            	disputeState.setId(disputeStateId);
+	public DisputeStateTransition createDisputeStateTransitionFromId(Long disputeStateTransitionId) {
+		DisputeStateTransition disputeStateTransition = disputeStateTransitionId != null ? readDisputeStateTransitionById(disputeStateTransitionId) : null;
+        if (disputeStateTransition == null) {
+        	disputeStateTransition = disputeStateTransitionDao.create();
+            if (disputeStateTransitionId != null) {
+            	disputeStateTransition.setId(disputeStateTransitionId);
             } else {
-            	disputeState.setId(findNextDisputeStateId());
+            	disputeStateTransition.setId(findNextDisputeStateTransitionId());
             }
         }
-        return disputeState;
+        return disputeStateTransition;
 	}
 
 	@Override
-	public DisputeState createNewDisputeState() {
-		return createDisputeStateFromId(null);
+	public DisputeStateTransition createNewDisputeStateTransition() {
+		return createDisputeStateTransitionFromId(null);
 	}
 	
 	@Override
-	public Long findNextDisputeStateId() {
-		return idGenerationService.findNextId("com.enclothe.core.dispute.domain.DisputeState");
+	public Long findNextDisputeStateTransitionId() {
+		return idGenerationService.findNextId("com.enclothe.core.dispute.domain.DisputeStateTransition");
 	}
 
 	@Override
-	public DisputeState readDisputeStateById(Long disputeStateId) {
-		return disputeStateDao.readDisputeStateById(disputeStateId);
+	public DisputeStateTransition readDisputeStateTransitionById(Long disputeStateTransitionId) {
+		return disputeStateTransitionDao.readDisputeStateTransitionById(disputeStateTransitionId);
 	}
 	
 	@Override
-	public DisputeState saveDisputeState(DisputeState disputeState) {
-		return disputeStateDao.save(disputeState);
-	}
-
-	@Override
-	public void DeleteDisputeState(DisputeState disputeState) {
-		disputeStateDao.delete(disputeState);
-		
+	public DisputeStateTransition saveDisputeStateTransition(DisputeStateTransition disputeStateTransition) {
+		return disputeStateTransitionDao.save(disputeStateTransition);
 	}
     	
 }

@@ -10,6 +10,6 @@ public interface DisputeChannelDao {
 
 	DisputeChannel create(DisputeChannel disputeChannel);
 
-	DisputeChannel readDisputeStateById(Long DisputeChannelId);
+	DisputeChannel readDisputeChannelById(Long DisputeChannelId);
 
 }

@@ -1,13 +1,11 @@
 package com.enclothe.core.dispute.dao;
 
-import com.enclothe.core.dispute.domain.DisputeState;
+import com.enclothe.core.dispute.domain.DisputeStateTransition;
 
 public interface DisputeStateTransitionDao {
-	public DisputeState	readDisputeStateById(Long DisputeStateId);
+	public DisputeStateTransition readDisputeStateTransitionById(Long DisputeStateId);
 
-	DisputeState save(DisputeState disputeState);
+	DisputeStateTransition save(DisputeStateTransition disputeState);
 
-	void delete(DisputeState disputeState);
-
-	DisputeState create();
+	DisputeStateTransition create();
 }

@@ -23,7 +23,7 @@ public class DisputeChannelDaoImpl implements DisputeChannelDao {
     protected EntityConfiguration entityConfiguration;
 	
 	@Override
-	public DisputeChannel readDisputeStateById(Long DisputeChannelId) {
+	public DisputeChannel readDisputeChannelById(Long DisputeChannelId) {
 		DisputeChannel disputeChannel = null;
 		final Query query = em.createNamedQuery("BC_READ_DISPUTECHANNEL_BY_ID",DisputeChannel.class);
         query.setParameter("id", DisputeChannelId);

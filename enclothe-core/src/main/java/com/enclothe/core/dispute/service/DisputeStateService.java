@@ -15,5 +15,8 @@ public interface DisputeStateService {
 	Long findNextDisputeStateId();
 
 	DisputeState saveDisputeState(DisputeState disputeState);
+	
+	void DeleteDisputeState(DisputeState disputeState);
+	
 
 }
