@@ -1,89 +1,22 @@
 package com.enclothe.core.common.service;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-
-
-
-
-
-
-
-
-
-
-//import org.hibernate.annotations.QueryHints;
-import org.hibernate.ejb.QueryHints;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.From;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-
-
-
 import javax.annotation.Resource;
 
-import org.broadleafcommerce.common.money.Money;
 import org.broadleafcommerce.common.persistence.EntityConfiguration;
 import org.broadleafcommerce.core.catalog.dao.ProductDao;
-import org.broadleafcommerce.core.catalog.domain.Category;
-import org.broadleafcommerce.core.catalog.domain.CategoryImpl;
-import org.broadleafcommerce.core.catalog.domain.Product;
-import org.broadleafcommerce.core.catalog.domain.ProductImpl;
-import org.broadleafcommerce.core.catalog.domain.Sku;
-import org.broadleafcommerce.core.catalog.domain.SkuImpl;
-import org.broadleafcommerce.core.catalog.service.CatalogService;
 import org.broadleafcommerce.core.catalog.service.CatalogServiceImpl;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.enclothe.core.dispute.dao.DisputeChannelDao;
-import com.enclothe.core.dispute.dao.DisputeChannelDaoImpl;
-import com.enclothe.core.dispute.dao.DisputeStateDao;
-import com.enclothe.core.dispute.dao.DisputeStateDaoImpl;
-import com.enclothe.core.dispute.domain.DisputeChannel;
-import com.enclothe.core.dispute.domain.DisputeChannelImpl;
 import com.enclothe.core.dispute.domain.DisputeState;
-import com.enclothe.core.dispute.domain.DisputeStateImpl;
 import com.enclothe.core.dispute.service.DisputeStateService;
-import com.enclothe.core.dispute.service.DisputeStateServiceImpl;
-import com.enclothe.core.product.domain.EncDesign;
-import com.enclothe.core.product.domain.EncDesignImpl;
-import com.enclothe.core.product.domain.EncMaterial;
-import com.enclothe.core.product.domain.EncMaterialImpl;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "blTransactionManager", defaultRollback = false)
 @ContextConfiguration(locations = { "/bl-applicationContext-test.xml"})

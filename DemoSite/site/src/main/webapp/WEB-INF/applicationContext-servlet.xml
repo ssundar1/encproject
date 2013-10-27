@@ -34,7 +34,7 @@
     </bean>
     
     <!--  Checks for a URL match to a category's SEO URL -->
-    <bean class="org.broadleafcommerce.core.web.catalog.CategoryHandlerMapping">
+    <bean class="com.enclothe.web.catalog.EncCategoryHandlerMapping">
       <property name="order" value="4"/>
     </bean>
 

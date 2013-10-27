@@ -24,9 +24,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
+import com.enclothe.core.product.domain.EncMaterial;
 
 import java.io.IOException;
 import java.util.Map;
@@ -35,18 +37,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/enccart")
 public class EncCartController extends CartController {
     
+	public static final String BLOUSE_DESIGN_VIEW = "/bls-design";
+	public static final String CHUDI_DESIGN_VIEW = "/chud-design";
+	public static final String BLOUSE = "blouse";
+	public static final String CHUD = "chud";
+	public static final String ORDER_ITEM_REQUEST = "orderItemRequest";
+	
     @Override
-    @RequestMapping("")
+    @RequestMapping("/enccart")
     public String cart(HttpServletRequest request, HttpServletResponse response, Model model) throws PricingException {
         return super.cart(request, response, model);
     }
     
-    @RequestMapping("/dummy")
+    @RequestMapping("/enccart/dummy")
     public String dummy(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "cart/dummy";
+    }
+    
+    //This method redirects to design once the material is selected
+    @RequestMapping("/enccart/selectmaterial")
+    public String selectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) {
+    	
+    	
+    	EncMaterial material = (EncMaterial) catalogService.findProductById(addToCartItem.getProductId());
+    	String view = BLOUSE_DESIGN_VIEW; // by default
+    	
+    	if(material.getType().equals(CHUD))
+    		view = CHUDI_DESIGN_VIEW;
+    	
+    	model.addAttribute("material", material);
+    	
+        return "forward:" + view ;
     }
     
     /*
@@ -56,7 +80,7 @@ public class EncCartController extends CartController {
      * the necessary attributes. By using the @ResposeBody tag, Spring will automatically use Jackson to convert the
      * returned object into JSON for easy processing via JavaScript.
      */
-    @RequestMapping(value = "/addmaterial", produces = "application/json")
+    @RequestMapping(value = "/enccart/addmaterial", produces = "application/json")
     public @ResponseBody Map<String, Object> addJson(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
        
@@ -69,7 +93,7 @@ public class EncCartController extends CartController {
      * when JavaScript is disabled. When this occurs, we will redirect the user to the full product details page 
      * for the given product so that the required options may be chosen.
      */
-    @RequestMapping(value = "/addmaterial", produces = { "text/html", "*/*" })
+    @RequestMapping(value = "/enccart/addmaterial", produces = { "text/html", "*/*" })
     public String add(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
 

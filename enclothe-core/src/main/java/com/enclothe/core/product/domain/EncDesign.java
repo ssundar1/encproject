@@ -4,9 +4,9 @@ import org.broadleafcommerce.core.catalog.domain.Product;
 
 public interface EncDesign extends Product {
 
-	public String getTest() ;
+	public String getType() ;
 
-	public void setTest(String test);
+	public void setType(String type);
 
 	
 }

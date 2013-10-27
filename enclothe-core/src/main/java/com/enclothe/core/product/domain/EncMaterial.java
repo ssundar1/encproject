@@ -1,7 +1,11 @@
 package com.enclothe.core.product.domain;
 
-public interface EncMaterial {
-	public String getTest() ;
+import org.broadleafcommerce.core.catalog.domain.Product;
 
-	public void setTest(String test);
+public interface EncMaterial extends Product {
+	
+	// Type specifies if it is for blouse or chudidhar 
+	public String getType() ;
+
+	public void setType(String type);
 }

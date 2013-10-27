@@ -50,16 +50,16 @@ public class EncDesignImpl extends ProductImpl implements EncNonCartableItem,Enc
 //		this.serviceProvider = serviceProvider;
 //	}
 
-	@Column(name = "TEST")
+	@Column(name = "TYPE")
 	  //  @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Registered", order = 80, prominent = true, gridOrder = 4000)
-	    protected String test;
+	    protected String type;
 
-		public String getTest() {
-		return test;
+		public String getType() {
+		return type;
 	}
 
-	public void setTest(String test) {
-		this.test = test;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 		
