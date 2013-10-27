@@ -18,7 +18,10 @@ package com.mycompany.controller.cart;
 
 
 import org.broadleafcommerce.core.order.service.exception.AddToCartException;
+import org.broadleafcommerce.core.order.service.exception.RemoveFromCartException;
+import org.broadleafcommerce.core.order.service.exception.UpdateCartException;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
+import org.broadleafcommerce.core.web.order.model.AddToCartItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,42 +40,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RequestMapping("/enccart")
 public class EncCartController extends CartController {
     
-	public static final String BLOUSE_DESIGN_VIEW = "/bls-design";
-	public static final String CHUDI_DESIGN_VIEW = "/chud-design";
-	public static final String BLOUSE = "blouse";
-	public static final String CHUD = "chud";
 	public static final String ORDER_ITEM_REQUEST = "orderItemRequest";
 	
     @Override
-    @RequestMapping("/enccart")
+    @RequestMapping("")
     public String cart(HttpServletRequest request, HttpServletResponse response, Model model) throws PricingException {
         return super.cart(request, response, model);
     }
     
-    @RequestMapping("/enccart/dummy")
+    @RequestMapping("dummy")
     public String dummy(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "cart/dummy";
     }
     
-    //This method redirects to design once the material is selected
-    @RequestMapping("/enccart/selectmaterial")
-    public String selectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,
-    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) {
-    	
-    	
-    	EncMaterial material = (EncMaterial) catalogService.findProductById(addToCartItem.getProductId());
-    	String view = BLOUSE_DESIGN_VIEW; // by default
-    	
-    	if(material.getType().equals(CHUD))
-    		view = CHUDI_DESIGN_VIEW;
-    	
-    	model.addAttribute("material", material);
-    	
-        return "forward:" + view ;
-    }
-    
+   
     /*
      * The Heat Clnic does not show the cart when a product is added. Instead, when the product is added via an AJAX
      * POST that requests JSON, we only need to return a few attributes to update the state of the page. The most
@@ -80,26 +64,24 @@ public class EncCartController extends CartController {
      * the necessary attributes. By using the @ResposeBody tag, Spring will automatically use Jackson to convert the
      * returned object into JSON for easy processing via JavaScript.
      */
-    @RequestMapping(value = "/enccart/addmaterial", produces = "application/json")
+    @RequestMapping(value = "/addmaterial", produces = "application/json")
     public @ResponseBody Map<String, Object> addJson(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
        
         return super.addJson(request, response, model, addToCartItem);
     }
-    
-    
-    /*
+
+	/*
      * The Heat Clinic does not support adding products with required product options from a category browse page
      * when JavaScript is disabled. When this occurs, we will redirect the user to the full product details page 
      * for the given product so that the required options may be chosen.
      */
-    @RequestMapping(value = "/enccart/addmaterial", produces = { "text/html", "*/*" })
+    @RequestMapping(value = "/addmaterial", produces = { "text/html", "*/*" })
     public String add(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
 
             return super.add(request, response, model, addToCartItem);
-    }
-    
- 
+    }    
+
     
 }

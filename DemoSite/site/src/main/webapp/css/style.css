@@ -1,4 +1,3 @@
-/* =============================================================================
    HTML5 Boilerplate CSS: h5bp.com/css
    red = #E40037 (link, button, cart bar)
    plum = #3e0000 (titles, dark trans buttons)
@@ -1821,7 +1820,7 @@ footer {
 input[type="submit"].big, a.big-button, 
 input[type="submit"].medium, a.medium-button,
 input[type="submit"].small, a.small-button,
-.addToCart, a.inCart {
+.addToCart, a.inCart, .encCartBtn {
     -webkit-transition: background-color 0.2s ease-in;  
     -moz-transition: background-color 0.2s ease-in;  
     -o-transition: background-color 0.2s ease-in;  
@@ -1834,7 +1833,7 @@ input[type="submit"].small, a.small-button,
     text-decoration: none;
 }
 
-input[type="submit"].big, a.big-button, .addToCart, a.inCart {
+input[type="submit"].big, a.big-button, .addToCart, a.inCart, .encCartBtn {
     font: 16px/16px 'Open Sans', Helvetica, sans-serif;
     font-weight: 600;
     margin: 10px auto 0;
@@ -1842,7 +1841,7 @@ input[type="submit"].big, a.big-button, .addToCart, a.inCart {
     display: inline-block;
 }
 
-input[type="submit"].medium, a.medium-button, #featured_products .addToCart, #featured_products a.inCart {
+input[type="submit"].medium, a.medium-button, #featured_products .addToCart, #featured_products a.inCart, .encCartBtn {
     font: 12px/16px 'Open Sans', Helvetica, sans-serif;
     font-weight: 600;
     margin: 10px auto;
@@ -1858,12 +1857,12 @@ input[type="submit"].small, a.small-button {
     display: inline-block;
 }
 
-input[type="submit"].red, a.red-button, a.addToCart, .addToCart {
+input[type="submit"].red, a.red-button, a.addToCart, .addToCart, .encCartBtn {
     color: white;
     background-color: #E40037;
 }
 
-input[type="submit"].dark, a.dark-button, #featured_products .addToCart {
+input[type="submit"].dark, a.dark-button, #featured_products .addToCart, .encCartBtn {
     color: white;
     background-color: #3D0001;
 }
@@ -1877,14 +1876,14 @@ input[type="submit"].gray, a.gray-button, a.inCart {
 input[type="submit"].big:hover, a.big-button:hover, 
 input[type="submit"].medium:hover, a.medium-button:hover,
 input[type="submit"].small:hover, a.small-button:hover,
-.addToCart, a.inCart {
+.addToCart, a.inCart, .encCartBtn {
     -webkit-transition: background-color 0.2s ease-in;  
     -moz-transition: background-color 0.2s ease-in;  
     -o-transition: background-color 0.2s ease-in;  
     transition: background-color 0.2s ease-in;
 }
 
-input[type="submit"].red:hover, a.red-button:hover, .addToCart:hover {
+input[type="submit"].red:hover, a.red-button:hover, .addToCart:hover, .encCartBtn:hover {
     background-color: #a50832;
 }
 
@@ -1892,7 +1891,7 @@ input[type="submit"].gray:hover, a.gray-button:hover, a.inCart:hover {
     background-color: #9B8A87;
 }
 
-input[type="submit"].dark:hover, a.dark-button:hover, #featured_products .addToCart:hover {
+input[type="submit"].dark:hover, a.dark-button:hover, #featured_products .addToCart:hover, .encCartBtn:hover {
     background-color: #0f0000;
 }
 

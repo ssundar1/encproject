@@ -11,10 +11,12 @@ import org.broadleafcommerce.core.web.catalog.CategoryHandlerMapping;
 public class EncCategoryHandlerMapping extends CategoryHandlerMapping {
 
 	private String newControllerName="encCategoryController";
+	
 	   @Resource(name = "blCatalogService")
 	    private CatalogService catalogService;
 	    
 	   public static final String MATERIAL = "material";
+	   public static final String DESIGN = "design";
 	    public static final String CURRENT_CATEGORY_ATTRIBUTE_NAME = "category";
 
 	    @Override
@@ -22,7 +24,9 @@ public class EncCategoryHandlerMapping extends CategoryHandlerMapping {
 	            throws Exception {      
 	        BroadleafRequestContext context = BroadleafRequestContext.getBroadleafRequestContext();
 	        if (context != null && context.getRequestURIWithoutContext() != null
-	        		&& context.getRequestURIWithoutContext().contains(MATERIAL) ) {
+	        		&& (context.getRequestURIWithoutContext().contains(MATERIAL)  ||
+	        				context.getRequestURIWithoutContext().contains(DESIGN))	
+	        		){
 	            Category category = catalogService.findCategoryByURI(context.getRequestURIWithoutContext());
 
 	            if (category != null) {
