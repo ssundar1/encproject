@@ -18,24 +18,23 @@ package com.mycompany.controller.cart;
 
 
 import org.broadleafcommerce.core.order.service.exception.AddToCartException;
-import org.broadleafcommerce.core.order.service.exception.RemoveFromCartException;
-import org.broadleafcommerce.core.order.service.exception.UpdateCartException;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
-import org.broadleafcommerce.core.web.order.model.AddToCartItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
-import com.enclothe.core.product.domain.EncMaterial;
+import com.enclothe.core.measurement.domain.Measurement;
+import com.enclothe.core.measurement.domain.MeasurementImpl;
+import com.enclothe.core.measurement.service.MeasurementService;
 
 import java.io.IOException;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,6 +42,9 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/enccart")
 public class EncCartController extends CartController {
     
+    @Resource(name = "encMeasurementService")
+    protected MeasurementService measurementService;
+	
 	public static final String ORDER_ITEM_REQUEST = "orderItemRequest";
 	
     @Override
@@ -64,10 +66,12 @@ public class EncCartController extends CartController {
      * the necessary attributes. By using the @ResposeBody tag, Spring will automatically use Jackson to convert the
      * returned object into JSON for easy processing via JavaScript.
      */
-    @RequestMapping(value = "/addmaterial", produces = "application/json")
+    @RequestMapping(value = "/addtocart", produces = "application/json")
     public @ResponseBody Map<String, Object> addJson(HttpServletRequest request, HttpServletResponse response, Model model,
-            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
+            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, @ModelAttribute("measurement") MeasurementImpl measurement) throws IOException, PricingException, AddToCartException {
        
+    	measurementService.saveMeasurement(measurement);
+    	addToCartItem.setMeasurementId(measurement.getId());
         return super.addJson(request, response, model, addToCartItem);
     }
 
@@ -76,10 +80,12 @@ public class EncCartController extends CartController {
      * when JavaScript is disabled. When this occurs, we will redirect the user to the full product details page 
      * for the given product so that the required options may be chosen.
      */
-    @RequestMapping(value = "/addmaterial", produces = { "text/html", "*/*" })
+    @RequestMapping(value = "/addtocart", produces = { "text/html", "*/*" })
     public String add(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
-            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
+            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, @ModelAttribute("measurement") MeasurementImpl measurement) throws IOException, PricingException, AddToCartException {
 
+    		measurement = (MeasurementImpl) measurementService.saveMeasurement(measurement);
+    		addToCartItem.setMeasurementId(measurement.getId());
             return super.add(request, response, model, addToCartItem);
     }    
 

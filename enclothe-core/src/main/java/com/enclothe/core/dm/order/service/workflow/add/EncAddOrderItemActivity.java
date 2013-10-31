@@ -18,6 +18,8 @@ import com.enclothe.core.dm.order.domain.EncOrderItem;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.dm.order.service.EncOrderItemRequest;
 import com.enclothe.core.dm.order.service.EncOrderItemService;
+import com.enclothe.core.measurement.domain.Measurement;
+import com.enclothe.core.measurement.service.MeasurementService;
 import com.enclothe.core.product.domain.EncDesign;
 
 public class EncAddOrderItemActivity extends AddOrderItemActivity {
@@ -31,6 +33,9 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
 	    
 	    @Resource(name = "blCatalogService")
 	    protected CatalogService catalogService;
+	    
+	    @Resource(name = "encMeasurementService")
+	    protected MeasurementService measurementService;
 
 	@Override
     public CartOperationContext execute(CartOperationContext context) throws Exception {
@@ -46,6 +51,7 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         Sku designSku =null;               
         
         Product product = null;
+        Measurement measurement = null;
         if (orderItemRequestDTO.getProductId() != null) {
             product = catalogService.findProductById(orderItemRequestDTO.getProductId());
         }
@@ -64,6 +70,9 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         if (category == null && product != null) {
             category = product.getDefaultCategory();
         }
+        
+        if (orderItemRequestDTO.getMeasurementId() != null && orderItemRequestDTO.getMeasurementId()!=0)
+        	measurement = measurementService.readMeasurementById(orderItemRequestDTO.getMeasurementId());
 
         EncOrderItem item;
         if (product == null || !(product instanceof ProductBundle)) {
@@ -79,6 +88,7 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
             itemRequest.setRetailPriceOverride(orderItemRequestDTO.getOverrideRetailPrice());
             itemRequest.setDesign((EncDesign) encDesign);
             itemRequest.setDesignSku(designSku);
+            itemRequest.setMeasurement(measurement);
             item = (EncOrderItem) orderItemService.createDiscreteOrderItem(itemRequest);
         } else {
             ProductBundleOrderItemRequest bundleItemRequest = new ProductBundleOrderItemRequest();

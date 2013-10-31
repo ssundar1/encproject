@@ -19,6 +19,8 @@
         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
         
         <!-- Shared properties between admin and site go here -->
+         <context:component-scan base-package="com.enclothe.core"/>
+    	<context:component-scan base-package="com.enclothe.web"/>
         <bean p:order="1000" id="blValidateAddRequestActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncValidateAddRequestActivity"/>
         <bean p:order="2000" id="blAddOrderItemActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncAddOrderItemActivity"/>   
 		<bean id="blEncOrderItemService" class="com.enclothe.core.dm.order.service.EncOrderItemServiceImpl"/>

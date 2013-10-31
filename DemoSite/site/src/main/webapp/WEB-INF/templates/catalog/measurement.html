@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<blc:head pageTitle="Measurement - Enclothe" />
+
+<body>
+    <div id="notification_bar"></div>
+    <header th:substituteby="layout/partials/header" />
+    
+    <div id="content" class="width_setter group" role="main">
+    
+        <nav th:substituteby="layout/partials/nav" />
+        
+        <section id="left_column">
+    
+            <header>
+                <h1 th:inline="text">
+                    <span >Provide Measurement</span>
+                </h1>               
+                <div class="add_to_cart">
+		        <blc:form method="POST" th:action="@{/enccart/addtocart}">
+		            <input type="hidden" name="productId" th:value="${material.id}" />
+		            <input type="hidden" name="designId" th:value="${design.id}" />
+		            <input type="hidden" name="measurementId" value="" />		            
+		            <input type="hidden" name="quantity" value="1" />
+					 <div class="form50">
+                		<label for="name"><span>Measurement Name</span></label>
+                		<input type="text"  class="field50" name="name" />
+            		</div>
+					 <div class="form50">
+                		<label for="description"><span>Measurement Description</span></label>
+                		<input type="text"  class="field50" name="description" />
+            		</div>
+            							 <div class="form50">
+                		<label for="height"><span>Height</span></label>
+                		<input type="text"  class="field50" name="height" />
+            		</div>
+            							 <div class="form50">
+                		<label for="chest"><span>Chest</span></label>
+                		<input type="text"  class="field50" name="chest" />
+            		</div>
+            							 <div class="form50">
+                		<label for="bust"><span>Bust</span></label>
+                		<input type="text"  class="field50" name="bust" />
+            		</div>
+            							 <div class="form50">
+                		<label for="dartline"><span>Dartline</span></label>
+                		<input type="text"  class="field50" name="dartline" />
+            		</div>
+            							 <div class="form50">
+                		<label for="waist"><span>Waist</span></label>
+                		<input type="text"  class="field50" name="waist" />
+            		</div>
+            							 <div class="form50">
+                		<label for="hip"><span>Hip</span></label>
+                		<input type="text"  class="field50" name="hip" />
+            		</div>
+            							 <div class="form50">
+                		<label for="nWaist"><span>N Waist</span></label>
+                		<input type="text"  class="field50" name="nWaist" />
+            		</div>
+            							 <div class="form50">
+                		<label for="shoulder"><span>Shoulder</span></label>
+                		<input type="text"  class="field50" name="shoulder" />
+            		</div>
+            							 <div class="form50">
+                		<label for="sleeveLength"><span>Sleeve Length</span></label>
+                		<input type="text"  class="field50" name="sleeveLength" />
+            		</div>
+            							 <div class="form50">
+                		<label for="armHole"><span>Arm Hole</span></label>
+                		<input type="text"  class="field50" name="armHole" />
+            		</div>
+            							 <div class="form50">
+                		<label for="frontNeck"><span>Front Neck</span></label>
+                		<input type="text"  class="field50" name="frontNeck" />
+            		</div>
+            		            		
+		            <input type="submit" class="addToCart"  th:value="#{product.buyNow}"/>
+		        </blc:form>
+   			 </div>
+            </header>
+            
+        </section>
+    
+        <section id="right_column">            
+            <div id="options">                
+                
+                <div th:substituteby="catalog/partials/rightHandBannerAds" />
+                
+                
+                
+            </div>
+        </section>
+            
+    </div>
+    
+    <footer th:substituteby="layout/partials/footer" />
+    
+</body>
+</html>

@@ -61,6 +61,7 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	            feePrice.setDiscreteOrderItem(item);
 	        }
 	        
+	        item.setMeasurement(itemRequest.getMeasurement());
 	        item.setPersonalMessage(itemRequest.getPersonalMessage());
 
 	        return item;
