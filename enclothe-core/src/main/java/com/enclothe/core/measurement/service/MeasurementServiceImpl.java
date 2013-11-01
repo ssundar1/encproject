@@ -5,6 +5,7 @@ package com.enclothe.core.measurement.service;
 import org.springframework.stereotype.Service;
 import org.broadleafcommerce.profile.core.service.IdGenerationService;
 
+import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.measurement.dao.MeasurementDao;
 import com.enclothe.core.measurement.domain.Measurement;
 

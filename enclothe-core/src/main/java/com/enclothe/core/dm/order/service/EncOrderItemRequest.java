@@ -10,6 +10,8 @@ import org.broadleafcommerce.core.order.service.call.AbstractOrderItemRequest;
 import org.broadleafcommerce.core.order.service.call.DiscreteOrderItemRequest;
 
 import com.enclothe.core.dm.order.domain.EncOrderItem;
+import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
+import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncMaterial;
@@ -21,8 +23,27 @@ import com.enclothe.core.product.domain.EncMaterial;
 	    protected EncDesign design;
 	    protected Measurement measurement;
 	    protected Sku designSku;
+	    protected EncOrderItemStates orderItemState;
+	    protected EncOrderItemStateDetail orderItemStateDetail;
 	    
-	    public Measurement getMeasurement() {
+	    
+	    public EncOrderItemStateDetail getOrderItemStateDetail() {
+			return orderItemStateDetail;
+		}
+
+		public void setOrderItemStateDetail(EncOrderItemStateDetail orderItemStateDetail) {
+			this.orderItemStateDetail = orderItemStateDetail;
+		}
+
+		public EncOrderItemStates getOrderItemState() {
+			return orderItemState;
+		}
+
+		public void setOrderItemState(EncOrderItemStates orderItemState) {
+			this.orderItemState = orderItemState;
+		}
+
+		public Measurement getMeasurement() {
 			return measurement;
 		}
 

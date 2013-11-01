@@ -5,7 +5,19 @@
 
     <named-query name="BC_READ_MEASUREMENT_BY_ID" >
         <query>SELECT measurement FROM com.enclothe.core.measurement.domain.Measurement measurement
-        WHERE measurement.Id = :measurementId</query>
+        WHERE measurement.id = :measurementId</query>
+    </named-query>
+ <named-query name="BC_DEFAULT_ORDERITEM_ID" >
+        <query>SELECT orderItemState FROM com.enclothe.core.dm.order.domain.EncOrderItemStates orderItemState
+        WHERE orderItemState.id = :orderItemStateId</query>
+    </named-query>
+    <named-query name="BC_DEFAULT_ORDERITEM_STATE_DETAIL_ID" >
+        <query>SELECT orderItemStateDetail FROM com.enclothe.core.dm.order.domain.EncOrderItemStateDetail orderItemStateDetail
+        WHERE orderItemStateDetail.id = :orderItemStateDetailId</query>
+    </named-query>
+    <named-query name="BC_DEFAULT_USER_CATEGORY_ID" >
+        <query>SELECT userCategory FROM com.enclothe.core.common.domain.UserCategory userCategory
+        WHERE userCategory.id = :userCategoryId</query>
     </named-query>
  
 </entity-mappings>

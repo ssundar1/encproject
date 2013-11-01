@@ -1,5 +1,6 @@
 package com.enclothe.core.measurement.service;
 
+import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.measurement.domain.*;
 
 public interface MeasurementService {
@@ -15,5 +16,7 @@ public interface MeasurementService {
 	Long findNextMeasurementId();
 
 	Measurement saveMeasurement(Measurement measurement);
+
+	
 
 }

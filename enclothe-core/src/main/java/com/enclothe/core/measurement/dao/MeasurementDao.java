@@ -1,5 +1,6 @@
 package com.enclothe.core.measurement.dao;
 
+
 import  com.enclothe.core.measurement.domain.Measurement;
 
 public interface MeasurementDao {
@@ -11,5 +12,6 @@ public interface MeasurementDao {
 	Measurement create(Measurement measurement);
 
 	Measurement readMeasurementById(Long measurementId);
+	
 
 }

@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import com.enclothe.core.measurement.domain.Measurement;
+import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 
 @Repository("encMeasurementDao")
 public class MeasurementDaoImpl implements MeasurementDao {
@@ -26,7 +27,7 @@ public class MeasurementDaoImpl implements MeasurementDao {
 	public Measurement readMeasurementById(Long measurementId) {
 		Measurement measurement = null;
 		final Query query = em.createNamedQuery("BC_READ_MEASUREMENT_BY_ID",Measurement.class);
-        query.setParameter("id", measurementId);
+        query.setParameter("measurementId", measurementId);
         @SuppressWarnings("rawtypes")
         final List temp = query.getResultList();
         if (temp != null && !temp.isEmpty()) {
@@ -34,7 +35,7 @@ public class MeasurementDaoImpl implements MeasurementDao {
         }
         return measurement;
 	}		
-	
+			
 	public EntityManager getEm() {
 		return em;
 	}

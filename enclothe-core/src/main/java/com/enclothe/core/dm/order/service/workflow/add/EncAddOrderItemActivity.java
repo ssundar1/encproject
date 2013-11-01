@@ -14,7 +14,10 @@ import org.broadleafcommerce.core.order.service.workflow.CartOperationContext;
 import org.broadleafcommerce.core.order.service.workflow.CartOperationRequest;
 import org.broadleafcommerce.core.order.service.workflow.add.AddOrderItemActivity;
 
+import com.enclothe.core.common.domain.UserCategory;
 import com.enclothe.core.dm.order.domain.EncOrderItem;
+import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
+import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.dm.order.service.EncOrderItemRequest;
 import com.enclothe.core.dm.order.service.EncOrderItemService;
@@ -73,10 +76,18 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         
         if (orderItemRequestDTO.getMeasurementId() != null && orderItemRequestDTO.getMeasurementId()!=0)
         	measurement = measurementService.readMeasurementById(orderItemRequestDTO.getMeasurementId());
-
+      
+      
+        /*temp code to be removed*/
+        
+        measurement = measurementService.readMeasurementById(new Long(301));
+        
+        /*temp code to be removed end*/
+        
         EncOrderItem item;
         if (product == null || !(product instanceof ProductBundle)) {
             EncOrderItemRequest itemRequest = new EncOrderItemRequest();
+            
             itemRequest.setCategory(category);
             itemRequest.setProduct(product);
             itemRequest.setSku(sku);
@@ -89,6 +100,7 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
             itemRequest.setDesign((EncDesign) encDesign);
             itemRequest.setDesignSku(designSku);
             itemRequest.setMeasurement(measurement);
+            
             item = (EncOrderItem) orderItemService.createDiscreteOrderItem(itemRequest);
         } else {
             ProductBundleOrderItemRequest bundleItemRequest = new ProductBundleOrderItemRequest();
