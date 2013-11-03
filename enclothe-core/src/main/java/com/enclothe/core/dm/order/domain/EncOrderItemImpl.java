@@ -30,28 +30,28 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		EncOrderItem {
 	private static final long serialVersionUID = 6545097668293683751L;
 
-	@OneToOne(targetEntity = EncOrderItemStatesImpl.class, optional = false)
+	@OneToOne(targetEntity = EncOrderItemStatesImpl.class)
 	@JoinColumn(name = "ORDER_ITEM_STATE_ID")
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state", order = 10, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected EncOrderItemStates orderItemState;
 
-	@OneToOne(targetEntity = EncOrderItemStateDetailImpl.class, optional = false)
+	@OneToOne(targetEntity = EncOrderItemStateDetailImpl.class)
 	@JoinColumn(name = "ORDER_ITEM_STATE_DETAIL_ID")
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 20, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected EncOrderItemStateDetail orderItemStateDetail;
 
-	@OneToOne(targetEntity = MeasurementImpl.class, optional = false)
+	@OneToOne(targetEntity = MeasurementImpl.class)
 	@JoinColumn(name = "ORDER_ITEM_MEASUREMENT_ID")
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 20, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected Measurement measurement;
 
-	@OneToOne(targetEntity = EncDesignImpl.class, optional = false)
+	@OneToOne(targetEntity = EncDesignImpl.class)
 	@JoinColumn(name = "ORDER_ITEM_DESIGN_ID")
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected EncDesign design;
 
-	@ManyToOne(targetEntity = SkuImpl.class, optional = false)
-	@JoinColumn(name = "DESIGN_SKU_ID", nullable = false)
+	@ManyToOne(targetEntity = SkuImpl.class)
+	@JoinColumn(name = "DESIGN_SKU_ID")
 	@Index(name = "DISCRETE_SKU_INDEX", columnNames = { "SKU_ID" })
 	@AdminPresentation(friendlyName = "DiscreteOrderItemImpl_Sku", order = 20, group = OrderItemImpl.Presentation.Group.Name.Catalog, groupOrder = OrderItemImpl.Presentation.Group.Order.Catalog)
 	@AdminPresentationToOneLookup()

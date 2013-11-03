@@ -2,7 +2,11 @@ package com.enclothe.core.dm.order.domain;
 
 import com.enclothe.core.common.domain.UserCategory;
 import com.enclothe.core.common.domain.UserCategoryImpl;
+import com.enclothe.core.measurement.domain.MeasurementImpl;
+
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -14,6 +18,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import org.broadleafcommerce.common.audit.Auditable;
 import org.broadleafcommerce.common.audit.AuditableListener;
 import org.broadleafcommerce.common.presentation.AdminPresentation;
@@ -45,12 +50,11 @@ public class EncOrderItemStateDetailImpl  implements EncOrderItemStateDetail
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_currentOwner", order=10, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected Long currentOwner;
 
-  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemImpl.class, optional=false)
-  @JoinColumn(name="ORDER_ITEM_ID")
+  @OneToOne(mappedBy = "orderItemStateDetail", targetEntity = EncOrderItemImpl.class, cascade = { CascadeType.ALL }, orphanRemoval = true)
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_orderItemId", order=20, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected EncOrderItem orderItem;
 
- @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemStatesImpl.class, optional=false)
+ @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=EncOrderItemStatesImpl.class)
   @JoinColumn(name="ORDER_ITEM_STATE_ID")
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_currentStateId", order=30, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected EncOrderItemStates orderItemState;
@@ -62,7 +66,7 @@ public class EncOrderItemStateDetailImpl  implements EncOrderItemStateDetail
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_expectedDeliverDate", order=40, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected Date expectedDeliverDate;
 
-  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=UserCategoryImpl.class, optional=false)
+  @OneToOne(cascade={javax.persistence.CascadeType.ALL}, targetEntity=UserCategoryImpl.class)
   @JoinColumn(name="OWNER_CATEGORY_ID", referencedColumnName="USER_CATEGORY_ID")
   @AdminPresentation(friendlyName="EncOrderItemStateDetailImpl_userCategory", order=50, group="EncOrderItemStateDetailImpl_GRP", visibility=VisibilityEnum.HIDDEN_ALL)
   protected UserCategory userCategory;

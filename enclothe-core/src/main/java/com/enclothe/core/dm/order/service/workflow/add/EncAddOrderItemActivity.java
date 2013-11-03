@@ -77,13 +77,6 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         if (orderItemRequestDTO.getMeasurementId() != null && orderItemRequestDTO.getMeasurementId()!=0)
         	measurement = measurementService.readMeasurementById(orderItemRequestDTO.getMeasurementId());
       
-      
-        /*temp code to be removed*/
-        
-        measurement = measurementService.readMeasurementById(new Long(301));
-        
-        /*temp code to be removed end*/
-        
         EncOrderItem item;
         if (product == null || !(product instanceof ProductBundle)) {
             EncOrderItemRequest itemRequest = new EncOrderItemRequest();

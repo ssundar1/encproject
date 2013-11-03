@@ -39,27 +39,12 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	    protected EncOrderItemDao orderItemDao;
 	 @Resource(name="blIdGenerationService")
 	    protected IdGenerationService idGenerationService;
+	 
 	protected void populateDiscreteOrderItem(EncOrderItem item, EncOrderItemRequest itemRequest) {     				
 		super.populateDiscreteOrderItem(item, itemRequest);
-		item.setDesign(itemRequest.getDesign());
-		item.setDesignSku(itemRequest.getDesignSku());
-		item.setOrderItemState(itemRequest.getOrderItemState());
-		 UserCategory userCategory = readUserCategoryById(new Long(2001));
-         EncOrderItemStates orderItemState = readOrderItemStatesById(new Long(1001));
-         EncOrderItemStateDetail orderItemStateDetail = createOrderItemStateDetailFromId(null);
-         orderItemStateDetail.setCurrentOwner(new Long(700));
-         orderItemStateDetail.setOrderItem(item);
-         orderItemStateDetail.setOrderItemState(orderItemState);
-         orderItemStateDetail.setUserCategory(userCategory);
-         orderItemStateDetail= saveOrderItemStateDetail(orderItemStateDetail);
-         item.setOrderItemState(orderItemState);
          item.setDesign((EncDesign) itemRequest.getDesign());
          item.setDesignSku(itemRequest.getDesignSku());
-         
-         item.setOrderItemStateDetail(orderItemStateDetail);
-         item.setMeasurement(itemRequest.getMeasurement());
-       
-        
+         item.setMeasurement(itemRequest.getMeasurement());        
     }
 
 	 public DiscreteOrderItem createDiscreteOrderItem(final EncOrderItemRequest itemRequest) {
@@ -102,14 +87,14 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	    }
 
 	@Override
-	public EncOrderItemStates defaultOrderItemState(Long orderItemStateId) {
-		
+	public EncOrderItemStates defaultOrderItemState(Long orderItemStateId) {		
 		return orderItemDao.defaultOrderItemState(orderItemStateId);
 	}
 
 	public Long findNextOrderItemStatesId() {
 		return idGenerationService.findNextId("com.enclothe.core.dm.order.domain.EncOrderItemStates");
 	}
+	
 	@Override
 	public EncOrderItemStates createOrderItemStatesFromId(Long OrderItemStatesId) {
 		EncOrderItemStates orderItemStates = OrderItemStatesId != null ? readOrderItemStatesById(OrderItemStatesId) : null;
