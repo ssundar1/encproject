@@ -17,6 +17,7 @@
 package com.mycompany.controller.cart;
 
 
+import org.broadleafcommerce.core.order.service.OrderService;
 import org.broadleafcommerce.core.order.service.exception.AddToCartException;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,9 @@ public class EncCartController extends CartController {
     
     @Resource(name = "encMeasurementService")
     protected MeasurementService measurementService;
+    
+    @Resource(name = "encOrderService")
+    protected OrderService orderService;
 	
 	public static final String ORDER_ITEM_REQUEST = "orderItemRequest";
 	
