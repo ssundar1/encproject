@@ -21,7 +21,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
             <Set name="driverClassName">com.mysql.jdbc.Driver</Set>
             <Set name="url">jdbc:mysql://localhost:3306/broadleaf</Set>
             <Set name="username">root</Set>
-            <Set name="password">admin</Set>
+            <Set name="password">sa123</Set>
         </New>
     </Arg>
 </New>
@@ -33,7 +33,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
             <Set name="driverClassName">com.mysql.jdbc.Driver</Set>
             <Set name="url">jdbc:mysql://localhost:3306/broadleaf</Set>
             <Set name="username">root</Set>
-            <Set name="password">admin</Set>
+            <Set name="password">sa123</Set>
         </New>
     </Arg>
 </New>
@@ -45,7 +45,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
             <Set name="driverClassName">com.mysql.jdbc.Driver</Set>
             <Set name="url">jdbc:mysql://localhost:3306/broadleaf</Set>
             <Set name="username">root</Set>
-            <Set name="password">admin</Set>
+            <Set name="password">sa123</Set>
         </New>
     </Arg>
 </New>
