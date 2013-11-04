@@ -25,7 +25,7 @@
     <aop:config/>
     
     <!--  Checks for a URL match to a product's SEO URL.   -->
-    <bean class="org.broadleafcommerce.core.web.catalog.ProductHandlerMapping">
+    <bean class="com.enclothe.web.catalog.EncProductHandlerMapping">
       <property name="order" value="2"/>
     </bean>
     

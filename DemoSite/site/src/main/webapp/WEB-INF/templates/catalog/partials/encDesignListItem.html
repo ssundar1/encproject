@@ -1,7 +1,7 @@
 <div th:if="*{featuredProduct}" class="new_badge">New!</div>
 
 <div class="image">
-    <a th:href="@{*{url}}">
+    <a th:href="@{*{url} + '?materialId=' + ${material.id}}">
     <img th:if="*{media['primary']}" th:src="@{*{media['primary'].url} + '?browse'}" alt="Sauce Image" />
     <div class="price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
         <div blc:price="*{salePrice}" th:if="*{onSale}" th:classappend="*{defaultSku.onSale}? 'sale'"></div>

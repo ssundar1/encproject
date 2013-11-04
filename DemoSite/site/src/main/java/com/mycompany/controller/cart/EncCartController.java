@@ -20,6 +20,7 @@ package com.mycompany.controller.cart;
 import org.broadleafcommerce.core.order.service.OrderService;
 import org.broadleafcommerce.core.order.service.exception.AddToCartException;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
+import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,10 +46,7 @@ public class EncCartController extends CartController {
     
     @Resource(name = "encMeasurementService")
     protected MeasurementService measurementService;
-    
-    @Resource(name = "encOrderService")
-    protected OrderService orderService;
-	
+    	
 	public static final String ORDER_ITEM_REQUEST = "orderItemRequest";
 	
     @Override
@@ -74,6 +72,7 @@ public class EncCartController extends CartController {
     public @ResponseBody Map<String, Object> addJson(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, @ModelAttribute("measurement") MeasurementImpl measurement) throws IOException, PricingException, AddToCartException {
        
+    	measurement.setCustomer(CustomerState.getCustomer(request));
     	measurementService.saveMeasurement(measurement);
     	addToCartItem.setMeasurementId(measurement.getId());
         return super.addJson(request, response, model, addToCartItem);
@@ -88,6 +87,7 @@ public class EncCartController extends CartController {
     public String add(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, @ModelAttribute("measurement") MeasurementImpl measurement) throws IOException, PricingException, AddToCartException {
 
+    	    measurement.setCustomer(CustomerState.getCustomer(request));
     		measurement = (MeasurementImpl) measurementService.saveMeasurement(measurement);
     		addToCartItem.setMeasurementId(measurement.getId());
             return super.add(request, response, model, addToCartItem);

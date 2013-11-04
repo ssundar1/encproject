@@ -5,7 +5,6 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="en">
 <!--<![endif]-->
-
 <blc:head pageTitle="Measurement - Enclothe" />
 
 <body>
@@ -21,13 +20,14 @@
 			<header>
 				<h1 th:inline="text">
 					<span>Provide Measurement</span>
-				</h1>
+				</h1>				
 				<div class="add_to_cart">
 					<blc:form method="POST" th:action="@{/enccart/addtocart}">
 						<input type="hidden" name="productId" th:value="${material.id}" />
 						<input type="hidden" name="designId" th:value="${design.id}" />
 						<input type="hidden" name="measurementId" value="" />
 						<input type="hidden" name="quantity" value="1" />
+
 						<div class="form50">
 							<label for="name"><span>Measurement Name</span></label> 
 							<input type="text" class="field50" name="name" />
@@ -48,9 +48,30 @@
 							<label for="bust"><span>Bust</span></label> 
 							<input type="text" class="field50" name="bust" />
 						</div>
+						<div class="form50">
+							<label for="dartLine"><span>Dart line</span></label>
+							<input type="text" class="field50" name="dartLine" />
+						</div>
+						<div class="form50">
+							<label for="waist"><span>Waist</span></label>
+							<input type="text" class="field50" name="waist" />
+						</div>
+						<div class="form50">
+							<label for="hip"><span>Hip</span></label>
+							<input type="text" class="field50" name="hip" />
+						</div>
+						<div class="form50">
+							<label for="shoulder"><span>Shoulder</span></label>
+							<input type="text" class="field50" name="shoulder" />
+						</div>
+						<div class="form50">
+							<label for="sleeveLength"><span>Sleeve Length</span></label>
+							<input type="text" class="field50" name="sleeveLength" />
+						</div>
 						<input type="submit" class="addToCart"
 							th:value="#{product.buyNow}" />
 					</blc:form>
+					
 				</div>
 			</header>
 

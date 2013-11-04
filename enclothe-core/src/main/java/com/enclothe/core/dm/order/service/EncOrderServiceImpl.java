@@ -1,20 +1,25 @@
 package com.enclothe.core.dm.order.service;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
+import org.broadleafcommerce.core.catalog.domain.Product;
+import org.broadleafcommerce.core.catalog.domain.Sku;
 import org.broadleafcommerce.core.order.domain.BundleOrderItem;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.order.domain.OrderItem;
+import org.broadleafcommerce.core.order.domain.OrderItemAttribute;
 import org.broadleafcommerce.core.order.service.OrderItemService;
 import org.broadleafcommerce.core.order.service.OrderServiceImpl;
 import org.broadleafcommerce.core.order.service.call.OrderItemRequestDTO;
 import org.springframework.stereotype.Service;
 
 import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
+import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.product.domain.EncMaterial;
 
-@Service("encOrderService")
 public class EncOrderServiceImpl extends OrderServiceImpl{
    
     @Resource(name = "encOrderItemService")
@@ -30,10 +35,15 @@ public class EncOrderServiceImpl extends OrderServiceImpl{
                 EncMaterial material = (EncMaterial) discreteItem.getProduct();
             	if(material.getIsDummy())
             		return null;
-                
+                            	
                 if (itemMatches(discreteItem.getSku(), discreteItem.getProduct(), discreteItem.getOrderItemAttributes(),
                         itemToFind)) {
-                    return discreteItem;
+                	EncOrderItemRequestDTO newItem = (EncOrderItemRequestDTO) itemToFind;
+                	
+                	if(discreteItem.getDesignSku() != null && newItem.getDesignSkuId().equals(discreteItem.getDesignSku().getId()))
+                		return discreteItem;
+                	else
+                		return null;
                 }
             } else if (currentItem instanceof BundleOrderItem) {
                 BundleOrderItem bundleItem = (BundleOrderItem) currentItem;
@@ -44,4 +54,5 @@ public class EncOrderServiceImpl extends OrderServiceImpl{
         }
         return null;
     }
+       
 }
