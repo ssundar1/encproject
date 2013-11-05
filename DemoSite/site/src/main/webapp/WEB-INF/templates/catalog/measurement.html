@@ -20,12 +20,25 @@
 			<header>
 				<h1 th:inline="text">
 					<span>Provide Measurement</span>
-				</h1>				
-				<div class="add_to_cart">
+				</h1>	
+				<input type="radio" name="measurementOption" value="dropdown"/>
+				<div class="add_to_cart" id="dropdown">
+				<blc:form method="POST" th:action="@{/enccart/addtocart}">
+					<input type="hidden" name="productId" th:value="${material.id}" />
+					<input type="hidden" name="designId" th:value="${design.id}" />
+					<input type="hidden" name="quantity" value="1" />
+					<select name="measurementId">
+	          			<option th:each="var : ${custMeasurements}" 
+	                  	th:value="${var.id}" 
+	                  	th:text="${var.name}"></option>
+	        		</select>	
+	        	</blc:form>	
+	        	</div>	
+	        	<input type="radio" name="measurementOption" value="addNew"/>
+				<div class="add_to_cart" id="addNew">
 					<blc:form method="POST" th:action="@{/enccart/addtocart}">
 						<input type="hidden" name="productId" th:value="${material.id}" />
 						<input type="hidden" name="designId" th:value="${design.id}" />
-						<input type="hidden" name="measurementId" value="" />
 						<input type="hidden" name="quantity" value="1" />
 
 						<div class="form50">
