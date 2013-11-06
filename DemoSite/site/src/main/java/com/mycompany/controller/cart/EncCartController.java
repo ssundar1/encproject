@@ -115,5 +115,11 @@ public class EncCartController extends CartController {
         return respURL;
     }    
 
+    @RequestMapping(value = "/addtocartoldmeasurement", produces = { "text/html", "*/*" })
+    public String addWithPrevMeasurement(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
+            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
+
+        return super.add(request, response, model, addToCartItem);
+    }    
     
 }
