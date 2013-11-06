@@ -20,73 +20,75 @@
 			<header>
 				<h1 th:inline="text">
 					<span>Provide Measurement</span>
-				</h1>	
-				<input type="radio" name="measurementOption" value="dropdown"/>
-				<div class="add_to_cart" id="dropdown">
+				</h1>
+			</header>
+
+			<div class="add_to_cart" id="dropdown">
+			<input type="radio" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
 				<blc:form method="POST" th:action="@{/enccart/addtocart}">
 					<input type="hidden" name="productId" th:value="${material.id}" />
 					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
 					<select name="measurementId">
-	          			<option th:each="var : ${custMeasurements}" 
-	                  	th:value="${var.id}" 
-	                  	th:text="${var.name}"></option>
-	        		</select>	
-	        	</blc:form>	
-	        	</div>	
-	        	<input type="radio" name="measurementOption" value="addNew"/>
-				<div class="add_to_cart" id="addNew">
-					<blc:form method="POST" th:action="@{/enccart/addtocart}">
-						<input type="hidden" name="productId" th:value="${material.id}" />
-						<input type="hidden" name="designId" th:value="${design.id}" />
-						<input type="hidden" name="quantity" value="1" />
+						<option th:each="var : ${custMeasurements}" th:value="${var.id}"
+							th:text="${var.name}"></option>
+					</select>
+				</blc:form>
+			</div>
+			
+			<div class="add_to_cart" id="addNew">
+			<input type="radio" name="measurementOption" value="addNew"><span>Add New Measurement</span></input>
+				<blc:form method="POST" th:action="@{/enccart/addtocart}">
+					<input type="hidden" name="productId" th:value="${material.id}" />
+					<input type="hidden" name="designId" th:value="${design.id}" />
+					<input type="hidden" name="quantity" value="1" />
 
-						<div class="form50">
-							<label for="name"><span>Measurement Name</span></label> 
-							<input type="text" class="field50" name="name" />
-						</div>
-						<div class="form50">
-							<label for="description"><span>Measurement Description</span></label> 
-							<input type="text" class="field50" name="description" />
-						</div>
-						<div class="form50">
-							<label for="height"><span>Height</span></label> 
-							<input type="text" class="field50" name="height" />
-						</div>
-						<div class="form50">
-							<label for="chest"><span>Chest</span></label> 
-							<input type="text" class="field50" name="chest" />
-						</div>
-						<div class="form50">
-							<label for="bust"><span>Bust</span></label> 
-							<input type="text" class="field50" name="bust" />
-						</div>
-						<div class="form50">
-							<label for="dartLine"><span>Dart line</span></label>
-							<input type="text" class="field50" name="dartLine" />
-						</div>
-						<div class="form50">
-							<label for="waist"><span>Waist</span></label>
-							<input type="text" class="field50" name="waist" />
-						</div>
-						<div class="form50">
-							<label for="hip"><span>Hip</span></label>
-							<input type="text" class="field50" name="hip" />
-						</div>
-						<div class="form50">
-							<label for="shoulder"><span>Shoulder</span></label>
-							<input type="text" class="field50" name="shoulder" />
-						</div>
-						<div class="form50">
-							<label for="sleeveLength"><span>Sleeve Length</span></label>
-							<input type="text" class="field50" name="sleeveLength" />
-						</div>
-						<input type="submit" class="addToCart"
-							th:value="#{product.buyNow}" />
-					</blc:form>
-					
-				</div>
-			</header>
+					<div class="form50">
+						<label for="name"><span>Measurement Name</span></label> <input
+							type="text" class="field50" name="name" />
+					</div>
+					<div class="form50">
+						<label for="description"><span>Measurement
+								Description</span></label> <input type="text" class="field50"
+							name="description" />
+					</div>
+					<div class="form50">
+						<label for="height"><span>Height</span></label> <input type="text"
+							class="field50" name="height" />
+					</div>
+					<div class="form50">
+						<label for="chest"><span>Chest</span></label> <input type="text"
+							class="field50" name="chest" />
+					</div>
+					<div class="form50">
+						<label for="bust"><span>Bust</span></label> <input type="text"
+							class="field50" name="bust" />
+					</div>
+					<div class="form50">
+						<label for="dartLine"><span>Dart line</span></label> <input
+							type="text" class="field50" name="dartLine" />
+					</div>
+					<div class="form50">
+						<label for="waist"><span>Waist</span></label> <input type="text"
+							class="field50" name="waist" />
+					</div>
+					<div class="form50">
+						<label for="hip"><span>Hip</span></label> <input type="text"
+							class="field50" name="hip" />
+					</div>
+					<div class="form50">
+						<label for="shoulder"><span>Shoulder</span></label> <input
+							type="text" class="field50" name="shoulder" />
+					</div>
+					<div class="form50">
+						<label for="sleeveLength"><span>Sleeve Length</span></label> <input
+							type="text" class="field50" name="sleeveLength" />
+					</div>
+					<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
+				</blc:form>
+
+			</div>
+
 
 		</section>
 
