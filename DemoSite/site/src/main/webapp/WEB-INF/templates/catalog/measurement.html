@@ -30,12 +30,13 @@
 					<input type="hidden" name="productId" th:value="${material.id}" />
 					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
-					<div class="form50">
+					<div class="form50" id="chooseMeasurementDiv">
+													<input type="radio" id="chooseMeasurement" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
+								</div>
+					<div class="form50" id="newMeasurementDiv" >
 								<input type="radio" id="newMeasurement" name="measurementOption" value="addNew"><span>Add New Measurement</span></input>
 								</div>
-								<div class="form50">
-								<input type="radio" id="chooseMeasurement" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
-								</div>
+
 								<div class="form50" id="measurementdropdown">
 													<select id="measurementDropDown" name="measurementId">
 														<option th:each="var : ${custMeasurements}" th:value="${var.id}"

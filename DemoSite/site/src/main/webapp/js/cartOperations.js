@@ -220,23 +220,36 @@ $(function(){
         return false;
     });
     $(document).ready(function(){
-   	 
-       $("#addNew").hide();
-      
-       return false;
-   });
-   
-    $("#newMeasurement").click(function(){
-           	$("#addNew").show();
-           	$("#measurementDropDown").hide();
-           	$("#addNewMeasurement").hide();
-           	return false;
-         });
+        if($('#measurementdropdown option').length < 1){
+       	 alert($('#measurementdropdown option').length );
+           $("#addNew").show();
+           $('#measurementDropDown').hide();
+           $("#addNewMeasurement").hide();
+           $("#chooseMeasurementDiv").hide();
+           $("#newMeasurementDiv").hide();
+           }else{
+           alert('else'+$('#measurementdropdown option').length );
+           $('#measurementDropDown').show();
+           $("#addNew").hide();
+           $("#addNewMeasurement").show();
+           $("#chooseMeasurementDiv").show();
+           $("#newMeasurementDiv").show();
+           }
+          
+           return false;
+       });
        
-     $("#chooseMeasurement").click(function(){
-           	$("#addNew").hide();
-           	$("#measurementDropDown").show();
-           	$("#addNewMeasurement").show();
-           	return false;
-         }); 
+        $("#newMeasurement").click(function(){
+               	$("#addNew").show();
+               	$("#measurementDropDown").hide();
+               	$("#addNewMeasurement").hide();
+               	return false;
+             });
+           
+         $("#chooseMeasurement").click(function(){
+               	$("#addNew").hide();
+               	$("#measurementDropDown").show();
+               	$("#addNewMeasurement").show();
+               	return false;
+             }); 
 });
