@@ -219,4 +219,24 @@ $(function(){
         );
         return false;
     });
+    $(document).ready(function(){
+   	 
+       $("#addNew").hide();
+      
+       return false;
+   });
+   
+    $("#newMeasurement").click(function(){
+           	$("#addNew").show();
+           	$("#measurementDropDown").hide();
+           	$("#addNewMeasurement").hide();
+           	return false;
+         });
+       
+     $("#chooseMeasurement").click(function(){
+           	$("#addNew").hide();
+           	$("#measurementDropDown").show();
+           	$("#addNewMeasurement").show();
+           	return false;
+         }); 
 });

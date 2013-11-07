@@ -6,8 +6,8 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 <blc:head pageTitle="Measurement - Enclothe" />
-
 <body>
+
 	<div id="notification_bar"></div>
 	<header th:substituteby="layout/partials/header" />
 
@@ -24,21 +24,32 @@
 			</header>
 
 			<div class="add_to_cart" id="dropdown">
-			<input type="radio" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
+
+
 				<blc:form method="POST" th:action="@{/enccart/addtocartoldmeasurement}">
 					<input type="hidden" name="productId" th:value="${material.id}" />
 					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
-					<select name="measurementId">
-						<option th:each="var : ${custMeasurements}" th:value="${var.id}"
-							th:text="${var.name}"></option>
-					</select>
-					<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
+					<div class="form50">
+								<input type="radio" id="newMeasurement" name="measurementOption" value="addNew"><span>Add New Measurement</span></input>
+								</div>
+								<div class="form50">
+								<input type="radio" id="chooseMeasurement" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
+								</div>
+								<div class="form50" id="measurementdropdown">
+													<select id="measurementDropDown" name="measurementId">
+														<option th:each="var : ${custMeasurements}" th:value="${var.id}"
+															th:text="${var.name}"></option>
+													</select>
+				</div>
+					<div class="form100">
+					<input id="addNewMeasurement" type="submit" class="addToCart" th:value="#{proudct.addToCart}" />
+					</div>
 				</blc:form>
 			</div>
-			
+
 			<div class="add_to_cart" id="addNew">
-			<input type="radio" name="measurementOption" value="addNew"><span>Add New Measurement</span></input>
+
 				<blc:form method="POST" th:action="@{/enccart/addtocart}">
 					<input type="hidden" name="productId" th:value="${material.id}" />
 					<input type="hidden" name="designId" th:value="${design.id}" />
@@ -85,10 +96,13 @@
 						<label for="sleeveLength"><span>Sleeve Length</span></label> <input
 							type="text" class="field50" name="sleeveLength" />
 					</div>
+					<div class="form100">
 					<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
+					</div>
 				</blc:form>
 
-			</div>
+
+					</div>
 
 
 		</section>
@@ -104,6 +118,7 @@
 		</section>
 
 	</div>
+
 
 	<footer th:substituteby="layout/partials/footer" />
 
