@@ -18,10 +18,6 @@ import javax.persistence.Table;
 
 import org.broadleafcommerce.common.audit.Auditable;
 import org.broadleafcommerce.common.audit.AuditableListener;
-import org.broadleafcommerce.common.presentation.AdminPresentation;
-import org.broadleafcommerce.common.presentation.AdminPresentationClass;
-import org.broadleafcommerce.common.presentation.PopulateToOneFieldsEnum;
-import org.broadleafcommerce.common.presentation.client.VisibilityEnum;
 import org.broadleafcommerce.core.order.domain.OrderItem;
 import org.broadleafcommerce.profile.core.domain.Customer;
 import org.hibernate.annotations.Cache;
@@ -59,27 +55,27 @@ public class DisputeImpl implements Dispute {
     @Column(name = "DISPUTE_ID", nullable=false)
     protected Long id;
 	
-	@OneToOne(targetEntity = EncOrderItemImpl.class, optional=false)
+	@OneToOne(targetEntity = EncOrderItemImpl.class)
     @JoinColumn(name = "ORDER_ITEM_ID",referencedColumnName="ORDER_ITEM_ID")
     @Index(name="DISPUTE_ORDERITEM_INDEX", columnNames={"ORDER_ITEM_ID"})
     protected OrderItem orderItem;
 	
-	@OneToOne(targetEntity = ServiceProviderImpl.class, optional=false)
+	@OneToOne(targetEntity = ServiceProviderImpl.class)
     @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
     @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
     protected ServiceProvider serviceProvider;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = EncCustomerImpl.class, optional=false)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = EncCustomerImpl.class)
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
     @Index(name="DISPUTE_CUSTOMER_INDEX", columnNames={"CUSTOMER_ID"})
     protected Customer customer;
 	
-	@ManyToOne(targetEntity = DisputeStateImpl.class, optional=false)
+	@ManyToOne(targetEntity = DisputeStateImpl.class)
     @JoinColumn(name = "DISPUTE_STATE_ID", referencedColumnName="DISPUTE_STATE_ID")
     @Index(name="DISPUTE_STATE_INDEX", columnNames={"DISPUTE_STATE_ID"})
     protected DisputeState disputeState;
 	
-	@ManyToOne(targetEntity = DisputePriorityImpl.class, optional=false)
+	@ManyToOne(targetEntity = DisputePriorityImpl.class)
     @JoinColumn(name = "DISPUTE_PRIORITY_ID", referencedColumnName="DISPUTE_PRIORITY_ID")
     @Index(name="DISPUTE_PRIORITY_INDEX", columnNames={"DISPUTE_PRIORITY_ID"})
     protected DisputePriority disputePriority;

@@ -1,21 +1,13 @@
 package com.enclothe.core.dm.order.service;
 
-import java.util.Map;
-
 import javax.annotation.Resource;
-
-import org.broadleafcommerce.core.catalog.domain.Product;
-import org.broadleafcommerce.core.catalog.domain.Sku;
 import org.broadleafcommerce.core.order.domain.BundleOrderItem;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.order.domain.OrderItem;
-import org.broadleafcommerce.core.order.domain.OrderItemAttribute;
 import org.broadleafcommerce.core.order.service.OrderItemService;
 import org.broadleafcommerce.core.order.service.OrderServiceImpl;
 import org.broadleafcommerce.core.order.service.call.OrderItemRequestDTO;
-import org.springframework.stereotype.Service;
-
 import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.product.domain.EncMaterial;

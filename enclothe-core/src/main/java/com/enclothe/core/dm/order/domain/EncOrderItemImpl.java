@@ -18,6 +18,8 @@ import org.broadleafcommerce.core.order.domain.DiscreteOrderItemImpl;
 import org.broadleafcommerce.core.order.domain.OrderItemImpl;
 import org.hibernate.annotations.Index;
 
+import com.enclothe.core.dispute.domain.Dispute;
+import com.enclothe.core.dispute.domain.DisputeImpl;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
 import com.enclothe.core.product.domain.EncDesign;
@@ -50,6 +52,10 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected EncDesign design;
 
+	@OneToOne(mappedBy = "orderItem", targetEntity = DisputeImpl.class)
+	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_dispute_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
+	protected Dispute dispute;
+	
 	@ManyToOne(targetEntity = SkuImpl.class)
 	@JoinColumn(name = "DESIGN_SKU_ID")
 	@Index(name = "DISCRETE_SKU_INDEX", columnNames = { "SKU_ID" })
@@ -71,6 +77,14 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 
 	public void setDesign(EncDesign design) {
 		this.design = design;
+	}
+
+	public Dispute getDispute() {
+		return dispute;
+	}
+
+	public void setDispute(Dispute dispute) {
+		this.dispute = dispute;
 	}
 
 	public void setOrderItemStateDetail(

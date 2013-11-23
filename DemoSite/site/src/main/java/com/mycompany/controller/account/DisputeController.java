@@ -29,33 +29,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/account/orders")
-public class OrderHistoryController extends BroadleafOrderHistoryController {
+public class DisputeController {
 
-    protected static String orderHistoryView = "account/orderHistory";
-    protected static String orderDetailsView = "account/partials/encOrderDetails";
-    protected static String orderDetailsRedirectView = "account/partials/encOrderDetails";
+    @RequestMapping(value = "/createDispute")
+    public String createDispute(HttpServletRequest request, Model model) {
+//	dummy place holder
+    return "";	
+    }
 
+    @RequestMapping(value = "/viewDispDet")
+    public String viewDisputeDetails(HttpServletRequest request, Model model) {
+    	
+    long disputeId = Long.parseLong(request.getParameter("dispid"));	
+//	dummy place holder
+    return "";	
+    }
     
-    @Resource(name = "blStateService")
-    StateService stateService;
-
-    @Resource(name = "blCountryService")
-    CountryService countryService;
-
-    @RequestMapping(method = RequestMethod.GET)
-    public String viewOrderHistory(HttpServletRequest request, Model model) {
-        return super.viewOrderHistory(request, model); 
-    }
-
-    @RequestMapping(value = "/{orderNumber}", method = RequestMethod.GET)
-    public String viewOrderDetails(HttpServletRequest request, Model model, @PathVariable("orderNumber") String orderNumber) {
-        Order order = orderService.findOrderByOrderNumber(orderNumber);
-        if (order == null) {
-            throw new IllegalArgumentException("The orderNumber provided is not valid");
-        }
-        model.addAttribute("order", order);
-        return isAjaxRequest(request) ? orderDetailsView : orderDetailsRedirectView;
-    }
-
 }
