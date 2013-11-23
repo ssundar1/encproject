@@ -31,10 +31,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DisputeController {
 
+	
     @RequestMapping(value = "/createDispute")
     public String createDispute(HttpServletRequest request, Model model) {
 //	dummy place holder
-    return "";	
+    return "account/partials/disputeform";	
     }
 
     @RequestMapping(value = "/viewDispDet")
