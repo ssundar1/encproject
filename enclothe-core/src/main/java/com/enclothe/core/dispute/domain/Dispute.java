@@ -21,10 +21,10 @@ public interface Dispute extends Serializable {
 	public OrderItem getOrderItem();
 
 	public void setOrderItem(@Nonnull OrderItem orderItem);
-	@Nonnull
-	public ServiceProvider getServiceProvider();
-
-	public void setServiceProvider(@Nonnull ServiceProvider serviceProvider);
+//	@Nonnull
+//	public ServiceProvider getServiceProvider();
+//
+//	public void setServiceProvider(@Nonnull ServiceProvider serviceProvider);
 	@Nonnull
 	public Customer getCustomer();
 

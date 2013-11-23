@@ -72,7 +72,7 @@ public class DisputeDaoImpl implements DisputeDao {
 	@Override
 	public List<Dispute> readDisputesByPriorityId(Long priorityId) {
 		Query query = em.createNamedQuery("BC_READ_DISPUTES_BY_PRIORITY_ID");
-        query.setParameter("channelId", priorityId);
+        query.setParameter("priorityId", priorityId);
         query.setHint(QueryHints.HINT_CACHEABLE, true);
 
         List<Dispute> resultList = query.getResultList();

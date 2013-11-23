@@ -29,8 +29,8 @@ import org.hibernate.annotations.SQLDelete;
 
 import com.enclothe.core.customer.domain.EncCustomerImpl;
 import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
-import com.enclothe.core.serviceprovider.domain.ServiceProvider;
-import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
+//import com.enclothe.core.serviceprovider.domain.ServiceProvider;
+//import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
 
 @Entity
 @EntityListeners(value = { AuditableListener.class })
@@ -60,10 +60,10 @@ public class DisputeImpl implements Dispute {
     @Index(name="DISPUTE_ORDERITEM_INDEX", columnNames={"ORDER_ITEM_ID"})
     protected OrderItem orderItem;
 	
-	@OneToOne(targetEntity = ServiceProviderImpl.class)
-    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
-    @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
-    protected ServiceProvider serviceProvider;
+//	@OneToOne(targetEntity = ServiceProviderImpl.class)
+//    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
+//    @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
+//    protected ServiceProvider serviceProvider;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = EncCustomerImpl.class)
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
@@ -107,14 +107,14 @@ public class DisputeImpl implements Dispute {
 	public void setOrderItem(OrderItem orderItem) {
 		this.orderItem = orderItem;
 	}
-    @Override
-	public ServiceProvider getServiceProvider() {
-		return serviceProvider;
-	}
-    @Override
-	public void setServiceProvider(ServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
-	}
+  //  @Override
+//	public ServiceProvider getServiceProvider() {
+//		return serviceProvider;
+//	}
+//    @Override
+//	public void setServiceProvider(ServiceProvider serviceProvider) {
+//		this.serviceProvider = serviceProvider;
+//	}
     @Override
 	public Customer getCustomer() {
 		return customer;

@@ -5,16 +5,16 @@
 
     <named-query name="BC_READ_DISPUTES_BY_STATE_ID" >
         <query>SELECT dispute FROM com.enclothe.core.dispute.domain.Dispute dispute
-        WHERE dispute.DisputeState.Id = :stateId</query>
+        WHERE dispute.disputeState.id = :stateId</query>
     </named-query>
     
     <named-query name="BC_READ_DISPUTES_BY_CHANNEL_ID" >
         <query>SELECT dispute FROM com.enclothe.core.dispute.domain.Dispute dispute
-        WHERE dispute.DisputeChannel.Id = :stateId</query>
+        WHERE dispute.disputeChannel.id = :channelId</query>
     </named-query>
     
     <named-query name="BC_READ_DISPUTES_BY_PRIORITY_ID" >
         <query>SELECT dispute FROM com.enclothe.core.dispute.domain.Dispute dispute
-        WHERE dispute.DisputePriority.Id = :priorityId</query>
+        WHERE dispute.disputePriority.id = :priorityId</query>
     </named-query>
 </entity-mappings>

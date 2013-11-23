@@ -8,6 +8,7 @@
         <non-jta-data-source>jdbc/web</non-jta-data-source>
         <mapping-file>config/bc/jpa/domain/Measurement.orm.xml</mapping-file>
         <mapping-file>config/bc/jpa/domain/OrderItem.orm.xml</mapping-file>
+        <mapping-file>config/bc/jpa/domain/Dispute.orm.xml</mapping-file>
        <class>com.enclothe.core.customer.domain.EncCustomerImpl</class>
         <class>com.enclothe.core.measurement.domain.MeasurementImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStatesImpl</class>
@@ -18,7 +19,11 @@
         <class>com.enclothe.core.dm.order.domain.EncMaterialOrderItemImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemImpl</class>        
         <class>com.enclothe.core.product.domain.EncDesignImpl</class>        
-        <class>com.enclothe.core.product.domain.EncMaterialImpl</class>       
+        <class>com.enclothe.core.product.domain.EncMaterialImpl</class>  
+        <class>com.enclothe.core.dispute.domain.DisputeImpl</class>
+         <class>com.enclothe.core.dispute.domain.DisputeStateImpl</class>
+         <class>com.enclothe.core.dispute.domain.DisputeChannelImpl</class>
+         <class>com.enclothe.core.dispute.domain.DisputePriorityImpl</class>     
         <exclude-unlisted-classes/>
     </persistence-unit>
     
