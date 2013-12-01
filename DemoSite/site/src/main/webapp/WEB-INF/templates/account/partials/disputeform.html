@@ -1,53 +1,13 @@
 
-			<div  id="addNew">
-
-				<blc:form method="POST" th:action="@{/saveDispute}">
-					<div class="form50">
-						<label for="name"><span>Measurement Name</span></label> <input
-							type="text" class="field50" name="name" />
-					</div>
-					<div class="form50">
-						<label for="description"><span>Measurement
-								Description</span></label> <input type="text" class="field50"
-							name="description" />
-					</div>
-					<div class="form50">
-						<label for="height"><span>Height</span></label> <input type="text"
-							class="field50" name="height" />
-					</div>
-					<div class="form50">
-						<label for="chest"><span>Chest</span></label> <input type="text"
-							class="field50" name="chest" />
-					</div>
-					<div class="form50">
-						<label for="bust"><span>Bust</span></label> <input type="text"
-							class="field50" name="bust" />
-					</div>
-					<div class="form50">
-						<label for="dartLine"><span>Dart line</span></label> <input
-							type="text" class="field50" name="dartLine" />
-					</div>
-					<div class="form50">
-						<label for="waist"><span>Waist</span></label> <input type="text"
-							class="field50" name="waist" />
-					</div>
-					<div class="form50">
-						<label for="hip"><span>Hip</span></label> <input type="text"
-							class="field50" name="hip" />
-					</div>
-					<div class="form50">
-						<label for="shoulder"><span>Shoulder</span></label> <input
-							type="text" class="field50" name="shoulder" />
-					</div>
-					<div class="form50">
-						<label for="sleeveLength"><span>Sleeve Length</span></label> <input
-							type="text" class="field50" name="sleeveLength" />
-					</div>
-					<div class="form100">
-					<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
-					</div>
-				</blc:form>
-
-
-					</div>
+<div id="addNew">
+	<blc:form method="POST" th:action="@{/saveDispute}">
+		<div class="form50">
+			<label for="name"><span>Dispute Comment</span></label> <input
+				type="text" class="field50" name="disputeComment" />
+		</div>
+		<div class="form100">
+			<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
+		</div>
+	</blc:form>
+</div>
 

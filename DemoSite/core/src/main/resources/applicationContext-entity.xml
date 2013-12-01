@@ -55,6 +55,9 @@
                  <bean id="com.enclothe.core.dispute.domain.DisputePriority"
          class="com.enclothe.core.dispute.domain.DisputePriorityImpl"
          scope="prototype" /> 
+         <bean id="com.enclothe.core.dispute.domain.DisputeComment"
+         class="com.enclothe.core.dispute.domain.DisputeCommentImpl"
+         scope="prototype" /> 
          <bean id="com.enclothe.core.dispute.domain.Dispute"
          class="com.enclothe.core.dispute.domain.DisputeImpl"
          scope="prototype" />

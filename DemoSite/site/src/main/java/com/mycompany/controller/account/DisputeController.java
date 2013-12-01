@@ -18,7 +18,9 @@ package com.mycompany.controller.account;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.broadleafcommerce.common.audit.Auditable;
 import org.broadleafcommerce.core.web.controller.account.BroadleafOrderHistoryController;
 import org.broadleafcommerce.profile.core.service.CountryService;
 import org.broadleafcommerce.profile.core.service.StateService;
@@ -28,13 +30,40 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.enclothe.core.dispute.dao.DisputeCommentDaoImpl;
+import com.enclothe.core.dispute.domain.Dispute;
+import com.enclothe.core.dispute.domain.DisputeChannel;
+import com.enclothe.core.dispute.domain.DisputeComment;
+import com.enclothe.core.dispute.domain.DisputeCommentImpl;
+import com.enclothe.core.dispute.service.DisputeCommentService;
+import com.enclothe.core.dispute.service.DisputeService;
+
 @Controller
 public class DisputeController {
 
+	@Resource(name = "blDisputeService")
+    protected DisputeService disputeService;
+	
+	@Resource(name = "blDisputeCommentService")
+    protected DisputeCommentService disputeCommentService;
+	
 	
     @RequestMapping(value = "/createDispute")
     public String createDispute(HttpServletRequest request, Model model) {
 //	dummy place holder
+    return "account/partials/disputeform";	
+    }
+    
+    @RequestMapping(value = "/saveDispute")
+    public String saveDispute(HttpServletRequest request, Model model, HttpServletResponse response) {
+
+    	Dispute dispute = disputeService.createNewDispute();
+    	disputeService.saveDispute(dispute);
+    	
+    	DisputeComment disputeComment = new DisputeCommentImpl();
+    	disputeComment.setComment("Test");
+    	disputeCommentService.saveDisputeComment(disputeComment);
+    	
     return "account/partials/disputeform";	
     }
 

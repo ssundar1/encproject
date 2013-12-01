@@ -23,7 +23,8 @@
         <class>com.enclothe.core.dispute.domain.DisputeImpl</class>
          <class>com.enclothe.core.dispute.domain.DisputeStateImpl</class>
          <class>com.enclothe.core.dispute.domain.DisputeChannelImpl</class>
-         <class>com.enclothe.core.dispute.domain.DisputePriorityImpl</class>     
+         <class>com.enclothe.core.dispute.domain.DisputePriorityImpl</class>
+         <class>com.enclothe.core.dispute.domain.DisputeCommentImpl</class>     
         <exclude-unlisted-classes/>
     </persistence-unit>
     
