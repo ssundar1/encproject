@@ -13,6 +13,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -69,6 +70,9 @@ public class DisputeImpl implements Dispute {
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
     @Index(name="DISPUTE_CUSTOMER_INDEX", columnNames={"CUSTOMER_ID"})
     protected Customer customer;
+	
+	@OneToMany(targetEntity = DisputeCommentImpl.class)
+    protected DisputeComment disputeComment;
 	
 	@ManyToOne(targetEntity = DisputeStateImpl.class)
     @JoinColumn(name = "DISPUTE_STATE_ID", referencedColumnName="DISPUTE_STATE_ID")
@@ -146,6 +150,14 @@ public class DisputeImpl implements Dispute {
     @Override
 	public void setDisputeChannel(DisputeChannel disputeChannel) {
 		this.disputeChannel = disputeChannel;
+	}
+    @Override
+	public DisputeComment getDisputeComment() {
+		return disputeComment;
+	}
+    @Override
+	public void setDisputeComment(DisputeComment disputeComment) {
+		this.disputeComment = disputeComment;
 	}
     @Override
 	public Date getEndDate() {
