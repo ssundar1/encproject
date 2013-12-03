@@ -26,6 +26,7 @@ import org.broadleafcommerce.profile.core.service.CountryService;
 import org.broadleafcommerce.profile.core.service.StateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,7 @@ import com.enclothe.core.dispute.domain.DisputeComment;
 import com.enclothe.core.dispute.domain.DisputeCommentImpl;
 import com.enclothe.core.dispute.service.DisputeCommentService;
 import com.enclothe.core.dispute.service.DisputeService;
+import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 
 @Controller
 public class DisputeController {
@@ -55,13 +57,15 @@ public class DisputeController {
     }
     
     @RequestMapping(value = "/saveDispute")
-    public String saveDispute(HttpServletRequest request, Model model, HttpServletResponse response) {
+    public String saveDispute(HttpServletRequest request, Model model, HttpServletResponse response
+    		,@ModelAttribute("disputeComment") String comment) {
 
     	Dispute dispute = disputeService.createNewDispute();
     	disputeService.saveDispute(dispute);
     	
     	DisputeComment disputeComment = new DisputeCommentImpl();
-    	disputeComment.setComment("Test");
+    	disputeComment.setComment(comment);
+    	//disputeComment.setDispute(dispute);
     	disputeCommentService.saveDisputeComment(disputeComment);
     	
     return "account/partials/disputeform";	

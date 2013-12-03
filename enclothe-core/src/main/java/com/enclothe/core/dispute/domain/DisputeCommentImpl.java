@@ -56,7 +56,7 @@ public class DisputeCommentImpl implements DisputeComment {
     protected Long id;
 	
 	@OneToOne(targetEntity = DisputeImpl.class)
-    @JoinColumn(name = "Dispute_ID",referencedColumnName="Dispute_ID")
+    @JoinColumn(name = "Dispute_ID")
     @Index(name="DISPUTE_INDEX", columnNames={"Dispute_ID"})
     protected Dispute dispute;
 	

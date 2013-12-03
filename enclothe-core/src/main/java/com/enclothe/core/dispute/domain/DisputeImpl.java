@@ -2,6 +2,8 @@ package com.enclothe.core.dispute.domain;
 
 import java.util.Date;
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -40,7 +42,7 @@ import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
 @SQLDelete(sql="UPDATE ENC_Dispute SET END_DATE = now() WHERE DISPUTE_ID = ?")
 public class DisputeImpl implements Dispute {
-
+ 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -71,9 +73,15 @@ public class DisputeImpl implements Dispute {
     @Index(name="DISPUTE_CUSTOMER_INDEX", columnNames={"CUSTOMER_ID"})
     protected Customer customer;
 	
-	@OneToMany(targetEntity = DisputeCommentImpl.class)
-    protected DisputeComment disputeComment;
+    @OneToMany(mappedBy = "dispute", targetEntity = DisputeCommentImpl.class, cascade = {CascadeType.ALL})
+    protected List<DisputeComment> disputeComments = new ArrayList<DisputeComment>();
 	
+	public List<DisputeComment> getDisputeComments() {
+		return disputeComments;
+	}
+	public void setDisputeComments(List<DisputeComment> disputeComments) {
+		this.disputeComments = disputeComments;
+	}
 	@ManyToOne(targetEntity = DisputeStateImpl.class)
     @JoinColumn(name = "DISPUTE_STATE_ID", referencedColumnName="DISPUTE_STATE_ID")
     @Index(name="DISPUTE_STATE_INDEX", columnNames={"DISPUTE_STATE_ID"})
@@ -151,14 +159,7 @@ public class DisputeImpl implements Dispute {
 	public void setDisputeChannel(DisputeChannel disputeChannel) {
 		this.disputeChannel = disputeChannel;
 	}
-    @Override
-	public DisputeComment getDisputeComment() {
-		return disputeComment;
-	}
-    @Override
-	public void setDisputeComment(DisputeComment disputeComment) {
-		this.disputeComment = disputeComment;
-	}
+ 
     @Override
 	public Date getEndDate() {
 		return endDate;

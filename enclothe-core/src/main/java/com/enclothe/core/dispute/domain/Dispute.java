@@ -2,6 +2,7 @@ package com.enclothe.core.dispute.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -38,10 +39,9 @@ public interface Dispute extends Serializable {
 
 	public void setDisputePriority(@Nonnull DisputePriority disputePriority);
 	
-	@Nonnull
-	public DisputeComment getDisputeComment();
-
-	public void setDisputeComment(@Nonnull DisputeComment disputeComment);
+	public List<DisputeComment> getDisputeComments();
+	
+	public void setDisputeComments(List<DisputeComment> disputeComments);
 	
 	@Nullable
 	public DisputeChannel getDisputeChannel();

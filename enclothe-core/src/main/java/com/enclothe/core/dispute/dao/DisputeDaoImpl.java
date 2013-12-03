@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.enclothe.core.dispute.domain.Dispute;
 import com.enclothe.core.dispute.domain.DisputeImpl;
 import com.enclothe.core.dispute.domain.DisputeState;
+import org.broadleafcommerce.core.order.dao.OrderItemDao;
 
 @Repository("blDisputeDao")
 public class DisputeDaoImpl implements DisputeDao {
@@ -24,6 +25,9 @@ public class DisputeDaoImpl implements DisputeDao {
 	
 	@Resource(name = "blEntityConfiguration")
     protected EntityConfiguration entityConfiguration;
+	
+	@Resource(name="blOrderItemDao")
+    protected OrderItemDao orderItemDao;
 	
 	@Override
 	public Dispute readDisputeById(Long DisputeId) {
