@@ -37,18 +37,19 @@ public class EncDesignImpl extends ProductImpl implements EncNonCartableItem,Enc
 
 	private static final long serialVersionUID = 6545097668293683751L;
 	
-//	 @OneToOne(targetEntity=ServiceProviderImpl.class, optional=false)
-//	  @JoinColumn(name="DESIGN_OWNER_ID")
-//	//  @AdminPresentationCollection(friendlyName="EncOrderItemImpl_state_detail", order=20, addType=AddMethodType.PERSIST, tab="EncOrderItemImpl_Advanced_Tab", tabOrder=3000)
-//	  protected ServiceProvider serviceProvider;
-//
-//	public ServiceProvider getServiceProvider() {
-//		return serviceProvider;
-//	}
-//
-//	public void setServiceProvider(ServiceProvider serviceProvider) {
-//		this.serviceProvider = serviceProvider;
-//	}
+	@OneToOne(targetEntity=ServiceProviderImpl.class, optional=true)
+	 @JoinColumn(name="SP_ID")
+	  //@AdminPresentation(friendlyName = "MaterialImpl_Owner_id", order = 30, group = "MaterialImpl_Owner",   	    visibility = VisibilityEnum.HIDDEN_ALL)
+	protected ServiceProvider serviceProvider;
+  
+
+	public ServiceProvider getServiceProvider() {
+		return serviceProvider;
+	}
+
+	public void setServiceProvider(ServiceProvider serviceProvider) {
+		this.serviceProvider = serviceProvider;
+	}
 
 	@Column(name = "TYPE")
 	  //  @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Registered", order = 80, prominent = true, gridOrder = 4000)

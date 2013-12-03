@@ -1,16 +1,22 @@
 package com.enclothe.core.product.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.broadleafcommerce.common.presentation.AdminPresentation;
+import org.broadleafcommerce.common.presentation.client.VisibilityEnum;
 import org.broadleafcommerce.core.catalog.domain.ProductImpl;
+import org.broadleafcommerce.profile.core.domain.Customer;
+import org.hibernate.annotations.Index;
 
+import com.enclothe.core.customer.domain.EncCustomerImpl;
 import com.enclothe.core.product.EncCartableItem;
 import com.enclothe.core.serviceprovider.domain.ServiceProvider;
 import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
@@ -19,17 +25,7 @@ import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
 @Table(name = "ENC_MATERIAL")
 public class EncMaterialImpl extends ProductImpl implements EncCartableItem, EncMaterial{
 
-/*	 @OneToOne(targetEntity=ServiceProviderImpl.class)
-	 @JoinColumn(name="MATERIAL_OWNER_ID")
-	 protected ServiceProvider serviceProvider;
-
-	public ServiceProvider getServiceProvider() {
-		return serviceProvider;
-	}
-
-	public void setServiceProvider(ServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
-	}*/
+	 
 	
     @Column(name = "IS_DUMMY")
     @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Registered", order = 80, prominent = true, gridOrder = 4000)
@@ -42,7 +38,19 @@ public class EncMaterialImpl extends ProductImpl implements EncCartableItem, Enc
 	public void setIsDummy(Boolean isDummy) {
 		this.isDummy = isDummy;
 	}  
-    
+	@OneToOne(targetEntity=ServiceProviderImpl.class, optional=true)
+	 @JoinColumn(name="SP_ID")
+	  //@AdminPresentation(friendlyName = "MaterialImpl_Owner_id", order = 30, group = "MaterialImpl_Owner",   	    visibility = VisibilityEnum.HIDDEN_ALL)
+	protected ServiceProvider serviceProvider;
+   
+
+	public ServiceProvider getServiceProvider() {
+		return serviceProvider;
+	}
+
+	public void setServiceProvider(ServiceProvider serviceProvider) {
+		this.serviceProvider = serviceProvider;
+	}
 	
 	/**
 	 * 

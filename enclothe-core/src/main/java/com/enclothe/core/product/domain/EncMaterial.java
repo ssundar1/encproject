@@ -14,10 +14,10 @@ public interface EncMaterial extends Product {
 	public Boolean getIsDummy();
 	
 	public void setIsDummy(Boolean isDummy);
-/*	
+	
 	public ServiceProvider getServiceProvider() ;
 
-	public void setServiceProvider(ServiceProvider serviceProvider);*/
+	public void setServiceProvider(ServiceProvider serviceProvider);
 	
     
 	

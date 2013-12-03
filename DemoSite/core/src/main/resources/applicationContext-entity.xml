@@ -61,4 +61,14 @@
          <bean id="com.enclothe.core.dispute.domain.Dispute"
          class="com.enclothe.core.dispute.domain.DisputeImpl"
          scope="prototype" />
+       <bean id="com.enclothe.core.serviceprovider.domain.ServiceProvider"
+         class="com.enclothe.core.serviceprovider.domain.ServiceProviderImpl"
+         scope="prototype" />
+       
+       	<bean id="com.enclothe.core.serviceprovider.domain.ServiceProviderAccountInfo"
+         class="com.enclothe.core.serviceprovider.domain.ServiceProviderAccountInfoImpl"
+         scope="prototype" />										
+       											  
+         
+          
 </beans>
