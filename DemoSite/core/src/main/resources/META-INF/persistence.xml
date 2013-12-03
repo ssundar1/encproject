@@ -24,7 +24,10 @@
          <class>com.enclothe.core.dispute.domain.DisputeStateImpl</class>
          <class>com.enclothe.core.dispute.domain.DisputeChannelImpl</class>
          <class>com.enclothe.core.dispute.domain.DisputePriorityImpl</class>
-         <class>com.enclothe.core.dispute.domain.DisputeCommentImpl</class>     
+         <class>com.enclothe.core.dispute.domain.DisputeCommentImpl</class>  
+          <class>com.enclothe.core.serviceprovider.domain.ServiceProviderImpl</class>
+         <class>com.enclothe.core.serviceprovider.domain.ServiceProviderAccountInfoImpl</class>
+        <class>com.enclothe.core.serviceprovider.domain.ServiceProviderAttributeImpl</class>   
         <exclude-unlisted-classes/>
     </persistence-unit>
     
