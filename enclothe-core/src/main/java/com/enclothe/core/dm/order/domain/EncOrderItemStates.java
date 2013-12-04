@@ -5,6 +5,12 @@ import java.util.Date;
 
 public abstract interface EncOrderItemStates extends Serializable
 {
+  public static final long SUBMITTED=100;
+  public static final long MATERIAL_SHIPPED=101;
+  public static final long STITCHING_IN_PROGRESS=102;
+  public static final long SHIPPED=103;
+  public static final long COMPLETED=104;
+  
   public abstract String getOrderStateName();
 
   public abstract void setOrderStateName(String paramLong);
