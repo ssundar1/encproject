@@ -8,13 +8,17 @@
                     <tr>
                         <th class="label">Items</th>
                         <th class="price">Price</th>
+                        <th class="price">Dispute</th>
                     </tr>
                    <div th:each="orderItem : *{orderItems}" th:object="${orderItem}" th:remove="tag">
                    <tr >
                     
                         <td class="label" th:text="${orderItem.quantity} + ' of ' + ${orderItem.name}"></td>
                         <td class="price" blc:price="${orderItem.totalPrice}"></td>
-                        
+                          
+                        <td  class="label" >
+                        	<a href="/createDispute" >Raise a new dispute</a>                        
+                        </td>
                     </tr>
                     <tr >
                       <td>
@@ -25,17 +29,7 @@
                       </td>
                       <td></td>
                     </tr>
-                    <tr >
-                        <td class="label">Dispute:</td>
-                        <td th:if="${orderItem.dispute} == null" class="price">
-                        	<a href="/createDispute">Raise a new dispute</a>                        
-                        </td>
-                        <td th:unless="${orderItem.dispute} == null" class="price">
-                        	<a th:href="@{'/viewDispDet?dispid=' + ${orderItem.dispute.id}}">
-                        		<div class="title" th:text="${orderItem.dispute.id}"></div>
-                        	</a>                        
-                        </td>                        
-                    </tr>                      
+                    
                     </div>
                     <tr class="shipment-summary merchandise-total">
                         <td class="label">Merchandise Total:</td>

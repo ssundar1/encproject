@@ -55,7 +55,7 @@ import org.broadleafcommerce.core.order.domain.OrderImpl;
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
 @AdminPresentationClass(populateToOneFields = PopulateToOneFieldsEnum.TRUE, friendlyName = "ServiceProviderImpl_base")
 
-public class ServiceProviderImpl extends OrderImpl implements ServiceProvider{
+public class ServiceProviderImpl  implements ServiceProvider{
 
 	private static final long serialVersionUID = -2667332421333264215L;
 
@@ -193,7 +193,7 @@ public class ServiceProviderImpl extends OrderImpl implements ServiceProvider{
     visibility = VisibilityEnum.HIDDEN_ALL) 
     protected Date endDate;
     
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserCategoryImpl.class, optional=false)
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserCategoryImpl.class, optional=true)
     @JoinColumn(name = "USER_CATEGORY_ID")
     @AdminPresentation(friendlyName = "ServiceProviderImpl_user_category", order = 200, group = "ServiceProviderImpl_SP",
     visibility = VisibilityEnum.HIDDEN_ALL) 

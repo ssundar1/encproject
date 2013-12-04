@@ -2,6 +2,8 @@ package com.enclothe.core.dispute.domain;
 
 import java.util.Date;
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,6 +15,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,8 +32,8 @@ import org.hibernate.annotations.SQLDelete;
 
 import com.enclothe.core.customer.domain.EncCustomerImpl;
 import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
-import com.enclothe.core.serviceprovider.domain.ServiceProvider;
-import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
+//import com.enclothe.core.serviceprovider.domain.ServiceProvider;
+//import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
 
 @Entity
 @EntityListeners(value = { AuditableListener.class })
@@ -39,7 +42,7 @@ import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
 @SQLDelete(sql="UPDATE ENC_Dispute SET END_DATE = now() WHERE DISPUTE_ID = ?")
 public class DisputeImpl implements Dispute {
-
+ 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -60,16 +63,25 @@ public class DisputeImpl implements Dispute {
     @Index(name="DISPUTE_ORDERITEM_INDEX", columnNames={"ORDER_ITEM_ID"})
     protected OrderItem orderItem;
 	
-	@OneToOne(targetEntity = ServiceProviderImpl.class)
-    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
-    @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
-    protected ServiceProvider serviceProvider;
+//	@OneToOne(targetEntity = ServiceProviderImpl.class)
+//    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
+//    @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
+//    protected ServiceProvider serviceProvider;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = EncCustomerImpl.class)
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
     @Index(name="DISPUTE_CUSTOMER_INDEX", columnNames={"CUSTOMER_ID"})
     protected Customer customer;
 	
+    @OneToMany(mappedBy = "dispute", targetEntity = DisputeCommentImpl.class, cascade = {CascadeType.ALL})
+    protected List<DisputeComment> disputeComments = new ArrayList<DisputeComment>();
+	
+	public List<DisputeComment> getDisputeComments() {
+		return disputeComments;
+	}
+	public void setDisputeComments(List<DisputeComment> disputeComments) {
+		this.disputeComments = disputeComments;
+	}
 	@ManyToOne(targetEntity = DisputeStateImpl.class)
     @JoinColumn(name = "DISPUTE_STATE_ID", referencedColumnName="DISPUTE_STATE_ID")
     @Index(name="DISPUTE_STATE_INDEX", columnNames={"DISPUTE_STATE_ID"})
@@ -107,14 +119,14 @@ public class DisputeImpl implements Dispute {
 	public void setOrderItem(OrderItem orderItem) {
 		this.orderItem = orderItem;
 	}
-    @Override
-	public ServiceProvider getServiceProvider() {
-		return serviceProvider;
-	}
-    @Override
-	public void setServiceProvider(ServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
-	}
+  //  @Override
+//	public ServiceProvider getServiceProvider() {
+//		return serviceProvider;
+//	}
+//    @Override
+//	public void setServiceProvider(ServiceProvider serviceProvider) {
+//		this.serviceProvider = serviceProvider;
+//	}
     @Override
 	public Customer getCustomer() {
 		return customer;
@@ -147,6 +159,7 @@ public class DisputeImpl implements Dispute {
 	public void setDisputeChannel(DisputeChannel disputeChannel) {
 		this.disputeChannel = disputeChannel;
 	}
+ 
     @Override
 	public Date getEndDate() {
 		return endDate;

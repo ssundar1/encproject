@@ -2,6 +2,7 @@ package com.enclothe.core.dispute.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,10 +22,10 @@ public interface Dispute extends Serializable {
 	public OrderItem getOrderItem();
 
 	public void setOrderItem(@Nonnull OrderItem orderItem);
-	@Nonnull
-	public ServiceProvider getServiceProvider();
-
-	public void setServiceProvider(@Nonnull ServiceProvider serviceProvider);
+//	@Nonnull
+//	public ServiceProvider getServiceProvider();
+//
+//	public void setServiceProvider(@Nonnull ServiceProvider serviceProvider);
 	@Nonnull
 	public Customer getCustomer();
 
@@ -37,6 +38,11 @@ public interface Dispute extends Serializable {
 	public DisputePriority getDisputePriority();
 
 	public void setDisputePriority(@Nonnull DisputePriority disputePriority);
+	
+	public List<DisputeComment> getDisputeComments();
+	
+	public void setDisputeComments(List<DisputeComment> disputeComments);
+	
 	@Nullable
 	public DisputeChannel getDisputeChannel();
 

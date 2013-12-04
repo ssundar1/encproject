@@ -221,14 +221,14 @@ $(function(){
     });
     $(document).ready(function(){
         if($('#measurementdropdown option').length < 1){
-       	 alert($('#measurementdropdown option').length );
+       	 //alert($('#measurementdropdown option').length );
            $("#addNew").show();
            $('#measurementDropDown').hide();
            $("#addNewMeasurement").hide();
            $("#chooseMeasurementDiv").hide();
            $("#newMeasurementDiv").hide();
            }else{
-           alert('else'+$('#measurementdropdown option').length );
+          // alert('else'+$('#measurementdropdown option').length );
            $('#measurementDropDown').show();
            $("#addNew").hide();
            $("#addNewMeasurement").show();

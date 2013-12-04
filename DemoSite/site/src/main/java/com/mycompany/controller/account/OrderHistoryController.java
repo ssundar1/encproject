@@ -19,6 +19,7 @@ package com.mycompany.controller.account;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.web.controller.account.BroadleafOrderHistoryController;
 import org.broadleafcommerce.profile.core.service.CountryService;
 import org.broadleafcommerce.profile.core.service.StateService;

@@ -165,4 +165,54 @@
     </bean>
     -->
     
+    <!-- 
+     <bean id="blMergedPersistenceXmlLocations" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>classpath*:/META-INF/persistence-common.xml</value>
+            </list>
+        </property>
+    </bean>
+ <jee:jndi-lookup id="webDS" jndi-name="jdbc/web"/>
+
+    <jee:jndi-lookup id="webSecureDS" jndi-name="jdbc/secure"/>
+
+    <jee:jndi-lookup id="webStorageDS" jndi-name="jdbc/storage"/>
+    
+    
+    <bean id="blPersistenceUnitManager" class="org.broadleafcommerce.common.extensibility.jpa.MergePersistenceUnitManager">
+        <property name="persistenceUnitPostProcessors">
+            <list>
+                <bean class="org.broadleafcommerce.common.extensibility.jpa.JPAPropertiesPersistenceUnitPostProcessor"/>
+            </list>
+        </property>
+    </bean>
+         
+         
+         <bean id="blCacheManager" class="org.broadleafcommerce.common.extensibility.cache.ehcache.MergeEhCacheManagerFactoryBean">
+        <property name="shared" value="true"/>
+    </bean>
+         <bean id="blJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        <bean id="blEntityManagerFactorySecureInfo1" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="blCacheManager">
+        <property name="jpaVendorAdapter" ref="blJpaVendorAdapter"/>
+        <property name="persistenceUnitManager" ref="blPersistenceUnitManager" />
+        <property name="persistenceUnitName" value="blSecurePU"/>
+    </bean>
+
+    <bean id="blTransactionManagerSecureInfo1" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="blEntityManagerFactorySecureInfo1" />
+    </bean>
+
+    <tx:advice id="blTxAdviceSecureInfo1" transaction-manager="blTransactionManagerSecureInfo1">
+        <tx:attributes>
+          <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+     -->
+    <aop:config>
+	<aop:pointcut id="encDisputeOperation"
+		expression="execution(* com.enclothe.core.dispute.dao.*Impl*.save*(..))" />
+	<aop:advisor advice-ref="blTxAdviceSecureInfo" pointcut-ref="encDisputeOperation" />
+</aop:config>    
+    
 </beans>
