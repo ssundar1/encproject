@@ -9,6 +9,8 @@
                         <th class="label">Items</th>
                         <th class="price">Price</th>
                         <th class="price">Dispute</th>
+                        <th class="price">Status</th>
+                        <th class="price">Expected Delivery Date</th>
                     </tr>
                    <div th:each="orderItem : *{orderItems}" th:object="${orderItem}" th:remove="tag">
                    <tr >
@@ -19,6 +21,8 @@
                         <td  class="label" >
                         	<a href="/createDispute" >Raise a new dispute</a>                        
                         </td>
+                        <td  class="label" th:text="${orderItem.orderItemState.orderStateName}"></td>
+                        <td  class="label" th:text="${orderItem.orderItemStateDetail.expectedDeliverDate}"></td>
                     </tr>
                     <tr >
                       <td>

@@ -8,12 +8,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.broadleafcommerce.common.money.Money;
 import org.broadleafcommerce.common.presentation.AdminPresentation;
 import org.broadleafcommerce.common.presentation.AdminPresentationCollection;
 import org.broadleafcommerce.common.presentation.AdminPresentationToOneLookup;
 import org.broadleafcommerce.common.presentation.client.AddMethodType;
 import org.broadleafcommerce.core.catalog.domain.Sku;
 import org.broadleafcommerce.core.catalog.domain.SkuImpl;
+import org.broadleafcommerce.core.order.domain.DiscreteOrderItemFeePrice;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItemImpl;
 import org.broadleafcommerce.core.order.domain.OrderItemImpl;
 import org.hibernate.annotations.Index;
@@ -55,7 +57,7 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 	@OneToOne(mappedBy = "orderItem", targetEntity = DisputeImpl.class)
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_dispute_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected Dispute dispute;
-	
+
 	@ManyToOne(targetEntity = SkuImpl.class)
 	@JoinColumn(name = "DESIGN_SKU_ID")
 	@Index(name = "DISCRETE_SKU_INDEX", columnNames = { "SKU_ID" })
@@ -69,6 +71,21 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 
 	public void setDesignSku(Sku designSku) {
 		this.designSku = designSku;
+
+		if (designSku.getRetailPrice() != null) {
+			this.baseRetailPrice = designSku.getRetailPrice().getAmount();
+
+			if (sku.getRetailPrice() != null)
+				this.baseRetailPrice = this.baseRetailPrice.add(sku
+						.getRetailPrice().getAmount());
+		}
+		if (designSku.getSalePrice() != null) {
+			this.baseSalePrice = designSku.getSalePrice().getAmount();
+
+			if (sku.getSalePrice() != null)
+				this.baseSalePrice = this.baseSalePrice.add(sku.getSalePrice()
+						.getAmount());
+		}
 	}
 
 	public EncDesign getDesign() {
@@ -115,6 +132,82 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 	@Override
 	public EncOrderItemStateDetail getOrderItemStateDetail() {
 		return this.orderItemStateDetail;
+	}
+
+	private boolean updateSalePrice() {
+		if (isSalePriceOverride()) {
+			return false;
+		}
+
+		Money skuSalePrice = (getSku().getSalePrice() == null ? null : getSku()
+				.getSalePrice());
+
+		if (getDesignSku() != null && getDesignSku().getSalePrice() != null)
+			skuSalePrice = skuSalePrice.add(getDesignSku().getSalePrice());
+
+		// Override retail/sale prices from skuBundle.
+		if (skuBundleItem != null) {
+			if (skuBundleItem.getSalePrice() != null) {
+				skuSalePrice = skuBundleItem.getSalePrice();
+			}
+		}
+
+		boolean updated = false;
+		// use the sku prices - the retail and sale prices could be null
+		if (skuSalePrice != null && !skuSalePrice.equals(salePrice)) {
+			baseSalePrice = skuSalePrice.getAmount();
+			salePrice = skuSalePrice.getAmount();
+			updated = true;
+		}
+
+		// Adjust prices by adding in fees if they are attached.
+		if (getDiscreteOrderItemFeePrices() != null) {
+			for (DiscreteOrderItemFeePrice fee : getDiscreteOrderItemFeePrices()) {
+				Money returnPrice = convertToMoney(salePrice);
+				salePrice = returnPrice.add(fee.getAmount()).getAmount();
+			}
+		}
+		return updated;
+	}
+
+	private boolean updateRetailPrice() {
+		if (isRetailPriceOverride()) {
+			return false;
+		}
+		Money skuRetailPrice = getSku().getRetailPrice();
+
+		if (getDesignSku() != null && getDesignSku().getRetailPrice() != null)
+			skuRetailPrice = skuRetailPrice
+					.add(getDesignSku().getRetailPrice());
+
+		// Override retail/sale prices from skuBundle.
+		if (skuBundleItem != null) {
+			if (skuBundleItem.getRetailPrice() != null) {
+				skuRetailPrice = skuBundleItem.getRetailPrice();
+			}
+		}
+
+		boolean updated = false;
+		// use the sku prices - the retail and sale prices could be null
+		if (!skuRetailPrice.equals(retailPrice)) {
+			baseRetailPrice = skuRetailPrice.getAmount();
+			retailPrice = skuRetailPrice.getAmount();
+			updated = true;
+		}
+
+		// Adjust prices by adding in fees if they are attached.
+		if (getDiscreteOrderItemFeePrices() != null) {
+			for (DiscreteOrderItemFeePrice fee : getDiscreteOrderItemFeePrices()) {
+				Money returnPrice = convertToMoney(retailPrice);
+				retailPrice = returnPrice.add(fee.getAmount()).getAmount();
+			}
+		}
+		return updated;
+	}
+
+	@Override
+	public boolean updateSaleAndRetailPrices() {
+		return super.updateSaleAndRetailPrices();
 	}
 
 	public static class Presentation {

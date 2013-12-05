@@ -23,6 +23,7 @@
     	<context:component-scan base-package="com.enclothe.web"/>
         <bean p:order="1000" id="blValidateAddRequestActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncValidateAddRequestActivity"/>
         <bean p:order="2000" id="blAddOrderItemActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncAddOrderItemActivity"/>   
+        <bean p:order="5000" id="blCompleteOrderActivity" class="com.enclothe.core.dm.order.service.workflow.add.EncCompleteOrderActivity"/>
 		<bean id="blEncOrderItemService" class="com.enclothe.core.dm.order.service.EncOrderItemServiceImpl"/>
 		<bean id="blOrderService" class="com.enclothe.core.dm.order.service.EncOrderServiceImpl"/>
 		<bean id="encOrderItemDao" class="com.enclothe.core.dm.order.dao.EncOrderItemDaoImpl"/>		

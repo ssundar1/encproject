@@ -38,11 +38,19 @@ public class EncCompleteOrderActivity extends CompleteOrderActivity{
         	EncOrderItem encOrderItem = (EncOrderItem) orderItem;
         	EncOrderItemStateDetail orderItemStateDetail = 
         			orderItemService.createOrderItemStateDetailFromId(null);
-        	orderItemStateDetail.setOrderItem(encOrderItem);
-        	orderItemStateDetail.setOrderItemState(state);
-        	//stateDetail.setCurrentOwner(paramLong);
         	
-        	orderItemService.saveOrderItemStateDetail(orderItemStateDetail);       	        
+        	orderItemStateDetail.setOrderItemState(state);        	
+        	encOrderItem.setOrderItemState(state);
+        	orderItemStateDetail.setOrderItem(encOrderItem);
+        	
+        	//Save Order Item State Detail
+        	orderItemService.saveOrderItemStateDetail(orderItemStateDetail);
+        	
+        	//Save Order Item
+        	encOrderItem.setOrderItemStateDetail(orderItemStateDetail);
+        	orderItemService.saveOrderItem(encOrderItem);
+        	//stateDetail.setCurrentOwner(paramLong);        	
+        	//orderItemService.saveOrderItemStateDetail(orderItemStateDetail);       	        
         }
         return context;
     }
