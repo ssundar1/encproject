@@ -36,7 +36,10 @@
 					<div class="form50" id="newMeasurementDiv" >
 								<input type="radio" id="newMeasurement" name="measurementOption" value="addNew"><span>Add New Measurement</span></input>
 								</div>
-
+					<div class="form50" id="dummyMeasurementDiv">
+							<input type="radio" id="dummyMeasurement" name="measurementOption" value="dummyMeasurement"><span>Pick up Off-Shelf Sample</span></input>
+							
+					</div>
 								<div class="form50" id="measurementdropdown">
 													<select id="measurementDropDown" name="measurementId">
 														<option th:each="var : ${custMeasurements}" th:value="${var.id}"
@@ -44,7 +47,7 @@
 													</select>
 				</div>
 					<div class="form100">
-					<input id="addNewMeasurement" type="submit" class="addToCart" th:value="#{proudct.addToCart}" />
+					<input id="selectMeasurement" type="submit" class="addToCart" th:value="#{proudct.addToCart}" />
 					</div>
 				</blc:form>
 			</div>
@@ -104,7 +107,20 @@
 
 
 					</div>
+			<div class="add_to_cart" id="offshelf">
 
+
+				<blc:form method="POST" th:action="@{/enccart/addtocartoldmeasurement}">
+					<input type="hidden" name="productId" th:value="${material.id}" />
+					<input type="hidden" name="designId" th:value="${design.id}" />
+					<input type="hidden" name="quantity" value="1" />
+
+					<input type="hidden" name="measurementId" value="1" />
+					<div class="form100">
+					<input id="addNewMeasurement" type="submit" class="addToCart" th:value="#{proudct.addToCart}" />
+					</div>
+				</blc:form>
+			</div>
 
 		</section>
 

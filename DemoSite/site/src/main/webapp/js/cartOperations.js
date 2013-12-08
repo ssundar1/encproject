@@ -221,35 +221,65 @@ $(function(){
     });
     $(document).ready(function(){
         if($('#measurementdropdown option').length < 1){
-       	 //alert($('#measurementdropdown option').length );
-           $("#addNew").show();
-           $('#measurementDropDown').hide();
-           $("#addNewMeasurement").hide();
-           $("#chooseMeasurementDiv").hide();
-           $("#newMeasurementDiv").hide();
+       	 
+	        	//If there are no previously added measurements, then hide drop down and the corresponding radio button
+	            $('#measurementDropDown').hide();
+	            $("#selectMeasurement").hide();
+	            $("#chooseMeasurementDiv").hide();
+	            
+	        	//Display the Add New Option and Offshelf option.
+	           $("#addNew").show();
+	           $("#newMeasurementDiv").show();
+	           $("#dummyMeasurementDiv").show();
+	
+	           //However offshelf button is hidden since new measurement would be default
+	           $("#offshelf").hide();
+	           
+	           $("newMeasurement").prop('checked', true);
+           
            }else{
-          // alert('else'+$('#measurementdropdown option').length );
-           $('#measurementDropDown').show();
-           $("#addNew").hide();
-           $("#addNewMeasurement").show();
-           $("#chooseMeasurementDiv").show();
-           $("#newMeasurementDiv").show();
+          
+	           //Here drop down is visible and would be the default option
+	           $("#chooseMeasurementDiv").show();
+	           $('#measurementDropDown').show();
+	           $("#selectMeasurement").show();
+	           
+	           //Show other radio buttons           
+	           $("#newMeasurementDiv").show();
+	           $("#dummyMeasurementDiv").show();
+	           
+	           //Hide other sections
+	           $("#addNew").hide();
+	           $("#offshelf").hide();
+	           
+	           $("chooseMeasurement").prop('checked', true);
            }
           
            return false;
        });
        
         $("#newMeasurement").click(function(){
+        	
                	$("#addNew").show();
                	$("#measurementDropDown").hide();
-               	$("#addNewMeasurement").hide();
+               	$("#selectMeasurement").hide();
+               	$("#offshelf").hide();
                	return false;
              });
            
          $("#chooseMeasurement").click(function(){
                	$("#addNew").hide();
                	$("#measurementDropDown").show();
-               	$("#addNewMeasurement").show();
+               	$("#selectMeasurement").show();
+               	$("#offshelf").hide();
                	return false;
-             }); 
+             });
+         $("#dummyMeasurement").click(function(){
+            	$("#addNew").hide();
+            	$("#measurementDropDown").hide();
+            	$("#selectMeasurement").hide();
+            	$("#offshelf").show();
+            	return false;
+          });
+         
 });
