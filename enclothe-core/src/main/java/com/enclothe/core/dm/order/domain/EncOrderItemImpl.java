@@ -207,7 +207,16 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 
 	@Override
 	public boolean updateSaleAndRetailPrices() {
-		return super.updateSaleAndRetailPrices();
+        boolean salePriceUpdated = updateSalePrice();
+        boolean retailPriceUpdated = updateRetailPrice();
+        if (!isRetailPriceOverride() && !isSalePriceOverride()) {
+            if (salePrice != null) {
+                price = salePrice;
+            } else {
+                price = retailPrice;
+            }
+        }
+        return salePriceUpdated || retailPriceUpdated;
 	}
 
 	public static class Presentation {
