@@ -14,10 +14,18 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />   
     <meta name="viewport" content="width=device-width" />
     
-    <blc:bundle name="style.css" 
+    <!-- blc:bundle name="style.css" 
                 mapping-prefix="/css/"
                 files="style.css,
-                       jquery.rating.css" />
+                       jquery.rating.css" / -->
+    
+        <blc:bundle name="style.css" 
+                mapping-prefix="/css/"
+                files="style.css,
+                       jquery.rating.css,
+                       menu_black.css,
+                       menu_red.css,
+                       menu1.css" />
     
     <link rel="stylesheet" th:unless="${#strings.isEmpty(additionalCss)}" />
     

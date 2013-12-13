@@ -7,9 +7,159 @@
     </div>
     <blc:categories resultVar="navCategories" parentCategory="Primary Nav" maxResults="6" />
     
-    <ul>
-        <li th:each="category : ${navCategories}">
-            <a class="home" th:href="@{${category.url}}" th:class="${categoryStat.first}? 'home'" th:text="${category.name}"></a>
-        </li>
-    </ul>
+   <div class="wrapper">
+  <!-- >h1>mb.menu.demo</h1>
+change css:
+
+  <button onclick="$('[rel=stylesheet]').attr('href','css/menu_red.css')">red</button>
+  <button onclick="$('[rel=stylesheet]').attr('href','css/menu_black.css')">black</button -->
+  <table width="100%"  border="0" cellpadding="0" cellspacing="0" bgcolor="#EDEDED">
+    <tr>
+      <td valign="bottom">
+        <table  border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" class="container">
+          <tr>
+            <td class="myMenu">
+
+              <!-- start horizontal menu -->
+
+              <table class="rootVoices" cellspacing='0' cellpadding='0' border='0'><tr>
+              <td class="rootVoice {menu: 'empty'}"><a class="home" href="/">HOME</a></td>
+                <td class="rootVoice {menu: 'box_menu'}" >Get Started</td>  
+                <td class="rootVoice {menu: 'box_menu2'}" >HOW TO</td>               
+<!--                 <td class="rootVoice {menu: 'menu_2'}" >menu 1</td> -->
+<!--                 <td class="rootVoice {menu: 'menu_2', disabled:true}" >menu disabled</td> -->
+                <td class="rootVoice {menu: 'menu_3'}" >FAQ</td>
+                <td class="rootVoice {menu: 'empty'}"><a class="home" href="/">FORUM</a></td>
+                <td class="rootVoice {menu: 'empty'}"><a class="home" href="/">DRESS MAKERS</a></td>
+              </tr></table>
+
+              <!-- end horizontal menu -->
+
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+
+
+  <!-- menues -->
+  <div id="menu_1" class="mbmenu">
+    <a rel="title" >title menu_1.1</a> <!-- menuvoice title-->
+    <a href="http://patapage.com" class="{img: 'ico_view.gif'}" >menu_1.1 (href with target "_self") </a> <!-- menuvoice with href-->
+    <a class="{action: 'showMessage(\'menu_1.2\')'}" >menu_1.2</a> <!-- menuvoice with js action-->
+    <a rel="separator"> </a> <!-- menuvoice separator-->
+    <a href="#" class="{action: 'showMessage(\'menu_1.3\')', disabled:true}">menu_1.3</a> <!-- menuvoice disabled-->
+    <a class="{action: 'showMessage(\'menu_1.4\')', menu:'menu_1', img: '24-book-blue-check.png'}">menu_1.4</a><!-- menuvoice with js action, image and submenu-->
+  </div>
+
+  <div id="menu_2" class="mbmenu">
+    <a rel="title" class="{action: 'showMessage(\'menu_2.1\')', img: 'icon_13.png'}">choose one of these links</a>
+    <a class="{action: 'showMessage(\'menu_2.2\')'}">menu_2.2</a>
+    <a class="{menu: 'sub_menu_1', img: 'icon_14.png', disabled:true}">menu_2.3 (disabled)</a>
+    <a class="{menu: 'sub_menu_2', img: '24-tag-add.png'}">menu_2.4</a>
+    <a rel="separator"> </a>
+    <a class="{action: 'showMessage(\'menu_2.4\')'}">menu_2.5</a>
+  </div>
+
+  <div id="menu_3" class="mbmenu" >
+    <a rel="text">
+      <form>
+        <img src="images/browser.png" alt="img" style="position:absolute;margin-top:-20px; margin-left:-25px;margin-bottom:10px"/><br/>
+        <input id="myInput" type="text" name="tuoTesto" value="you can have input inside" />
+        <input type="button" name="tuoTesto" value="submit" onclick="$.fn.removeMbMenu($.mbMenu.options.actualOpenedMenu,true);" />
+        <table>
+          <tr><td><input type="checkbox" checked="checked" value="aaa"/></td><td>checkbox 1</td></tr>
+          <tr><td><input type="checkbox" value="aaa"/></td><td>checkbox 1</td></tr>
+          <tr><td><input type="checkbox" value="aaa"/></td><td>checkbox 1</td></tr>
+          <tr><td><input type="checkbox" value="aaa"/></td><td>checkbox 1</td></tr>
+        </table>
+        <br/>
+        <br/>* form fields value are not preserved once you close the menu!
+      </form>
+    </a>
+    <a rel="separator"> </a>
+    <a class="{action: 'showMessage(\'menu_3.1\')', img: 'iconDone.png'}">menu_3.1</a>
+    <a id="aaa" class="{menu:'sub_menu_2'}"  >submenu</a>
+    <a class="{action: 'showMessage(\'menu_3.4\')'}">menu_3.4 con testo veramente molto lungo menu_3.4 con testo veramente molto lungo</a>
+  </div>
+
+  <div id="sub_menu_1" class="mbmenu">
+    <a class="{action: 'showMessage(\'sub_menu_1.1\')'}">sub_menu_1.1</a>
+    <a rel="separator"> </a>
+    <a class="{menu:'menu_1'}">sub_menu_1.2</a>
+    <a class="{action: 'showMessage(\'sub_menu_1.3\')', img: 'bgColor.gif'}">sub_menu_1.3</a>
+    <a class="{action: 'showMessage(\'sub_menu_1.4\')',img: 'Applet.gif'}">sub_menu_1.4</a>
+  </div>
+
+  <div id="sub_menu_2" class="mbmenu">
+    <a class="{action: 'showMessage(\'sub_menu_2.1\')', img: 'buttonfind.gif'}" target="_blank" >sub_menu_2.1</a>
+    <a href="http://google.com" class="{img: 'buttonfind.gif'}" target="_self" >sub_menu_2.2 (href target _self)</a>
+    <a class="{action: 'showMessage(\'sub_menu_2.3\')'}">sub_menu_2.3</a>
+    <a rel="separator"> </a>
+    <a class="{action: 'showMessage(\'sub_menu_2.4\')'}">sub_menu_2.4</a>
+    <a class="{action: 'showMessage(\'sub_menu_2.5\')'}" >sub_menu_2.5</a>
+  </div>
+
+
+
+  <div id="box_menu" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>
+          <a class="home" href="/bls-material">Choose a Material</a>
+          <a href="http://patapage.com/demo/" target="_blank">Featured</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">About Patapage</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Sign up</a>
+        </td>
+        <td>
+          <div style="height:130px;"><img src="http://bugsvoice.com/applications/bugsVoice/images/logo.png" alt="bugsvoice" width="250" style="padding-top:30px"/></div>
+          <a href="http://bugsvoice.com" target="_blank">Home</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/details.jsp" target="_blank">Details</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/aboutHelp.jsp" target="_blank">About Bugs Voice</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/access/login.jsp" target="_blank">Sign up</a>
+        </td>
+        <td>
+          <div style="height:130px"><img src="http://devineu.eu/applications/webwork/site_devineu/media/baloonSmall.png" alt="bugsvoice" width="200"/></div>
+          <a href="http://devineu.eu/home.page" target="_blank">Home</a>
+          <a href="http://devineu.eu/mission.page" target="_blank">Mission</a>
+          <a href="http://devineu.eu/interviewyourself.page" target="_blank">Interview yourself</a>
+          <a href="http://devineu.eu/getInterviewed.page" target="_blank">Get interviewed</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+<div id="box_menu2" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>
+          <a class="home" href="/bls-material">How to take a measurement</a>
+          <a href="http://patapage.com/demo/" target="_blank">Featured</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">About Patapage</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Sign up</a>
+        </td>
+        <td>
+          <div style="height:130px;"><img src="http://bugsvoice.com/applications/bugsVoice/images/logo.png" alt="bugsvoice" width="250" style="padding-top:30px"/></div>
+          <a href="http://bugsvoice.com" target="_blank">Home</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/details.jsp" target="_blank">Details</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/aboutHelp.jsp" target="_blank">About Bugs Voice</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/access/login.jsp" target="_blank">Sign up</a>
+        </td>
+        <td>
+          <div style="height:130px"><img src="http://devineu.eu/applications/webwork/site_devineu/media/baloonSmall.png" alt="bugsvoice" width="200"/></div>
+          <a href="http://devineu.eu/home.page" target="_blank">Home</a>
+          <a href="http://devineu.eu/mission.page" target="_blank">Mission</a>
+          <a href="http://devineu.eu/interviewyourself.page" target="_blank">Interview yourself</a>
+          <a href="http://devineu.eu/getInterviewed.page" target="_blank">Get interviewed</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- end menus -->
+
+</div>
 </nav>
