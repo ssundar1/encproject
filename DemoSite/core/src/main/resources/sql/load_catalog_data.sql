@@ -707,7 +707,8 @@ INSERT INTO ENC_ORDER_ITEM_STATES (ORDER_ITEM_STATE_ID, ORDER_ITEM_STATE_NAME, O
 --- Changes for a new Search Facet
 
 INSERT INTO `broadleaf`.`enc_user_category` (`USER_CATEGORY_ID`, `USER_CATEGORY_DESCRIPTION`, `END_DATE`, `USER_CATEGORY_NAME`) VALUES ('1', 'testuser', '2099-04-05 00:00:00', 'test');
-INSERT INTO `broadleaf`.`enc_service_provider` (`SP_ID`, `CREATED_BY`, `SP_EMAIL_ADDRESS`, `END_DATE`, `SP_FIRM_NAME`, `SP_FIRST_NAME`, `SP_LAST_NAME`, `SP_LONG_DESCRIPTION`, `USER_NAME`, `ADDRESS_ID`) VALUES ('2', '1', 'test@abc.com', '2099-04-05 00:00:00', 'TEST', 'TESTNAME', 'TESTLAST', 'DESC1', 'abc123', '51');
+INSERT INTO `broadleaf`.`blc_address` (`ADDRESS_ID`, `ADDRESS_LINE1`, `ADDRESS_LINE2`, `CITY`, `EMAIL_ADDRESS`, `FIRST_NAME`, `IS_ACTIVE`, `IS_BUSINESS`, `IS_DEFAULT`, `LAST_NAME`, `POSTAL_CODE`, `PRIMARY_PHONE`, `COUNTRY`) VALUES ('51', 'test add1', 'test add line2', 'chennai', '123@abc.com', 'test1', '1', '1', '1', 'test2', '600042', '1234567890', 'IN');
+INSERT INTO `broadleaf`.`enc_service_provider` (`SP_ID`, `CREATED_BY`, `SP_EMAIL_ADDRESS`, `END_DATE`, `SP_FIRM_NAME`, `SP_FIRST_NAME`, `SP_LAST_NAME`, `SP_LONG_DESCRIPTION`, `USER_NAME`, `ADDRESS_ID`) VALUES ('1', '1', 'test@abc.com', '2099-04-05 00:00:00', 'TEST', 'TESTNAME', 'TESTLAST', 'DESC1', 'abc123', '51');
 
 UPDATE `broadleaf`.`enc_material` SET `SP_ID`='1' WHERE `PRODUCT_ID`='10';
 UPDATE `broadleaf`.`enc_material` SET `SP_ID`='1' WHERE `PRODUCT_ID`='11';
@@ -726,4 +727,6 @@ INSERT INTO `broadleaf`.`blc_cat_search_facet_xref` (`CATEGORY_SEARCH_FACET_ID`,
 
 
 --- A new dummy measurement
+INSERT INTO `broadleaf`.`blc_customer` (`CUSTOMER_ID`, `CHALLENGE_ANSWER`, `EMAIL_ADDRESS`, `FIRST_NAME`, `LAST_NAME`, `CHALLENGE_QUESTION_ID`) VALUES ('100', 'test', '123@abc.com', 'test', 'test', '1');
+INSERT INTO `broadleaf`.`enc_customer` (`CUSTOMER_ID`) VALUES ('100');
 INSERT INTO `broadleaf`.`enc_measurements` (`MEASUREMENT_ID`, `ARM_HOLE`, `CREATED_BY`, `DATE_CREATED`, `B_NECK`, `B_SLEEVE`, `BUST`, `CHEST`, `DARTLINE`, `MEASUREMENT_DESCRIPTION`, `F_NECK`, `HEIGHT`, `HIP`, `N_WAIST`, `MEASUREMENT_NAME`, `PANT_HEIGHT`, `S_LENGTH`, `SEAT`, `SHOULDER`, `T_SLEEVE`, `WAIST`, `CUSTOMER_ID`) VALUES ('1', '0', '-1', '2013-12-06 00:06:48', '12', '12', '12', '12', '12', 'Dummy Measurement', '12', '12', '12', '12', 'DUMMY', '12', '12', '12', '12', '12', '12', '100');
