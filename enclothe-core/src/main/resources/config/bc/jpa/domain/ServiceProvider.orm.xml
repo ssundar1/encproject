@@ -42,4 +42,8 @@
         <query>SELECT customer FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider
         WHERE serviceprovider.userName = :userName</query>
     </named-query>
+    
+    <named-query name="BC_READ_SERVICEPROVIDERS" >
+        <query>SELECT serviceprovider FROM com.enclothe.core.serviceprovider.domain.ServiceProvider serviceprovider</query>
+    </named-query>
 </entity-mappings>

@@ -68,5 +68,7 @@ public interface ServiceProviderDao {
     public void delete(ServiceProvider serviceProvider);
 
     public ServiceProvider create();
+
+	public List<ServiceProvider> getServiceProviders();
     
 }

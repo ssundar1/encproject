@@ -147,5 +147,12 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		List<ServiceProvider> serviceProviders = readServiceProvidersByFirstName(UserName);
         return serviceProviders == null || serviceProviders.isEmpty() ? null : serviceProviders.get(0);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServiceProvider> getServiceProviders() {
+		Query query = em.createNamedQuery("BC_READ_SERVICEPROVIDERS");
+        return query.getResultList();   
+	}
 	
 }
