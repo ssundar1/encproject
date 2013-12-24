@@ -90,7 +90,7 @@ public class DisputeImpl implements Dispute {
     protected DisputeState disputeState;
 	
 	@ManyToOne(targetEntity = ServiceProviderImpl.class)
-    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="DISPUTE_STATE_ID")
+    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
     @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
     protected ServiceProvider disputeServiceProvider;
 	

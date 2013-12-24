@@ -137,9 +137,9 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ServiceProvider> readServiceProvidersByUserName(String UserName) {
+	public List<ServiceProvider> readServiceProvidersByUserName(String userName) {
 		Query query = em.createNamedQuery("BC_READ_SERVICEPROVIDER_BY_USER_NAME");
-        query.setParameter("firstName", UserName);        
+        query.setParameter("username", userName);        
         return query.getResultList();   
 	}
 	
