@@ -715,6 +715,8 @@ INSERT INTO `broadleaf`.`blc_cat_search_facet_xref` (`CATEGORY_SEARCH_FACET_ID`,
 
 
 --- A new dummy measurement
+INSERT INTO `broadleaf`.`blc_customer` (`CUSTOMER_ID`, `CHALLENGE_ANSWER`, `EMAIL_ADDRESS`, `FIRST_NAME`, `LAST_NAME`, `CHALLENGE_QUESTION_ID`) VALUES ('100', 'test', '123@abc.com', 'test', 'test', '1');
+INSERT INTO `broadleaf`.`enc_customer` (`CUSTOMER_ID`) VALUES ('100');
 INSERT INTO `broadleaf`.`enc_measurements` (`MEASUREMENT_ID`, `ARM_HOLE`, `CREATED_BY`, `DATE_CREATED`, `B_NECK`, `B_SLEEVE`, `BUST`, `CHEST`, `DARTLINE`, `MEASUREMENT_DESCRIPTION`, `F_NECK`, `HEIGHT`, `HIP`, `N_WAIST`, `MEASUREMENT_NAME`, `PANT_HEIGHT`, `S_LENGTH`, `SEAT`, `SHOULDER`, `T_SLEEVE`, `WAIST`, `CUSTOMER_ID`) VALUES ('1', '0', '-1', '2013-12-06 00:06:48', '12', '12', '12', '12', '12', 'Dummy Measurement', '12', '12', '12', '12', 'DUMMY', '12', '12', '12', '12', '12', '12', '100');
 
 INSERT INTO `blc_phone` (`PHONE_ID`, `IS_ACTIVE`, `IS_DEFAULT`, `PHONE_NUMBER`) VALUES (1,1,0,'123456789');
@@ -740,9 +742,3 @@ UPDATE `broadleaf`.`enc_material` SET `SP_ID`='1' WHERE `PRODUCT_ID`='19';
 INSERT INTO `broadleaf`.`blc_field` (`FIELD_ID`, `ABBREVIATION`, `ENTITY_TYPE`, `FACET_FIELD_TYPE`, `PROPERTY_NAME`, `SEARCHABLE`) VALUES ('8', 'sp', 'PRODUCT', 's', 'serviceProvider.firstName', '1');
 INSERT INTO `broadleaf`.`blc_search_facet` (`SEARCH_FACET_ID`, `MULTISELECT`, `LABEL`, `SEARCH_DISPLAY_PRIORITY`, `SHOW_ON_SEARCH`, `FIELD_ID`) VALUES ('4', '1', 'SP', '1', '1', '8');
 INSERT INTO `broadleaf`.`blc_cat_search_facet_xref` (`CATEGORY_SEARCH_FACET_ID`, `SEQUENCE`, `CATEGORY_ID`, `SEARCH_FACET_ID`) VALUES ('4', '4', '2003', '4');
-
-
---- A new dummy measurement
-INSERT INTO `broadleaf`.`blc_customer` (`CUSTOMER_ID`, `CHALLENGE_ANSWER`, `EMAIL_ADDRESS`, `FIRST_NAME`, `LAST_NAME`, `CHALLENGE_QUESTION_ID`) VALUES ('100', 'test', '123@abc.com', 'test', 'test', '1');
-INSERT INTO `broadleaf`.`enc_customer` (`CUSTOMER_ID`) VALUES ('100');
-INSERT INTO `broadleaf`.`enc_measurements` (`MEASUREMENT_ID`, `ARM_HOLE`, `CREATED_BY`, `DATE_CREATED`, `B_NECK`, `B_SLEEVE`, `BUST`, `CHEST`, `DARTLINE`, `MEASUREMENT_DESCRIPTION`, `F_NECK`, `HEIGHT`, `HIP`, `N_WAIST`, `MEASUREMENT_NAME`, `PANT_HEIGHT`, `S_LENGTH`, `SEAT`, `SHOULDER`, `T_SLEEVE`, `WAIST`, `CUSTOMER_ID`) VALUES ('1', '0', '-1', '2013-12-06 00:06:48', '12', '12', '12', '12', '12', 'Dummy Measurement', '12', '12', '12', '12', 'DUMMY', '12', '12', '12', '12', '12', '12', '100');
