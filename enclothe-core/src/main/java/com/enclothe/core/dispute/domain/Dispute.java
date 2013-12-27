@@ -35,6 +35,10 @@ public interface Dispute extends Serializable {
 
 	public void setDisputeState(@Nonnull DisputeState disputeState);
 	@Nonnull
+	public ServiceProvider getDisputeServiceProvider();
+
+	public void setDisputeServiceProvider(@Nonnull ServiceProvider serviceProvider);
+	@Nonnull
 	public DisputePriority getDisputePriority();
 
 	public void setDisputePriority(@Nonnull DisputePriority disputePriority);

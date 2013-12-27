@@ -9,6 +9,7 @@
         <mapping-file>config/bc/jpa/domain/Measurement.orm.xml</mapping-file>
         <mapping-file>config/bc/jpa/domain/OrderItem.orm.xml</mapping-file>
         <mapping-file>config/bc/jpa/domain/Dispute.orm.xml</mapping-file>
+        <mapping-file>config/bc/jpa/domain/ServiceProvider.orm.xml</mapping-file>
        <class>com.enclothe.core.customer.domain.EncCustomerImpl</class>
         <class>com.enclothe.core.measurement.domain.MeasurementImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStatesImpl</class>

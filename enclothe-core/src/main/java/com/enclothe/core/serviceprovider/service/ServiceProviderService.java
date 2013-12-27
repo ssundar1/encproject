@@ -42,6 +42,8 @@ public interface ServiceProviderService {
     public ServiceProvider readServiceProviderById(Long userId);
 
     public ServiceProvider createServiceProvider();
+    
+    public List<ServiceProvider> getServiceProviders();
 
     /**
      * Returns a <code>ServiceProvider</code> by first looking in the database, otherwise creating a new non-persisted <code>ServiceProvider</code>

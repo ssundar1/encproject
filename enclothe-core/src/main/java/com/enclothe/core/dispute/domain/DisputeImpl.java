@@ -1,9 +1,9 @@
 package com.enclothe.core.dispute.domain;
 
 import java.util.Date;
-
 import java.util.List;
 import java.util.ArrayList;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -32,8 +32,10 @@ import org.hibernate.annotations.SQLDelete;
 
 import com.enclothe.core.customer.domain.EncCustomerImpl;
 import com.enclothe.core.dm.order.domain.EncOrderItemImpl;
+import com.enclothe.core.serviceprovider.domain.ServiceProvider;
 //import com.enclothe.core.serviceprovider.domain.ServiceProvider;
 //import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
+import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
 
 @Entity
 @EntityListeners(value = { AuditableListener.class })
@@ -86,6 +88,11 @@ public class DisputeImpl implements Dispute {
     @JoinColumn(name = "DISPUTE_STATE_ID", referencedColumnName="DISPUTE_STATE_ID")
     @Index(name="DISPUTE_STATE_INDEX", columnNames={"DISPUTE_STATE_ID"})
     protected DisputeState disputeState;
+	
+	@ManyToOne(targetEntity = ServiceProviderImpl.class)
+    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
+    @Index(name="DISPUTE_SP_INDEX", columnNames={"DISPUTE_SP_ID"})
+    protected ServiceProvider disputeServiceProvider;
 	
 	@ManyToOne(targetEntity = DisputePriorityImpl.class)
     @JoinColumn(name = "DISPUTE_PRIORITY_ID", referencedColumnName="DISPUTE_PRIORITY_ID")
@@ -142,6 +149,14 @@ public class DisputeImpl implements Dispute {
     @Override
 	public void setDisputeState(DisputeState disputeState) {
 		this.disputeState = disputeState;
+	}
+    @Override
+	public ServiceProvider getDisputeServiceProvider() {
+		return disputeServiceProvider;
+	}
+    @Override
+	public void setDisputeServiceProvider(ServiceProvider serviceProvider) {
+		this.disputeServiceProvider = serviceProvider;
 	}
     @Override
 	public DisputePriority getDisputePriority() {

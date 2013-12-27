@@ -444,5 +444,10 @@ private static final Log LOG = LogFactory.getLog(ServiceProviderServiceImpl.clas
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+	@Override
+	public List<ServiceProvider> getServiceProviders() {
+		return serviceProviderDao.getServiceProviders();
+	}
 	
 }
