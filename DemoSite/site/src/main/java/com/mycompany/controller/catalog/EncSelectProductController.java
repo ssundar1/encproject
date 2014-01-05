@@ -56,6 +56,22 @@ public class EncSelectProductController{
         return "forward:" + view ;
     }
     
+    //This method redirects to design once the material is selected
+    @RequestMapping("/choosedesignwomaterial")
+    public String chooseDesign(HttpServletRequest request, HttpServletResponse response, Model model) {
+    	
+    	
+    	EncMaterial material = (EncMaterial) catalogService.findProductById((long) 10);
+    	String view = BLOUSE_DESIGN_VIEW; // by default
+    	
+    	if(material!= null && material.getType().equals(CHUD))
+    		view = CHUDI_DESIGN_VIEW;
+    	
+    	request.setAttribute("material", material);
+    	
+        return "forward:" + view ;
+    }    
+    
     @RequestMapping("/selectdesign")
     public ModelAndView selectDesign(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) {

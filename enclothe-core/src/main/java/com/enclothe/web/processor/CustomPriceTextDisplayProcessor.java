@@ -32,7 +32,10 @@ public class CustomPriceTextDisplayProcessor extends PriceTextDisplayProcessor{
         if (brc.getJavaLocale() != null) {
             NumberFormat format = NumberFormat.getCurrencyInstance(brc.getJavaLocale());
             format.setCurrency(price.getCurrency());
-            return format.format(price.getAmount());
+            String amt = format.format(price.getAmount());
+            amt = amt.replace("Rs.", "₹");
+            
+            return amt;
         } else {
             // Setup your BLC_CURRENCY and BLC_LOCALE to display a diff default.
             return "₹" + price.getAmount().toString();
