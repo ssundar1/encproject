@@ -2,10 +2,11 @@ package com.enclothe.core.measurement.service;
 
 //import org.apache.commons.logging.Log;
 //import org.apache.commons.logging.LogFactory;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.broadleafcommerce.profile.core.service.IdGenerationService;
 
-import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.measurement.dao.MeasurementDao;
 import com.enclothe.core.measurement.domain.Measurement;
 
@@ -59,4 +60,8 @@ public class MeasurementServiceImpl implements MeasurementService {
 		return measurementDao.save(measurement);
 	}
     	
+	@Override	
+	public List<Measurement> readActiveCustomerMeasurementsByCustomerId(Long customerId){
+		return measurementDao.readActiveCustomerMeasurementsByCustomerId(customerId);
+	}
 }

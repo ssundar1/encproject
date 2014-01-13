@@ -1,0 +1,80 @@
+<div class="manage-account-form-wrapper">
+    <p class="success" th:if="${successMessage}" th:text="${successMessage}"></p>
+    <h2>Measurement Book</h2>
+    <p th:if="${#lists.isEmpty(customerMeasurements)}" style="margin: 20px 10px;">
+        You have not yet added any Measurements to your account. Start by adding one below. 
+    </p>
+    <div style="margin: 20px 10px;" th:unless="${#lists.isEmpty(customerMeasurements)}">
+        Options:
+        <select onchange="location.href=this.options[selectedIndex].value">
+            <option>Choose a measurement to update...</option>
+            <option th:each="customerMeasurement : ${customerMeasurements}" th:value="@{'/account/measurements/' + *{customerMeasurement.id}}">
+                <span th:text="*{customerMeasurement.name}"></span>
+            </option>
+        </select>
+        <span th:if="${customerMeasurementForm.customerMeasurementId}">&nbsp;&nbsp;- or -&nbsp;&nbsp;<a th:href="@{/account/measurements}" class="medium red">create a new measurement</a></span>
+        <span th:unless="${customerMeasurementForm.customerMeasurementId}">&nbsp;&nbsp;- or -&nbsp;&nbsp;create a new measurement below</span>
+    </div>
+    <blc:form class="manage-account" 
+        method="post" 
+        th:action="@{'/account/measurements/' + ${customerMeasurementForm.customerMeasurementId != null ? customerMeasurementForm.customerMeasurementId : ''}}" 
+        th:object="${customerMeasurementForm}">    
+        <div>
+            <div class="form30">
+                <label for="name">Measurement Name</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.name')}" th:errors="*{measurement.name}"></span>
+                <input type="text" class="field30 required" th:field="*{measurement.name}" th:classappend="${#fields.hasErrors('measurement.name')}? 'fieldError'" />
+            </div>
+            <div class="form100">
+                <label for="desc">Measurement Description</label>
+                <input type="text" th:field="*{measurement.description}" class="field50" />
+            </div>
+            <div class="form30">
+                <label for="height">Height</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.height')}" th:errors="*{measurement.height}"></span>
+                <input type="text" class="field30 cloneable" th:field="*{measurement.height}" th:classappend="${#fields.hasErrors('measurement.height')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="chest">Chest</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.chest')}" th:errors="*{measurement.chest}"></span>
+                <input type="text" th:field="*{measurement.chest}" class="field30 cloneable" th:classappend="${#fields.hasErrors('measurement.chest')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="bust">Bust</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.bust')}" th:errors="*{measurement.bust}"></span>
+                <input type="text" class="field30 cloneable" th:field="*{measurement.bust}" th:classappend="${#fields.hasErrors('measurement.bust')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="dartLine">Dartline</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.dartline')}" th:errors="*{measurement.dartline}"></span>
+                <input type="text" th:field="*{measurement.dartline}" class="field30 cloneable" th:classappend="${#fields.hasErrors('measurement.dartline')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="waist">Waist</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.waist')}" th:errors="*{measurement.waist}"></span>
+                <input type="text" class="field30 cloneable" th:field="*{measurement.waist}" th:classappend="${#fields.hasErrors('measurement.waist')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="hip">Hip</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.hip')}" th:errors="*{measurement.hip}"></span>
+                <input type="text" th:field="*{measurement.hip}" class="field30 cloneable" th:classappend="${#fields.hasErrors('measurement.hip')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="shoulder">Shoulder</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.shoulder')}" th:errors="*{measurement.shoulder}"></span>
+                <input type="text" class="field30 cloneable" th:field="*{measurement.shoulder}" th:classappend="${#fields.hasErrors('measurement.shoulder')}? 'fieldError'" />
+            </div>
+            <div class="form30">
+                <label for="sleevelength">Sleeve Length</label>
+                <span class="error" th:if="${#fields.hasErrors('measurement.sleeveLength')}" th:errors="*{measurement.sleeveLength}"></span>
+                <input type="text" th:field="*{measurement.sleeveLength}" class="field30 cloneable" th:classappend="${#fields.hasErrors('measurement.sleeveLength')}? 'fieldError'" />
+            </div>                        
+            <div class="clearfix"></div>
+        </div>
+        <div>
+            <input type="submit" th:value="*{customerMeasurementId != null ? 'Update Measurement' : 'Create New Measurement'}" class="medium red" />
+            <input th:if="*{customerMeasurementId}" type="submit" name="removeMeasurement" value="Remove" class="small dark" />
+            <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
+        </div>
+    </blc:form>
+        </div>

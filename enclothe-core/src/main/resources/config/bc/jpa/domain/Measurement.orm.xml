@@ -2,7 +2,11 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
-
+   <named-query name="BC_READ_ACTIVE_CUSTOMER_MEASUREMENTS_BY_CUSTOMER_ID" >
+            <query>SELECT cm FROM com.enclothe.core.measurement.domain.Measurement cm
+            WHERE cm.customer.id = :customerId
+            ORDER BY cm.id</query>
+    </named-query>
     <named-query name="BC_READ_MEASUREMENT_BY_ID" >
         <query>SELECT measurement FROM com.enclothe.core.measurement.domain.Measurement measurement
         WHERE measurement.id = :measurementId</query>

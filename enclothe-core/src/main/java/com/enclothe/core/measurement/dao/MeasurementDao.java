@@ -1,6 +1,8 @@
 package com.enclothe.core.measurement.dao;
 
 
+import java.util.List;
+
 import  com.enclothe.core.measurement.domain.Measurement;
 
 public interface MeasurementDao {
@@ -13,5 +15,5 @@ public interface MeasurementDao {
 
 	Measurement readMeasurementById(Long measurementId);
 	
-
+	List<Measurement> readActiveCustomerMeasurementsByCustomerId(Long customerId);
 }

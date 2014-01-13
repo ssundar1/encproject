@@ -1,6 +1,7 @@
 package com.enclothe.core.measurement.service;
 
-import com.enclothe.core.dm.order.domain.EncOrderItemStates;
+import java.util.List;
+
 import com.enclothe.core.measurement.domain.*;
 
 public interface MeasurementService {
@@ -17,6 +18,7 @@ public interface MeasurementService {
 
 	Measurement saveMeasurement(Measurement measurement);
 
+	List<Measurement> readActiveCustomerMeasurementsByCustomerId(Long customerId);
 	
 
 }
