@@ -214,5 +214,10 @@
 		expression="execution(* com.enclothe.core.dispute.dao.*Impl*.save*(..))" />
 	<aop:advisor advice-ref="blTxAdviceSecureInfo" pointcut-ref="encDisputeOperation" />
 </aop:config>    
+<aop:config>
+<aop:pointcut id="encMeasurementOperation"
+		expression="execution(* com.enclothe.core.measurement.dao.*Impl*.save*(..))" />
+	<aop:advisor advice-ref="blTxAdviceSecureInfo" pointcut-ref="encMeasurementOperation" />
+</aop:config>  
     
 </beans>
