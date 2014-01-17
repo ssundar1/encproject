@@ -11,7 +11,36 @@
         <div blc:price="*{defaultSku.salePrice}" th:if="*{defaultSku.onSale}" th:classappend="*{defaultSku.onSale}? 'sale'"></div>
         <div blc:price="*{defaultSku.retailPrice}" th:classappend="*{defaultSku.onSale}? 'has-sale'"></div>
     </div>
-    </a>
+
+    
+    	<blc:ratings itemId="*{id}" />
+	<div th:if="${ratingSummary}" th:object="${ratingSummary}">
+		<blc:form id="community-rating" class="star-rating"
+			th:attr="data-community-rating=*{averageRating}">
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+			<input type="radio" class="star {split:4}" />
+		</blc:form>
+     (<span th:text="*{numberOfReviews}"></span><span th:if="*{numberOfReviews} == 1"> review</span><span th:if="*{numberOfReviews} > 1"> reviews</span>)
+	</div>
+	    </a>
 </div>
 
 <div class="content">
