@@ -23,16 +23,17 @@ change css:
               <!-- start horizontal menu -->
 
               <table class="rootVoices" cellspacing='0' cellpadding='0' border='0'><tr>
-              <td class="rootVoice {menu: 'empty'}"><a href="/">HOME</a></td>
-                <td class="rootVoice {menu: 'box_menu'}" ><span class="home">SHOPPING</span></td>  
-                <td class="rootVoice {menu: 'box_menu2'}" >HOW TO</td>               
+              <td class="rootVoice {menu: 'box_menu_materials'}"><B>DRESS MATERIALS</B></td>
+                <td class="rootVoice {menu: 'box_menu_outfitters'}" ><span class="home"><B>OUTFITTERS</B></span></td>  
+                <td class="rootVoice {menu: 'box_menu_premium'}" ><B>PREMIEUM</B></td>               
 <!--                 <td class="rootVoice {menu: 'menu_2'}" >menu 1</td> -->
 <!--                 <td class="rootVoice {menu: 'menu_2', disabled:true}" >menu disabled</td> -->
-                <td class="rootVoice {menu: 'menu_3'}" >FAQ</td>
-                
-                <td class="rootVoice {menu: 'empty'}"><a class="home" href="/">FORUM</a></td>
-                <td class="rootVoice {menu: 'empty'}">Tutorials</td>                
+                <td class="rootVoice {menu: 'box_menu_sale'}" ><B>SALE</B></td>
+               <td class="rootVoice {menu: 'box_menu_myaccount'}"><B>MY ACCOUNT</B></td>
+               <td class="rootVoice {menu: 'box_menu_aboutus'}"><B>ABOUT US</B></td>  
+               <td class="rootVoice {menu: 'box_menu_tutotials'}"><B>TUTORIALS</B></td>                
               </tr></table>
+              
 
               <!-- end horizontal menu -->
 
@@ -105,61 +106,122 @@ change css:
 
 
 
-  <div id="box_menu" class="mbmenu boxMenu">
+  <div id="box_menu_outfitters" class="mbmenu boxMenu">
     <table style="border:0;" >
       <tr>
         <td>
-          <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>
-          <a class="home" href="/bls-material">Buy Material and Stitch</a>
-          <a class="home" href="/bls-material?topSelling">Top Selling Materials</a>
-          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">About Patapage</a>
-          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Sign up</a>
+          <a class="home" href="/bls-material">Churidhars Salwars</a>
+          <a class="home" href="/bls-material?topSelling">Blouses</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">Express Delivery</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Ratings Reviews</a>
         </td>
         <td>
-          <div style="height:130px;"><img src="http://bugsvoice.com/applications/bugsVoice/images/logo.png" alt="bugsvoice" width="250" style="padding-top:30px"/></div>
-          <a class="home" href="/choosedesignwomaterial">Pick Up and Stitch</a>
+          <a class="home" href="/choosedesignwomaterial">Featured</a>
           <a class="home" href="/choosedesignwomaterial?topSelling">Top Designs</a>
-          <a href="http://bugsvoice.com/applications/bugsVoice/site/aboutHelp.jsp" target="_blank">About Bugs Voice</a>
-          <a href="http://bugsvoice.com/applications/bugsVoice/site/access/login.jsp" target="_blank">Sign up</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/aboutHelp.jsp" target="_blank">Outfitters Details</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/access/login.jsp" target="_blank">Recommend a Tailor</a>
         </td>
         <td>
-          <div style="height:130px"><img src="http://devineu.eu/applications/webwork/site_devineu/media/baloonSmall.png" alt="bugsvoice" width="200"/></div>
-          <a href="http://devineu.eu/home.page" target="_blank">Home</a>
-          <a href="http://devineu.eu/mission.page" target="_blank">Mission</a>
-          <a href="http://devineu.eu/interviewyourself.page" target="_blank">Interview yourself</a>
-          <a href="http://devineu.eu/getInterviewed.page" target="_blank">Get interviewed</a>
-        </td>
+          <a href="http://devineu.eu/home.page" target="_blank">New Tailors</a>
+          </td>
       </tr>
+    </table>
+  </div>
+  <div id="box_menu_materials" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <a class="home" href="/bls-material">Brand</a>
+          <a class="home" href="/bls-material?topSelling">Price Range</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">Experts Pick</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Offers</a>
+        </td>
+        <td>
+          <a class="home" href="/choosedesignwomaterial">Featured</a>
+          <a class="home" href="/choosedesignwomaterial?topSelling">Top Selling</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/aboutHelp.jsp" target="_blank">Latest</a>
+          <a href="http://bugsvoice.com/applications/bugsVoice/site/access/login.jsp" target="_blank">Reviews Ratings</a>
+        </td>
+       </tr>
     </table>
   </div>
 
-<div id="box_menu2" class="mbmenu boxMenu">
+<div id="box_menu_premium" class="mbmenu boxMenu">
     <table style="border:0;" >
       <tr>
         <td>
-          <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>
-          <a class="home" href="/bls-material">How to take a measurement</a>
+          <!-- <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>-->
+          <a class="home" href="/bls-material">Bridal</a>
           <a href="http://patapage.com/demo/" target="_blank">Featured</a>
-          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">About Patapage</a>
-          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Sign up</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">Order Sample</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Personalized service</a>
         </td>
-        <td>
-          <div style="height:130px;"><img src="http://bugsvoice.com/applications/bugsVoice/images/logo.png" alt="bugsvoice" width="250" style="padding-top:30px"/></div>
-          <a href="http://bugsvoice.com" target="_blank">Home</a>
-          <a href="http://bugsvoice.com/applications/bugsVoice/site/details.jsp" target="_blank">Details</a>
-          <a href="http://bugsvoice.com/applications/bugsVoice/site/aboutHelp.jsp" target="_blank">About Bugs Voice</a>
-          <a href="http://bugsvoice.com/applications/bugsVoice/site/access/login.jsp" target="_blank">Sign up</a>
-        </td>
-        <td>
-          <div style="height:130px"><img src="http://devineu.eu/applications/webwork/site_devineu/media/baloonSmall.png" alt="bugsvoice" width="200"/></div>
-          <a href="http://devineu.eu/home.page" target="_blank">Home</a>
-          <a href="http://devineu.eu/mission.page" target="_blank">Mission</a>
-          <a href="http://devineu.eu/interviewyourself.page" target="_blank">Interview yourself</a>
-          <a href="http://devineu.eu/getInterviewed.page" target="_blank">Get interviewed</a>
-        </td>
+       
       </tr>
     </table>
   </div>
+  
+  <div id="box_menu_myaccount" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <!-- <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>-->
+          <a class="home" href="/bls-material">Order Status</a>
+          <a href="http://patapage.com/demo/" target="_blank">Disputes</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">Offshelf pick up</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Measurements</a>
+        </td>
+      
+      </tr>
+    </table>
+  </div>
+  <div id="box_menu_sale" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <!-- <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>-->
+          <a class="home" href="/bls-material">Salwars Churidhars</a>
+          <a href="http://patapage.com/demo/" target="_blank">Blouses</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">Outfitters offers</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Combo</a>
+        </td>
+      
+      </tr>
+    </table>
+  </div>
+  <div id="box_menu_aboutus" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <!-- <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>-->
+          <a class="home" href="/bls-material">Who we are</a>
+          <a href="http://patapage.com/demo/" target="_blank">Contact us</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">Investors</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Partners</a>
+        </td>
+      <td>
+          <!-- <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>-->
+          <a class="home" href="/bls-material">News</a>
+          <a href="http://patapage.com/demo/" target="_blank">Articles</a>
+      </td>
+      </tr>
+    </table>
+  </div>
+  <div id="box_menu_tutotials" class="mbmenu boxMenu">
+    <table style="border:0;" >
+      <tr>
+        <td>
+          <!-- <div style="height:130px"><img src="http://patapage.net/pp/images/logo.png" alt="patapage" width="150"/></div>-->
+          <a class="home" href="/bls-material">FAQ</a>
+          <a href="http://patapage.com/demo/" target="_blank">Videos</a>
+          <a href="http://patapage.com/applications/pataPage/site/aboutHelp.jsp" target="_blank">How it works</a>
+          <a href="http://patapage.com/applications/pataPage/site/access/login.jsp" target="_blank">Feedback</a>
+        </td>
+      
+      </tr>
+    </table>
+  </div>
+  
   <!-- end menus -->
 
 </div>
