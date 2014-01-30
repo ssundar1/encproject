@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.broadleafcommerce.common.audit.Auditable;
 import org.broadleafcommerce.core.catalog.service.CatalogService;
+import org.broadleafcommerce.core.order.service.OrderItemService;
 import org.broadleafcommerce.core.web.controller.account.BroadleafOrderHistoryController;
 import org.broadleafcommerce.profile.core.service.CountryService;
 import org.broadleafcommerce.profile.core.service.StateService;
@@ -42,7 +43,10 @@ import com.enclothe.core.dispute.domain.Dispute;
 import com.enclothe.core.dispute.domain.DisputeChannel;
 import com.enclothe.core.dispute.domain.DisputeComment;
 import com.enclothe.core.dispute.domain.DisputeCommentImpl;
+import com.enclothe.core.dispute.domain.DisputePriority;
+import com.enclothe.core.dispute.domain.DisputePriorityImpl;
 import com.enclothe.core.dispute.service.DisputeCommentService;
+import com.enclothe.core.dispute.service.DisputePriorityService;
 import com.enclothe.core.dispute.service.DisputeService;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.measurement.domain.Measurement;
@@ -60,32 +64,45 @@ public class DisputeController {
 	@Resource(name = "blDisputeCommentService")
     protected DisputeCommentService disputeCommentService;
 	
+	@Resource(name = "blDisputePriorityService")
+    protected DisputePriorityService disputePriorityService;
+	
 	@Resource(name = "blServiceProviderService")
 	protected ServiceProviderService serviceProviderService;
 	
-    @RequestMapping(value = "/createDispute")
-    public ModelAndView createDispute(HttpServletRequest request, Model model) {
+	@Resource(name = "blOrderItemService")
+	protected OrderItemService orderItemService;
+	
+    @RequestMapping(value = "/createDispute/{encOrderItemId}")
+    public ModelAndView createDispute(HttpServletRequest request, Model model, @PathVariable("encOrderItemId") String orderItemId) {
 //	dummy place holder
-    
+    	request.getSession().setAttribute("orderItemId_session", orderItemId);
     ModelAndView m = new ModelAndView();
 	
 	Collection<ServiceProvider> serviceProviders = serviceProviderService.getServiceProviders();
-	m.addObject("ServiceProveiders", serviceProviders);	
+	m.addObject("ServiceProveiders", serviceProviders);
+	m.addObject("EncOrderItemId", orderItemId);
 	m.setViewName("account/partials/disputeform");
     return m;
     }
     
-    @RequestMapping(value = "/saveDispute")
+    @RequestMapping(value = "/saveDispute")	
     public String saveDispute(HttpServletRequest request, Model model, HttpServletResponse response
-    		,@ModelAttribute("disputeComment") String comment) {
+    		,@ModelAttribute("disputeComment") String comment, @ModelAttribute("serviceProviderId") String serviceProviderId, @ModelAttribute("encOrderItemId") String encOrderItemId) {
 
     	Dispute dispute = disputeService.createNewDispute();
+    	dispute.setDisputeServiceProvider(serviceProviderService.readServiceProviderById(Long.parseLong(serviceProviderId)));
+    	dispute.setDisputePriority(disputePriorityService.readDisputePriorityById((long) 1));
+    	dispute.setOrderItem(orderItemService.readOrderItemById(Long.parseLong(request.getSession().getAttribute("orderItemId_session").toString())));
+    	
+    	//dispute.setOrderItem(orderItem);
     	disputeService.saveDispute(dispute);
     	
     	DisputeComment disputeComment = new DisputeCommentImpl();
     	disputeComment.setComment(comment);
-    	//disputeComment.setDispute(dispute);
+    	disputeComment.setDispute(dispute);
     	disputeCommentService.saveDisputeComment(disputeComment);
+    	
     	
     return "account/partials/disputeform";	
     }

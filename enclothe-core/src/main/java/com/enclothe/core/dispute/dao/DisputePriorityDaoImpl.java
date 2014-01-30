@@ -8,10 +8,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.broadleafcommerce.common.persistence.EntityConfiguration;
+import org.broadleafcommerce.core.order.domain.OrderItemImpl;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import com.enclothe.core.dispute.domain.DisputePriority;
+import com.enclothe.core.dispute.domain.DisputePriorityImpl;
 
 @Repository("blDisputePriorityDao")
 public class DisputePriorityDaoImpl implements DisputePriorityDao {
@@ -24,15 +26,7 @@ public class DisputePriorityDaoImpl implements DisputePriorityDao {
 	
 	@Override
 	public DisputePriority readDisputePriorityById(Long DisputePriorityId) {
-		DisputePriority disputePriority = null;
-		final Query query = em.createNamedQuery("BC_READ_DISPUTEPRIORITY_BY_ID",DisputePriority.class);
-        query.setParameter("id", DisputePriorityId);
-        @SuppressWarnings("rawtypes")
-        final List temp = query.getResultList();
-        if (temp != null && !temp.isEmpty()) {
-        	disputePriority = (DisputePriority) temp.get(0);
-        }
-        return disputePriority;
+		return em.find(DisputePriorityImpl.class, DisputePriorityId);
 	}		
 	
 	@Override
