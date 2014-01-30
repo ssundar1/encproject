@@ -112,9 +112,9 @@ public class ServiceProviderImpl  implements ServiceProvider{
     
     @OneToOne(cascade = CascadeType.ALL, targetEntity = AddressImpl.class, optional=false)
     @JoinColumn(name = "ADDRESS_ID")
-    @AdminPresentationCollection(friendlyName = "ServiceProviderImpl_address", order = 40,
+    /*@AdminPresentationCollection(friendlyName = "ServiceProviderImpl_address", order = 40,
     addType = AddMethodType.PERSIST,
-    tab = Presentation.Tab.Name.Contact, tabOrder = Presentation.Tab.Order.Contact)    
+    tab = Presentation.Tab.Name.Contact, tabOrder = Presentation.Tab.Order.Contact)    */
     protected Address address;
     
     @ManyToOne(targetEntity = ChallengeQuestionImpl.class)

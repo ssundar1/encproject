@@ -85,9 +85,9 @@ public class ServiceProviderAccountInfoImpl implements
         
     @OneToOne(cascade = CascadeType.ALL, targetEntity = AddressImpl.class, optional=false)
     @JoinColumn(name = "BRANCH_ADDRESS_ID", referencedColumnName="ADDRESS_ID")
-    @AdminPresentationCollection(friendlyName = "SPAccountInfoImpl_address", order = 40,
+   /* @AdminPresentationCollection(friendlyName = "SPAccountInfoImpl_address", order = 40,
     addType = AddMethodType.PERSIST,
-    tab = Presentation.Tab.Name.Contact, tabOrder = Presentation.Tab.Order.Contact)    
+    tab = Presentation.Tab.Name.Contact, tabOrder = Presentation.Tab.Order.Contact)    */
     protected Address address;    
     
     @Column(name = "ACCOUNT_TYPE", nullable=true)
