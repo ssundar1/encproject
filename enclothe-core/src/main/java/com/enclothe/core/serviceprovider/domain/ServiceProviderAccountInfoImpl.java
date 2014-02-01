@@ -29,13 +29,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Parameter;
 
-import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl.Presentation;
+//import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl.Presentation;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="ENC_SERVICE_PROVIDER_ACCOUNT_INFO")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region="blStandardElements")
-@AdminPresentationClass(friendlyName = "ServiceProviderAcctountInfoImpl_base")
+//@AdminPresentationClass(friendlyName = "ServiceProviderAcctountInfoImpl_base")
 public class ServiceProviderAccountInfoImpl implements
 		ServiceProviderAccountInfo {
 
@@ -59,28 +59,28 @@ public class ServiceProviderAccountInfoImpl implements
     /** The name. */
     @Column(name = "ACCOUNT_HOLDER_NAME", nullable=false)
     @Index(name="SP_ACCOUNT_HOLDER_NAME_INDEX", columnNames={"ACCOUNT_HOLDER_NAME"})
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_ahname", order = 20, group = "SPAccountInfoImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL) 
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_ahname", order = 20, group = "SPAccountInfoImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL) 
     protected String accountHolderName;	
     
     @Column(name = "BANK_NAME", nullable=false)
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_bname", order = 20, group = "SPAccountInfoImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_bname", order = 20, group = "SPAccountInfoImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String bankName;    	
     
     @Column(name = "BANK_IFSC_CODE", nullable=true)
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_ifsc", order = 20, group = "SPAccountInfoImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_ifsc", order = 20, group = "SPAccountInfoImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String bankIFSCCode;
     
     @Column(name = "ACCOUNT_NO", nullable=true)
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_accNo", order = 20, group = "SPAccountInfoImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_accNo", order = 20, group = "SPAccountInfoImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String accountNumber;
     
     @Column(name = "BRANCH", nullable=true)
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_branch", order = 20, group = "SPAccountInfoImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_branch", order = 20, group = "SPAccountInfoImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String branch;   
         
     @OneToOne(cascade = CascadeType.ALL, targetEntity = AddressImpl.class, optional=false)
@@ -91,16 +91,16 @@ public class ServiceProviderAccountInfoImpl implements
     protected Address address;    
     
     @Column(name = "ACCOUNT_TYPE", nullable=true)
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_accType", order = 20, group = "SPAccountInfoImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_accType", order = 20, group = "SPAccountInfoImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String accountType;
     
 	@Embedded
     protected Auditable auditable = new Auditable();
     
     @Column(name = "END_DATE")
-    @AdminPresentation(friendlyName = "SPAccountInfoImpl_End_Date", order = 200, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL) 
+//    @AdminPresentation(friendlyName = "SPAccountInfoImpl_End_Date", order = 200, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL) 
     protected Date endDate;
     
     @ManyToOne(targetEntity = ServiceProviderImpl.class, optional=false)

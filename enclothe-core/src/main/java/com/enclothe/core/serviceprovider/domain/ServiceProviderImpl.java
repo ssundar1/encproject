@@ -53,7 +53,7 @@ import org.broadleafcommerce.core.order.domain.OrderImpl;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "ENC_SERVICE_PROVIDER")
 @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
-@AdminPresentationClass(populateToOneFields = PopulateToOneFieldsEnum.TRUE, friendlyName = "ServiceProviderImpl_base")
+//@AdminPresentationClass(populateToOneFields = PopulateToOneFieldsEnum.TRUE, friendlyName = "ServiceProviderImpl_base")
 
 public class ServiceProviderImpl  implements ServiceProvider{
 
@@ -69,45 +69,45 @@ public class ServiceProviderImpl  implements ServiceProvider{
             @Parameter(name="entity_name", value="com.enclothe.core.serviceprovider.domain.ServiceProviderImpl")
         }
     )
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Id", group = "ServiceProviderImpl_Primary_Key",
-    visibility = VisibilityEnum.HIDDEN_ALL)
+    /*@AdminPresentation(friendlyName = "ServiceProviderImpl_Id", group = "ServiceProviderImpl_Primary_Key",
+    visibility = VisibilityEnum.HIDDEN_ALL)*/
     @Column(name = "SP_ID", nullable=false)
     protected Long id;
 
     @Column(name = "USER_NAME")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_UserName", order = 4000, group = "ServiceProviderImpl_SP",
-            visibility = VisibilityEnum.HIDDEN_ALL)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_UserName", order = 4000, group = "ServiceProviderImpl_SP",
+//            visibility = VisibilityEnum.HIDDEN_ALL)
     protected String username;
 	
     @Column(name = "SP_FIRST_NAME", nullable=true)
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_fname", order = 10, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_fname", order = 10, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String firstName;    	
 	
     @Column(name = "SP_LAST_NAME", nullable=true)
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_lname", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_lname", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String lastName;    	
     
     @Column(name = "SP_EMAIL_ADDRESS")
     @Index(name = "SP_EMAIL_INDEX", columnNames = { "SP_EMAIL_ADDRESS" })
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Email_Address", order = 1000, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Email_Address", order = 1000, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)
     protected String emailAddress;
 
     @Column(name = "SP_FIRM_NAME", nullable=false, unique=true)
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_firm_name", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_firm_name", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String firmName;    	    
 	
     @Column(name = "SP_SHORT_DESCRIPTION", nullable=true)
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_short_desc", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_short_desc", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String shortDesc;    	  
     
     @Column(name = "SP_LONG_DESCRIPTION", nullable=true)
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_long_desc", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)    
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_long_desc", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)    
     protected String longDesc;    
     
     @OneToOne(cascade = CascadeType.ALL, targetEntity = AddressImpl.class, optional=false)
@@ -120,68 +120,68 @@ public class ServiceProviderImpl  implements ServiceProvider{
     @ManyToOne(targetEntity = ChallengeQuestionImpl.class)
     @JoinColumn(name = "CHALLENGE_QUESTION_ID")
     @Index(name="SP_CHALLENGE_INDEX", columnNames={"CHALLENGE_QUESTION_ID"})
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Challenge_Question", order = 50,
-            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
-            excluded = true)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Challenge_Question", order = 50,
+//            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
+//            excluded = true)
     protected ChallengeQuestion challengeQuestion;
 
     @Column(name = "CHALLENGE_ANSWER")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Challenge_Answer", order = 60,
-            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
-            excluded = true)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Challenge_Answer", order = 60,
+//            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
+//            excluded = true)
     protected String challengeAnswer;
 
     @Column(name = "PASSWORD")
-    @AdminPresentation(excluded = true)
+//    @AdminPresentation(excluded = true)
     protected String password;
     
     @Column(name = "PASSWORD_CHANGE_REQUIRED")
-    @AdminPresentation(excluded = true)
+//    @AdminPresentation(excluded = true)
     protected Boolean passwordChangeRequired = false;
 
     @Column(name = "RECEIVE_EMAIL")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Receive_Email",order=70, 
-            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Receive_Email",order=70, 
+//            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced)
     protected Boolean receiveEmail = true;
 
     @Column(name = "IS_REGISTERED")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Registered", order = 80,
-            prominent = true, gridOrder = 4000)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Registered", order = 80,
+//            prominent = true, gridOrder = 4000)
     protected Boolean registered = false;  
     
     @Column(name = "DEACTIVATED")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Deactivated", order=90,
-        tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Deactivated", order=90,
+//        tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced)
     protected Boolean deactivated = false;
     
     @Column(name = "ENCLOTHE_URL")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_enclothe_url", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)   
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_enclothe_url", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)   
     protected String enclotheURL;
     
     @Column(name = "MERCHANT_URL")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_merchant_url", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)   
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_merchant_url", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)   
     protected String merchantURL;
     
     @Column(name = "CURRENT_CAPACITY")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_current_capacity", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)   
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_current_capacity", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)   
     protected String currentCapacity;
     
     @Column(name = "IMAGE_URL")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_image_url", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)   
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_image_url", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)   
     protected String imageURL;
     
     @Column(name = "LOGO_URL")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_logo_url", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)   
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_logo_url", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)   
     protected String logoURL;
  
     @Column(name = "IS_FEATURED")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_is_featured", order = 20, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL)   
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_is_featured", order = 20, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL)   
     protected Boolean isFeatured;
 
 
@@ -189,21 +189,21 @@ public class ServiceProviderImpl  implements ServiceProvider{
     protected Auditable auditable = new Auditable();
     
     @Column(name = "END_DATE")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_End_Date", order = 200, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL) 
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_End_Date", order = 200, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL) 
     protected Date endDate;
     
     @OneToOne(cascade = CascadeType.ALL, targetEntity = UserCategoryImpl.class, optional=true)
     @JoinColumn(name = "USER_CATEGORY_ID")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_user_category", order = 200, group = "ServiceProviderImpl_SP",
-    visibility = VisibilityEnum.HIDDEN_ALL) 
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_user_category", order = 200, group = "ServiceProviderImpl_SP",
+//    visibility = VisibilityEnum.HIDDEN_ALL) 
     protected UserCategory userCategory;
     
     @ManyToOne(targetEntity = LocaleImpl.class)
     @JoinColumn(name = "LOCALE_CODE")
-    @AdminPresentation(friendlyName = "ServiceProviderImpl_Locale",order=4000,             
-            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
-        excluded = true, visibility = VisibilityEnum.GRID_HIDDEN)
+//    @AdminPresentation(friendlyName = "ServiceProviderImpl_Locale",order=4000,             
+//            tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
+//        excluded = true, visibility = VisibilityEnum.GRID_HIDDEN)
     protected Locale spLocale;
     
 
@@ -211,10 +211,10 @@ public class ServiceProviderImpl  implements ServiceProvider{
     @Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region="blStandardElements")
     @MapKey(name="name")
     @BatchSize(size = 50)
-    @AdminPresentationMap(friendlyName = "ServiceProviderAttributesTitle",
-        tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
-        deleteEntityUponRemove = true, forceFreeFormKeys = true, keyPropertyFriendlyName = "ServiceProviderImpl_Attribute_Name"
-    )
+//    @AdminPresentationMap(friendlyName = "ServiceProviderAttributesTitle",
+//        tab = Presentation.Tab.Name.Advanced, tabOrder = Presentation.Tab.Order.Advanced,
+//        deleteEntityUponRemove = true, forceFreeFormKeys = true, keyPropertyFriendlyName = "ServiceProviderImpl_Attribute_Name"
+//    )
     protected Map<String, ServiceProviderAttribute> spAttributes = new HashMap<String, ServiceProviderAttribute>();
     
     @Transient
@@ -447,23 +447,23 @@ public class ServiceProviderImpl  implements ServiceProvider{
 		return this.spAttributes.get(name);
 	}
 	
-    public static class Presentation {
-
-        public static class Tab {
-
-            public static class Name {
-
-                public static final String Contact = "CustomerImpl_Contact_Tab";
-                public static final String Advanced = "CustomerImpl_Advanced_Tab";
-            }
-
-            public static class Order {
-
-                public static final int Contact = 2000;
-                public static final int Advanced = 3000;
-            }
-        }
-    }
+//    public static class Presentation {
+//
+//        public static class Tab {
+//
+//            public static class Name {
+//
+//                public static final String Contact = "CustomerImpl_Contact_Tab";
+//                public static final String Advanced = "CustomerImpl_Advanced_Tab";
+//            }
+//
+//            public static class Order {
+//
+//                public static final int Contact = 2000;
+//                public static final int Advanced = 3000;
+//            }
+//        }
+//    }
 
 	@Override
 	public boolean isRegistered() {
