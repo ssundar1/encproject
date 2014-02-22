@@ -15,11 +15,11 @@
 
 		<nav th:substituteby="layout/partials/nav" />
 
-		<section id="left_column">
+		<section id="">
 
 			<header>
 				<h1 th:inline="text">
-					<span>Provide Measurement</span>
+					<span>Provide Measurement (Hover over the icons for any help on measurements)</span>
 				</h1>
 			</header>
 
@@ -59,45 +59,89 @@
 					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
 
-					<div class="form50">
+					<div class="form66">
 						<label for="name"><span>Measurement Name</span></label> <input
 							type="text" class="field50" name="name" />
 					</div>
-					<div class="form50">
+					<div class="form66">
 						<label for="description"><span>Measurement
 								Description</span></label> <input type="text" class="field50"
 							name="description" />
 					</div>
+	
 					<div class="form50">
-						<label for="height"><span>Height</span></label> <input type="text"
+						<label for="height"><span>Height <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input type="text"
 							class="field50" name="height" />
+						
 					</div>
 					<div class="form50">
-						<label for="chest"><span>Chest</span></label> <input type="text"
+						<label for="chest"><span>Chest <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input type="text"
 							class="field50" name="chest" />
+						
 					</div>
+					
 					<div class="form50">
-						<label for="bust"><span>Bust</span></label> <input type="text"
+						<label for="bust"><span>Bust <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input type="text"
 							class="field50" name="bust" />
 					</div>
 					<div class="form50">
-						<label for="dartLine"><span>Dart line</span></label> <input
+						<label for="dartLine"><span>Dart line <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input
 							type="text" class="field50" name="dartLine" />
 					</div>
 					<div class="form50">
-						<label for="waist"><span>Waist</span></label> <input type="text"
+						<label for="waist"><span>Waist <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input type="text"
 							class="field50" name="waist" />
 					</div>
 					<div class="form50">
-						<label for="hip"><span>Hip</span></label> <input type="text"
+						<label for="hip"><span>Hip <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input type="text"
 							class="field50" name="hip" />
 					</div>
 					<div class="form50">
-						<label for="shoulder"><span>Shoulder</span></label> <input
+						<label for="shoulder"><span>Shoulder <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input
 							type="text" class="field50" name="shoulder" />
 					</div>
 					<div class="form50">
-						<label for="sleeveLength"><span>Sleeve Length</span></label> <input
+						<label for="sleeveLength"><span>Sleeve Length <img id="chestImg"
+						src="/img/measurements/chest.png"
+style="width: 5%; height:5%; margin-bottom: 4px;"
+onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
+onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
+/> </span></label> <input
 							type="text" class="field50" name="sleeveLength" />
 					</div>
 					<div class="form100">
@@ -124,15 +168,7 @@
 
 		</section>
 
-		<section id="right_column">
-			<div id="options">
-
-				<div th:substituteby="catalog/partials/rightHandBannerAds" />
-
-
-
-			</div>
-		</section>
+	
 
 	</div>
 
