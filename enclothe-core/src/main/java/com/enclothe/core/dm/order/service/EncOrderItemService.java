@@ -4,6 +4,7 @@ import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.service.OrderItemService;
 
 import com.enclothe.core.common.domain.UserCategory;
+import com.enclothe.core.dispute.domain.Dispute;
 import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
 import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.measurement.domain.Measurement;
@@ -32,4 +33,6 @@ public interface EncOrderItemService extends OrderItemService {
 			EncOrderItemStates OrderItemState);
 
 	public UserCategory readUserCategoryById(Long UserCategoryID);
+
+	public Dispute getDisputeIdByOrderItemId(Long encOrderItemId);
 }

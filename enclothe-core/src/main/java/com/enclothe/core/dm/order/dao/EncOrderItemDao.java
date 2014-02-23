@@ -4,6 +4,7 @@ import org.broadleafcommerce.core.order.dao.OrderItemDao;
 import org.broadleafcommerce.core.order.domain.OrderItem;
 
 import com.enclothe.core.common.domain.UserCategory;
+import com.enclothe.core.dispute.domain.Dispute;
 import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
 import com.enclothe.core.dm.order.domain.EncOrderItemStates;
 import com.enclothe.core.measurement.domain.Measurement;
@@ -24,5 +25,6 @@ public interface EncOrderItemDao  extends OrderItemDao{
 			Long orderItemStateDetailId);
 	public EncOrderItemStateDetail save(EncOrderItemStateDetail orderItemStateDetail);
 	public UserCategory readUserCategoryById(Long userCategoryId);
+	public Dispute getDisputeIdByOrderItemId(Long encOrderItemId);
 
 }

@@ -29,6 +29,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.enclothe.core.dispute.domain.Dispute;
+import com.enclothe.core.dm.order.service.EncOrderItemService;
+
 @Controller
 @RequestMapping("/account/orders")
 public class OrderHistoryController extends BroadleafOrderHistoryController {
@@ -43,6 +46,9 @@ public class OrderHistoryController extends BroadleafOrderHistoryController {
 
     @Resource(name = "blCountryService")
     CountryService countryService;
+    
+    @Resource(name = "encOrderItemService")
+    EncOrderItemService encOrderItemService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewOrderHistory(HttpServletRequest request, Model model) {
@@ -55,7 +61,9 @@ public class OrderHistoryController extends BroadleafOrderHistoryController {
         if (order == null) {
             throw new IllegalArgumentException("The orderNumber provided is not valid");
         }
+        Dispute dispute = encOrderItemService.getDisputeIdByOrderItemId(order.getOrderItems().get(0).getId());
         model.addAttribute("order", order);
+        model.addAttribute("dispute", dispute);
         return isAjaxRequest(request) ? orderDetailsView : orderDetailsRedirectView;
     }
 

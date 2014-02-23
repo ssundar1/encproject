@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 
 
+
 import org.broadleafcommerce.common.money.Money;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItemFeePrice;
@@ -23,6 +24,7 @@ import org.broadleafcommerce.core.order.service.type.OrderItemType;
 import org.broadleafcommerce.profile.core.service.IdGenerationService;
 
 import com.enclothe.core.common.domain.UserCategory;
+import com.enclothe.core.dispute.domain.Dispute;
 import com.enclothe.core.dm.order.dao.EncOrderItemDao;
 import com.enclothe.core.dm.order.domain.EncOrderItem;
 import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
@@ -151,5 +153,10 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	@Override
 	public UserCategory readUserCategoryById(Long userCategoryId) {
 		return orderItemDao.readUserCategoryById(userCategoryId);
+	}
+	
+	@Override
+	public Dispute getDisputeIdByOrderItemId(Long encOrderItemId) {
+		return orderItemDao.getDisputeIdByOrderItemId(encOrderItemId);
 	}
 }

@@ -60,10 +60,13 @@ public class DisputeImpl implements Dispute {
     @Column(name = "DISPUTE_ID", nullable=false)
     protected Long id;
 	
-	@OneToOne(targetEntity = EncOrderItemImpl.class)
-    @JoinColumn(name = "ORDER_ITEM_ID",referencedColumnName="ORDER_ITEM_ID")
-    @Index(name="DISPUTE_ORDERITEM_INDEX", columnNames={"ORDER_ITEM_ID"})
-    protected OrderItem orderItem;
+	@Column(name = "ORDER_ITEM_ID", nullable=true)
+	protected Long encOrderItemId;
+	
+//	@OneToOne(targetEntity = EncOrderItemImpl.class)
+//    @JoinColumn(name = "ORDER_ITEM_ID",referencedColumnName="ORDER_ITEM_ID")
+//    @Index(name="DISPUTE_ORDERITEM_INDEX", columnNames={"ORDER_ITEM_ID"})
+//    protected OrderItem orderItem;
 	
 //	@OneToOne(targetEntity = ServiceProviderImpl.class)
 //    @JoinColumn(name = "DISPUTE_SP_ID", referencedColumnName="SP_ID")
@@ -118,13 +121,21 @@ public class DisputeImpl implements Dispute {
 	public void setId(Long id) {
 		this.id = id;
 	}
-    @Override
+    /*@Override
 	public OrderItem getOrderItem() {
 		return orderItem;
 	}
     @Override
 	public void setOrderItem(OrderItem orderItem) {
 		this.orderItem = orderItem;
+	}*/
+    @Override
+	public Long getEncOrderItemId() {
+		return encOrderItemId;
+	}
+    @Override
+	public void setEncOrderItemId(Long encOrderItemId) {
+		this.encOrderItemId = encOrderItemId;
 	}
   //  @Override
 //	public ServiceProvider getServiceProvider() {
