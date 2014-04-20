@@ -1,4 +1,4 @@
-<blc:form th:object="${billingInfoForm}" th:action="@{/checkout/complete}" method="post" id="billing_info" th:if="${validOrderInfo and validShipping}">
+<blc:form th:object="${billingInfoForm}" action="https://secure.ebs.in/pg/ma/sale/pay" method="post" id="billing_info" th:if="${validOrderInfo and validShipping}">
 
     <div class="left_content_billing payment_info">
         <h3><span th:text="#{cart.paymentInfo}">Payment Information</span></h3>
@@ -82,16 +82,17 @@
 
     <div id="billing_info_form" class="right_content_billing">
 
-        <input type="hidden" name="address.country" value="US" />
+        <input type="hidden" id="address.country" name="country" value="US" />
 
         <div class="form100" th:unless="${cart.fulfillmentGroups != null and #lists.size(cart.fulfillmentGroups) > 1}">
-            <input id="use_shipping_address" type="checkbox" th:field="*{useShippingAddress}" th:disabled="${!validShipping}" /> <span th:text="#{cart.useShppingInfo}">Use Shipping Information</span>
+            <input id="use_shipping_address" type="checkbox" th:field="*{useShippingAddress}" th:disabled="${!validShipping}" />
+             <span th:text="#{cart.useShppingInfo}">Use Shipping Information</span>
         </div>
 
         <div class="form30">
             <label for="firstName"><span th:text="#{cart.firstName}">First Name</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.firstName')}" th:errors="*{address.firstName}"></span>
-            <input type="text" th:field="*{address.firstName}" class="field30 required clearable" th:classappend="${#fields.hasErrors('address.firstName')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="address.firstName" name="name" th:value="*{address.firstName}" class="field30 required clearable" th:classappend="${#fields.hasErrors('address.firstName')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div class="form30 margin20">
@@ -103,7 +104,7 @@
         <div class="form30 margin20">
             <label for="phone"><span th:text="#{cart.phone}">Phone</span></label>
             <span class="error_spacer" th:if="${#fields.hasErrors('address.firstName') or #fields.hasErrors('address.lastName')}">error</span>
-           <input type="tel" id="address.phonePrimary" name="address.phonePrimary" th:if="*{address.phonePrimary!=null}" th:value="*{address.phonePrimary.phoneNumber}" class="field30 clearable" />
+           <input type="tel" id="address.phonePrimary" name="phone" th:if="*{address.phonePrimary!=null}" th:value="*{address.phonePrimary.phoneNumber}" class="field30 clearable" />
             <input type="tel" id="address.phonePrimary" name="address.phonePrimary" th:if="*{address.phonePrimary==null}" class="field30 clearable" />
         </div>
 
@@ -112,7 +113,7 @@
         <div class="form50">
             <label for="address1"><span th:text="#{cart.address}">Address</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.addressLine1')}" th:errors="*{address.addressLine1}"></span>
-            <input type="text" th:field="*{address.addressLine1}" class="field50 required clearable" th:classappend="${#fields.hasErrors('address.addressLine1')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" name="address" id="address.addressLine1" th:value="*{address.addressLine1}" class="field50 required clearable" th:classappend="${#fields.hasErrors('address.addressLine1')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div class="form50 margin20">
@@ -128,9 +129,9 @@
             <span class="error" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
             <br th:if="${#fields.hasErrors('address.city')} and ${#fields.hasErrors('address.state')}"/>
             <span class="error" th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"></span>
-            <input type="text" th:field="*{address.city}" class="field25 required clearable" th:classappend="${#fields.hasErrors('address.city')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="address.city" name="city" th:value="*{address.city}" class="field25 required clearable" th:classappend="${#fields.hasErrors('address.city')}? 'fieldError'" th:disabled="${!validShipping}" />
 
-            <select id="state" th:field="*{address.state}" size="1" style="width: 48px;" class="required clearable" th:classappend="${#fields.hasErrors('address.state')}? 'fieldError'" th:disabled="${!validShipping}">
+            <select id="state" name="state" th:value="*{address.state}" size="1" style="width: 48px;" class="required clearable" th:classappend="${#fields.hasErrors('address.state')}? 'fieldError'" th:disabled="${!validShipping}">
                 <option value="">--</option>
                 <option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option>
             </select>
@@ -139,10 +140,18 @@
         <div class="form25 margin20">
             <label for="postal_code"><span th:text="#{cart.postalCode}">Postal Code</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.postalCode')}" th:errors="*{address.postalCode}"></span>
-            <input type="text" th:field="*{address.postalCode}" class="field25 clearable" th:classappend="${#fields.hasErrors('address.postalCode')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="address.postalCode" name="postal_code" th:value="*{address.postalCode}" class="field25 clearable" th:classappend="${#fields.hasErrors('address.postalCode')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div style="float:right;">
+        <input name="account_id" type="hidden" size="60" th:value="*{accountId}"/>
+        <input name="mode" type="hidden" size="60" value="TEST"/>
+          <input name="reference_no" type="hidden" th:value="*{referenceNo}"/>
+           <input name="return_url" type="hidden" size="60" value="http://localhost:8080"/>
+             <input name="amount" type="hidden" th:value="*{amount}"/>
+  			<input name="description" type="hidden" value="test"/> 
+   	  <input name="email" type="hidden" size="60" value="test@abc.com"/>
+   <input name="secure_hash" type="hidden" size="60" th:value="*{secureHash}"/>
             <input type="submit" class="medium" th:value="#{cart.completOrder}" th:disabled="${!validShipping}" th:classappend="${validShipping}? 'red' : 'gray'"/>
         </div>
 

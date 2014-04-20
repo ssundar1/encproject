@@ -42,6 +42,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.enclothe.core.web.checkout.model.EncBillingInfoForm;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -61,8 +63,9 @@ public class CheckoutController extends BroadleafCheckoutController {
     public String checkout(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm,
             @ModelAttribute("shippingInfoForm") ShippingInfoForm shippingForm,
-            @ModelAttribute("billingInfoForm") BillingInfoForm billingForm, RedirectAttributes redirectAttributes) {
+            @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm, RedirectAttributes redirectAttributes) {
         prepopulateCheckoutForms(CartState.getCart(), orderInfoForm, shippingForm, billingForm);
+        
         return super.checkout(request, response, model, redirectAttributes);
     }
     
@@ -80,7 +83,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     @RequestMapping(value="/singleship", method = RequestMethod.POST)
     public String saveSingleShip(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm,
-            @ModelAttribute("billingInfoForm") BillingInfoForm billingForm,
+            @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm,
             @ModelAttribute("shippingInfoForm") ShippingInfoForm shippingForm, 
             BindingResult result) throws PricingException, ServiceException {
         prepopulateOrderInfoForm(CartState.getCart(), orderInfoForm);
@@ -117,7 +120,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     public String completeSecureCreditCardCheckout(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm,
             @ModelAttribute("shippingInfoForm") ShippingInfoForm shippingForm,
-            @ModelAttribute("billingInfoForm") BillingInfoForm billingForm,
+            @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm,
             BindingResult result) throws CheckoutException, PricingException, ServiceException {
         prepopulateCheckoutForms(CartState.getCart(), null, shippingForm, billingForm);
         return super.completeSecureCreditCardCheckout(request, response, model, billingForm, result);
@@ -130,7 +133,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     }
             
     protected void prepopulateCheckoutForms(Order cart, OrderInfoForm orderInfoForm, ShippingInfoForm shippingForm, 
-            BillingInfoForm billingForm) {
+            EncBillingInfoForm billingForm) {
         List<FulfillmentGroup> groups = cart.getFulfillmentGroups();
         
         prepopulateOrderInfoForm(cart, orderInfoForm);
@@ -156,6 +159,10 @@ public class CheckoutController extends BroadleafCheckoutController {
                 }
             }
         }
+        
+        billingForm.setAmount(cart.getTotal().toString());
+        billingForm.setReferenceNo(cart.getId().toString());
+        billingForm.setReturnURL("http://localhost:8080");
     }
 
     @InitBinder
