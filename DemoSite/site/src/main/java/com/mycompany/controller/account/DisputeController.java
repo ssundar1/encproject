@@ -93,8 +93,9 @@ public class DisputeController {
     	Dispute dispute = disputeService.createNewDispute();
     	dispute.setDisputeServiceProvider(serviceProviderService.readServiceProviderById(Long.parseLong(serviceProviderId)));
     	dispute.setDisputePriority(disputePriorityService.readDisputePriorityById((long) 1));
-    	dispute.setOrderItem(orderItemService.readOrderItemById(Long.parseLong(request.getSession().getAttribute("orderItemId_session").toString())));
-    	
+    	//dispute.setOrderItem(orderItemService.readOrderItemById(Long.parseLong(request.getSession().getAttribute("orderItemId_session").toString())));
+    	dispute.setEncOrderItemId(Long.parseLong(request.getSession().getAttribute("orderItemId_session").toString()));
+    	dispute.setCustomer(CustomerState.getCustomer(request));
     	//dispute.setOrderItem(orderItem);
     	disputeService.saveDispute(dispute);
     	

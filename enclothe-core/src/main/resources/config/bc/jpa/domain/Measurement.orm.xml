@@ -23,5 +23,9 @@
         <query>SELECT userCategory FROM com.enclothe.core.common.domain.UserCategory userCategory
         WHERE userCategory.id = :userCategoryId</query>
     </named-query>
+    <named-query name="BC_READ_ORDERITEM_DISPUTE_ID" >
+    	<query>SELECT dispute FROM com.enclothe.core.dispute.domain.Dispute dispute
+        WHERE dispute.encOrderItemId = :encOrderItemId</query>
+    </named-query>
  
 </entity-mappings>

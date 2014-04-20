@@ -30,8 +30,8 @@ public interface EncOrderItem extends DiscreteOrderItem{
 	
 	void setDesignSku(Sku designSku);
 		
-	Dispute getDispute();
+	/*Dispute getDispute();
 	
-	void setDispute(Dispute dispute);
+	void setDispute(Dispute dispute);*/
 
 }

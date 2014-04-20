@@ -15,6 +15,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import com.enclothe.core.common.domain.UserCategory;
+import com.enclothe.core.dispute.domain.Dispute;
 import com.enclothe.core.dm.order.domain.EncOrderItem;
 import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
 import com.enclothe.core.dm.order.domain.EncOrderItemStates;
@@ -128,5 +129,18 @@ public class EncOrderItemDaoImpl extends OrderItemDaoImpl implements EncOrderIte
         	userCategory = (UserCategory) temp.get(0);
         }
         return userCategory;
+	}
+
+	@Override
+	public Dispute getDisputeIdByOrderItemId(Long encOrderItemId) {
+		Dispute dispute = null;
+		final Query query = em.createNamedQuery("BC_READ_ORDERITEM_DISPUTE_ID",Dispute.class);
+        query.setParameter("encOrderItemId", encOrderItemId);
+        @SuppressWarnings("rawtypes")
+        final List temp = query.getResultList();
+        if (temp != null && !temp.isEmpty()) {
+        	dispute = (Dispute) temp.get(0);
+        }
+        return dispute;
 	}
 }

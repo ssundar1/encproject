@@ -18,10 +18,10 @@ public interface Dispute extends Serializable {
 	public Long getId();
 
 	public void setId(@Nonnull Long id);
-	@Nonnull
+	/*@Nonnull
 	public OrderItem getOrderItem();
 
-	public void setOrderItem(@Nonnull OrderItem orderItem);
+	public void setOrderItem(@Nonnull OrderItem orderItem);*/
 //	@Nonnull
 //	public ServiceProvider getServiceProvider();
 //
@@ -68,4 +68,8 @@ public interface Dispute extends Serializable {
 	
 	@Nullable
 	public Auditable getAuditable();
+
+	public Long getEncOrderItemId();
+
+	public void setEncOrderItemId(Long encOrderItemId);
 }

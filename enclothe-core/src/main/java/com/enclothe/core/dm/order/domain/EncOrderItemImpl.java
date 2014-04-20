@@ -54,9 +54,9 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected EncDesign design;
 
-	@OneToOne(mappedBy = "orderItem", targetEntity = DisputeImpl.class)
+	/*@OneToOne(mappedBy = "orderItem", targetEntity = DisputeImpl.class)
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_dispute_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
-	protected Dispute dispute;
+	protected Dispute dispute;*/
 
 	@ManyToOne(targetEntity = SkuImpl.class)
 	@JoinColumn(name = "DESIGN_SKU_ID")
@@ -96,13 +96,13 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		this.design = design;
 	}
 
-	public Dispute getDispute() {
+	/*public Dispute getDispute() {
 		return dispute;
 	}
 
 	public void setDispute(Dispute dispute) {
 		this.dispute = dispute;
-	}
+	}*/
 
 	public void setOrderItemStateDetail(
 			EncOrderItemStateDetail orderItemStateDetail) {
