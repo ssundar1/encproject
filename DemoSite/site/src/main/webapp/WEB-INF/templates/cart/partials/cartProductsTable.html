@@ -1,7 +1,7 @@
 <table id="cart_products">
     <thead>
         <tr>
-            <th colspan="2"><span th:text="#{cart.item}">Item</span></th>
+            <th colspan="2"><span th:text="#{cart.itemLabel}">Item/Design/Measurement</span></th>
             <th><span th:text="#{cart.quantity}">Quantity</span></th>
             <th> <span th:text="#{cart.price}">Price</span> <span class="small" th:text="#{cart.each}">(each)</span></th>
             <th> <span th:text="#{cart.totalSavings}">Total Savings</span></th>
@@ -12,11 +12,11 @@
         <tr th:each="item : ${cart.orderItems}" th:object="${item}" th:id="${'productRow' + item.id}">
             <td><img th:if="*{product.media['primary']}" th:src="@{*{product.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{product.name}" />
                         <img th:if="*{design.media['primary']}" th:src="@{*{design.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{design.name}" />
-             <span  th:text="${design}"></span>
+             
             </td>
             <td class="name">
                 <a th:href="@{*{product.url}}" th:text="*{product.name}"></a>/<a th:href="@{*{design.url}}" th:text="*{design.name}"></a>
-                <br/>
+/<a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>             <br/>
                <blc:product_option_display orderItem="${item}" >
                      <ul th:unless="${#lists.isEmpty(productOptionDisplayValues)}" class="productOptions">
                          <li th:each="entry: ${productOptionDisplayValues}">
