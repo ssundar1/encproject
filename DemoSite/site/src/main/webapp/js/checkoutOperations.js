@@ -39,6 +39,18 @@ $(function(){
         return false;
     }
 
+    $('#billing_info').submit(function(event){
+	    $('#name').val($('#billingFirstName').val() + ' ' +$('#billingLastName').val());
+	    $('#phone').val($('#billingPhone').val());
+	    $('#address').val($('#billingAddress').val());
+	    $('#city').val($('#billingCity').val());
+	    alert('state is '+ $('#billingState option:selected').text());
+	    $('#state').val($('#billingState option:selected').text());
+	    $('#postal_code').val($('#billingPostalCode').val());
+	  	  
+  	  alert('val changed');
+  	});
+    
     /* Toggle visibility of payment methods */
     $('body').on('click', 'input#paymentMethod_cc', function() {
         $('#paymentOptions dd').css({display:"none"});
