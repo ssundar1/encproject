@@ -29,7 +29,8 @@
          <class>com.enclothe.core.dispute.domain.DisputeCommentImpl</class>  
           <class>com.enclothe.core.serviceprovider.domain.ServiceProviderImpl</class>
          <class>com.enclothe.core.serviceprovider.domain.ServiceProviderAccountInfoImpl</class>
-        <class>com.enclothe.core.serviceprovider.domain.ServiceProviderAttributeImpl</class>   
+        <class>com.enclothe.core.serviceprovider.domain.ServiceProviderAttributeImpl</class> 
+        <class>com.enclothe.core.payment.domain.PaymentImpl</class>  
         <exclude-unlisted-classes/>
     </persistence-unit>
     

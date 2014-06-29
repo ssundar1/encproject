@@ -61,6 +61,9 @@
          <bean id="com.enclothe.core.dispute.domain.Dispute"
          class="com.enclothe.core.dispute.domain.DisputeImpl"
          scope="prototype" />
+         <bean id="com.enclothe.core.payment.domain.Payment"
+         class="com.enclothe.core.payment.domain.PaymentImpl"
+         scope="prototype" />
        <bean id="com.enclothe.core.serviceprovider.domain.ServiceProvider"
          class="com.enclothe.core.serviceprovider.domain.ServiceProviderImpl"
          scope="prototype" />

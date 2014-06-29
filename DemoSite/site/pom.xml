@@ -134,6 +134,7 @@
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
+		    			    <version>5.1.21</version>
 		</dependency>         
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -150,6 +151,12 @@
 		<dependency>
 			<groupId>org.enclothe</groupId>
 			<artifactId>enclothe-core</artifactId>
-		</dependency>	        
+			                <version>1.0.0</version>
+		</dependency>	
+		<dependency>
+	<groupId>commons-beanutils</groupId>
+	<artifactId>commons-beanutils</artifactId>
+	<version>1.9.2</version>
+</dependency>        
     </dependencies>
 </project>

@@ -31,6 +31,7 @@ import org.broadleafcommerce.core.web.checkout.model.ShippingInfoForm;
 import org.broadleafcommerce.core.web.controller.checkout.BroadleafCheckoutController;
 import org.broadleafcommerce.core.web.order.CartState;
 import org.broadleafcommerce.profile.core.domain.CustomerAddress;
+import org.broadleafcommerce.profile.core.service.AddressService;
 import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,9 +43,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+import org.apache.commons.beanutils.BeanUtils;
 
+import com.enclothe.core.payment.domain.Payment;
+import com.enclothe.core.payment.service.PaymentService;
 import com.enclothe.core.web.checkout.model.EncBillingInfoForm;
 
+import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,15 +59,22 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 @Controller
 @RequestMapping("/checkout")
 public class CheckoutController extends BroadleafCheckoutController {
 
-	private static final String EBS_URL="https://secure.ebs.in/pg/ma/sale/pay"; 
+
+    @Resource(name = "blPaymentService")
+    protected PaymentService paymentService;
+     
     /*
     * The Checkout page for Heat Clinic will have the shipping information pre-populated 
     * with an address if the fulfillment group has an address and fulfillment option 
@@ -131,8 +143,8 @@ public class CheckoutController extends BroadleafCheckoutController {
         //prepopulateCheckoutForms(CartState.getCart(), null, shippingForm, billingForm);
         
         //
-    	RequestDispatcher rd = request.getRequestDispatcher(EBS_URL);
-    	rd.forward(request, response);
+    	//RequestDispatcher rd = request.getRequestDispatcher(EBS_URL);
+    	//rd.forward(request, response);
        // return "redirect:" + EBS_URL;
         //populate all the fields needed in request before forwarding
         
@@ -141,7 +153,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     }
 
     @RequestMapping(value = "/response", method = RequestMethod.GET)
-    public void completeCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException, CheckoutException, PricingException,ServletException,  ServiceException {
+    public void completeCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException, CheckoutException, PricingException,ServletException,  ServiceException, Exception {
         
     	String key = "ebskey"; //Your Secret Key
     	StringBuffer data1 = new StringBuffer().append(request.getParameter("DR"));
@@ -179,6 +191,29 @@ public class CheckoutController extends BroadleafCheckoutController {
 	respMap.put(field, val);
 	}
 	
+	
+	Payment payment = paymentService.createPayment();
+	
+	//Populate EBS Fields
+	payment.setPaymentId(Long.parseLong(respMap.get("PaymentID")));
+	payment.setResponseCode(Integer.parseInt(respMap.get("ResponseCode")));
+	payment.setResponseMessage(respMap.get("ResponseMessage"));
+	payment.setAmount(Float.parseFloat(respMap.get("Amount")));
+	payment.setTransactionID(respMap.get("TransactionID"));
+	payment.setMerchantRefNo(respMap.get("MerchantRefNo"));
+	payment.setPaymentMethod(Integer.parseInt(respMap.get("PaymentMethod")));
+	payment.setBillingName(respMap.get("BillingName"));
+	payment.setBillingAddress(respMap.get("BillingAddress"));
+	payment.setBillingCity(respMap.get("BillingCity"));
+	payment.setBillingState(respMap.get("BillingState"));
+	payment.setBillingCountry(respMap.get("BillingCountry"));
+	payment.setBillingEmail(respMap.get("BillingEmail"));
+	payment.setBillingPhone(respMap.get("BillingPhone"));
+	payment.setBillingPostalCode(respMap.get("BillingPostalCode"));
+	payment.setDescription(respMap.get("Description"));
+	payment.setDateCreated(new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(respMap.get("PaymentMethod")));
+	
+	paymentService.savePayment(payment);
 	System.out.println(respMap);
     }
     
