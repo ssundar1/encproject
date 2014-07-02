@@ -201,7 +201,7 @@ public class CheckoutController extends BroadleafCheckoutController {
 	payment.setAmount(Float.parseFloat(respMap.get("Amount")));
 	payment.setTransactionID(respMap.get("TransactionID"));
 	payment.setMerchantRefNo(respMap.get("MerchantRefNo"));
-	payment.setPaymentMethod(Integer.parseInt(respMap.get("PaymentMethod")));
+	payment.setPaymentMethod(Integer.parseInt(respMap.get("PaymentMethod").replaceAll("(\\r|\\n|\"|&)", "").trim()));
 	payment.setBillingName(respMap.get("BillingName"));
 	payment.setBillingAddress(respMap.get("BillingAddress"));
 	payment.setBillingCity(respMap.get("BillingCity"));
@@ -211,7 +211,7 @@ public class CheckoutController extends BroadleafCheckoutController {
 	payment.setBillingPhone(respMap.get("BillingPhone"));
 	payment.setBillingPostalCode(respMap.get("BillingPostalCode"));
 	payment.setDescription(respMap.get("Description"));
-	payment.setDateCreated(new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(respMap.get("PaymentMethod")));
+	payment.setDateCreated(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(respMap.get("DateCreated")));
 	
 	paymentService.savePayment(payment);
 	System.out.println(respMap);
