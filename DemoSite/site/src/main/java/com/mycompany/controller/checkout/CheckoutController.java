@@ -18,9 +18,12 @@ package com.mycompany.controller.checkout;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.broadleafcommerce.common.exception.ServiceException;
+import org.broadleafcommerce.common.time.SystemTime;
 import org.broadleafcommerce.core.checkout.service.exception.CheckoutException;
 import org.broadleafcommerce.core.order.domain.FulfillmentGroup;
 import org.broadleafcommerce.core.order.domain.Order;
+import org.broadleafcommerce.core.order.service.OrderService;
+import org.broadleafcommerce.core.order.service.type.OrderStatus;
 import org.broadleafcommerce.core.payment.domain.PaymentInfo;
 import org.broadleafcommerce.core.payment.service.type.PaymentInfoType;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
@@ -39,6 +42,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,6 +66,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -75,6 +80,8 @@ public class CheckoutController extends BroadleafCheckoutController {
     @Resource(name = "blPaymentService")
     protected PaymentService paymentService;
      
+    @Resource(name="blOrderService")
+    protected OrderService orderService;    
     /*
     * The Checkout page for Heat Clinic will have the shipping information pre-populated 
     * with an address if the fulfillment group has an address and fulfillment option 
@@ -85,7 +92,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     public String checkout(HttpServletRequest request, HttpServletResponse response, Model model,
             @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm,
             @ModelAttribute("shippingInfoForm") ShippingInfoForm shippingForm,
-            @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm, RedirectAttributes redirectAttributes) {
+            @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm, RedirectAttributes redirectAttributes) throws PricingException {
         prepopulateCheckoutForms(CartState.getCart(), orderInfoForm, shippingForm, billingForm);
         
         return super.checkout(request, response, model, redirectAttributes);
@@ -152,8 +159,11 @@ public class CheckoutController extends BroadleafCheckoutController {
         //return super.completeSecureCreditCardCheckout(request, response, model, billingForm, result);
     }
 
-    @RequestMapping(value = "/response", method = RequestMethod.GET)
-    public void completeCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException, CheckoutException, PricingException,ServletException,  ServiceException, Exception {
+    @RequestMapping(value = "{orderId}/response", method = RequestMethod.GET)
+    public String completeCheckout(HttpServletRequest request, 
+    		HttpServletResponse response,
+    		Model model,
+    		@PathVariable long orderId) throws IOException, CheckoutException, PricingException,ServletException,  ServiceException, Exception {
         
     	String key = "ebskey"; //Your Secret Key
     	StringBuffer data1 = new StringBuffer().append(request.getParameter("DR"));
@@ -191,6 +201,24 @@ public class CheckoutController extends BroadleafCheckoutController {
 	respMap.put(field, val);
 	}
 	
+	//Retrieve the order
+	Order order = orderService.findOrderById(orderId);	
+	String orderNumber = order.getOrderNumber();
+	
+	//Validation
+	//check order number, amount and response code
+	
+	if(!orderNumber.equals(respMap.get("MerchantRefNo")) || 
+			!(Long.valueOf(respMap.get("Amount")).equals(order.getTotal().getAmount().longValue())))
+	{
+			model.addAttribute("exceptionMessage", "Order Number or Amount sent by gateway doesnt match");
+			return "/orderpaymentfailure";
+	}
+	else if(Integer.parseInt(respMap.get("ResponseCode")) != 0)
+	{
+		model.addAttribute("exceptionMessage", respMap.get("ResponseMessage"));
+		return "/orderpaymentfailure";		
+	}
 	
 	Payment payment = paymentService.createPayment();
 	
@@ -214,7 +242,12 @@ public class CheckoutController extends BroadleafCheckoutController {
 	payment.setDateCreated(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(respMap.get("DateCreated")));
 	
 	paymentService.savePayment(payment);
-	System.out.println(respMap);
+
+	order.setStatus(OrderStatus.SUBMITTED);
+	order.setSubmitDate(Calendar.getInstance().getTime());	
+	orderService.save(order, false);
+	
+	return "redirect:/confirmation/{orderNumber}";
     }
     
     @RequestMapping(value = "/test", method = RequestMethod.POST)
@@ -237,7 +270,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     }
             
     protected void prepopulateCheckoutForms(Order cart, OrderInfoForm orderInfoForm, ShippingInfoForm shippingForm, 
-            EncBillingInfoForm billingForm) {
+            EncBillingInfoForm billingForm) throws PricingException {
         List<FulfillmentGroup> groups = cart.getFulfillmentGroups();
         
         prepopulateOrderInfoForm(cart, orderInfoForm);
@@ -264,9 +297,15 @@ public class CheckoutController extends BroadleafCheckoutController {
             }
         }
         
+        String orderNumber = new SimpleDateFormat("yyyyMMddHHmmssS").format(SystemTime.asDate()) + cart.getId().toString();
+        cart.setOrderNumber(orderNumber);
+
+        orderService.save(cart, false);
         billingForm.setAmount(cart.getTotal().toString());
-        billingForm.setReferenceNo(cart.getId().toString());
-        billingForm.setReturnURL("http://localhost:8080/checkout/response?DR={DR}");
+        billingForm.setReferenceNo(orderNumber);
+        
+        String returnURL = "http://localhost:8080/checkout/"+ cart.getId().toString() + "/response?DR={DR}";
+        billingForm.setReturnURL(returnURL);
     }
 
     @InitBinder
