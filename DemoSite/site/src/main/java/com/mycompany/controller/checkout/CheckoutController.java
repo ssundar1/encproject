@@ -205,21 +205,6 @@ public class CheckoutController extends BroadleafCheckoutController {
 	Order order = orderService.findOrderById(orderId);	
 	String orderNumber = order.getOrderNumber();
 	
-	//Validation
-	//check order number, amount and response code
-	
-	if(!orderNumber.equals(respMap.get("MerchantRefNo")) || 
-			!(Long.valueOf(respMap.get("Amount")).equals(order.getTotal().getAmount().longValue())))
-	{
-			model.addAttribute("exceptionMessage", "Order Number or Amount sent by gateway doesnt match");
-			return "/orderpaymentfailure";
-	}
-	else if(Integer.parseInt(respMap.get("ResponseCode")) != 0)
-	{
-		model.addAttribute("exceptionMessage", respMap.get("ResponseMessage"));
-		return "/orderpaymentfailure";		
-	}
-	
 	Payment payment = paymentService.createPayment();
 	
 	//Populate EBS Fields
@@ -243,11 +228,28 @@ public class CheckoutController extends BroadleafCheckoutController {
 	
 	paymentService.savePayment(payment);
 
+	//Validation
+	//check order number, amount and response code
+	
+	if(!orderNumber.equals(respMap.get("MerchantRefNo")) || 
+			!((Float.valueOf(respMap.get("Amount")).equals(order.getTotal().getAmount().floatValue()))))
+	{
+			model.addAttribute("exceptionMessage", "Order Number or Amount sent by gateway doesnt match");
+			model.addAttribute("orderNumber",respMap.get("MerchantRefNo"));
+			return "checkout/ordercheckoutfailure.html";
+	}
+	else if(Integer.parseInt(respMap.get("ResponseCode")) != 0)
+	{
+		model.addAttribute("exceptionMessage", respMap.get("ResponseMessage"));
+		model.addAttribute("orderNumber",respMap.get("MerchantRefNo"));
+		return "checkout/ordercheckoutfailure.html";		
+	}
+	
 	order.setStatus(OrderStatus.SUBMITTED);
 	order.setSubmitDate(Calendar.getInstance().getTime());	
 	orderService.save(order, false);
 	
-	return "redirect:/confirmation/{orderNumber}";
+	return "forward:/confirmation/{orderNumber}";
     }
     
     @RequestMapping(value = "/test", method = RequestMethod.POST)
