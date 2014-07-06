@@ -8,6 +8,11 @@
         WHERE dispute.disputeState.id = :stateId</query>
     </named-query>
     
+    <named-query name="BC_READ_DISPUTE_BY_ID" >
+        <query>SELECT dispute FROM com.enclothe.core.dispute.domain.Dispute dispute
+        WHERE dispute.id = :id</query>
+    </named-query>
+    
     <named-query name="BC_READ_DISPUTES_BY_CHANNEL_ID" >
         <query>SELECT dispute FROM com.enclothe.core.dispute.domain.Dispute dispute
         WHERE dispute.disputeChannel.id = :channelId</query>

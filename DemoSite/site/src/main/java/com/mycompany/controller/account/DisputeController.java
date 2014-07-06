@@ -92,6 +92,7 @@ public class DisputeController {
 
     	Dispute dispute = disputeService.createNewDispute();
     	dispute.setDisputeServiceProvider(serviceProviderService.readServiceProviderById(Long.parseLong(serviceProviderId)));
+    	//
     	dispute.setDisputePriority(disputePriorityService.readDisputePriorityById((long) 1));
     	//dispute.setOrderItem(orderItemService.readOrderItemById(Long.parseLong(request.getSession().getAttribute("orderItemId_session").toString())));
     	dispute.setEncOrderItemId(Long.parseLong(request.getSession().getAttribute("orderItemId_session").toString()));
@@ -108,12 +109,13 @@ public class DisputeController {
     return "account/partials/disputeform";	
     }
 
-    @RequestMapping(value = "/viewDispDet")
-    public String viewDisputeDetails(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "viewDispute/{disputeId}")
+    public String viewDisputeDetails(HttpServletRequest request, Model model, @PathVariable("disputeId") String disputeId) {
     	
-    long disputeId = Long.parseLong(request.getParameter("dispid"));	
-//	dummy place holder
-    return "";	
+    long lgDisputeId = Long.parseLong(disputeId);	
+    Dispute dispute = disputeService.readDisputeById(lgDisputeId);
+    model.addAttribute("dispute", dispute);
+    return "account/partials/viewDispute";	
     }
     
 }

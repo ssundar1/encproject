@@ -1,8 +1,10 @@
 package com.enclothe.core.dispute.domain;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,16 +17,24 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.broadleafcommerce.common.audit.Auditable;
 import org.broadleafcommerce.common.audit.AuditableListener;
+import org.broadleafcommerce.common.presentation.AdminPresentationCollection;
+import org.broadleafcommerce.common.presentation.client.AddMethodType;
 import org.broadleafcommerce.core.order.domain.OrderItem;
 import org.broadleafcommerce.profile.core.domain.Customer;
+import org.broadleafcommerce.profile.core.domain.CustomerAttribute;
+import org.broadleafcommerce.profile.core.domain.CustomerPhone;
+import org.broadleafcommerce.profile.core.domain.CustomerPhoneImpl;
+import org.broadleafcommerce.profile.core.domain.CustomerImpl.Presentation;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Parameter;
@@ -79,12 +89,14 @@ public class DisputeImpl implements Dispute {
     protected Customer customer;
 	
     @OneToMany(mappedBy = "dispute", targetEntity = DisputeCommentImpl.class, cascade = {CascadeType.ALL})
-    protected List<DisputeComment> disputeComments = new ArrayList<DisputeComment>();
-	
-	public List<DisputeComment> getDisputeComments() {
+    @MapKey(name="dispute")
+    protected Map<String, DisputeComment> disputeComments = new HashMap<String, DisputeComment>();
+
+    
+	public Map<String, DisputeComment> getDisputeComments() {
 		return disputeComments;
 	}
-	public void setDisputeComments(List<DisputeComment> disputeComments) {
+	public void setDisputeComments(Map<String, DisputeComment> disputeComments) {
 		this.disputeComments = disputeComments;
 	}
 	@ManyToOne(targetEntity = DisputeStateImpl.class)

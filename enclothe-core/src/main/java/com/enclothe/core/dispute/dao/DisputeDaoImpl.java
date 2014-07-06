@@ -31,15 +31,16 @@ public class DisputeDaoImpl implements DisputeDao {
 	
 	@Override
 	public Dispute readDisputeById(Long DisputeId) {
-		Dispute dispute = null;
-		final Query query = em.createNamedQuery("BC_READ_DISPUTE_BY_ID",Dispute.class);
-        query.setParameter("id", DisputeId);
-        @SuppressWarnings("rawtypes")
-        final List temp = query.getResultList();
-        if (temp != null && !temp.isEmpty()) {
-        	dispute = (Dispute) temp.get(0);
-        }
-        return dispute;
+		return em.find(DisputeImpl.class, DisputeId);
+//		Dispute dispute = null;
+//		final Query query = em.createNamedQuery("BC_READ_DISPUTE_BY_ID",Dispute.class);
+//        query.setParameter("id", DisputeId);
+//        @SuppressWarnings("rawtypes")
+//        final List temp = query.getResultList();
+//        if (temp != null && !temp.isEmpty()) {
+//        	dispute = (Dispute) temp.get(0);
+//        }
+//        return dispute;
 	}		
 	
 	@Override

@@ -19,7 +19,8 @@
                         <td class="price" blc:price="${orderItem.totalPrice}"></td>
                           
                         <td  class="label" >
-                        	<a th:href="'/createDispute/' + ${orderItem.id}" >Raise a new dispute</a>                      
+                        	<a th:href="'/createDispute/' + ${orderItem.id}" th:if="!${dispute.id}">Raise a new dispute</a>
+                        	<a th:href="'/viewDispute/' + ${dispute.id}" th:if="${dispute.id}" >View Dispute</a>                      
                         </td>
                         <td  class="label" th:text="${orderItem.orderItemState.orderStateName}"></td>
                         <td  class="label" th:text="${orderItem.orderItemStateDetail.expectedDeliverDate}"></td>
