@@ -236,20 +236,20 @@ public class CheckoutController extends BroadleafCheckoutController {
 	{
 			model.addAttribute("exceptionMessage", "Order Number or Amount sent by gateway doesnt match");
 			model.addAttribute("orderNumber",respMap.get("MerchantRefNo"));
-			return "checkout/ordercheckoutfailure.html";
+			return "checkout/ordercheckoutfailure";
 	}
 	else if(Integer.parseInt(respMap.get("ResponseCode")) != 0)
 	{
 		model.addAttribute("exceptionMessage", respMap.get("ResponseMessage"));
 		model.addAttribute("orderNumber",respMap.get("MerchantRefNo"));
-		return "checkout/ordercheckoutfailure.html";		
+		return "checkout/ordercheckoutfailure";		
 	}
 	
 	order.setStatus(OrderStatus.SUBMITTED);
 	order.setSubmitDate(Calendar.getInstance().getTime());	
 	orderService.save(order, false);
 	
-	return "forward:/confirmation/{orderNumber}";
+	return "forward:/confirmation/" + orderNumber;
     }
     
     @RequestMapping(value = "/test", method = RequestMethod.POST)
