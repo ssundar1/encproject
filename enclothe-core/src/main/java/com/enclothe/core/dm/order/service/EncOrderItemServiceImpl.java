@@ -29,7 +29,6 @@ import com.enclothe.core.dm.order.dao.EncOrderItemDao;
 import com.enclothe.core.dm.order.domain.EncOrderItem;
 import com.enclothe.core.dm.order.domain.EncOrderItemStateDetail;
 import com.enclothe.core.dm.order.domain.EncOrderItemStates;
-import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.product.domain.EncDesign;
 
 import org.springframework.stereotype.Service;

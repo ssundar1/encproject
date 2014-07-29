@@ -33,7 +33,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.enclothe.core.customer.domain.EncCustomer;
+import com.enclothe.core.dm.order.domain.EncOrderItemDTO;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
+import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
 import com.enclothe.core.measurement.service.MeasurementService;
@@ -55,6 +57,9 @@ public class EncCartController extends CartController {
     	    
     @Resource(name="blCustomerService")
     protected CustomerService customerService;
+    
+    @Resource(name = "encOrderItemDTOService")
+    protected EncOrderItemDTOService encOrderItemDTOService;
     
     public static final String ORDER_ITEM_REQUEST = "orderItemRequest";
 	
@@ -86,9 +91,13 @@ public class EncCartController extends CartController {
     	EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
     	measurement.setCustomer(newCustomer);
     	newCustomer.addMeasurement(measurement);
+       	newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
+           	
+    	//Add Measurement
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	itemDTO.setMeasurement(measurement);
+    	encOrderItemDTOService.save(itemDTO);
     	
-    	
-    	newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
     	addToCartItem.setMeasurementId(measurement.getId());
         return super.addJson(request, response, model, addToCartItem);
     }
@@ -107,17 +116,29 @@ public class EncCartController extends CartController {
 		//measurement = (MeasurementImpl) measurementService.saveMeasurement(measurement);
 		addToCartItem.setMeasurementId(measurement.getId());
         String respURL = super.add(request, response, model, addToCartItem);
-        
+
         //Add measurement changes to customer and reset it to request
         newCustomer.addMeasurement(measurement);
         newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
         CustomerState.setCustomer(newCustomer);
+ 
+        //Add Measurement
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	itemDTO.setMeasurement(measurement);
+    	encOrderItemDTOService.save(itemDTO);
+
         return respURL;
     }    
 
     @RequestMapping(value = "/addtocartoldmeasurement", produces = { "text/html", "*/*" })
     public String addWithPrevMeasurement(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException {
+
+    	//Add Measurement
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	Measurement measurement = measurementService.createMeasurementFromId(addToCartItem.getMeasurementId());
+    	itemDTO.setMeasurement(measurement);
+    	encOrderItemDTOService.save(itemDTO);
 
         return super.add(request, response, model, addToCartItem);
     }    

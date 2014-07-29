@@ -27,7 +27,10 @@
         
         <bean id="com.enclothe.core.measurement.domain.Measurement" 
         class="com.enclothe.core.measurement.domain.MeasurementImpl" 
-        scope="prototype"/>   
+        scope="prototype"/>
+        <bean id="com.enclothe.core.dm.order.domain.EncOrderItemDTO" 
+        class="com.enclothe.core.dm.order.domain.EncOrderItemDTOImpl" 
+        scope="prototype"/>      
         <bean id="com.enclothe.core.dm.order.domain.EncOrderItemStates" 
         class="com.enclothe.core.dm.order.domain.EncOrderItemStatesImpl" 
         scope="prototype"/>  

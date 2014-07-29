@@ -218,7 +218,12 @@
 <aop:pointcut id="encMeasurementOperation"
 		expression="execution(* com.enclothe.core.measurement.dao.*Impl*.save*(..))" />
 	<aop:advisor advice-ref="blTxAdviceSecureInfo" pointcut-ref="encMeasurementOperation" />
-</aop:config>  
+</aop:config> 
+<aop:config>
+<aop:pointcut id="encOrderItemDTOOperation"
+		expression="execution(* com.enclothe.core.dm.order.dao.*Impl*.save*(..))" />
+	<aop:advisor advice-ref="blTxAdviceSecureInfo" pointcut-ref="encOrderItemDTOOperation" />
+</aop:config>   
 <aop:config>
 <aop:pointcut id="encPaymentOperation"
 		expression="execution(* com.enclothe.core.payment.dao.*Impl*.save*(..))" />

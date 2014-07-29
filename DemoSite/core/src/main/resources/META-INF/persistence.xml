@@ -7,11 +7,13 @@
     <persistence-unit name="blPU" transaction-type="RESOURCE_LOCAL">
         <non-jta-data-source>jdbc/web</non-jta-data-source>
         <mapping-file>config/bc/jpa/domain/Measurement.orm.xml</mapping-file>
+        <mapping-file>config/bc/jpa/domain/EncOrderItemDTO.orm.xml</mapping-file>
         <mapping-file>config/bc/jpa/domain/OrderItem.orm.xml</mapping-file>
         <mapping-file>config/bc/jpa/domain/Dispute.orm.xml</mapping-file>
         <mapping-file>config/bc/jpa/domain/ServiceProvider.orm.xml</mapping-file>
        <class>com.enclothe.core.customer.domain.EncCustomerImpl</class>
         <class>com.enclothe.core.measurement.domain.MeasurementImpl</class>
+        <class>com.enclothe.core.dm.order.domain.EncOrderItemDTOImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStatesImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStateDetailImpl</class>
