@@ -73,11 +73,11 @@
                             <div class="in_wishlist" th:classappend="${!wishlist.containsSku(product.defaultSku)}? ' hidden'">
                                 <a class="inWishlist small-button gray-button" th:href="@{/account/wishlist}">In Wishlist!</a>
                             </div>
-                            <div class="add_to_wishlist" th:classappend="${wishlist.containsSku(product.defaultSku)}? ' hidden'">
+<!--                             <div class="add_to_wishlist" th:classappend="${wishlist.containsSku(product.defaultSku)}? ' hidden'">
                                 <input type="hidden" name="productId" th:value="*{id}" />
                                 <input type="hidden" name="quantity" value="1" />
                                 <input type="submit" class="addToWishlist small dark" value="+ Add to Wishlist" />
-                            </div>
+                            </div> -->
                         </div>
                     </blc:form>
                 </div>

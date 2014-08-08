@@ -55,12 +55,7 @@ public class EncProductController extends ProductController {
         	m.setViewName(MATERIAL_VIEW);
         
         else if(category.getName().contains(DESIGN))
-        {
-        	Long materialId = Long.parseLong(request.getParameter("materialId"));
-        	EncMaterial material = (EncMaterial) catalogService.findProductById(materialId);
-        	m.addObject("material", material);
         	m.setViewName(DESIGN_VIEW);
-        }       	
     	    	
     	return m;
     }
