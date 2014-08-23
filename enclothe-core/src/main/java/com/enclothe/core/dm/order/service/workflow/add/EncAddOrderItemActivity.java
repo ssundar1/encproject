@@ -1,5 +1,10 @@
 package com.enclothe.core.dm.order.service.workflow.add;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.broadleafcommerce.core.catalog.domain.Category;
@@ -24,6 +29,7 @@ import com.enclothe.core.dm.order.service.EncOrderItemService;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.service.MeasurementService;
 import com.enclothe.core.product.domain.EncDesign;
+import com.enclothe.core.product.domain.EncTailor;
 
 public class EncAddOrderItemActivity extends AddOrderItemActivity {
 	 EncOrderItem item;
@@ -51,19 +57,52 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         Order order = request.getOrder();
         Sku sku = catalogService.findSkuById(orderItemRequestDTO.getSkuId());
         
-        Sku designSku =null;               
-        
         Product product = null;
-        Measurement measurement = null;
         if (orderItemRequestDTO.getProductId() != null) {
             product = catalogService.findProductById(orderItemRequestDTO.getProductId());
         }
+               
+        //Initialize Design and DesignSku's
         
-        Product encDesign = null;
-        if (orderItemRequestDTO.getDesignId() !=  null) {
-        	encDesign = catalogService.findProductById(orderItemRequestDTO.getDesignId());
-        	designSku = catalogService.findSkuById(orderItemRequestDTO.getDesignSkuId());
+        
+        //Add all designs
+        List<EncDesign> designs = null;
+        for(Long designId: orderItemRequestDTO.getDesigns())
+        {
+        	EncDesign design = (EncDesign) catalogService.findProductById(designId);
+        	
+        	if(design == null)
+        		designs = new ArrayList<EncDesign>();
+        	
+        	designs.add(design);
         }
+        
+        //Add all design skus
+        List<Sku> designSkus = null;
+        for(Long designSkuId: orderItemRequestDTO.getDesignSkus())
+        {
+        	Sku designSku = catalogService.findSkuById(designSkuId);
+        	
+        	if(designSkus == null)
+        		designSkus = new ArrayList<Sku>();
+        	
+        	designSkus.add(designSku);
+        }
+        
+        //Add Tailor & Tailor Sku
+        EncTailor tailor = null;
+        Sku tailorSku = null;
+        
+        if(orderItemRequestDTO.getTailor() != null)
+        {
+        	tailor = (EncTailor) catalogService.findProductById(orderItemRequestDTO.getTailor());
+        	tailorSku = catalogService.findSkuById(orderItemRequestDTO.getTailorSku());
+        }
+        
+        //Set Measurement
+        Measurement measurement = null;       
+        if (orderItemRequestDTO.getMeasurementId() != null && orderItemRequestDTO.getMeasurementId()!=0)
+        	measurement = measurementService.readMeasurementById(orderItemRequestDTO.getMeasurementId());
         
         Category category = null;
         if (orderItemRequestDTO.getCategoryId() != null) {
@@ -73,9 +112,7 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         if (category == null && product != null) {
             category = product.getDefaultCategory();
         }
-        
-        if (orderItemRequestDTO.getMeasurementId() != null && orderItemRequestDTO.getMeasurementId()!=0)
-        	measurement = measurementService.readMeasurementById(orderItemRequestDTO.getMeasurementId());
+
       
         EncOrderItem item;
         if (product == null || !(product instanceof ProductBundle)) {
@@ -90,8 +127,10 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
             itemRequest.setOrder(order);
             itemRequest.setSalePriceOverride(orderItemRequestDTO.getOverrideSalePrice());
             itemRequest.setRetailPriceOverride(orderItemRequestDTO.getOverrideRetailPrice());
-            itemRequest.setDesign((EncDesign) encDesign);
-            itemRequest.setDesignSku(designSku);
+            itemRequest.setDesigns(designs);
+            itemRequest.setDesignSkus(designSkus);
+            itemRequest.setTailor(tailor);
+            itemRequest.setTailorSku(tailorSku);
             itemRequest.setMeasurement(measurement);
             
             item = (EncOrderItem) orderItemService.createDiscreteOrderItem(itemRequest);

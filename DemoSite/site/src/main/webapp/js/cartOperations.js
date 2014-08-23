@@ -55,6 +55,8 @@ $(function(){
         $('.productActions' + productId).children('.in_'+orderType).addClass('hidden');
     }
 
+    $( "#tabs" ).tabs();
+    
     // Show the cart in a modal when any link with the class "fancycart" is clicked
     $('body').on('click', 'a.fancycart', function() {
         var extendedOptions = $.extend({ href : $(this).attr('href') }, fancyCartOptions);

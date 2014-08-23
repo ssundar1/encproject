@@ -1,12 +1,13 @@
 package com.enclothe.core.dm.order.domain;
 
 import java.util.Date;
-
-import org.broadleafcommerce.profile.core.domain.Customer;
+import java.util.List;
+import java.util.Set;
 
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncMaterial;
+import com.enclothe.core.product.domain.EncTailor;
 
 public interface EncOrderItemDTO {
 
@@ -22,9 +23,13 @@ public interface EncOrderItemDTO {
 
 	public void setMeasurement(Measurement measurement);
 
-	public EncDesign getDesign();
+	public List<EncDesign> getDesigns();
 
-	public void setDesign(EncDesign design);
+	public void setDesigns(List<EncDesign> designs);
+
+	public EncTailor getTailor();
+
+	public void setTailor(EncTailor tailor);
 
 	public String getSessionId();
 
@@ -45,6 +50,5 @@ public interface EncOrderItemDTO {
 	Long getCustomerId();
 
 	void setCustomerId(Long customerId);
-	
-	
+
 }

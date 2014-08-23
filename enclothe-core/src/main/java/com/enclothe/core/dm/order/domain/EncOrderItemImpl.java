@@ -1,9 +1,18 @@
 package com.enclothe.core.dm.order.domain;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,6 +35,8 @@ import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncDesignImpl;
+import com.enclothe.core.product.domain.EncTailor;
+import com.enclothe.core.product.domain.EncTailorImpl;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -49,60 +60,86 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 20, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
 	protected Measurement measurement;
 
-	@OneToOne(targetEntity = EncDesignImpl.class)
-	@JoinColumn(name = "ORDER_ITEM_DESIGN_ID")
-	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_state_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
-	protected EncDesign design;
+	@ManyToMany(targetEntity = EncDesignImpl.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "ENC_ORDER_ITEM_DESIGN_MAP", joinColumns = @JoinColumn(name = "ORDER_ITEM_ID"),
+    inverseJoinColumns = @JoinColumn(name = "DESIGN_ID"))
+	protected List<EncDesign> designs;
 
-	/*@OneToOne(mappedBy = "orderItem", targetEntity = DisputeImpl.class)
-	@AdminPresentationCollection(friendlyName = "EncOrderItemImpl_dispute_detail", order = 40, addType = AddMethodType.PERSIST, tab = "EncOrderItemImpl_Advanced_Tab", tabOrder = 3000)
-	protected Dispute dispute;*/
+	@ManyToMany(targetEntity = SkuImpl.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "ENC_ORDER_ITEM_DESIGN_SKU_MAP", joinColumns = @JoinColumn(name = "ORDER_ITEM_ID"),
+    inverseJoinColumns = @JoinColumn(name = "SKU_ID"))
+	protected List<Sku> designSkus;
 
-	@ManyToOne(targetEntity = SkuImpl.class)
-	@JoinColumn(name = "DESIGN_SKU_ID")
-	@Index(name = "DISCRETE_SKU_INDEX", columnNames = { "SKU_ID" })
-	@AdminPresentation(friendlyName = "DiscreteOrderItemImpl_Sku", order = 20, group = OrderItemImpl.Presentation.Group.Name.Catalog, groupOrder = OrderItemImpl.Presentation.Group.Order.Catalog)
-	@AdminPresentationToOneLookup()
-	protected Sku designSku;
-
-	public Sku getDesignSku() {
-		return designSku;
+	@ManyToOne(targetEntity = EncTailorImpl.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "TAILOR_ID")
+	protected EncTailor tailor;
+	
+	@ManyToOne(targetEntity = EncTailorImpl.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "TAILOR_SKU_ID")
+	protected Sku tailorSku;
+	
+	public List<EncDesign> getDesigns() {
+		return designs;
 	}
 
-	public void setDesignSku(Sku designSku) {
-		this.designSku = designSku;
+	public void setDesigns(List<EncDesign> designs) {
+		this.designs = designs;
+	}
 
-		if (designSku.getRetailPrice() != null) {
-			this.baseRetailPrice = designSku.getRetailPrice().getAmount();
+	public List<Sku> getDesignSkus() {
+		return designSkus;
+	}
 
+	public void setDesignSkus(List<Sku> designSkus) {
+		this.designSkus = designSkus;
+		
+		//Once the Design Sku are set recalculate base retail and sale price
+		reCalculateBaseRetailAndSalePrice(designSkus);
+	}
+
+	public EncTailor getTailor() {
+		return tailor;
+	}
+
+	public void setTailor(EncTailor tailor) {
+		this.tailor = tailor;
+	}
+
+	public Sku getTailorSku() {
+		return tailorSku;
+	}
+
+	public void setTailorSku(Sku tailorSku) {
+		this.tailorSku = tailorSku;
+		
+		List<Sku> skuList = new ArrayList<Sku>();
+		skuList.add(tailorSku);
+		
+		//Once the tailor is set recalculate base retail and sale price
+		reCalculateBaseRetailAndSalePrice(skuList);
+	}
+
+	private void reCalculateBaseRetailAndSalePrice(Collection<Sku> skus)
+	{
+		for(Sku sku: skus)
+		{
+			if(this.baseRetailPrice == null)
+				this.baseRetailPrice = new BigDecimal(0.0);
+			
 			if (sku.getRetailPrice() != null)
 				this.baseRetailPrice = this.baseRetailPrice.add(sku
 						.getRetailPrice().getAmount());
+			
+			if (this.baseSalePrice!= null)
+			{
+				if(sku.getSalePrice() != null)
+					this.baseSalePrice = this.baseSalePrice.add(sku
+						.getSalePrice().getAmount());
+				else
+					this.baseSalePrice = this.baseSalePrice.add(sku.getRetailPrice().getAmount());
+			}		
 		}
-		if (designSku.getSalePrice() != null) {
-			this.baseSalePrice = designSku.getSalePrice().getAmount();
-
-			if (sku.getSalePrice() != null)
-				this.baseSalePrice = this.baseSalePrice.add(sku.getSalePrice()
-						.getAmount());
-		}
 	}
-
-	public EncDesign getDesign() {
-		return design;
-	}
-
-	public void setDesign(EncDesign design) {
-		this.design = design;
-	}
-
-	/*public Dispute getDispute() {
-		return dispute;
-	}
-
-	public void setDispute(Dispute dispute) {
-		this.dispute = dispute;
-	}*/
 
 	public void setOrderItemStateDetail(
 			EncOrderItemStateDetail orderItemStateDetail) {
@@ -142,9 +179,23 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		Money skuSalePrice = (getSku().getSalePrice() == null ? null : getSku()
 				.getSalePrice());
 
-		if (getDesignSku() != null && getDesignSku().getSalePrice() != null)
-			skuSalePrice = skuSalePrice.add(getDesignSku().getSalePrice());
-
+		for(Sku sku: getDesignSkus())
+		{
+			if (skuSalePrice != null)
+				if(sku.getSalePrice() != null)
+					skuSalePrice = skuSalePrice.add(sku.getSalePrice());
+				else
+					skuSalePrice = skuSalePrice.add(sku.getRetailPrice());
+		}
+		
+		
+		if (skuSalePrice != null )
+			if(getTailorSku() != null)
+				if(getTailorSku().getSalePrice() != null)
+					skuSalePrice = skuSalePrice.add(getTailorSku().getSalePrice());
+				else 
+					skuSalePrice = skuSalePrice.add(getTailorSku().getRetailPrice());
+		
 		// Override retail/sale prices from skuBundle.
 		if (skuBundleItem != null) {
 			if (skuBundleItem.getSalePrice() != null) {
@@ -176,9 +227,15 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		}
 		Money skuRetailPrice = getSku().getRetailPrice();
 
-		if (getDesignSku() != null && getDesignSku().getRetailPrice() != null)
-			skuRetailPrice = skuRetailPrice
-					.add(getDesignSku().getRetailPrice());
+		for(Sku sku: getDesignSkus())
+		{
+			if (sku.getRetailPrice() != null)
+				skuRetailPrice = skuRetailPrice.add(sku.getRetailPrice());					
+		}
+		
+		
+		if (getTailorSku() != null && getTailorSku().getRetailPrice() != null)
+			skuRetailPrice = skuRetailPrice.add(getTailorSku().getRetailPrice());
 
 		// Override retail/sale prices from skuBundle.
 		if (skuBundleItem != null) {

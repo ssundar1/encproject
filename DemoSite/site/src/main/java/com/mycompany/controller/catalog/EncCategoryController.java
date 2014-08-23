@@ -1,14 +1,28 @@
 package com.mycompany.controller.catalog;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.apache.commons.lang.StringUtils;
+import org.broadleafcommerce.common.exception.ServiceException;
 import org.broadleafcommerce.core.catalog.domain.Category;
+import org.broadleafcommerce.core.catalog.domain.Product;
+import org.broadleafcommerce.core.catalog.service.CatalogService;
+import org.broadleafcommerce.core.search.domain.ProductSearchCriteria;
+import org.broadleafcommerce.core.search.domain.ProductSearchResult;
+import org.broadleafcommerce.core.search.domain.SearchFacetDTO;
 import org.broadleafcommerce.core.web.catalog.CategoryHandlerMapping;
+import org.broadleafcommerce.core.web.util.ProcessorUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,27 +36,144 @@ import com.enclothe.web.catalog.EncCategoryHandlerMapping;
 @Controller("encCategoryController")
 public class EncCategoryController extends CategoryController {
 
-	public static final String MATERIAL_VIEW = "catalog/encmaterial";
-	public static final String DESIGN_VIEW = "catalog/encdesign";
-	public static final String MATERIAL = "Material";
-	public static final String DESIGN = "Design";
+	private static final String MATERIAL_VIEW = "catalog/encmaterial";
+	private static final String DESIGN_VIEW = "catalog/encdesign";
+	private static final String MATERIAL = "material";
+	private static final String DESIGN = "design";
+	private static final String BLOUSE = "blouse";
+	private static final String CHUD = "chud";
+	private static final String BLOUSE_FRONT_NECK_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
+	private static final String BLOUSE_BACK_NECK_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
+	private static final String BLOUSE_SLEEVE_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
+	private static final String TAILOR_CAT_NAME = "Tailor";
+	
+    @Resource(name="blCatalogService")
+    protected CatalogService catalogService;
 	
 	//Change the view to our new view     
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView m = super.handleRequest(request, response);
+        ModelAndView m = handleRequestBase(request, response);
         
         Category category = (Category) request.getAttribute(EncCategoryHandlerMapping.CURRENT_CATEGORY_ATTRIBUTE_NAME);
         
         
-        if(category.getName().contains(MATERIAL))
+        if(category.getName().toLowerCase().contains(MATERIAL))
         	m.setViewName(MATERIAL_VIEW);
         
-        else if(category.getName().contains(DESIGN))
+        else if(category.getName().toLowerCase().contains(DESIGN))
         {
         	m.addObject("material", request.getAttribute("material"));
         	m.setViewName(DESIGN_VIEW);
         }       	
         
         return m;
+    }
+    
+    public ModelAndView handleRequestBase(HttpServletRequest request, HttpServletResponse response) throws Exception
+    {
+    	ModelAndView model = new ModelAndView();
+        
+        if (request.getParameterMap().containsKey("facetField")) {
+            // If we receive a facetField parameter, we need to convert the field to the 
+            // product search criteria expected format. This is used in multi-facet selection. We 
+            // will send a redirect to the appropriate URL to maintain canonical URLs
+            
+            String fieldName = request.getParameter("facetField");
+            List<String> activeFieldFilters = new ArrayList<String>();
+            Map<String, String[]> parameters = new HashMap<String, String[]>(request.getParameterMap());
+            
+            for (Iterator<Entry<String,String[]>> iter = parameters.entrySet().iterator(); iter.hasNext();){
+                Map.Entry<String, String[]> entry = iter.next();
+                String key = entry.getKey();
+                if (key.startsWith(fieldName + "-")) {
+                    activeFieldFilters.add(key.substring(key.indexOf('-') + 1));
+                    iter.remove();
+                }
+            }
+            
+            parameters.remove(ProductSearchCriteria.PAGE_NUMBER);
+            parameters.put(fieldName, activeFieldFilters.toArray(new String[activeFieldFilters.size()]));
+            parameters.remove("facetField");
+            
+            String newUrl = ProcessorUtils.getUrl(request.getRequestURL().toString(), parameters);
+            model.setViewName("redirect:" + newUrl);
+        } else {
+            // Else, if we received a GET to the category URL (either the user clicked this link or we redirected
+            // from the POST method, we can actually process the results
+            
+            Category category = (Category) request.getAttribute(CategoryHandlerMapping.CURRENT_CATEGORY_ATTRIBUTE_NAME);
+            assert(category != null);
+            
+            if(!category.getName().toLowerCase().contains(DESIGN))
+            	prepareModelForRequest(request,category,"",model);
+            else
+            {
+            	//Retrieve All subcategories Neck Design , Sleeve design and tailors
+            	String fNeckDesign= "";
+            	String bNeckDesign = "";
+            	String sleeve = "";
+            	String tailor = TAILOR_CAT_NAME;
+            	
+            	if(category.getName().toLowerCase().contains(BLOUSE))
+            	{
+            		fNeckDesign = BLOUSE_FRONT_NECK_DESIGN_CAT_NAME;
+            		bNeckDesign = BLOUSE_BACK_NECK_DESIGN_CAT_NAME;
+            		sleeve = BLOUSE_SLEEVE_DESIGN_CAT_NAME;
+            	}
+            	
+            	//retrieve the categories 
+            	Map<String, String> categories = new HashMap<String,String>();
+            	categories.put(fNeckDesign, "fn");
+            	categories.put(bNeckDesign, "bn");
+            	categories.put(sleeve, "sl");
+            	
+            	//Add Tailor
+            	categories.put(tailor, "tl");
+            	
+            	for(String catg: categories.keySet())
+            	{
+                	List<Category> catgs = catalogService.findCategoriesByName(catg);   
+                	
+                	if(catgs.size() > 0)
+                	{
+                		//get first category
+                		category = catgs.get(0);
+                		prepareModelForRequest(request,category,categories.get(catg),model);
+                		
+                	}
+            	}
+          	
+            	
+            }
+    
+            if (StringUtils.isNotEmpty(category.getDisplayTemplate())) {
+                model.setViewName(category.getDisplayTemplate());   
+            } else {
+                model.setViewName(getDefaultCategoryView());
+            }
+        }
+        return model;
+    }
+    
+    private void prepareModelForRequest(HttpServletRequest request, Category category,
+    		 String prefix , ModelAndView model) throws ServiceException
+    {
+    	List<SearchFacetDTO> availableFacets = searchService.getCategoryFacets(category);
+        ProductSearchCriteria searchCriteria = facetService.buildSearchCriteria(request, availableFacets);
+        
+        String searchTerm = request.getParameter(ProductSearchCriteria.QUERY_STRING);
+        ProductSearchResult result;
+        if (StringUtils.isNotBlank(searchTerm)) {
+            result = searchService.findProductsByCategoryAndQuery(category, searchTerm, searchCriteria);
+        } else {
+            result = searchService.findProductsByCategory(category, searchCriteria);
+        }
+        
+        facetService.setActiveFacetResults(result.getFacets(), request);
+        
+        model.addObject(prefix + CATEGORY_ATTRIBUTE_NAME, category);
+        model.addObject(prefix + PRODUCTS_ATTRIBUTE_NAME, result.getProducts());
+        model.addObject(prefix + FACETS_ATTRIBUTE_NAME, result.getFacets());
+        model.addObject(prefix + PRODUCT_SEARCH_RESULT_ATTRIBUTE_NAME, result);
     }
 }

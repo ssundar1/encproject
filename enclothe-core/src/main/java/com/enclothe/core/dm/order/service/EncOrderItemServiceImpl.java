@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 
 
 
+
 import org.broadleafcommerce.common.money.Money;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItem;
 import org.broadleafcommerce.core.order.domain.DiscreteOrderItemFeePrice;
@@ -43,9 +44,10 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	 
 	protected void populateDiscreteOrderItem(EncOrderItem item, EncOrderItemRequest itemRequest) {     				
 		super.populateDiscreteOrderItem(item, itemRequest);
-         item.setDesign((EncDesign) itemRequest.getDesign());
-         item.setDesignSku(itemRequest.getDesignSku());
-         item.setMeasurement(itemRequest.getMeasurement());        
+        item.setDesigns(itemRequest.getDesigns());
+        item.setDesignSkus(itemRequest.getDesignSkus());
+        item.setTailor(itemRequest.getTailor());
+        item.setMeasurement(itemRequest.getMeasurement());        
     }
 
 	 public DiscreteOrderItem createDiscreteOrderItem(final EncOrderItemRequest itemRequest) {
@@ -53,16 +55,10 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	        //final EncOrderItem item = (EncOrderItem) orderItemDao.create();
 	       populateDiscreteOrderItem(item, itemRequest);
 	        
-	       Money matSalePrice = itemRequest.getSku().getSalePrice();
-	       Money desSalePrice = itemRequest.getDesignSku().getSalePrice();
-	       Money matRetailPrice = itemRequest.getSku().getRetailPrice();
-	       Money desRetailPrice = itemRequest.getDesignSku().getRetailPrice();
-	        
-	       if(matSalePrice !=null)
-	        item.setBaseSalePrice(itemRequest.getSalePriceOverride()==null?(matSalePrice.add(desSalePrice)):itemRequest.getSalePriceOverride());
-	       
-	       if(matRetailPrice != null)
-	        item.setBaseRetailPrice(matRetailPrice.add(desRetailPrice));
+           item.setBundleOrderItem(itemRequest.getBundleOrderItem());
+	       item.setBaseSalePrice(itemRequest.getSalePriceOverride()==null?
+	        		itemRequest.getSalePrice():itemRequest.getSalePriceOverride());
+	       item.setBaseRetailPrice(itemRequest.getRetailPrice());
 	        item.setDiscreteOrderItemFeePrices(itemRequest.getDiscreteOrderItemFeePrices());
 
 	        if (itemRequest.getSalePriceOverride() != null) {
@@ -81,7 +77,6 @@ public class EncOrderItemServiceImpl extends OrderItemServiceImpl implements Enc
 	            feePrice.setDiscreteOrderItem(item);
 	        }
 	        
-	        item.setMeasurement(itemRequest.getMeasurement());
 	        item.setPersonalMessage(itemRequest.getPersonalMessage());
 
 	        return item;

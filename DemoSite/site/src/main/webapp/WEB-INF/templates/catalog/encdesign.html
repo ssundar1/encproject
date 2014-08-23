@@ -15,19 +15,19 @@
         <nav th:substituteby="layout/partials/nav" />
         
         <section id="left_column">
-    
-            <header>
-                <h1 th:inline="text">
-                    <span th:text="#{category.viewing}">Viewing</span> [[${category.name}]] ([[${result.startResult}]] - [[${result.endResult}]] <span th:text="#{category.of}">of</span> [[${result.totalResults}]])
-                </h1>
-                <div th:substituteby="catalog/partials/productSortOptions"></div>
-            </header>
-            
-            <ul id="products" class="group">
-                <li th:each="product : ${products}" th:object="${product}" th:include="catalog/partials/encDesignListItem" class="product_container"></li>
-            </ul>
-            
-            <div th:substituteby="catalog/partials/productPagingOptions" />
+    		
+	            <header>
+	                <h1 th:inline="text">
+	                    <span th:text="#{category.viewing}">Viewing</span> [[${category.name}]] ([[${result.startResult}]] - [[${result.endResult}]] <span th:text="#{category.of}">of</span> [[${result.totalResults}]])
+	                </h1>
+	                <div th:substituteby="catalog/partials/productSortOptions"></div>
+	            </header>
+	            
+	            <ul id="products" class="group">
+	                <li th:each="product : ${products}" th:object="${product}" th:include="catalog/partials/encDesignListItem" class="product_container"></li>
+	            </ul>
+	            
+	            <div th:substituteby="catalog/partials/productPagingOptions" />
             
         </section>
     

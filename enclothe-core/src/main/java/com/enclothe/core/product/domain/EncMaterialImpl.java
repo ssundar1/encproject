@@ -1,22 +1,15 @@
 package com.enclothe.core.product.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.broadleafcommerce.common.presentation.AdminPresentation;
-import org.broadleafcommerce.common.presentation.client.VisibilityEnum;
 import org.broadleafcommerce.core.catalog.domain.ProductImpl;
-import org.broadleafcommerce.profile.core.domain.Customer;
-import org.hibernate.annotations.Index;
-
-import com.enclothe.core.customer.domain.EncCustomerImpl;
 import com.enclothe.core.product.EncCartableItem;
 import com.enclothe.core.serviceprovider.domain.ServiceProvider;
 import com.enclothe.core.serviceprovider.domain.ServiceProviderImpl;
@@ -57,7 +50,7 @@ public class EncMaterialImpl extends ProductImpl implements EncCartableItem, Enc
 	 */
 	private static final long serialVersionUID = 4325214477111206908L;
 	
-	@Column(name = "TYPE")
+	@Column(name = "TYPE", nullable = false)
 	  //  @AdminPresentation(friendlyName = "ServiceProviderImpl_Customer_Registered", order = 80, prominent = true, gridOrder = 4000)
 	    protected String type;
 

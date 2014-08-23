@@ -1,6 +1,7 @@
 package com.enclothe.core.dm.order.service;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -30,17 +31,11 @@ public class EncOrderServiceImpl extends OrderServiceImpl{
             return null;
         }
         for (OrderItem currentItem : order.getOrderItems()) {
-            if (currentItem instanceof DiscreteOrderItem) {
+            if (currentItem instanceof EncOrderItemImpl && 
+            		itemToFind instanceof EncOrderItemRequestDTO) {
             	EncOrderItemImpl discreteItem = (EncOrderItemImpl) currentItem;
-                EncMaterial material = (EncMaterial) discreteItem.getProduct();
-            	if(material.getIsDummy())
-            		return null;
                             	
-                if (itemMatches(discreteItem.getSku(), discreteItem.getProduct(),
-                		discreteItem.getDesignSku(), discreteItem.getDesign(),
-                		discreteItem.getMeasurement(),
-                		discreteItem.getOrderItemAttributes(),
-                        (EncOrderItemRequestDTO)itemToFind)) {
+                if (itemMatches(discreteItem,(EncOrderItemRequestDTO)itemToFind)) {
 
                 		return discreteItem;
                 }
@@ -54,9 +49,16 @@ public class EncOrderServiceImpl extends OrderServiceImpl{
         return null;
     }
        
-    protected boolean itemMatches(Sku item1Sku, Product item1Product, Sku item1DesignSku, Product item1Design,
-    		Measurement item1Measurement, Map<String, OrderItemAttribute> item1Attributes,
-    		EncOrderItemRequestDTO item2) {
+    protected boolean itemMatches(EncOrderItemImpl item1, 	EncOrderItemRequestDTO item2) {
+    	
+    	/*//Check if all Skus & Measurements match
+    	if(item1.getSku().getId().equals(item2.getSkuId()))
+    	{
+    		Set<Long> item1DesignSkus = item1.getDesignSkus();
+    		Set<Long> item2DesignSkus = item2.getDesignSkus();
+    	}
+    	
+    	
         // Must match on SKU and options
         if (item1Sku != null && item2.getSkuId() != null) {
             if (item1Sku.getId().equals(item2.getSkuId())) {
@@ -73,7 +75,7 @@ public class EncOrderServiceImpl extends OrderServiceImpl{
                 		return compareAttributes(item1Attributes, item2);
                 }
             }
-        }
+        }*/
         return false;
     }
     

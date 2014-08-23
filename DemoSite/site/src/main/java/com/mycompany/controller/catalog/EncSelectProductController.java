@@ -1,5 +1,6 @@
 package com.mycompany.controller.catalog;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -83,7 +84,41 @@ public class EncSelectProductController{
        return "forward:" + DESIGN_VIEW ;
     }    
     
-    @RequestMapping("/selectdesign")
+    @RequestMapping("/adddesign")
+    public ModelAndView addDesign(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId) {
+    	
+    	ModelAndView m = new ModelAndView();
+    	
+    	//Retrieve Item DTO Selected
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	
+    	if(itemDTO == null)
+    	{
+    		m.setViewName(ERROR_MATERIAL_VIEW);
+    	}
+    	
+    	//Add design to DTO. Retrieve designs already in DTO
+    	List<EncDesign> designs = itemDTO.getDesigns();
+    	if(designs == null)
+    		designs = new ArrayList<EncDesign>();
+    	
+    	EncDesign design = (EncDesign) catalogService.findProductById(designId);
+    	designs.add(design);
+    	
+    	encOrderItemDTOService.save(itemDTO);
+    	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+    	
+    	//Retrieve Measurements
+    	Collection<Measurement> customerMeasurements = customer.getCustomerMeasurements().values();
+    	m.addObject("material", itemDTO.getMaterial());
+    	m.addObject("designs", itemDTO.getDesigns());
+    	m.addObject("custMeasurements", customerMeasurements);
+    	m.setViewName(MEASUREMENT_VIEW);
+        return m;
+    }    
+    
+   /* @RequestMapping("/selectdesign")
     public ModelAndView selectDesign(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) {
     	
@@ -110,5 +145,5 @@ public class EncSelectProductController{
     	m.addObject("custMeasurements", customerMeasurements);
     	m.setViewName(MEASUREMENT_VIEW);
         return m;
-    }    
+    }    */
 }
