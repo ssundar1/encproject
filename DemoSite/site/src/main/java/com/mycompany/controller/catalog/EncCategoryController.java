@@ -43,8 +43,8 @@ public class EncCategoryController extends CategoryController {
 	private static final String BLOUSE = "blouse";
 	private static final String CHUD = "chud";
 	private static final String BLOUSE_FRONT_NECK_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
-	private static final String BLOUSE_BACK_NECK_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
-	private static final String BLOUSE_SLEEVE_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
+	private static final String BLOUSE_BACK_NECK_DESIGN_CAT_NAME = "Blouse_Back_Neck_Design";
+	private static final String BLOUSE_SLEEVE_DESIGN_CAT_NAME = "Blouse_Sleeve_Design";
 	private static final String TAILOR_CAT_NAME = "Tailor";
 	
     @Resource(name="blCatalogService")

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,6 +83,57 @@ public class EncSelectProductController{
     }    
     
     @RequestMapping("/adddesign")
+    public String addDesignOptions(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId)
+    {
+    	
+    	//
+    	//Retrieve Item DTO Selected
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+
+        String view = BLOUSE_DESIGN_VIEW; // by default
+    	
+    	//if(material!= null && material.getType().equals(CHUD))
+    		//view = CHUDI_DESIGN_VIEW;
+        
+    	if(itemDTO == null)
+    	{
+    		return ERROR_MATERIAL_VIEW;
+    	}
+    	
+    	//Add design to DTO. Retrieve designs already in DTO
+    	List<EncDesign> designs = itemDTO.getDesigns();
+    	if(designs == null)
+    		designs = new ArrayList<EncDesign>();
+    	
+    	EncDesign design = (EncDesign) catalogService.findProductById(designId);
+    	
+    	for(int i=0; i < designs.size(); i++)
+    	{
+    		EncDesign e = designs.get(i);
+    		
+    		//if design already exists, then just return success
+    		if(e.getId().equals(designId))
+    			return "forward:" + view ;
+    		
+    		//retrieve category, if same category exists replace category
+    		String category = e.getCategory();
+    		
+    		if(category.equals(design.getCategory()))
+    		{
+    			designs.set(i, design);
+    			encOrderItemDTOService.save(itemDTO);
+    			return "forward:" + view ;
+    		}    		    			
+    	}
+    	designs.add(design);
+    	
+    	encOrderItemDTOService.save(itemDTO);    	
+    	
+        return "forward:" + view ;
+    }
+    
+    @RequestMapping("/temp")
     public ModelAndView addDesign(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId) {
     	

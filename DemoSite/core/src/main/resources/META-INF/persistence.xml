@@ -21,7 +21,8 @@
         <class>com.enclothe.core.dm.order.domain.EncOrderItemStateTransitionImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncMaterialOrderItemImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderItemImpl</class>        
-        <class>com.enclothe.core.product.domain.EncDesignImpl</class>        
+        <class>com.enclothe.core.product.domain.EncDesignImpl</class>
+        <class>com.enclothe.core.product.domain.EncTailorImpl</class>         
         <class>com.enclothe.core.product.domain.EncMaterialImpl</class>
         <class>com.enclothe.core.dm.order.domain.EncOrderImpl</class>  
         <class>com.enclothe.core.dispute.domain.DisputeImpl</class>
