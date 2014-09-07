@@ -10,7 +10,7 @@
 	            </header>
 	            
 	            <ul id="products" class="group">
-	                <li th:each="product : ${tlproducts}" th:object="${product}" th:include="catalog/partials/encDesignListItem" class="product_container"></li>
+	                <li th:each="product : ${tlproducts}" th:object="${product}" th:include="catalog/partials/encTlDesignListItem" class="product_container"></li>
 	            </ul>
 	            
 	            <div th:substituteby="catalog/partials/tlProductPagingOptions" />
@@ -31,7 +31,7 @@
                         <div class="section" th:object="${category}">
                              <blc:related_products categoryId="*{id}" quantity="3"/>     
                              <ul id="featured_products" class="group">
-                                <li th:each="product : ${tlproducts}" th:object="${product}" th:include="catalog/partials/encDesignListItem" class="product_container"></li>
+                                <li th:each="product : ${tlproducts}" th:object="${product}" th:include="catalog/partials/encTlDesignListItem" class="product_container"></li>
                              </ul>
                         </div>                                  
                     </div>

@@ -71,7 +71,7 @@ public class EncAddOrderItemActivity extends AddOrderItemActivity {
         {
         	EncDesign design = (EncDesign) catalogService.findProductById(designId);
         	
-        	if(design == null)
+        	if(designs == null)
         		designs = new ArrayList<EncDesign>();
         	
         	designs.add(design);

@@ -50,7 +50,10 @@ public class EncValidateAddRequestActivity extends ValidateAddRequestActivity {
             }
         	
         	//Get Corresponding Sku
-        	Long skuId = orderItemRequestDTO.getDesignSkus().get(i);
+        	Long skuId = null;
+        	if(orderItemRequestDTO.getDesignSkus() != null && i < orderItemRequestDTO.getDesignSkus().size())
+        		skuId = orderItemRequestDTO.getDesignSkus().get(i);
+        	
             Sku designSku = 
             		determineSku(design, skuId, orderItemRequestDTO.getItemAttributes());
             

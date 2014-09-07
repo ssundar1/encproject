@@ -39,9 +39,14 @@ import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
 import com.enclothe.core.measurement.service.MeasurementService;
+import com.enclothe.core.product.domain.EncDesign;
+import com.enclothe.core.product.domain.EncMaterial;
+import com.enclothe.core.product.domain.EncTailor;
 import com.enclothe.web.form.EncRegisterCustomerForm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -98,7 +103,7 @@ public class EncCartController extends CartController {
     	itemDTO.setMeasurement(measurement);
     	encOrderItemDTOService.save(itemDTO);
     	
-    	addToCartItem.setMeasurementId(measurement.getId());
+    	populateAddToCartItem(itemDTO, addToCartItem);
         return super.addJson(request, response, model, addToCartItem);
     }
 
@@ -113,9 +118,6 @@ public class EncCartController extends CartController {
 
     	EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
 	    measurement.setCustomer(newCustomer);
-		//measurement = (MeasurementImpl) measurementService.saveMeasurement(measurement);
-		addToCartItem.setMeasurementId(measurement.getId());
-        String respURL = super.add(request, response, model, addToCartItem);
 
         //Add measurement changes to customer and reset it to request
         newCustomer.addMeasurement(measurement);
@@ -127,6 +129,9 @@ public class EncCartController extends CartController {
     	itemDTO.setMeasurement(measurement);
     	encOrderItemDTOService.save(itemDTO);
 
+    	populateAddToCartItem(itemDTO, addToCartItem);
+    	
+        String respURL = super.add(request, response, model, addToCartItem);
         return respURL;
     }    
 
@@ -140,7 +145,46 @@ public class EncCartController extends CartController {
     	itemDTO.setMeasurement(measurement);
     	encOrderItemDTOService.save(itemDTO);
 
+    	populateAddToCartItem(itemDTO, addToCartItem);
+    	
         return super.add(request, response, model, addToCartItem);
     }    
     
+    
+    @RequestMapping(value = "/addtocartdummymeasurement", produces = { "text/html", "*/*" })
+    public String addWithDummyMeasurement(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
+            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem,
+            @ModelAttribute("measurementId") Long measurementId) throws IOException, PricingException, AddToCartException 
+    	{
+    	
+    		Measurement m = measurementService.readMeasurementById(measurementId);
+    		EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);        	
+        	itemDTO.setMeasurement(m);
+        	encOrderItemDTOService.save(itemDTO);
+
+        	populateAddToCartItem(itemDTO, addToCartItem);
+        	
+        	return super.add(request, response, model, addToCartItem);
+        }
+    	
+    private void populateAddToCartItem(EncOrderItemDTO itemDTO, 
+    			EncOrderItemRequestDTO addToCartItem)
+    {
+    	EncMaterial material = itemDTO.getMaterial();
+    	List<EncDesign> designs = itemDTO.getDesigns();
+    	List<Long> designIds = new ArrayList<Long>();
+    	EncTailor tailor = itemDTO.getTailor();
+    	Measurement measurement = itemDTO.getMeasurement();
+    	
+    	for(EncDesign d: designs)
+    	{
+    		designIds.add(d.getId());
+    	}
+    	
+    	
+    	addToCartItem.setMaterial(material.getId());
+    	addToCartItem.setDesigns(designIds);
+    	addToCartItem.setTailor(tailor.getId());
+    	addToCartItem.setMeasurementId(measurement.getId());
+    }
 }

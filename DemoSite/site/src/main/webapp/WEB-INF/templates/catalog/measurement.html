@@ -28,7 +28,6 @@
 
 				<blc:form method="POST" th:action="@{/enccart/addtocartoldmeasurement}">
 					<input type="hidden" name="productId" th:value="${material.id}" />
-					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
 					<div class="form50" id="chooseMeasurementDiv">
 													<input type="radio" id="chooseMeasurement" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
@@ -56,7 +55,6 @@
 
 				<blc:form method="POST" th:action="@{/enccart/addtocart}">
 					<input type="hidden" name="productId" th:value="${material.id}" />
-					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
 
 					<div class="form66">
@@ -154,9 +152,8 @@ onmouseout = "document.getElementById('chestImg').style.width='5%'; document.get
 			<div class="add_to_cart" id="offshelf">
 
 
-				<blc:form method="POST" th:action="@{/enccart/addtocartoldmeasurement}">
+				<blc:form method="POST" th:action="@{/enccart/addtocartdummymeasurement}">
 					<input type="hidden" name="productId" th:value="${material.id}" />
-					<input type="hidden" name="designId" th:value="${design.id}" />
 					<input type="hidden" name="quantity" value="1" />
 
 					<input type="hidden" name="measurementId" value="1" />

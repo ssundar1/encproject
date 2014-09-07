@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncMaterial;
+import com.enclothe.core.product.domain.EncTailor;
 import com.enclothe.core.customer.domain.EncCustomer;
 import com.enclothe.core.dm.order.domain.EncOrderItemDTO;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
@@ -133,9 +135,9 @@ public class EncSelectProductController{
         return "forward:" + view ;
     }
     
-    @RequestMapping("/temp")
-    public ModelAndView addDesign(HttpServletRequest request, HttpServletResponse response, Model model,
-    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId) {
+    @RequestMapping("/addtailor")
+    public ModelAndView addTailor(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long tailorId) {
     	
     	ModelAndView m = new ModelAndView();
     	
@@ -148,12 +150,8 @@ public class EncSelectProductController{
     	}
     	
     	//Add design to DTO. Retrieve designs already in DTO
-    	List<EncDesign> designs = itemDTO.getDesigns();
-    	if(designs == null)
-    		designs = new ArrayList<EncDesign>();
-    	
-    	EncDesign design = (EncDesign) catalogService.findProductById(designId);
-    	designs.add(design);
+    	EncTailor tailor = (EncTailor) catalogService.findProductById(tailorId);    	
+    	itemDTO.setTailor(tailor);
     	
     	encOrderItemDTOService.save(itemDTO);
     	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
@@ -161,7 +159,6 @@ public class EncSelectProductController{
     	//Retrieve Measurements
     	Collection<Measurement> customerMeasurements = customer.getCustomerMeasurements().values();
     	m.addObject("material", itemDTO.getMaterial());
-    	m.addObject("designs", itemDTO.getDesigns());
     	m.addObject("custMeasurements", customerMeasurements);
     	m.setViewName(MEASUREMENT_VIEW);
         return m;
