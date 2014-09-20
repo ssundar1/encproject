@@ -57,26 +57,28 @@ public class EncSelectProductController{
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) {
     	
     	//Retrieve Customer Information
-    	String sessionId = request.getSession().getId();
+    	/*String sessionId = request.getSession().getId();
     	String ipAddress = request.getRemoteAddr();
        	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
-    	
+    	*/
        	//Retrieve Material
     	EncMaterial material = (EncMaterial) catalogService.findProductById(addToCartItem.getProductId());
     	
     	//Store Material to DTO
-    	EncOrderItemDTO itemDTO = encOrderItemDTOService.createEncOrderItemDTO();
-    	itemDTO.setSessionId(sessionId);
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+ /*   	itemDTO.setSessionId(sessionId);
     	itemDTO.setIpAddress(ipAddress);
-    	itemDTO.setCustomerId(customer.getId());
-    	itemDTO.setMaterial(material);
-    	itemDTO.setCreationDate(Calendar.getInstance().getTime());
-    	encOrderItemDTOService.save(itemDTO);
-    	
+    	itemDTO.setCustomerId(customer.getId());*/
     	String view = BLOUSE_DESIGN_VIEW; // by default
     	
     	if(material!= null && material.getType().equals(CHUD))
     		view = CHUDI_DESIGN_VIEW;
+    	
+    	if(!(itemDTO != null &&  itemDTO.getMaterial()!=null && itemDTO.getMaterial().getId().equals(addToCartItem.getProductId())))
+    	{
+    		itemDTO.setMaterial(material);    	
+    		encOrderItemDTOService.save(itemDTO);
+    	}
     	
         return "forward:" + view ;
     }

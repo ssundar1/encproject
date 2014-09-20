@@ -1,6 +1,7 @@
 package com.mycompany.controller.catalog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -67,7 +68,18 @@ public class EncCategoryController extends CategoryController {
         
         
         if(category.getName().toLowerCase().contains(MATERIAL))
+        {
+        	EncOrderItemDTO itemDTO = encOrderItemDTOService.createEncOrderItemDTO();
+        	itemDTO.setSessionId(request.getSession().getId());
+        	itemDTO.setIpAddress(request.getRemoteAddr());
+        	
+        	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+        	itemDTO.setCustomerId(customer.getId());
+        	itemDTO.setCreationDate(Calendar.getInstance().getTime());
+        	encOrderItemDTOService.save(itemDTO);
+
         	m.setViewName(MATERIAL_VIEW);
+        }
         
         else if(category.getName().toLowerCase().contains(DESIGN))
         {
