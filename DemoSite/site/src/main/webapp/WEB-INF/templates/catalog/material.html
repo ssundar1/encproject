@@ -4,7 +4,7 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
-<blc:head pageTitle="${product.name + '- Broadleaf Demo - Heat Clinic'}" />
+<blc:head pageTitle="Enclothe" />
 
 <body>
     <div id="notification_bar"></div>
@@ -32,7 +32,7 @@
                 
                 <div class="product-options" th:substituteby="catalog/partials/productOptions"/>                                
                 
-                <blc:form method="POST" th:action="@{/selectmaterial}">
+                <blc:form method="GET" th:action="@{/selectmaterial}">
                     <div class="product-option-nonjs" th:each="productOption : *{productOptions}" th:object="${productOption}">
                         <div class="form50">
                             <label th:text="*{label}"></label>
