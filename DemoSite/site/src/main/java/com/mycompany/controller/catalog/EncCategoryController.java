@@ -1,6 +1,7 @@
 package com.mycompany.controller.catalog;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,9 +24,14 @@ import org.broadleafcommerce.core.search.domain.ProductSearchResult;
 import org.broadleafcommerce.core.search.domain.SearchFacetDTO;
 import org.broadleafcommerce.core.web.catalog.CategoryHandlerMapping;
 import org.broadleafcommerce.core.web.util.ProcessorUtils;
+import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.enclothe.core.customer.domain.EncCustomer;
+import com.enclothe.core.dm.order.domain.EncOrderItemDTO;
+import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
+import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.product.domain.EncMaterial;
 import com.enclothe.web.catalog.EncCategoryHandlerMapping;
 
@@ -49,6 +55,9 @@ public class EncCategoryController extends CategoryController {
 	
     @Resource(name="blCatalogService")
     protected CatalogService catalogService;
+    
+    @Resource(name = "encOrderItemDTOService")
+    protected EncOrderItemDTOService encOrderItemDTOService;
 	
 	//Change the view to our new view     
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -142,7 +151,14 @@ public class EncCategoryController extends CategoryController {
                 		
                 	}
             	}
-          	
+            	
+            	//Add attributes needed for measurement
+               	//Retrieve Measurements
+            	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+            	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+            	Collection<Measurement> customerMeasurements = customer.getCustomerMeasurements().values();
+            	model.addObject("material", itemDTO.getMaterial());
+            	model.addObject("custMeasurements", customerMeasurements);          	
             	
             }
     

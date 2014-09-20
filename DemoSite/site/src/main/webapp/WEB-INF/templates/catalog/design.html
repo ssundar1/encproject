@@ -32,7 +32,7 @@
                 
                 <div class="product-options" th:substituteby="catalog/partials/productOptions"/>                                
                 
-                <blc:form method="POST" th:action="@{/selectdesign}">
+                <blc:form method="POST" th:action="@{/adddesignbck}">
                     <div class="product-option-nonjs" th:each="productOption : *{productOptions}" th:object="${productOption}">
                         <div class="form50">
                             <label th:text="*{label}"></label>
@@ -49,7 +49,7 @@
                         <div class="add_to_cart" th:classappend="${cart.containsSku(#object.defaultSku)}? ' hidden'">
                              <input type="hidden" name="designId" th:value="*{id}" />
                             <input type="hidden" name="quantity" value="1" />
-                            <input type="submit" class="encCartBtn" th:value="#{product.buyNow}"/>
+                            <input type="submit" class="addToCart" th:value="#{product.buyNow}"/>
                         </div>
             <p class="error" th:if="${param.errorMessage}" th:text="${param.errorMessage[0]}"></p>
                     </div>

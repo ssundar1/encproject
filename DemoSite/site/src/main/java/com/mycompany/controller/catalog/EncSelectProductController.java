@@ -3,7 +3,9 @@ package com.mycompany.controller.catalog;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import org.broadleafcommerce.core.catalog.service.CatalogService;
 import org.broadleafcommerce.profile.web.core.CustomerState;
@@ -84,11 +87,22 @@ public class EncSelectProductController{
        return "forward:" + DESIGN_VIEW ;
     }    
     
-    @RequestMapping("/adddesign")
-    public String addDesignOptions(HttpServletRequest request, HttpServletResponse response, Model model,
+    @RequestMapping(value = "/adddesignbck", produces = "application/json")
+    public @ResponseBody Map<String, Object> addDesignAndBack(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId)
+    		{
+    	
+    			Map m = addDesignOptions(request,response,model,addToCartItem,designId);
+    			m.put("back", "true");
+    			
+    			return m;
+    		}
+    
+    @RequestMapping(value = "/adddesign", produces = "application/json")
+    public @ResponseBody Map<String, Object> addDesignOptions(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId)
     {
-    	
+    	Map<String, Object> responseMap = new HashMap<String, Object>();
     	//
     	//Retrieve Item DTO Selected
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
@@ -100,7 +114,8 @@ public class EncSelectProductController{
         
     	if(itemDTO == null)
     	{
-    		return ERROR_MATERIAL_VIEW;
+    		//return "false";
+    		return responseMap;
     	}
     	
     	//Add design to DTO. Retrieve designs already in DTO
@@ -109,14 +124,16 @@ public class EncSelectProductController{
     		designs = new ArrayList<EncDesign>();
     	
     	EncDesign design = (EncDesign) catalogService.findProductById(designId);
-    	
+    	responseMap.put("productId", designId);
+    	responseMap.put("productName", design.getName());
     	for(int i=0; i < designs.size(); i++)
     	{
     		EncDesign e = designs.get(i);
     		
     		//if design already exists, then just return success
     		if(e.getId().equals(designId))
-    			return "forward:" + view ;
+    			return responseMap;
+    			//return "true";
     		
     		//retrieve category, if same category exists replace category
     		String category = e.getCategory();
@@ -125,43 +142,49 @@ public class EncSelectProductController{
     		{
     			designs.set(i, design);
     			encOrderItemDTOService.save(itemDTO);
-    			return "forward:" + view ;
+    			return responseMap;
+    			//return "true";
     		}    		    			
     	}
     	designs.add(design);
     	
     	encOrderItemDTOService.save(itemDTO);    	
     	
-        return "forward:" + view ;
+    	//return "true";
+        //return "forward:" + view ;
+    	return responseMap;
     }
-    
-    @RequestMapping("/addtailor")
-    public ModelAndView addTailor(HttpServletRequest request, HttpServletResponse response, Model model,
+        
+    @RequestMapping(value = "/addtailor", produces = "application/json")
+    public @ResponseBody Map<String, Object> addTailor(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long tailorId) {
     	
-    	ModelAndView m = new ModelAndView();
+    	Map<String, Object> responseMap = new HashMap<String, Object>();
     	
     	//Retrieve Item DTO Selected
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
     	
     	if(itemDTO == null)
     	{
-    		m.setViewName(ERROR_MATERIAL_VIEW);
+    		return responseMap;
     	}
     	
     	//Add design to DTO. Retrieve designs already in DTO
     	EncTailor tailor = (EncTailor) catalogService.findProductById(tailorId);    	
     	itemDTO.setTailor(tailor);
     	
-    	encOrderItemDTOService.save(itemDTO);
-    	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+    	responseMap.put("productId", tailorId);
+    	responseMap.put("productName", tailor.getName());
     	
-    	//Retrieve Measurements
+    	encOrderItemDTOService.save(itemDTO);
+    	//EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+    	
+/*    	//Retrieve Measurements
     	Collection<Measurement> customerMeasurements = customer.getCustomerMeasurements().values();
     	m.addObject("material", itemDTO.getMaterial());
     	m.addObject("custMeasurements", customerMeasurements);
-    	m.setViewName(MEASUREMENT_VIEW);
-        return m;
+    	m.setViewName(MEASUREMENT_VIEW);*/
+    	return responseMap;
     }    
     
    /* @RequestMapping("/selectdesign")

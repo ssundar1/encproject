@@ -144,6 +144,9 @@ $(function(){
                             HC.showNotification(data.productName + "  has been added to your wishlist!");
                         } else {
                             HC.showNotification(data.productName + "  has been added to the cart!", 2000);
+                            
+                            if(data.back== "true")
+                            	history.back(1);
                         }
                     }
                 }

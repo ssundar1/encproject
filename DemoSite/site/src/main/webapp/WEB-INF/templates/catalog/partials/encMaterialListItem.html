@@ -59,7 +59,7 @@
 	<div th:switch="*{id}">
 		<div th:case="'10'">
 			<div class="add_to_cart">
-				<blc:form method="POST" th:action="@{/selectmaterial}">
+				<blc:form method="GET" th:action="@{/selectmaterial}">
 					<input type="hidden" name="productId" th:value="*{id}" />
 					<input type="hidden" name="quantity" value="1" />
 					<input type="hidden" name="hasProductOptions"
@@ -69,15 +69,14 @@
 			</div>
 		</div>
 		<div th:case="*">
-			<div class="in_cart"
+<!-- 			<div class="in_cart"
 				th:classappend="${!cart.containsSku(#object.defaultSku)}? ' hidden'">
 				<a class="fancycart fancybox.ajax inCart" th:href="@{/cart}"><span
 					th:text="#{product.inCart}">In Cart!</span></a>
 			</div>
-
-			<div class="add_to_cart"
-				th:classappend="${cart.containsSku(#object.defaultSku)}? ' hidden'">
-				<blc:form method="POST" th:action="@{/selectmaterial}">
+ -->
+			<div class="add_to_cart">
+				<blc:form method="GET" th:action="@{/selectmaterial}">
 					<input type="hidden" name="productId" th:value="*{id}" />
 					<input type="hidden" name="quantity" value="1" />
 					<input type="hidden" name="hasProductOptions"

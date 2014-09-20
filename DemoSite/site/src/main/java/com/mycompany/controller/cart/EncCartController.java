@@ -181,7 +181,7 @@ public class EncCartController extends CartController {
     		designIds.add(d.getId());
     	}
     	
-    	
+    	addToCartItem.setProductId(material.getId());
     	addToCartItem.setMaterial(material.getId());
     	addToCartItem.setDesigns(designIds);
     	addToCartItem.setTailor(tailor.getId());

@@ -59,7 +59,8 @@
             <input type="hidden" name="designId" th:value="*{id}" />
             <input type="hidden" name="quantity" value="1" />
             <input type="hidden" name="hasProductOptions" th:value="*{!#lists.isEmpty(productOptions)}" />
-            <input type="submit" class="encCartBtn" th:value="#{product.chooseDesign}"/>
+            <!-- <input type="submit" class="encCartBtn" th:value="#{product.chooseDesign}"/> -->
+            <input type="submit" class="addToCart" th:value="#{product.chooseDesign}"/>            
         </blc:form>
     </div>
 

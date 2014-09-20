@@ -1,7 +1,7 @@
 <div th:if="*{featuredProduct}" class="new_badge">New!</div>
 
 <div class="image">
-    <a th:href="@{*{url}}">
+<!--     <a th:href="@{*{url}}"> -->
     <img th:if="*{media['primary']}" th:src="@{*{media['primary'].url} + '?browse'}" alt="Designs" />
     <div class="price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
         <div blc:price="*{salePrice}" th:if="*{onSale}" th:classappend="*{defaultSku.onSale}? 'sale'"></div>
@@ -40,7 +40,7 @@
 		</blc:form>
      (<span th:text="*{numberOfReviews}"></span><span th:if="*{numberOfReviews} == 1"> review</span><span th:if="*{numberOfReviews} > 1"> reviews</span>)
 	</div>
-	    </a>
+	    <!-- </a> -->
 </div>
 
 <div class="content">
@@ -59,7 +59,7 @@
             <input type="hidden" name="tailorId" th:value="*{id}" />
             <input type="hidden" name="quantity" value="1" />
             <input type="hidden" name="hasProductOptions" th:value="*{!#lists.isEmpty(productOptions)}" />
-            <input type="submit" class="encCartBtn" th:value="#{product.chooseTailor}"/>
+            <input type="submit" class="addToCart" th:value="#{product.chooseTailor}"/>
         </blc:form>
     </div>
 
