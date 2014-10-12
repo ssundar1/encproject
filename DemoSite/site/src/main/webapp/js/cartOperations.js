@@ -54,7 +54,7 @@ $(function() {
 				.addClass('hidden');
 	}
 	
-	function showCheckMark(productId){
+	function showCheckMark(productId, orderType){
 		$('.check').css('display','none');
 		$('.productActions' + productId).prev().children().children('.check').css('display','block');
 		$('.add_to_cart').removeClass('hidden');
