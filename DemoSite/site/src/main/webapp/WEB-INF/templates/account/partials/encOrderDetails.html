@@ -61,7 +61,7 @@
                 <div class="clearfix">&nbsp;</div>
             </div>
         </li>
-    
+
         <li th:each="fulfillmentGroup, iterStat : *{fulfillmentGroups}" th:object="${fulfillmentGroup}">
             <h3>Shipment <span th:text="${iterStat.count}"></span><span th:if="*{status}" th:text="' : ' + *{status}"></span></h3>
             <div class="details">
@@ -149,6 +149,7 @@
                 </table>
                 <div class="clearfix">&nbsp;</div>  
             </div>
-        </li>               
+        </li> 
+              
     </ul>
 </div>

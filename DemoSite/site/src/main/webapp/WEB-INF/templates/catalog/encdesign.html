@@ -2,77 +2,53 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 
 <blc:head pageTitle="${category.name + ' - Enclothe'}" />
 
 <body>
-    <div id="notification_bar"></div>
-    <header th:substituteby="layout/partials/header" />
-   
-       <div id="content" class="width_setter group" role="main">
-    
-        <nav th:substituteby="layout/partials/nav" />
-        
-   <div id="tab-container" class="tab-container">
-  <div id="tabs1" >
-    <ul class='etabs'>
-    <li class='tab'><a href="#tabs1">Front Neck Designs</a></li>
-    <li class='tab'><a href="#tabs2">Back Neck Designs</a></li>
-    <li class='tab'><a href="#tabs3">Sleeve Designs</a></li>
-    <li class='tab'><a href="#tabs4">Tailors</a></li>
-    <li class='tab'><a href="#tabs5">Measurement</a></li>
-  </ul>
-    <div th:substituteby="catalog/partials/encFnDesign"/>
-    <!-- content -->
-  </div>
-  <div id="tabs2">
-    <ul class='etabs'>
-    <li class='tab'><a href="#tabs1">Front Neck Designs</a></li>
-    <li class='tab'><a href="#tabs2">Back Neck Designs</a></li>
-    <li class='tab'><a href="#tabs3">Sleeve Designs</a></li>
-    <li class='tab'><a href="#tabs4">Tailors</a></li>
-    <li class='tab'><a href="#tabs5">Measurement</a></li>
-  </ul>
-    <div th:substituteby="catalog/partials/encBnDesign"/>
-    <!-- content -->
-  </div>
-  <div id="tabs3">
-    <ul class='etabs'>
-    <li class='tab'><a href="#tabs1">Front Neck Designs</a></li>
-    <li class='tab'><a href="#tabs2">Back Neck Designs</a></li>
-    <li class='tab'><a href="#tabs3">Sleeve Designs</a></li>
-    <li class='tab'><a href="#tabs4">Tailors</a></li>
-    <li class='tab'><a href="#tabs5">Measurement</a></li>
-  </ul>
-    <div th:substituteby="catalog/partials/encSlDesign"/>
-    <!-- content -->
-  </div>
-  <div id="tabs4">
-    <ul class='etabs'>
-    <li class='tab'><a href="#tabs1">Front Neck Designs</a></li>
-    <li class='tab'><a href="#tabs2">Back Neck Designs</a></li>
-    <li class='tab'><a href="#tabs3">Sleeve Designs</a></li>
-    <li class='tab'><a href="#tabs4">Tailors</a></li>
-    <li class='tab'><a href="#tabs5">Measurement</a></li>
-  </ul>
-    <div th:substituteby="catalog/partials/encTlDesign"/>
-    <!-- content -->
-  </div>  
-  <div id="tabs5">
-    <ul class='etabs'>
-    <li class='tab'><a href="#tabs1">Front Neck Designs</a></li>
-    <li class='tab'><a href="#tabs2">Back Neck Designs</a></li>
-    <li class='tab'><a href="#tabs3">Sleeve Designs</a></li>
-    <li class='tab'><a href="#tabs4">Tailors</a></li>
-    <li class='tab'><a href="#tabs5">Measurement</a></li>
-  </ul>
-    <div th:substituteby="catalog/partials/encMeasurement"/>
-    <!-- content -->
-  </div>   
-</div>     
-     </div>
-    <footer th:substituteby="layout/partials/footer" />
-    
+	<div id="notification_bar"></div>
+	<header th:substituteby="layout/partials/header" />
+
+	<div id="content" class="width_setter group" role="main">
+
+		<nav th:substituteby="layout/partials/nav" />
+
+		<div id="tab-container" class="tab-container">
+			<ul class='etabs'>
+				<li class='tab'><a href="#tabs1">Front Neck Designs</a></li>
+				<li class='tab'><a href="#tabs2">Back Neck Designs</a></li>
+				<li class='tab'><a href="#tabs3">Sleeve Designs</a></li>
+				<li class='tab'><a href="#tabs4">Tailors</a></li>
+				<li class='tab'><a href="#tabs5">Measurement</a></li>
+			</ul>
+			<div class="panel-container">
+				<div id="tabs1">
+					<div th:substituteby="catalog/partials/encFnDesign" />
+					<!-- <h2>tabs1 content</h2> -->
+				</div>
+				<div id="tabs2">
+					<div th:substituteby="catalog/partials/encBnDesign" />
+					<!-- <h2>tabs2 content</h2> -->
+				</div>
+				<div id="tabs3">
+					<div th:substituteby="catalog/partials/encSlDesign" />
+					<!-- <h2>tabs3 content</h2> -->
+				</div>
+				<div id="tabs4">
+					<div th:substituteby="catalog/partials/encTlDesign" />
+					<!-- <h2>tabs4 content</h2> -->
+				</div>
+				<div id="tabs5">
+					<div th:substituteby="catalog/partials/encMeasurement" />
+					<!-- <h2>tabs5 content</h2> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:substituteby="layout/partials/footer" />
+
 </body>
 </html>

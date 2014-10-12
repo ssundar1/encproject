@@ -35,6 +35,7 @@ import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
  */
 @Controller("encSelectProductController")
 public class EncSelectProductController{
+	
 
 	public static final String DESIGN_VIEW = "/design";
 	public static final String BLOUSE_DESIGN_VIEW = "/bls-design";
