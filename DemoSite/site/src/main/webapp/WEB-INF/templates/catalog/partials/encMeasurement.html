@@ -1,157 +1,199 @@
-	<div id="content" class="width_setter group" role="main">
 
-		<nav th:substituteby="layout/partials/nav" />
+<div id="content" class="width_setter group" role="main">
 
-		<section id="">
+	<nav th:substituteby="layout/partials/nav" />
 
-			<header>
-				<h1 th:inline="text">
-					<span>Provide Measurement (Hover over the icons for any help on measurements)</span>
-				</h1>
-			</header>
+	<section id="left_column">
 
-			<div class="add_to_cart" id="dropdown">
+		<header>
+			<h1 th:inline="text">
+				<span>Provide Measurement (Hover over the icons for any help
+					on measurements)</span>
+			</h1>
+		</header>
+
+		<div class="add_to_cart" id="dropdown">
 
 
-				<blc:form method="POST" th:action="@{/enccart/addtocartoldmeasurement}">
-					<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
-					<input type="hidden" name="quantity" value="1" />
-					<div class="form50" id="chooseMeasurementDiv">
-													<input type="radio" id="chooseMeasurement" name="measurementOption" value="dropdown"><span>Choose a Measurement</span> </input>
-								</div>
-					<div class="form50" id="newMeasurementDiv" >
-								<input type="radio" id="newMeasurement" name="measurementOption" value="addNew"><span>Add New Measurement</span></input>
-								</div>
-					<div class="form50" id="dummyMeasurementDiv">
-							<input type="radio" id="dummyMeasurement" name="measurementOption" value="dummyMeasurement"><span>Pick up Off-Shelf Sample</span></input>
-							
-					</div>
-								<div class="form50" id="measurementdropdown">
-													<select id="measurementDropDown" name="measurementId">
-														<option th:each="var : ${custMeasurements}" th:value="${var.id}"
-															th:text="${var.name}"></option>
-													</select>
+			<blc:form method="POST"
+				th:action="@{/enccart/addtocartoldmeasurement}">
+				<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
+				<input type="hidden" name="quantity" value="1" />
+				<div class="form50" id="chooseMeasurementDiv">
+					<input type="radio" id="chooseMeasurement" name="measurementOption"
+						value="dropdown" desc="This is Choose Measurement"><span>Choose a Measurement</span> </input>
 				</div>
-					<div class="form100">
-					<input id="selectMeasurement" type="submit" class="addToCart" th:value="#{proudct.addToCart}" />
-					</div>
-				</blc:form>
-			</div>
+				<div class="form50" id="newMeasurementDiv">
+					<input type="radio" id="newMeasurement" name="measurementOption"
+						value="addNew" desc="This is Add new Measurement"><span>Add New Measurement</span></input>
+				</div>
+				<div class="form50" id="dummyMeasurementDiv">
+					<input type="radio" id="dummyMeasurement" name="measurementOption"
+						value="dummyMeasurement" desc="This is pick up off-self Measurement"><span>Pick up Off-Shelf
+						Sample</span></input>
 
-			<div class="add_to_cart" id="addNew">
+				</div>
+				<div class="form50" id="measurementdropdown">
+					<select id="measurementDropDown" name="measurementId">
+						<option th:each="var : ${custMeasurements}" th:value="${var.id}"
+							th:text="${var.name}"></option>
+					</select>
+				</div>
+				<div class="" id="sizeMeasurementDiv">
+						<input type="radio" id="small" name="measurementOptions" value="smalloption" checked="checked"/>
+						<label for="small">S</label> 
+						<input type="radio" id="medium" name="measurementOptions" value="mediumoption"/>
+						<label for="medium">M</label> 
+						<input type="radio" id="large" name="measurementOptions" value="largeoption"/>
+						<label for="large">L</label>
+						<input type="radio" id="xlarge" name="measurementOptions" value="xlargeoption"/>
+						<label for="xlarge">XL</label>
 
-				<blc:form method="POST" th:action="@{/enccart/addtocart}">
-					<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
-					<input type="hidden" name="quantity" value="1" />
+					</div>
+				<div class="form100">
+					<input id="selectMeasurement" type="submit" class="addToCart"
+						th:value="#{proudct.addToCart}" />
+				</div>
+			</blc:form>
+		</div>
 
-					<div class="form66">
-						<label for="name"><span>Measurement Name</span></label> <input
-							type="text" class="field50" name="name" />
+		<div class="add_to_cart" id="addNew">
+
+			<blc:form id="addnew" method="POST" th:action="@{/enccart/addtocart}">
+				<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
+				<input type="hidden" name="quantity" value="1" />
+
+				<div class="form66">
+					<label for="name"><span>Measurement Name</span></label> <input
+						type="text" class="field50" name="name" />
+				</div>
+				<div class="form66">
+					<label for="description"><span>Measurement
+							Description</span></label> <input type="text" class="field50" name="description" />
+				</div>
+
+				<div class="form50">
+					<label for="height"><span>Height
+					</span></label> <input type="text" class="field50" name="height" id="height" imgsrc="/img/measurements/chest.png" desc="This is Height Measurement"/>
+
+				</div>
+				<div class="form50">
+					<label for="chest"><span>Chest
+					</span></label> <input type="text" class="field50" name="chest" id="chest"
+							imgsrc="/img/measurements/chest.png" desc="This is Chest Measurement" />
+
+				</div>
+
+				<div class="form50">
+					<label for="bust"><span>Bust
+					</span></label> <input type="text" class="field50" name="bust" id="bust"
+							imgsrc="/img/measurements/chest.png" desc="This is Bust Measurement" />
+				</div>
+				<div class="form50">
+					<label for="dartLine"><span>Dart line
+					</span></label> <input type="text" class="field50" name="dartLine" id="dartLine"
+							imgsrc="/img/measurements/chest.png" desc="This is Dart Line Measurement" />
+				</div>
+				<div class="form50">
+					<label for="waist"><span>Waist
+					</span></label> <input type="text" class="field50" name="waist" id="waist"
+							imgsrc="/img/measurements/waist.png" desc="This is waist Measurement" />
+				</div>
+				<div class="form50">
+					<label for="hip"><span>Hip
+					</span></label> <input type="text" class="field50" name="hip" id="hip"
+							imgsrc="/img/measurements/chest.png" desc="This is Hip Measurement" />
+				</div>
+				<div class="form50">
+					<label for="shoulder"><span>Shoulder
+					</span></label> <input type="text" class="field50" name="shoulder" id="shoulder"
+							imgsrc="/img/measurements/shoulder.png" desc="This is Shoulder Measurement" />
+				</div>
+				<div class="form50">
+					<label for="sleeveLength"><span>Sleeve Length
+					</span></label> <input type="text" class="field50" name="sleeveLength" id="sleeveLength"
+							imgsrc="/img/measurements/chest.png" desc="This is Sleeve Lenghth Measurement" />
+				</div>
+				<div class="form50"><label for="nwaist"><span>NWaist </span></label> <input
+							type="text" class="field50" name="nwaist" id="nwaist"
+							imgsrc="/img/measurements/chest.png" desc="This is Nwaist Measurement"/>
 					</div>
-					<div class="form66">
-						<label for="description"><span>Measurement
-								Description</span></label> <input type="text" class="field50"
-							name="description" />
+					<div class="form50"><label for="armhole"><span>ARM_HOLE </span></label> <input type="text"
+							class="field50" name="armhole" id="armhole"
+							imgsrc="/img/measurements/chest.png" desc="This is Arm Hole Measurement"/>
 					</div>
-	
-					<div class="form50">
-						<label for="height"><span>Height <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input type="text"
-							class="field50" name="height" />
-						
-					</div>
-					<div class="form50">
-						<label for="chest"><span>Chest <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input type="text"
-							class="field50" name="chest" />
-						
-					</div>
-					
-					<div class="form50">
-						<label for="bust"><span>Bust <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input type="text"
-							class="field50" name="bust" />
-					</div>
-					<div class="form50">
-						<label for="dartLine"><span>Dart line <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input
-							type="text" class="field50" name="dartLine" />
-					</div>
-					<div class="form50">
-						<label for="waist"><span>Waist <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input type="text"
-							class="field50" name="waist" />
-					</div>
-					<div class="form50">
-						<label for="hip"><span>Hip <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input type="text"
-							class="field50" name="hip" />
-					</div>
-					<div class="form50">
-						<label for="shoulder"><span>Shoulder <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input
-							type="text" class="field50" name="shoulder" />
+					<div class="form50"><label for="tsleeve"><span>T_SLEEVE </span></label> <input type="text"
+							class="field50" name="tsleeve" id="tsleeve"
+							imgsrc="/img/measurements/chest.png" desc="This is T_Sleeve Measurement"/>
 					</div>
 					<div class="form50">
-						<label for="sleeveLength"><span>Sleeve Length <img id="chestImg"
-						src="/img/measurements/chest.png"
-style="width: 5%; height:5%; margin-bottom: 4px;"
-onmouseover = "document.getElementById('chestImg').style.width='100%'; document.getElementById('chestImg').style.height='100%'"
-onmouseout = "document.getElementById('chestImg').style.width='5%'; document.getElementById('chestImg').style.height='5%'"
-/> </span></label> <input
-							type="text" class="field50" name="sleeveLength" />
+
+						<label for="bsleeve"><span>B_SLEEVE </span></label> <input type="text" class="field50" name="bsleeve" id="bsleeve"
+							imgsrc="/img/measurements/chest.png" desc="This is B_Sleeve Measurement"/>
 					</div>
-					<div class="form100">
+					<div class="form50"><label for="fneck"><span>F_NECK </span></label> <input type="text"
+							class="field50" name="fneck" id="fneck"
+							imgsrc="/img/measurements/waist.png" desc="This is F_Neck Measurement"/>
+					</div>
+					<div class="form50"><label for="bneck"><span>B_NECK </span></label> <input type="text"
+							class="field50" name="bneck" id="bneck"
+							imgsrc="/img/measurements/chest.png" desc="This is B_Neck Measurement"/>
+					</div>
+					<div class="form50">
+						<label for="pantheight"><span>PANT_HEIGHT </span></label> <input type="text" class="field50" name="pantheight" id="pantheight"
+							imgsrc="/img/measurements/shoulder.png" desc="This is Pant Height Measurement"/>
+					</div>
+					<div class="form50">
+						<label for="seat"><span>SEAT </span></label> <input
+							type="text" class="field50" name="seat" id="seat"
+							imgsrc="/img/measurements/chest.png" desc="This is Seat Measurement"/>
+					</div>
+				<div class="form100">
 					<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
+				</div>
+			</blc:form>
+
+
+		</div>
+		<div class="add_to_cart" id="offshelf">
+
+
+			<blc:form method="POST"
+				th:action="@{/enccart/addtocartdummymeasurement}">
+				<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
+				<input type="hidden" name="quantity" value="1" />
+
+				<input type="hidden" name="measurementId" value="1" />
+				<div class="form100">
+					<input id="addNewMeasurement" type="submit" class="addToCart"
+						th:value="#{proudct.addToCart}" />
+				</div>
+			</blc:form>
+		</div>
+
+	</section>
+		<section id="right_column">
+			<header>
+				<span>Explore Image</span>
+			</header>
+			<div id="options">
+				<div class="section">
+					<img id="dImg" src="/img/blank.gif"
+						style="width: 100%; height: 100%; margin-bottom: 4px; display: block; margin-left: auto; margin-right: auto;" />
+				</div> 
+				<section id="right_column">
+					<header>
+						<span>Description of option</span>
+					</header>
+					<div id="options">
+						<div class="section">
+							<p id="content" style="word-wrap: break-word; width: 220px">
+							</p>
+						</div>
 					</div>
-				</blc:form>
-
-
-					</div>
-			<div class="add_to_cart" id="offshelf">
-
-
-				<blc:form method="POST" th:action="@{/enccart/addtocartdummymeasurement}">
-					<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
-					<input type="hidden" name="quantity" value="1" />
-
-					<input type="hidden" name="measurementId" value="1" />
-					<div class="form100">
-					<input id="addNewMeasurement" type="submit" class="addToCart" th:value="#{proudct.addToCart}" />
-					</div>
-				</blc:form>
+				</section>
 			</div>
-
 		</section>
 
-	
 
-	</div>
+</div>
