@@ -12,7 +12,7 @@ audio:not([controls]) { display: none; }
 
 html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 html, button, input, select, textarea { font-family: sans-serif; color: #222; }
-body { margin: 0; font: 12px/18px Georgia, serif; color: #655c5a; background: url(../img/canvas.jpg) repeat; }
+body { margin: 0; font: 12px/18px Georgia, serif; color: #655c5a; /* background: url(../img/canvas.jpg) repeat; */ }
 
 ::-moz-selection { background: #E40037; color: #fff; text-shadow: none; }
 ::selection { background: #E40037; color: #fff; text-shadow: none; }
@@ -340,7 +340,7 @@ header {
 }
 
 #header_content {
-    width: 980px;
+    /* width: 980px; */ width: 1250px;
     margin: 0 auto;
     position: relative;
 }
@@ -425,6 +425,7 @@ header {
     position: absolute;
     top: 60px;
     right: 0;
+    margin-right: 40px;
 }
 
     #header_content #search .search {
@@ -451,6 +452,7 @@ header {
         color: white;
         text-align: right;
         float: right;
+        margin-right: 40px;
     }
     
     #header_content #cart_info a:link, #header_content #cart_info a:visited {
@@ -495,7 +497,7 @@ nav {
     width: 940px;
     height: 70px;
     margin: 0 20px;
-    border-bottom: double #C8C3C1;
+    /* border-bottom: double #C8C3C1; */
 }
 
     nav ul {
@@ -1347,19 +1349,19 @@ ul#payment_methods li {
 }
 
 #left_column {
-    /* width: 500px; */width: 720px;
+    /* width: 500px; *//* width: 720px; */width:950px;
     float: left;
 }
 
     #left_column header {
-        /* width: 460px; */width: 255px;
+        /* width: 460px; *//* width: 255px; */width:950px;
         margin-top: 20px;
         padding: 0 20px;
         border: none;
     }
     
     #left_column header h1 {
-        /* width: 55%; */width: 200%;
+        /* width: 55%; */width: 100%;
         font: bold 20px/24px 'Open Sans',Helvetica,sans-serif;
         color: #262322;
         float: left;
@@ -1368,8 +1370,10 @@ ul#payment_methods li {
     
     #left_column header #sort {
         font-size: 12px;
-        margin-top: 6px;
-        margin-right: -120px;
+        /*  margin-top: 6px;
+        margin-right: -120px; */
+        margin-right: 32px;
+    	margin-top: -45px;
         line-height: 14px;
         text-align: right;
         float: right;
@@ -1765,13 +1769,19 @@ ul#payment_methods li {
      /* left side filter */
     #left_filter {
     width: 260px;
-    margin: 20px 0 0 -21px;
+    margin: 20px 0 0 -20px;
     background: url('../img/sidebarbg.jpg') repeat;
     float: left;
     -moz-box-shadow: 0px 2px 7px #C2B9B3;
     -webkit-box-shadow: 0px 2px 7px #C2B9B3;
     box-shadow: 0px 2px 7px #C2B9B3;
 }
+
+.border{
+		 border-color: #e40037 #ffffff #ffffff;
+	    border-style: solid;
+	    border-width: 5px;
+	}
 
     #left_filter header {
         width: 220px;
@@ -2064,16 +2074,20 @@ input[type="submit"].small, a.small-button,
 }
 
 input[type="submit"].encCartBtn, input[type="submit"].addToCart{
-	background: url("../img/add_cart_2.png") no-repeat scroll 70% 70% rgba(0, 0, 0, 0);
+	background: url("../img/cart_icon.png") no-repeat scroll 40% 60% #e40037;
     cursor:pointer;
     border: none;
 	float: right;
 	height: 45px;
 	width: 45px;
 	padding: 0px;
-	margin-bottom: 200px;
+	margin-bottom: 115px;
 	text-indent: -9999px;
     white-space: nowrap;
+}
+
+input[type="submit"].encCartBtn:hover, input[type="submit"].addToCart:hover{
+	background-color: #000000;
 }
 
 input[type="submit"].big, a.big-button, .addToCart, a.inCart, .encCartBtn {
@@ -2105,7 +2119,7 @@ input[type="submit"].red, a.red-button, a.addToCart, .addToCart, a.encCartBtn,  
     background-color: #E40037;
 }
 
-input[type="submit"].dark, a.dark-button, #featured_products .addToCart, #featured_products .encCartBtn {
+input[type="submit"].dark, a.dark-button {
     color: white;
     /* background-color: #3D0001; */
     background-color:transparent;

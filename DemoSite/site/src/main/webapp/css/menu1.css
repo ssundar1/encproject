@@ -13,6 +13,7 @@
   }
 
   .wrapper{
+  	display: none;
     font-family:Arial, Helvetica, sans-serif;
     margin-top:50px;
     margin-left:50px;
