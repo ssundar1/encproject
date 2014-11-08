@@ -12,7 +12,23 @@
     
     <div id="content" class="width_setter group" role="main">
     
-        <nav th:substituteby="layout/partials/nav" />
+        <!-- <nav th:substituteby="layout/partials/nav" /> -->
+        <div class="checkout-wrap">
+		  <ul class="checkout-bar">
+		    <li class="bar active">Choose Material</li>
+		
+		    <li class="bar">Choose FrontNeck</li>
+		
+		    <li class="bar">Choose BackNeck</li>
+		
+		    <li class="bar">Choose Sleeve</li>
+		
+		    <li class="bar">Choose Tailors</li>
+		    
+			<li class="bar">Choose Measurement</li>
+			
+		  </ul>
+		</div>
         
          <section id="left_filter"  class="border">
             <header><span th:text="#{category.filterResults}">Filter your results</span></header>

@@ -4,7 +4,7 @@
             <header><span th:text="#{category.filterResults}">Filter your results</span></header>
             <div id="options">
                 
-                <div th:substituteby="catalog/partials/facetFilter" />
+                <div th:substituteby="catalog/partials/fnFacetFilter" />
                 
                 <div th:substituteby="catalog/partials/rightHandBannerAds" />
                 
@@ -13,8 +13,8 @@
                     <div id="options">
                         <div class="section" th:object="${category}">
                              <blc:related_products categoryId="*{id}" quantity="3"/>     
-                             <ul id="featured_products" class="group">
-                                <li th:each="product : ${products}" th:object="${product}" th:include="catalog/partials/encMaterialListItem" class="product_container"></li>
+                            <ul id="featured_products" class="group">
+                                <li th:each="product : ${fnproducts}" th:object="${product}" th:include="catalog/partials/encDesignListItem" class="product_container"></li>
                              </ul>
                         </div>                                  
                     </div>

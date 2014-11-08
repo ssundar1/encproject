@@ -311,28 +311,54 @@ $(function() {
 					function() {
 
 						$('#tab-container').easytabs();
+						
+						$(".ui-tabs-panel").each(function(i){
 
-						/*$(".addcart").on(
-								"click",
-								function() {
-									var $parent = $(this).parent();
-									console.log('$parent tagname:'
-											+ $parent.prop('tagName'));
-									if ($parent.prop('tagName') == 'form') {
-										var $li = $parent.parent().parent()
-												.parent();
-										$image = $li.find('.image');
-										$a = $image.children('a');
-										$check = $a.find('.check');
-										$($check).toggle();
-									} else {
-										var $li = $parent.parent().parent();
-										$image = $li.find('.image');
-										$a = $image.children('a');
-										$check = $a.find('.check');
-										$($check).toggle();
-									}
-								});*/
+							  var totalSize = $(".ui-tabs-panel").size() - 1;
+							  
+							  if (i != totalSize) {
+							      next = i + 2;
+						   		  $(this).append("<a href='#' class='next-tab mover' rel='" + next + "'>Next &#187;</a>");
+							  }
+					  
+							  if (i != 0) {
+							      prev = i;
+						   		  $(this).append("<a href='#' class='prev-tab mover' rel='" + prev + "'>&#171; Prev</a>");
+							  }
+				   		
+							});
+					
+							   $('.next-tab').click(function() { 
+								   var no = $(this).attr("rel")-1;
+								   var prevTabId = '#tabs'+no;
+									$(prevTabId).css("display","none");
+									var CurrTabId = '#tabs'+$(this).attr("rel");
+									$(CurrTabId).css("display","block");
+									
+									var i = $(this).attr("rel");
+									i++;
+									$('.checkout-bar .bar:nth-of-type(' + i + ')').addClass('active');
+									$('.checkout-bar .bar:nth-of-type(' + (i-1) + ')').removeClass('active').addClass('visited');
+									
+						           return false;
+						       });
+						       
+						       $('.prev-tab').click(function() { 
+						    	   var no = $(this).attr("rel");
+						    	   no++;
+						    	   var NextTabId = '#tabs'+no;
+									$(NextTabId).css("display","none");
+									
+						    	   var CurrTabId = '#tabs'+$(this).attr("rel");
+									$(CurrTabId).css("display","block");
+									
+									var i = $(this).attr("rel");
+									$('.checkout-bar .bar:nth-of-type(' + (i++) + ')').removeClass('visited').addClass('active');
+									$('.checkout-bar .bar:nth-of-type(' + (i++) + ')').removeClass('active').addClass('next');
+									
+						           return false;
+						       });
+						
 						$("#sizeMeasurementDiv #small").click(function() {
 
 							$("div #height").val("1");
