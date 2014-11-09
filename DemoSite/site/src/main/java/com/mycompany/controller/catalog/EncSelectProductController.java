@@ -35,7 +35,6 @@ import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
  */
 @Controller("encSelectProductController")
 public class EncSelectProductController{
-	
 
 	public static final String DESIGN_VIEW = "/design";
 	public static final String BLOUSE_DESIGN_VIEW = "/bls-design";
@@ -109,7 +108,7 @@ public class EncSelectProductController{
     	//
     	//Retrieve Item DTO Selected
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
-
+    	List<String> itemId = new ArrayList<String>();
         String view = BLOUSE_DESIGN_VIEW; // by default
     	
     	//if(material!= null && material.getType().equals(CHUD))
@@ -129,6 +128,7 @@ public class EncSelectProductController{
     	EncDesign design = (EncDesign) catalogService.findProductById(designId);
     	responseMap.put("productId", designId);
     	responseMap.put("productName", design.getName());
+    	//responseMap.put("itemDTO", itemDTO);
     	for(int i=0; i < designs.size(); i++)
     	{
     		EncDesign e = designs.get(i);
@@ -150,7 +150,7 @@ public class EncSelectProductController{
     		}    		    			
     	}
     	designs.add(design);
-    	
+    	//responseMap.put("itemDTO", itemDTO);
     	encOrderItemDTOService.save(itemDTO);    	
     	
     	//return "true";

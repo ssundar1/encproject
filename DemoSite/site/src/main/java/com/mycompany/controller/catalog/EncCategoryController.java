@@ -43,7 +43,7 @@ import com.enclothe.web.catalog.EncCategoryHandlerMapping;
 @Controller("encCategoryController")
 public class EncCategoryController extends CategoryController {
 
-	private static final String MATERIAL_VIEW = "catalog/encmaterial";
+	private static final String MATERIAL_VIEW = "catalog/home";//"catalog/encmaterial"
 	private static final String DESIGN_VIEW = "catalog/encdesign";
 	private static final String MATERIAL = "material";
 	private static final String DESIGN = "design";
