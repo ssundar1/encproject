@@ -37,9 +37,9 @@ import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
 public class EncSelectProductController{
 
 	public static final String DESIGN_VIEW = "/design";
-	public static final String BLOUSE_DESIGN_VIEW = "/bls-design";
+	public static final String BLOUSE_DESIGN_VIEW = "/bls-design/bls-fn-design";
 	public static final String CHUDI_DESIGN_VIEW = "/chud-design";
-	public static final String MEASUREMENT_VIEW = "catalog/measurement";
+	public static final String MEASUREMENT_VIEW = "catalog/encmeasurement";
 	public static final String ERROR_MATERIAL_VIEW = "catalog/materialerror";
 	public static final String BLOUSE = "blouse";
 	public static final String CHUD = "chud";
@@ -88,7 +88,13 @@ public class EncSelectProductController{
     public String chooseDesign(HttpServletRequest request, HttpServletResponse response, Model model) {    	
        return "forward:" + DESIGN_VIEW ;
     }    
+
     
+    @RequestMapping("/measurement")
+    public String addMeasurement(HttpServletRequest request, HttpServletResponse response, Model model) {    	
+       return MEASUREMENT_VIEW ;
+    }    
+
     @RequestMapping(value = "/adddesignbck", produces = "application/json")
     public @ResponseBody Map<String, Object> addDesignAndBack(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem, Long designId)

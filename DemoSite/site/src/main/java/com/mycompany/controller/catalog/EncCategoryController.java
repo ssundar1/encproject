@@ -43,10 +43,14 @@ import com.enclothe.web.catalog.EncCategoryHandlerMapping;
 @Controller("encCategoryController")
 public class EncCategoryController extends CategoryController {
 
-	private static final String MATERIAL_VIEW = "catalog/home";//"catalog/encmaterial"
-	private static final String DESIGN_VIEW = "catalog/encdesign";
+	private static final String MATERIAL_VIEW = "catalog/encmaterial";
+	private static final String FN_DESIGN_VIEW = "catalog/encdesignfn";
+	private static final String BN_DESIGN_VIEW = "catalog/encdesignbn";
+	private static final String SL_DESIGN_VIEW = "catalog/encdesignsl";
+	private static final String TAILOR_VIEW = "catalog/enctailor";
 	private static final String MATERIAL = "material";
 	private static final String DESIGN = "design";
+	private static final String TAILOR = "tailor";
 	private static final String BLOUSE = "blouse";
 	private static final String CHUD = "chud";
 	private static final String BLOUSE_FRONT_NECK_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
@@ -83,10 +87,20 @@ public class EncCategoryController extends CategoryController {
         
         else if(category.getName().toLowerCase().contains(DESIGN))
         {
-        	m.addObject("material", request.getAttribute("material"));
-        	m.setViewName(DESIGN_VIEW);
+        	//m.addObject("material", request.getAttribute("material"));
+        	
+        	String catg = category.getName();
+        	
+        	if(catg.equals(BLOUSE_FRONT_NECK_DESIGN_CAT_NAME))
+        		m.setViewName(FN_DESIGN_VIEW);
+        	else if(catg.equals(BLOUSE_BACK_NECK_DESIGN_CAT_NAME))
+        		m.setViewName(BN_DESIGN_VIEW);
+        	else if(catg.equals(BLOUSE_SLEEVE_DESIGN_CAT_NAME))
+        		m.setViewName(SL_DESIGN_VIEW);
+        		
         }       	
-        
+        else if(category.getName().toLowerCase().contains(TAILOR))
+        	m.setViewName(TAILOR_VIEW);
         return m;
     }
     
@@ -125,9 +139,11 @@ public class EncCategoryController extends CategoryController {
             Category category = (Category) request.getAttribute(CategoryHandlerMapping.CURRENT_CATEGORY_ATTRIBUTE_NAME);
             assert(category != null);
             
-            if(!category.getName().toLowerCase().contains(DESIGN))
-            	prepareModelForRequest(request,category,"",model);
-            else
+            //if(!category.getName().toLowerCase().contains(""))
+            prepareModelForRequest(request,category,"",model);
+            
+            
+           /* else
             {
             	//Retrieve All subcategories Neck Design , Sleeve design and tailors
             	String fNeckDesign= "";
@@ -172,7 +188,7 @@ public class EncCategoryController extends CategoryController {
             	model.addObject("material", itemDTO.getMaterial());
             	model.addObject("custMeasurements", customerMeasurements);          	
             	
-            }
+            } */
     
             if (StringUtils.isNotEmpty(category.getDisplayTemplate())) {
                 model.setViewName(category.getDisplayTemplate());   

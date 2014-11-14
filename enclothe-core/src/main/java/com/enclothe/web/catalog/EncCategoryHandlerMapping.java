@@ -17,6 +17,7 @@ public class EncCategoryHandlerMapping extends CategoryHandlerMapping {
 	    
 	   public static final String MATERIAL = "material";
 	   public static final String DESIGN = "design";
+	   public static final String TAILOR = "tailor";
 	    public static final String CURRENT_CATEGORY_ATTRIBUTE_NAME = "category";
 
 	    @Override
@@ -25,7 +26,8 @@ public class EncCategoryHandlerMapping extends CategoryHandlerMapping {
 	        BroadleafRequestContext context = BroadleafRequestContext.getBroadleafRequestContext();
 	        if (context != null && context.getRequestURIWithoutContext() != null
 	        		&& (context.getRequestURIWithoutContext().contains(MATERIAL)  ||
-	        				context.getRequestURIWithoutContext().contains(DESIGN))	
+	        				context.getRequestURIWithoutContext().contains(DESIGN) ||
+	        				context.getRequestURIWithoutContext().contains(TAILOR))	
 	        		){
 	            Category category = catalogService.findCategoryByURI(context.getRequestURIWithoutContext());
 

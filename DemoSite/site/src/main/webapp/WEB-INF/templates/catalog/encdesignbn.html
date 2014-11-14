@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<blc:head pageTitle="${category.name + ' - Enclothe'}" />
+
+<body>
+	<div id="notification_bar"></div>
+	<header th:substituteby="layout/partials/header" />
+
+	<div id="content" class="width_setter group" role="main">
+
+		<div class="checkout-wrap">
+		  <ul class="checkout-bar">
+		    <li class="bar visited">Choose Material</li>
+		
+		    <li class="bar visited"><a href="/bls-design/bls-fn-design">Choose FrontNeck</a></li>
+		
+		    <li class="bar active"><a href="/bls-design/bls-bn-design">Choose BackNeck</a></li>
+		
+		    <li class="bar"><a href="/bls-design/bls-sl-design">Choose Sleeve</a></li>
+		
+		    <li class="bar">Choose Tailors</li>
+		    
+			<li class="bar">Choose Measurement</li>
+			
+		  </ul>
+		</div> 
+
+		<div th:substituteby="catalog/partials/encBnDesign" />
+	<footer th:substituteby="layout/partials/footer" />
+</div>
+</body>
+</html>
