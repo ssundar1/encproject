@@ -2074,12 +2074,12 @@ input[type="submit"].small, a.small-button,
 }
 
 input[type="submit"].encCartBtn, input[type="submit"].addToCart{
-	background: url("../img/cart_icon.png") no-repeat scroll 40% 60% #e40037;
+	background: url("../img/cart_icon.png") no-repeat scroll 30% 55% #e40037;
     cursor:pointer;
     border: none;
 	float: right;
-	height: 45px;
-	width: 45px;
+	height: 32px;
+	width: 32px;
 	padding: 0px;
 	margin-bottom: 115px;
 	text-indent: -9999px;
@@ -2102,7 +2102,7 @@ input[type="submit"].medium, a.medium-button, #featured_products .addToCart, #fe
     font: 12px/16px 'Open Sans', Helvetica, sans-serif;
     font-weight: 600;
     margin: 10px auto;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     display: inline-block;
 }
 
@@ -3405,7 +3405,105 @@ a.mover	{ background: #e40037; padding: 6px; margin: 0 0 350px; position: fixed;
 .prev-tab { bottom: 0; left: 0; -moz-border-radius-topright: 10px; -webkit-border-top-right-radius: 10px; }
 
 /* Breadcrumb */
- @-webkit-keyframes myanimation {
+.progress {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 12px 0;
+  text-align: center;
+}
+.progress .circle,
+.progress .bar {
+  display: inline-block;
+  background: #fff;
+  width: 40px; height: 40px;
+  border-radius: 40px;
+  border: 1px solid #d5d5da;
+}
+.progress .bar {
+  position: relative;
+  /* width: 80px; */
+  width: 120px;
+  height: 6px;
+  margin: 0 -5px 17px -5px;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+.progress .circle .label {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 32px;
+  margin-top: 3px;
+  color: #b5b5ba;
+  font-size: 17px;
+}
+.progress .circle .title {
+  color: #b5b5ba;
+  font-size: 13px;
+  line-height: 30px;
+  /* margin-left: -5px; */
+  margin-left: -30px;
+  text-decoration: none
+}
+
+/* Done / Active */
+.progress .bar.done,
+.progress .circle.done {
+  background: #eee;
+}
+.progress .bar.active {
+  background: linear-gradient(to right, #EEE 40%, #FFF 60%);
+}
+.progress .circle.done .label {
+  color: #FFF;
+  background: #8bc435;
+  box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.progress .circle.done .title {
+  color: #444;
+}
+.progress .circle.active .label {
+  color: #FFF;
+  background: #0c95be;
+  box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.progress .circle.active .title {
+  color: #0c95be;
+}
+
+/* blink for next step */
+@keyframes blink {  
+	  0% {background-color: blue}
+	  50% {background-color: black}
+}
+@-webkit-keyframes blink {
+	 0% {background-color: blue}
+	 50% {background-color: black}
+}
+@-moz-keyframes blink {
+	 0% {background-color: blue}
+	 50% {background-color: black}
+}
+@-ms-keyframes blink {
+	 0% {background-color: blue}
+	 50% {background-color: black}
+}
+@-o-keyframes blink {
+	 0% {background-color: blue}
+	 50% {background-color: black}
+}
+.blink {
+	  animation: blink 1s step-start 0s infinite;
+	  -webkit-animation: blink 1s step-start 0s infinite;
+	  -moz-animation: blink 1s step-start 0s infinite;
+	  -ms-animation: blink 1s step-start 0s infinite;
+	  -o-animation: blink 1s step-start 0s infinite;
+} 
+
+
+/*  @-webkit-keyframes myanimation {
   from {
     left: 0%;
   }
@@ -3510,6 +3608,7 @@ ul.checkout-bar a {
 
   .checkout-wrap {
     margin: 80px auto;
+    margin: 25px auto 70px;
     padding-bottom: 5px;
   }
 
@@ -3576,6 +3675,7 @@ ul.checkout-bar a {
     z-index: 99;
   }
 }
+ */ 
  
 /* Home screen style */
 .slider1 div { position: relative; margin: 0px; padding: 0px; }
@@ -3655,7 +3755,7 @@ ul.checkout-bar a {
             .jssora20rdn { background-position: -303px -33px; }
             
             /*--- menu ---*/
-#menuwrapper{ position:relative; height:250px; width:955px; margin: 0 auto; text-align:center;}
+#menuwrapper{ position:relative; height:175px; width:955px; margin: 0 auto; text-align:center;}
 #menu{position:absolute; bottom:0; left:0; width:955px;}
 /* .menuitem{ position:relative; display:inline-block; vertical-align:bottom; } */
 .menuitem{display: inline-block; height: 151px; line-height: 151px; position: relative; text-align: center;}

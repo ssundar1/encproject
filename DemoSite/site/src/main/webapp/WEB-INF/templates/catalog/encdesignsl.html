@@ -14,7 +14,7 @@
 
 	<div id="content" class="width_setter group" role="main">
 
-		<div class="checkout-wrap">
+				<!-- <div class="checkout-wrap">
 		  <ul class="checkout-bar">
 		    <li class="bar visited">Choose Material</li>
 		
@@ -29,8 +29,33 @@
 			<li class="bar">Choose Measurement</li>
 			
 		  </ul>
-		</div> 
-
+		</div>  -->
+		
+		<div class="progress">
+			<div class="circle done">
+				<span class="label">1</span> <a class="title" href="/bls-material">Choose_Material</a>
+			</div>
+			<span class="bar done"></span>
+			<div class="circle done">
+				<span class="label">2</span> <a class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+			</div>
+			<span class="bar done"></span>
+			<div class="circle done">
+				<span class="label">3</span> <a class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+			</div>
+			<span class="bar half"></span>
+			<div class="circle active">
+				<span class="label">4</span> <a class="title">Choose_Sleeve</a>
+			</div>
+			<span class="bar"></span>
+			<div class="circle">
+				<span class="label">5</span> <a class="title" href="/bls-tailor">Choose_Tailors</a>
+			</div>
+			<span class="bar"></span>
+			<div class="circle">
+				<span class="label">6</span> <a class="title">Choose_Measurement</a>
+			</div>
+		</div>
 		<div th:substituteby="catalog/partials/encSlDesign" />
 	
 </div>
