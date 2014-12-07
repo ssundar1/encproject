@@ -33,7 +33,9 @@
 		
 		<div class="progress">
 			<div class="circle done">
-				<span class="label">1</span> <a class="title" href="/bls-material">Choose_Material</a>
+				<span class="label">1</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-material">Choose_Material</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-material">Choose_Material</a>
 			</div>
 			<span class="bar half"></span>
 			<div class="circle active">
@@ -41,7 +43,9 @@
 			</div>
 			<span class="bar"></span>
 			<div class="circle">
-				<span class="label">3</span> <a class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+				<span class="label">3</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
 			</div>
 			<span class="bar"></span>
 			<div class="circle">

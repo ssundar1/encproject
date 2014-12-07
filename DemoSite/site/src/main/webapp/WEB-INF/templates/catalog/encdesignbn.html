@@ -33,11 +33,15 @@
 		
 		<div class="progress">
 			<div class="circle done">
-				<span class="label">1</span> <a class="title" href="/bls-material">Choose_Material</a>
+				<span class="label">1</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-material">Choose_Material</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-material">Choose_Material</a>
 			</div>
 			<span class="bar done"></span>
 			<div class="circle done">
-				<span class="label">2</span> <a class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<span class="label">2</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-fn-design">Choose_FrontNeck</a>
 			</div>
 			<span class="bar half"></span>
 			<div class="circle active">
@@ -45,7 +49,9 @@
 			</div>
 			<span class="bar"></span>
 			<div class="circle">
-				<span class="label">4</span> <a class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
+				<span class="label">4</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
 			</div>
 			<span class="bar"></span>
 			<div class="circle">

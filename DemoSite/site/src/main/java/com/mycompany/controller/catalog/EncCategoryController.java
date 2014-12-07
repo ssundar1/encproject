@@ -53,9 +53,9 @@ public class EncCategoryController extends CategoryController {
 	private static final String TAILOR = "tailor";
 	private static final String BLOUSE = "blouse";
 	private static final String CHUD = "chud";
-	private static final String BLOUSE_FRONT_NECK_DESIGN_CAT_NAME = "Blouse_Front_Neck_Design";
-	private static final String BLOUSE_BACK_NECK_DESIGN_CAT_NAME = "Blouse_Back_Neck_Design";
-	private static final String BLOUSE_SLEEVE_DESIGN_CAT_NAME = "Blouse_Sleeve_Design";
+	private static final String FRONT_NECK_DESIGN_CAT_NAME = "Front_Neck_Design";
+	private static final String BACK_NECK_DESIGN_CAT_NAME = "Back_Neck_Design";
+	private static final String SLEEVE_DESIGN_CAT_NAME = "Sleeve_Design";
 	private static final String TAILOR_CAT_NAME = "Tailor";
 	
     @Resource(name="blCatalogService")
@@ -82,6 +82,11 @@ public class EncCategoryController extends CategoryController {
         	itemDTO.setCreationDate(Calendar.getInstance().getTime());
         	encOrderItemDTOService.save(itemDTO);
 
+        	if(category.getName().toLowerCase().contains(BLOUSE))        		
+        		m.addObject("type", BLOUSE);
+        	else
+        		m.addObject("type", CHUD);
+        	
         	m.setViewName(MATERIAL_VIEW);
         }
         
@@ -91,13 +96,18 @@ public class EncCategoryController extends CategoryController {
         	
         	String catg = category.getName();
         	
-        	if(catg.equals(BLOUSE_FRONT_NECK_DESIGN_CAT_NAME))
+        	if(catg.contains(FRONT_NECK_DESIGN_CAT_NAME))
         		m.setViewName(FN_DESIGN_VIEW);
-        	else if(catg.equals(BLOUSE_BACK_NECK_DESIGN_CAT_NAME))
+        	else if(catg.contains(BACK_NECK_DESIGN_CAT_NAME))
         		m.setViewName(BN_DESIGN_VIEW);
-        	else if(catg.equals(BLOUSE_SLEEVE_DESIGN_CAT_NAME))
+        	else if(catg.contains(SLEEVE_DESIGN_CAT_NAME))
         		m.setViewName(SL_DESIGN_VIEW);
-        		
+
+        	if(category.getName().toLowerCase().contains(BLOUSE))        		
+        		m.addObject("type", BLOUSE);
+        	else
+        		m.addObject("type", CHUD);
+
         }       	
         else if(category.getName().toLowerCase().contains(TAILOR))
         	m.setViewName(TAILOR_VIEW);

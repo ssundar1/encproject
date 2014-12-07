@@ -38,7 +38,7 @@ public class EncSelectProductController{
 
 	public static final String DESIGN_VIEW = "/design";
 	public static final String BLOUSE_DESIGN_VIEW = "/bls-design/bls-fn-design";
-	public static final String CHUDI_DESIGN_VIEW = "/chud-design";
+	public static final String CHUDI_DESIGN_VIEW = "/chud-design/chud-fn-design";
 	public static final String MEASUREMENT_VIEW = "catalog/encmeasurement";
 	public static final String ERROR_MATERIAL_VIEW = "catalog/materialerror";
 	public static final String BLOUSE = "blouse";
@@ -69,9 +69,10 @@ public class EncSelectProductController{
  /*   	itemDTO.setSessionId(sessionId);
     	itemDTO.setIpAddress(ipAddress);
     	itemDTO.setCustomerId(customer.getId());*/
+    	
     	String view = BLOUSE_DESIGN_VIEW; // by default
     	
-    	if(material!= null && material.getType().equals(CHUD))
+    	if(material.getDefaultCategory().getName().toLowerCase().contains("chud"))
     		view = CHUDI_DESIGN_VIEW;
     	
     	if(!(itemDTO != null &&  itemDTO.getMaterial()!=null && itemDTO.getMaterial().getId().equals(addToCartItem.getProductId())))
