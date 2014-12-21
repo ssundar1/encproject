@@ -1,5 +1,6 @@
 package com.mycompany.controller.catalog;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -70,7 +71,6 @@ public class EncCategoryController extends CategoryController {
         
         Category category = (Category) request.getAttribute(EncCategoryHandlerMapping.CURRENT_CATEGORY_ATTRIBUTE_NAME);
         
-        
         if(category.getName().toLowerCase().contains(MATERIAL))
         {
         	EncOrderItemDTO itemDTO = encOrderItemDTOService.createEncOrderItemDTO();
@@ -81,7 +81,6 @@ public class EncCategoryController extends CategoryController {
         	itemDTO.setCustomerId(customer.getId());
         	itemDTO.setCreationDate(Calendar.getInstance().getTime());
         	encOrderItemDTOService.save(itemDTO);
-
         	m.setViewName(MATERIAL_VIEW);
         }
         
@@ -91,16 +90,37 @@ public class EncCategoryController extends CategoryController {
         	
         	String catg = category.getName();
         	
-        	if(catg.equals(BLOUSE_FRONT_NECK_DESIGN_CAT_NAME))
+        	/*//Store Material to DTO
+        	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+        	Long encM =  itemDTO.getMaterial().getId();*/
+        	
+        	if(catg.equals(BLOUSE_FRONT_NECK_DESIGN_CAT_NAME)){
+        		//m.addObject("prodselid", itemsDTO.getFnSelectedId());
         		m.setViewName(FN_DESIGN_VIEW);
-        	else if(catg.equals(BLOUSE_BACK_NECK_DESIGN_CAT_NAME))
+        	}else if(catg.equals(BLOUSE_BACK_NECK_DESIGN_CAT_NAME)){
+        		//m.addObject("prodselid", itemsDTO.getBnSelectedId());
         		m.setViewName(BN_DESIGN_VIEW);
-        	else if(catg.equals(BLOUSE_SLEEVE_DESIGN_CAT_NAME))
+        	}else if(catg.equals(BLOUSE_SLEEVE_DESIGN_CAT_NAME)){
+        		//m.addObject("prodselid", itemsDTO.getSlSelectedId());
         		m.setViewName(SL_DESIGN_VIEW);
-        		
+        	}
         }       	
-        else if(category.getName().toLowerCase().contains(TAILOR))
+        else if(category.getName().toLowerCase().contains(TAILOR)){  
+        	//m.addObject("prodselid", itemsDTO.getTlSelectedId());
         	m.setViewName(TAILOR_VIEW);
+        }
+        
+        EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+        m.addObject("status", itemDTO.getStatus());
+        if(category.getName().equals(BLOUSE_FRONT_NECK_DESIGN_CAT_NAME)){
+    		m.addObject("prodselid", itemDTO.getFnSelectedId());
+    	}else if(category.getName().equals(BLOUSE_BACK_NECK_DESIGN_CAT_NAME)){
+    		m.addObject("prodselid", itemDTO.getBnSelectedId());
+    	}else if(category.getName().equals(BLOUSE_SLEEVE_DESIGN_CAT_NAME)){
+    		m.addObject("prodselid", itemDTO.getSlSelectedId());
+    	}else if(category.getName().toLowerCase().contains(TAILOR)){
+    		m.addObject("prodselid", itemDTO.getTlSelectedId());
+    	}
         return m;
     }
     

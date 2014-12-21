@@ -1,3 +1,19 @@
+//for drag and drop event in home screen
+	function allowDrop(ev) {
+	    ev.preventDefault();
+	}
+
+	function drag(ev) {
+	    ev.dataTransfer.setData("text", ev.target.href);
+	    console.log(ev.target.href);
+	}
+
+	function drop(ev) {
+	    ev.preventDefault();
+	    var data = ev.dataTransfer.getData("text");
+	    //ev.target.appendChild(document.getElementById(data));
+	    window.location.href = data;
+	}
 $(function() {
 	// Set up basic options for the cart fancybox
 	var fancyCartOptions = {
@@ -55,15 +71,16 @@ $(function() {
 	}
 	
 	function showCheckMark(productId, orderType){
-		$('.progress > .circle > .label').addClass('blink');
+		$('.progress').find('.active').next().next().addClass('blink');
+		$('.progress').find('.active').next().next().children('.title').addClass('tblink');
+		$('.progress').find('.active').next().next().children('.title').removeClass('dis');
+		$('#dialog-box').css({'display':'block'});
 		$('.check').css('display','none');
 		$('.productActions' + productId).prev().children().children('.check').css('display','block');
 		$('.add_to_cart').removeClass('hidden');
 		$('.productActions' + productId).children('.add_to_' + orderType).addClass('hidden');
 	}
 		
-	
-
 	// Hides the in cart/in wishlist button and shows the add to cart/add to
 	// wishlist button
 	// orderType can either be 'cart' or 'wishlist'
@@ -330,14 +347,50 @@ $(function() {
 					function() {
 						
 						$('.menuitem span').animate({width: 151}, 0);
+						var def;
 						$('.menuitem').mouseover(function(){
 								gridimage = $(this).find('span');
 								gridimage.css('line-height','201px');
+								def = gridimage.text();
+								gridimage.text('sorry');
+								$('.dd').css('display','block');
 								gridimage.stop().animate({width: 200, height: 200}, 150);
 							}).mouseout(function(){
 								gridimage.css('line-height','151px');
+								gridimage.text(def);
+								$('.dd').css('display','none');
 								gridimage.stop().animate({width: 151, height: 151}, 150);
 						});
+						
+						
+						// if user clicked on button, close the dialog	
+						$('#dialog-box').click(function () {	
+							//$('.progress').next().css({'display':'none'});
+							$('#dialog-box').css({'display':'none'});
+							return false;
+						});
+						
+						// if user clicked on choosematerial, show the dialog	
+						$('#ch_material').click(function () {
+							//$('#ch_material').attr('href', '/bls-material');
+							$('#dialog-box1').css({'display':'block'});
+							return false;
+						});
+						// if user clicked on choosematerial, show the dialog	
+						$('#yes').click(function () {
+							// similar behavior as an HTTP redirect
+							window.location.replace("/bls-material");
+							//window.location.assign("/bls-material")
+							/*// similar behavior as clicking on a link
+							window.location.href = "/bls-material";*/
+							return false;
+						});
+						// if user clicked on choosematerial, show the dialog	
+						$('#no').click(function () {
+							$('#dialog-box1').css({'display':'none'});
+							return false;
+						});
+
 						
 						/*$('#tab-container').easytabs();
 						
@@ -1260,7 +1313,51 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+					var $this = $(this);
+					$imgSrc = $this.attr('imgsrc');
+					$sec = $this.parent().parent().parent().parent();
+					// console.log('tagname:'+$sec.get(0).tagName);
+					$sec2 = $sec.next();
+					// $ch1 = $sec2.find('#options');
+					$ch1 = $sec2.children('#options');
+					// console.log('tagname:'+$ch1.prop('tagName'));
+					$imgTag = $ch1.find('#dImg');
+					// console.log('tagname:'+$ch2.prop('tagName'));
+					// $imgTag.src = $imgSrc;
+					$($imgTag).attr('src', $imgSrc);
+
+					var $descOp = $(this).attr('desc');
+					$sec = $(this).parent().parent().parent().parent();
+					// console.log('tagname:'+$sec.get(0).tagName);
+					$sec2 = $sec.next();
+					$ch1 = $sec2.children('#options').children('#right_column')
+							.children('#options');
+					// console.log('tagname:'+$ch1.prop('tagName'));
+					$pTag = $ch1.find('#content');
+					// console.log('tagname:'+$pTag.prop('tagName'));
+					$($pTag).text($descOp);
+					},function() {
+								var $this = $(this);
+								$sec = $this.parent().parent().parent().parent();
+								// console.log('tagname:'+$sec.get(0).tagName);
+								$sec2 = $sec.next();
+								$ch1 = $sec2.children('#options');
+								$imgTag = $ch1.find('#dImg');
+								// $imgTag.src = '/img/blank.gif';
+								$($imgTag).attr('src', '/img/blank.gif');
+
+								// var $descOp = $(this).attr('desc');
+								$sec = $(this).parent().parent().parent().parent();
+								// console.log('tagname:'+$sec.get(0).tagName);
+								$sec2 = $sec.next();
+								$ch1 = $sec2.children('#options').children('#right_column')
+										.children('#options');
+								// console.log('tagname:'+$ch1.prop('tagName'));
+								$pTag = $ch1.find('#content');
+								// console.log('tagname:'+$pTag.prop('tagName'));
+								$($pTag).text("");
+							});
 
 	$('#chest').on(
 			'focus',
@@ -1311,7 +1408,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#bust').on(
 			'focus',
@@ -1363,7 +1505,53 @@ $(function() {
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
 
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+
+					});
 
 	$('#dartLine').on(
 			'focus',
@@ -1415,7 +1603,53 @@ $(function() {
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
 
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+
+					});
 
 	$('#waist').on(
 			'focus',
@@ -1466,7 +1700,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#hip').on(
 			'focus',
@@ -1517,7 +1796,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#shoulder').on(
 			'focus',
@@ -1568,7 +1892,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#sleeveLength').on(
 			'focus',
@@ -1620,7 +1989,53 @@ $(function() {
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
 
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+
+					});
 	$('#nwaist').on(
 			'focus',
 			function() {
@@ -1670,7 +2085,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#armhole').on(
 			'focus',
@@ -1721,7 +2181,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#tsleeve').on(
 			'focus',
@@ -1773,7 +2278,53 @@ $(function() {
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
 
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+
+					});
 
 	$('#bsleeve').on(
 			'focus',
@@ -1824,7 +2375,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#fneck').on(
 			'focus',
@@ -1875,7 +2471,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 
 	$('#bneck').on(
 			'focus',
@@ -1926,7 +2567,52 @@ $(function() {
 				$pTag = $ch1.find('#content');
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+					});
 	$('#pantheight').on(
 			'focus',
 			function() {
@@ -1977,7 +2663,53 @@ $(function() {
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
 
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+
+					});
 
 	$('#seat').on(
 			'focus',
@@ -2029,5 +2761,51 @@ $(function() {
 				// console.log('tagname:'+$pTag.prop('tagName'));
 				$($pTag).text("");
 
-			});
+			}).hover(function() {
+						var $this = $(this);
+						$imgSrc = $this.attr('imgsrc');
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						// $ch1 = $sec2.find('#options');
+						$ch1 = $sec2.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$imgTag = $ch1.find('#dImg');
+						// console.log('tagname:'+$ch2.prop('tagName'));
+						// $imgTag.src = $imgSrc;
+						$($imgTag).attr('src', $imgSrc);
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text($descOp);
+
+					},function() {
+						var $this = $(this);
+						$sec = $this.parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options');
+						$imgTag = $ch1.find('#dImg');
+						// $imgTag.src = '/img/blank.gif';
+						$($imgTag).attr('src', '/img/blank.gif');
+
+						var $descOp = $(this).attr('desc');
+						$sec = $(this).parent().parent().parent().parent();
+						// console.log('tagname:'+$sec.get(0).tagName);
+						$sec2 = $sec.next();
+						$ch1 = $sec2.children('#options').children('#right_column')
+								.children('#options');
+						// console.log('tagname:'+$ch1.prop('tagName'));
+						$pTag = $ch1.find('#content');
+						// console.log('tagname:'+$pTag.prop('tagName'));
+						$($pTag).text("");
+
+					});
 });

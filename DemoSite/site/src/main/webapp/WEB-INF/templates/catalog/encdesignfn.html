@@ -14,49 +14,24 @@
 
 	<div id="content" class="width_setter group" role="main">
 
-		<!--<div class="checkout-wrap">
-		   <ul class="checkout-bar">
-		    <li class="bar visited">Choose Material</li>
+		<nav th:substituteby="layout/partials/breadcrumb" />
 		
-		    <li class="bar active"><a href="/bls-design/bls-fn-design">Choose FrontNeck</a></li>
-		
-		    <li class="bar"><a href="/bls-design/bls-bn-design">Choose BackNeck</a></li>
-		
-		    <li class="bar">Choose Sleeve</li>
-		
-		    <li class="bar">Choose Tailors</li>
-		    
-			<li class="bar">Choose Measurement</li>
+		<div id="dialog-box">
+				<div class="dialog-content">
+					<div id="dialog-message">Click me! if you want to proceed Next Step.</div>
+					<a href="#" class="button">Ok</a>
+				</div>
+			</div>
 			
-		  </ul>
-		</div>  -->
+			<div id="dialog-box1">
+				<div class="dialog-content">
+					<div id="dialog-message">Re-Selecting a material would remove all the designs selected.
+											Do you really want to re-choose?</div>
+					<a href="/bls-material" id="yes" class="button">Yes</a>
+					<a href="#" id="no" class="button">No</a>
+				</div>
+			</div>
 		
-		<div class="progress">
-			<div class="circle done">
-				<span class="label">1</span> <a class="title" href="/bls-material">Choose_Material</a>
-			</div>
-			<span class="bar half"></span>
-			<div class="circle active">
-				<span class="label">2</span> <a class="title">Choose_FrontNeck</a>
-			</div>
-			<span class="bar"></span>
-			<div class="circle">
-				<span class="label">3</span> <a class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-			</div>
-			<span class="bar"></span>
-			<div class="circle">
-				<span class="label">4</span> <a class="title">Choose_Sleeve</a>
-			</div>
-			<span class="bar"></span>
-			<div class="circle">
-				<span class="label">5</span> <a class="title">Choose_Tailors</a>
-			</div>
-			<span class="bar"></span>
-			<div class="circle">
-				<span class="label">6</span> <a class="title">Choose_Measurement</a>
-			</div>
-		</div>
-
 		<div th:substituteby="catalog/partials/encFnDesign" />
 		</div>
 	<footer th:substituteby="layout/partials/footer" />

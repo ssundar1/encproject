@@ -20,7 +20,7 @@
 		</span> <span th:unless="${customerMeasurementForm.customerMeasurementId}">&nbsp;&nbsp;-
 			or -&nbsp;&nbsp;create a new measurement below</span>
 	</div>
-	<div class="" id="sizeMeasurementDiv" style="margin: 20px 85px;">
+	<div class="" id="sizeMeasurementDiv" style="margin: 20px 35px;">
 		<input type="radio" id="small" name="measurementOptions"
 			value="smalloption" checked="checked" /> <label for="small">S</label>
 		<input type="radio" id="medium" name="measurementOptions"
@@ -28,6 +28,10 @@
 			type="radio" id="large" name="measurementOptions" value="largeoption" />
 		<label for="large">L</label> <input type="radio" id="xlarge"
 			name="measurementOptions" value="xlargeoption" /> <label for="xlarge">XL</label>
+	</div>
+	<div class="" id="preferredMeasurement">
+		<input type="checkbox" id="preferredMeasurement" name="" value="" style="margin: 15px 0px 0px 15px;"/>
+		<span style="padding-left: 5px;">Preferred Measurement</span>
 	</div>
 	<blc:form class="manage-account" method="post"
 		th:action="@{'/account/measurements/' + ${customerMeasurementForm.customerMeasurementId != null ? customerMeasurementForm.customerMeasurementId : ''}}"

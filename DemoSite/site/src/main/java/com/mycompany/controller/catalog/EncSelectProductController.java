@@ -76,7 +76,8 @@ public class EncSelectProductController{
     	
     	if(!(itemDTO != null &&  itemDTO.getMaterial()!=null && itemDTO.getMaterial().getId().equals(addToCartItem.getProductId())))
     	{
-    		itemDTO.setMaterial(material);    	
+    		itemDTO.setMaterial(material);   
+    		itemDTO.setStatus(1);
     		encOrderItemDTOService.save(itemDTO);
     	}
     	
@@ -91,8 +92,13 @@ public class EncSelectProductController{
 
     
     @RequestMapping("/measurement")
-    public String addMeasurement(HttpServletRequest request, HttpServletResponse response, Model model) {    	
-       return MEASUREMENT_VIEW ;
+    public ModelAndView addMeasurement(HttpServletRequest request, HttpServletResponse response) {    	
+    	ModelAndView model = new ModelAndView();
+    	//EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	
+    	model.addObject("status", 5);
+    	model.setViewName(MEASUREMENT_VIEW);
+       return model ;
     }    
 
     @RequestMapping(value = "/adddesignbck", produces = "application/json")
@@ -150,12 +156,28 @@ public class EncSelectProductController{
     		if(category.equals(design.getCategory()))
     		{
     			designs.set(i, design);
+    			
+    			
     			encOrderItemDTOService.save(itemDTO);
     			return responseMap;
     			//return "true";
     		}    		    			
     	}
     	designs.add(design);
+
+    	String category = design.getCategory();
+		if(category.contains("Front_Neck_Design")){
+			itemDTO.setStatus(2);
+			itemDTO.setFnSelectedId(designId);
+		}else if ( category.contains("Back_Neck_Design")){
+			itemDTO.setStatus(3);
+			itemDTO.setBnSelectedId(designId);
+		}else if(category.contains("Sleeve_Design")){
+			itemDTO.setStatus(4);
+			itemDTO.setSlSelectedId(designId);
+		}
+
+		
     	//responseMap.put("itemDTO", itemDTO);
     	encOrderItemDTOService.save(itemDTO);    	
     	
@@ -181,7 +203,8 @@ public class EncSelectProductController{
     	//Add design to DTO. Retrieve designs already in DTO
     	EncTailor tailor = (EncTailor) catalogService.findProductById(tailorId);    	
     	itemDTO.setTailor(tailor);
-    	
+    	itemDTO.setStatus(5);
+    	itemDTO.setTlSelectedId(tailorId);
     	responseMap.put("productId", tailorId);
     	responseMap.put("productName", tailor.getName());
     	
