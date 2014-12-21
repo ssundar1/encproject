@@ -32,6 +32,39 @@
 				</div>
 			</div>
 		
+<<<<<<< HEAD
+=======
+		<div class="progress">
+			<div class="circle done">
+				<span class="label">1</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-material">Choose_Material</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-material">Choose_Material</a>
+			</div>
+			<span class="bar half"></span>
+			<div class="circle active">
+				<span class="label">2</span> <a class="title">Choose_FrontNeck</a>
+			</div>
+			<span class="bar"></span>
+			<div class="circle">
+				<span class="label">3</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+			</div>
+			<span class="bar"></span>
+			<div class="circle">
+				<span class="label">4</span> <a class="title">Choose_Sleeve</a>
+			</div>
+			<span class="bar"></span>
+			<div class="circle">
+				<span class="label">5</span> <a class="title">Choose_Tailors</a>
+			</div>
+			<span class="bar"></span>
+			<div class="circle">
+				<span class="label">6</span> <a class="title">Choose_Measurement</a>
+			</div>
+		</div>
+
+>>>>>>> refs/remotes/origin/enc_changes_phase1
 		<div th:substituteby="catalog/partials/encFnDesign" />
 		</div>
 	<footer th:substituteby="layout/partials/footer" />

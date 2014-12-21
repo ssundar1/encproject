@@ -378,8 +378,16 @@ $(function() {
 						});
 						// if user clicked on choosematerial, show the dialog	
 						$('#yes').click(function () {
+							var cat = $('#ch_material').attr('name');
+							if(cat.equals('blouse')){
+								// similar behavior as an HTTP redirect
+								window.location.replace("/bls-material");
+							}else {
+								// similar behavior as an HTTP redirect
+								window.location.replace("/chud-material");
+							}
 							// similar behavior as an HTTP redirect
-							window.location.replace("/bls-material");
+							//window.location.replace("/bls-material");
 							//window.location.assign("/bls-material")
 							/*// similar behavior as clicking on a link
 							window.location.href = "/bls-material";*/

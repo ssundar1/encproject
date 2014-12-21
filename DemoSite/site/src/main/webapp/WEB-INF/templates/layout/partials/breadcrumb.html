@@ -1,0 +1,100 @@
+<div class="progress" th:id="${status}">
+			
+			<div class="circle active" th:if="${status == 0}">
+				<span class="label">1</span> 
+				<a class="title">Choose_Material</a>
+			</div>
+			<div class="circle done" th:if="${status >= 1}">
+				<span class="label">1</span> 
+				<a th:name="${type}" id="ch_material" class="title" href="#">Choose_Material</a>
+			</div>
+			
+			<span class="bar"  th:if="${status == 0}"></span>
+			<div class="circle"  th:if="${status == 0}">
+				<span class="label">2</span> 
+				<a class="title">Choose_FrontNeck</a>
+			</div>
+			<span class="bar half"  th:if="${status == 1}"></span>
+			<div class="circle active"  th:if="${status == 1}">
+				<span class="label">2</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-fn-design">Choose_FrontNeck</a>
+			</div>
+			<span class="bar done"  th:if="${status >= 2}"></span>
+			<div class="circle done"  th:if="${status >= 2}">
+				<span class="label">2</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-fn-design">Choose_FrontNeck</a>
+			</div>
+			
+			
+			<span class="bar" th:if="${1 >= status}"></span>
+			<div class="circle"  th:if="${1 >= status}">
+				<span class="label">3</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+			</div>
+			<span class="bar half" th:if="${status == 2}"></span>
+			<div class="circle active"  th:if="${status == 2}">
+				<span class="label">3</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+			</div>
+			<span class="bar done" th:if="${status >= 3}"></span>
+			<div class="circle done"  th:if="${status >= 3}">
+				<span class="label">3</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+			</div>
+			
+			<span class="bar" th:if="${2 >= status}"></span>
+			<div class="circle"  th:if="${2 >= status}">
+				<span class="label">4</span> 
+				<a th:if="${type == 'blouse'}" class="title dis" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
+				<a th:if="${type == 'chud'}" class="title dis" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
+			</div>
+			<span class="bar half" th:if="${status == 3}"></span>
+			<div class="circle active"  th:if="${status == 3}">
+				<span class="label">4</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
+			</div>
+			<span class="bar done" th:if="${status >= 4}"></span>
+			<div class="circle done"  th:if="${status >= 4}">
+				<span class="label">4</span> 
+				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
+				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
+			</div>
+			
+			<span class="bar" th:if="${3 >= status}"></span>
+			<div class="circle"  th:if="${3 >= status}">
+				<span class="label">5</span> 
+				<a class="title dis" href="/bls-tailor">Choose_Tailors</a>
+			</div>
+			<span class="bar half" th:if="${status == 4}"></span>
+			<div class="circle active"  th:if="${status == 4}">
+				<span class="label">5</span> 
+				<a class="title" href="/bls-tailor">Choose_Tailors</a>
+			</div>
+			<span class="bar done" th:if="${status >= 5}"></span>
+			<div class="circle done" th:if="${status >= 5}">
+				<span class="label">5</span> 
+				<a class="title" href="/bls-tailor">Choose_Tailors</a>
+			</div>
+			
+			<span class="bar" th:if="${4 >= status}"></span>
+			<div class="circle" th:if="${4 >= status}">
+				<span class="label">6</span> 
+				<a class="title dis" href="/measurement">Choose_Measurement</a>
+			</div>
+			<span class="bar half" th:if="${status == 5}"></span>
+			<div class="circle active" th:if="${status == 5}">
+				<span class="label">6</span> 
+				<a class="title" href="/measurement">Choose_Measurement</a>
+			</div>
+			<span class="bar done" th:if="${status >= 6}"></span>
+			<div class="circle done" th:if="${status >= 6}">
+				<span class="label">6</span> 
+				<a class="title" href="/measurement">Choose_Measurement</a>
+			</div>
+		</div>
