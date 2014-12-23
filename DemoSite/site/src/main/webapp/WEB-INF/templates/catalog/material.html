@@ -45,10 +45,15 @@
                     <div th:utext="*{longDescription}" id="description"></div>
                     
                     <div th:class="*{'productActions' + id}">
-                        <div class="add_to_cart">
+                         <!--  <div class="add_to_cart">
                             <input type="hidden" name="productId" th:value="*{id}" />
                             <input type="hidden" name="quantity" value="1" />
                             <input type="submit" class="encCartBtn" th:value="#{product.buyNow}"/>
+                        </div> -->
+                        <div class="add_to_cart">
+                             <input type="hidden" name="productId" th:value="*{id}" />
+                            <input type="hidden" name="quantity" value="1" /><!-- th:value="#{product.buyNow}" -->
+                            <input type="submit" class="addToCart" value="AddToCart" style="background: no-repeat scroll 40% 50% #e40037; float: none; width: 150px; height: 50px; margin-bottom: 0; height: none; width: none; text-indent: 0; white-space: nowrap;"/>
                         </div>
             <p class="error" th:if="${param.errorMessage}" th:text="${param.errorMessage[0]}"></p>
                     </div>

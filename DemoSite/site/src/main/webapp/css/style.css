@@ -257,7 +257,7 @@ textarea {
 }
 
 table { border-collapse: collapse; border-spacing: 0; }
-td { vertical-align: top; }
+/* td { vertical-align: top; } */
 td.error {
     color: #E40037;
     font-weight: bold;
@@ -914,7 +914,8 @@ li.promotion,  ul.promotion{
 }
 
 #cart {
-    width: 920px;
+    /* width: 920px; */
+    width: 100%;
     padding: 10px;
     margin: 10px 20px;
     display: block;
@@ -982,15 +983,20 @@ li.promotion,  ul.promotion{
 #cart_products {
     width: 580px;
     float: left;
+    margin-bottom: 20px;
 }
 
     #cart_products thead tr th {
+    	border: 1px solid black;
+    	border-collapse: collapse;
         padding: 0 5px;
         text-align: center;
-        font: bold 10px/10px Helvetica, sans-serif;
+        font: bold 12px/15px Helvetica, sans-serif;
         text-transform: uppercase;
-        color: #333;
-        vertical-align: top;
+        /* color: #333; */
+        background-color: #E40037;
+        color: #fff;
+        /* vertical-align: top; */
     }
     
     #cart_products thead tr th span.small {
@@ -999,8 +1005,10 @@ li.promotion,  ul.promotion{
     }
     
     #cart_products tbody tr td {
+    	border: 1px solid black;
+    	border-collapse: collapse;
         padding: 10px;
-        border-bottom: 1px dotted #C8C3C1;
+        /* border-bottom: 1px dotted #C8C3C1; */
     }
     
         #cart_products tbody tr td .cartLinkBtn {

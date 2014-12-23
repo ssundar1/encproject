@@ -46,10 +46,15 @@
                     
                     <div th:class="*{'productActions' + id}">
                         <div class="in_cart" th:classappend="${!cart.containsSku(#object.defaultSku)}? ' hidden'"><a class="fancycart fancybox.ajax big-button gray-button" th:href="@{/cart}">In Cart!</a></div>
-                        <div class="add_to_cart" th:classappend="${cart.containsSku(#object.defaultSku)}? ' hidden'">
+                       <!--  <div class="add_to_cart" th:classappend="${cart.containsSku(#object.defaultSku)}? ' hidden'">
                              <input type="hidden" name="designId" th:value="*{id}" />
                             <input type="hidden" name="quantity" value="1" />
                             <input type="submit" class="addToCart" th:value="#{product.buyNow}"/>
+                        </div> -->
+                         <div class="add_to_cart" th:classappend="${cart.containsSku(#object.defaultSku)}? ' hidden'">
+                             <input type="hidden" name="designId" th:value="*{id}" />
+                            <input type="hidden" name="quantity" value="1" /><!-- th:value="#{product.buyNow}" -->
+                            <input type="submit" class="addToCart" value="AddToCart" style="background: no-repeat scroll 40% 50% #e40037; float: none; width: 150px; height: 50px; margin-bottom: 0; height: none; width: none; text-indent: 0; white-space: nowrap;"/>
                         </div>
             <p class="error" th:if="${param.errorMessage}" th:text="${param.errorMessage[0]}"></p>
                     </div>

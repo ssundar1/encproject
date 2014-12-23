@@ -379,7 +379,7 @@ $(function() {
 						// if user clicked on choosematerial, show the dialog	
 						$('#yes').click(function () {
 							var cat = $('#ch_material').attr('name');
-							if(cat.equals('blouse')){
+							if(cat.contains('blouse')){
 								// similar behavior as an HTTP redirect
 								window.location.replace("/bls-material");
 							}else {
