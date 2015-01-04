@@ -50,5 +50,21 @@ public interface EncOrderItemDTO {
 	Long getCustomerId();
 
 	void setCustomerId(Long customerId);
+	
+	Long getFnSelectedId();
+
+	void setFnSelectedId(Long fnSelectedId);
+	
+	Long getBnSelectedId();
+
+	void setBnSelectedId(Long bnSelectedId);
+	
+	Long getSlSelectedId();
+
+	void setSlSelectedId(Long slSelectedId);
+	
+	Long getTlSelectedId();
+
+	void setTlSelectedId(Long tlSelectedId);
 
 }
