@@ -52,28 +52,18 @@ public class EncSelectProductController{
     protected EncOrderItemDTOService encOrderItemDTOService;
     
     //This method redirects to design once the material is selected
-    @RequestMapping("/selectmaterial")
-    public String selectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,
+    @RequestMapping(value = "/selectmaterial", produces = "application/json")
+    public @ResponseBody Map<String, Object> selectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,
     		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) {
     	
-    	//Retrieve Customer Information
-    	/*String sessionId = request.getSession().getId();
-    	String ipAddress = request.getRemoteAddr();
-       	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
-    	*/
-       	//Retrieve Material
     	EncMaterial material = (EncMaterial) catalogService.findProductById(addToCartItem.getProductId());
     	
+    	Map<String, Object> responseMap = new HashMap<String, Object>();
+    	responseMap.put("productId", material.getId());
+    	responseMap.put("productName", material.getName());
+
     	//Store Material to DTO
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
- /*   	itemDTO.setSessionId(sessionId);
-    	itemDTO.setIpAddress(ipAddress);
-    	itemDTO.setCustomerId(customer.getId());*/
-    	
-    	String view = BLOUSE_DESIGN_VIEW; // by default
-    	
-    	if(material.getDefaultCategory().getName().toLowerCase().contains("chud"))
-    		view = CHUDI_DESIGN_VIEW;
     	
     	if(!(itemDTO != null &&  itemDTO.getMaterial()!=null && itemDTO.getMaterial().getId().equals(addToCartItem.getProductId())))
     	{
@@ -82,7 +72,7 @@ public class EncSelectProductController{
     		encOrderItemDTOService.save(itemDTO);
     	}
     	
-        return "forward:" + view ;
+        return responseMap;
     }
     
     //This method redirects to design once the material is selected

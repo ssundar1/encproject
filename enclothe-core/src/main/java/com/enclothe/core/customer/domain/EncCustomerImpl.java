@@ -6,17 +6,22 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.InheritanceType;
+
 import org.broadleafcommerce.common.presentation.AdminPresentationMap;
 import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
+import com.enclothe.core.product.domain.EncTailorImpl;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -52,5 +57,29 @@ public class EncCustomerImpl extends CustomerImpl implements EncCustomer {
 	   
 	   setCustomerMeasurements(m);
    }
+   
+	@OneToOne(targetEntity=MeasurementImpl.class, optional=true)
+	@JoinColumn(name="DEF_MEASUREMENT_ID")	  
+	protected Measurement preferredMeasurement;
+	  
+	@OneToOne(targetEntity=EncTailorImpl.class, optional=true)
+	@JoinColumn(name="DEF_TAILOR_ID")	  
+	protected Measurement preferredTailor;
+	
+   	public Measurement getPreferredMeasurement() {
+		return preferredMeasurement;
+	}
+
+	public void setPreferredMeasurement(Measurement preferredMeasurement) {
+		this.preferredMeasurement = preferredMeasurement;
+	}
+
+	public Measurement getPreferredTailor() {
+		return preferredTailor;
+	}
+
+	public void setPreferredTailor(Measurement preferredTailor) {
+		this.preferredTailor = preferredTailor;
+	}
 		
 }

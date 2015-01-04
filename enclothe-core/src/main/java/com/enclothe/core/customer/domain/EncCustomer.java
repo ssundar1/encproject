@@ -13,7 +13,12 @@ public interface EncCustomer extends Customer{
 	
 	public void addMeasurement (Measurement measurement);
 	
-	//public Measurement getCustomerMeasurement();
-	//public void setCustomerMeasurement(Measurement m);
+   	public Measurement getPreferredMeasurement();
+
+	public void setPreferredMeasurement(Measurement preferredMeasurement);
+
+	public Measurement getPreferredTailor();
+
+	public void setPreferredTailor(Measurement preferredTailor);
 	
 }

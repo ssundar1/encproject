@@ -55,12 +55,12 @@
 	<div th:switch="*{id}">
 		<div th:case="'10'">
 			<div class="add_to_cart">
-				<blc:form method="GET" th:action="@{/selectmaterial}">
+				<blc:form method="POST" th:action="@{/selectmaterial}">
 					<input type="hidden" name="productId" th:value="*{id}" />
 					<input type="hidden" name="quantity" value="1" />
 					<input type="hidden" name="hasProductOptions"
 						th:value="*{!#lists.isEmpty(productOptions)}" />
-					<input type="submit" class="encCartBtn" value="Choose Design" />
+					<input type="submit" class="addToCart addcart" value="Choose Design" />
 				</blc:form>
 			</div>
 		</div>
@@ -72,12 +72,12 @@
 			</div>
  -->
 			<div class="add_to_cart">
-				<blc:form method="GET" th:action="@{/selectmaterial}">
+				<blc:form method="POST" th:action="@{/selectmaterial}">
 					<input type="hidden" name="productId" th:value="*{id}" />
 					<input type="hidden" name="quantity" value="1" />
 					<input type="hidden" name="hasProductOptions"
 						th:value="*{!#lists.isEmpty(productOptions)}" />
-					<input type="submit" class="encCartBtn"
+					<input type="submit" class="addToCart addcart"
 						th:value="#{product.buyNow}" />
 				</blc:form>
 			</div>
