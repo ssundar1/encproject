@@ -83,6 +83,62 @@ public class EncOrderItemDTOImpl implements EncOrderItemDTO {
 	@Column(name = "END_DATE")
 	protected Date endDate;
 	
+	@Column(name = "STATUS")
+	protected int status;
+	
+	@Column(name = "FN_SELECTED_ID")
+	protected Long fnSelectedId;
+	
+	@Column(name = "BN_SELECTED_ID")
+	protected Long bnSelectedId;
+	
+	@Column(name = "SL_SELECTED_ID")
+	protected Long slSelectedId;
+	
+	@Column(name = "TL_SELECTED_ID")
+	protected Long tlSelectedId;
+	
+	
+	public Long getFnSelectedId() {
+		return fnSelectedId;
+	}
+
+	public void setFnSelectedId(Long fnSelectedId) {
+		this.fnSelectedId = fnSelectedId;
+	}
+
+	public Long getBnSelectedId() {
+		return bnSelectedId;
+	}
+
+	public void setBnSelectedId(Long bnSelectedId) {
+		this.bnSelectedId = bnSelectedId;
+	}
+
+	public Long getSlSelectedId() {
+		return slSelectedId;
+	}
+
+	public void setSlSelectedId(Long slSelectedId) {
+		this.slSelectedId = slSelectedId;
+	}
+
+	public Long getTlSelectedId() {
+		return tlSelectedId;
+	}
+
+	public void setTlSelectedId(Long tlSelectedId) {
+		this.tlSelectedId = tlSelectedId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	@Override
 	public Date getCreationDate() {
 		return creationDate;
