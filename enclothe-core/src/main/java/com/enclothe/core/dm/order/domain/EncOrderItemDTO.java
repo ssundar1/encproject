@@ -51,6 +51,10 @@ public interface EncOrderItemDTO {
 
 	void setCustomerId(Long customerId);
 	
+	int getStatus();
+
+	void setStatus(int status);
+	
 	Long getFnSelectedId();
 
 	void setFnSelectedId(Long fnSelectedId);
