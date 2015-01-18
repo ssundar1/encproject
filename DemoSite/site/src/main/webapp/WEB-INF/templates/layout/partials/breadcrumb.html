@@ -12,7 +12,9 @@
 			<span class="bar"  th:if="${status == 0}"></span>
 			<div class="circle"  th:if="${status == 0}">
 				<span class="label">2</span> 
-				<a class="title">Choose_FrontNeck</a>
+				<a th:if="${type == null}" class="title dis" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<a th:if="${type == 'blouse'}" class="title dis" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<a th:if="${type == 'chud'}" class="title dis" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
 			</div>
 			<span class="bar half"  th:if="${status == 1}"></span>
 			<div class="circle active"  th:if="${status == 1}">

@@ -1005,9 +1005,11 @@ li.promotion,  ul.promotion{
     }
     
     #cart_products tbody tr td {
+    	background: url("../img/sidebarbg.jpg") repeat scroll 0 0 rgba(0, 0, 0, 0);
     	border: 1px solid black;
     	border-collapse: collapse;
-        padding: 10px;
+        padding: 5px;
+        text-align: center;
         /* border-bottom: 1px dotted #C8C3C1; */
     }
     
@@ -1170,6 +1172,7 @@ li.promotion,  ul.promotion{
     width: 260px;
     padding: 10px 20px;
     background: url('../img/sidebarbg.jpg') repeat;
+    box-shadow: 5px 5px 2px rgba(34, 25, 25, 0.4);
     float: right;
 }
 
@@ -1207,7 +1210,8 @@ li.promotion,  ul.promotion{
         }
     
 #cart_promo {
-    width: 900px;
+    /* width: 900px; */
+    width: 875px;
     padding: 10px;
     background-color: #3e0000;
     color: #fff;
@@ -1250,7 +1254,7 @@ li.promotion,  ul.promotion{
     }
     
 #checkout {
-    margin: 20px 0;
+    /* margin: 20px 0; */
 }
 
 #shipping_total {
@@ -3532,6 +3536,46 @@ a.mover	{ background: #e40037; padding: 6px; margin: 0 0 350px; position: fixed;
 	  -o-animation: tblink 1s step-start 0s infinite;
 } 
 
+/* bounce animation */
+.animated { 
+    -webkit-animation-duration: 1s; 
+    animation-duration: 1s; 
+    -webkit-animation-fill-mode: both; 
+    animation-fill-mode: both; 
+    -webkit-animation-timing-function: ease-in-out; 
+    animation-timing-function: ease-in-out; 
+    animation-iteration-count:infinite; 
+    -webkit-animation-iteration-count:infinite; 
+} 
+
+@-webkit-keyframes bounceIn { 
+   
+
+    70% { 
+        -webkit-transform: scale(.9); 
+    } 
+
+    100% { 
+         -webkit-transform: scale(1); 
+    } 
+} 
+
+@keyframes bounceIn { 
+    
+
+    70% { 
+        transform: scale(.9); 
+    } 
+
+    100% { 
+        transform: scale(1); 
+    } 
+} 
+
+.bounceIn { 
+    -webkit-animation-name: bounceIn; 
+    animation-name: bounceIn; 
+}
 
 /*  @-webkit-keyframes myanimation {
   from {

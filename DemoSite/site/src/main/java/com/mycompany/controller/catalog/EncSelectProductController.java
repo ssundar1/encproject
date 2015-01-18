@@ -50,7 +50,18 @@ public class EncSelectProductController{
     
     @Resource(name = "encOrderItemDTOService")
     protected EncOrderItemDTOService encOrderItemDTOService;
-    
+
+    @RequestMapping(value = "/selectmaterialbck", produces = "application/json")
+    public @ResponseBody Map<String, Object> selectMaterialBackselectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem)
+    		{
+    	
+    			Map m = selectMaterial(request,response,model,addToCartItem);
+    			m.put("back", "true");
+    			
+    			return m;
+    		}
+
     //This method redirects to design once the material is selected
     @RequestMapping(value = "/selectmaterial", produces = "application/json")
     public @ResponseBody Map<String, Object> selectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,

@@ -4,6 +4,8 @@
 <div class="image">
 	<a th:href="@{*{url}}"> <img th:if="*{media['primary']}"
 		th:src="@{*{media['primary'].url} + '?browse'}" alt="Sauce Image" />
+		<img class="check" src="../img/green_tick.png" style="position: absolute; width:50px; height:50px; top: -10px; left: 180px; display: none;" alt="check" />
+    	<img class="check" th:if="${prodselid} == *{id}" src="../img/green_tick.png" style="position: absolute; width:50px; height:50px; top: -10px; left: 180px;" alt="check" />
 		<div class="price"
 			th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
 			<div blc:price="*{salePrice}" th:if="*{onSale}"

@@ -362,6 +362,13 @@ $(function() {
 								gridimage.stop().animate({width: 151, height: 151}, 150);
 						});
 						
+						if($('.check').is(":visible")){
+							$('.progress').find('.active').addClass('blink');
+							$('.progress').find('.active').children('.title').addClass('tblink');
+							$('.progress').find('.active').children('.title').removeClass('dis');
+							$('.progress').find('.active').removeClass('active')
+							$('#dialog-box').css({'display':'block'});
+						}
 						
 						// if user clicked on button, close the dialog	
 						$('#dialog-box').click(function () {	

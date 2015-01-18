@@ -21,6 +21,7 @@
              
             </td> -->
             <td class="name">
+            <img th:if="*{product.media['primary']}" th:src="@{*{product.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{product.name}" style="width: 80px; height: 80px;"/>
                 <a th:href="@{*{product.url}}" th:text="*{product.name}"></a><!-- /<a th:href="@{*{design.url}}" th:text="*{design.name}"></a> -->
 <!-- /<a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a> -->             <br/>
                <blc:product_option_display orderItem="${item}" >
@@ -35,16 +36,20 @@
                 </ul>
             </td>
             <td>
-            <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
+            <img th:if="*{designs[0].media['primary']}" th:src="@{*{designs[0].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[0].name}" style="width: 80px; height: 80px;"/>
+            <a th:href="@{*{designs[0].url}}" th:text="*{designs[0].name}"></a>
             </td>
             <td>
-            <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
+            <img th:if="*{designs[1].media['primary']}" th:src="@{*{designs[1].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[1].name}" style="width: 80px; height: 80px;"/>
+            <a th:href="@{*{designs[1].url}}" th:text="*{designs[1].name}"></a>
             </td>
             <td>
-            <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
+            <img th:if="*{designs[2].media['primary']}" th:src="@{*{designs[2].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[2].name}" style="width: 80px; height: 80px;"/>
+            <a th:href="@{*{designs[2].url}}" th:text="*{designs[2].name}"></a>
             </td>
             <td>
-            <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
+            <img th:if="*{tailor.media['primary']}" th:src="@{*{tailor.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{tailor.name}" style="width: 80px; height: 80px;"/>
+            <a th:href="@{*{tailor.url}}" th:text="*{tailor.name}"></a>
             </td>
             <td>
             <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
