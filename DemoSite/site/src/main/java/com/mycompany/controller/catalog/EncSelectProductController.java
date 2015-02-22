@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+import org.broadleafcommerce.core.catalog.domain.Category;
 import org.broadleafcommerce.core.catalog.service.CatalogService;
 import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import com.enclothe.core.customer.domain.EncCustomer;
 import com.enclothe.core.dm.order.domain.EncOrderItemDTO;
 import com.enclothe.core.dm.order.dto.EncOrderItemRequestDTO;
 import com.enclothe.core.dm.order.service.EncOrderItemDTOService;
+import com.enclothe.web.catalog.EncCategoryHandlerMapping;
 
 /**
  * This class works in combination with the CategoryHandlerMapping which finds a category based upon
@@ -73,16 +75,40 @@ public class EncSelectProductController{
     	responseMap.put("productId", material.getId());
     	responseMap.put("productName", material.getName());
 
-    	//Store Material to DTO
-    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	//Store Material to DTO    	
+    	EncOrderItemDTO itemDTO = null;
+    	
+    	itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	
+    	if(itemDTO == null || itemDTO.getStatus() == 5)	
+    	{	itemDTO = encOrderItemDTOService.createEncOrderItemDTO();    	
+    		itemDTO.setSessionId(request.getSession().getId());
+    		itemDTO.setIpAddress(request.getRemoteAddr());
+    	}
+    	else
+    	{
+    		itemDTO.setStatus(0);
+    		itemDTO.setFnSelectedId(null);
+    		itemDTO.setBnSelectedId(null);
+    		itemDTO.setSlSelectedId(null);
+    		itemDTO.setTlSelectedId(null);
+    		itemDTO.setMaterial(null);
+    		itemDTO.setDesigns(null);
+    		itemDTO.setTailor(null);
+    	}
+    	
+    	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+    	itemDTO.setCustomerId(customer.getId());
+    	itemDTO.setCreationDate(Calendar.getInstance().getTime());
     	
     	if(!(itemDTO != null &&  itemDTO.getMaterial()!=null && itemDTO.getMaterial().getId().equals(addToCartItem.getProductId())))
     	{
     		itemDTO.setMaterial(material);   
     		itemDTO.setStatus(1);
-    		encOrderItemDTOService.save(itemDTO);
+    		itemDTO.setMatSelectedId(material.getId());
+    		//encOrderItemDTOService.save(itemDTO);
     	}
-    	
+    	encOrderItemDTOService.save(itemDTO);
         return responseMap;
     }
     
@@ -97,8 +123,13 @@ public class EncSelectProductController{
     public ModelAndView addMeasurement(HttpServletRequest request, HttpServletResponse response) {    	
     	ModelAndView model = new ModelAndView();
     	//EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
-    	
+
     	model.addObject("status", 5);
+    	
+    	/*EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
+    	if(newCustomer.getPreferredMeasurement() != null){
+    		System.out.println(newCustomer.getPreferredMeasurement());
+    	}*/
     	model.setViewName(MEASUREMENT_VIEW);
        return model ;
     }    

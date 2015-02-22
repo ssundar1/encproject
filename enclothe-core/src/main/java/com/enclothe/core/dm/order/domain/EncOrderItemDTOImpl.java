@@ -86,6 +86,9 @@ public class EncOrderItemDTOImpl implements EncOrderItemDTO {
 	@Column(name = "STATUS")
 	protected int status;
 	
+	@Column(name = "MAT_SELECTED_ID")
+	protected Long matSelectedId;
+	
 	@Column(name = "FN_SELECTED_ID")
 	protected Long fnSelectedId;
 	
@@ -98,6 +101,15 @@ public class EncOrderItemDTOImpl implements EncOrderItemDTO {
 	@Column(name = "TL_SELECTED_ID")
 	protected Long tlSelectedId;
 	
+	@Override
+	public Long getMatSelectedId() {
+		return matSelectedId;
+	}
+
+	@Override
+	public void setMatSelectedId(Long matSelectedId) {
+		this.matSelectedId = matSelectedId;
+	}
 	
 	public Long getFnSelectedId() {
 		return fnSelectedId;

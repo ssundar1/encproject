@@ -55,6 +55,10 @@ public interface EncOrderItemDTO {
 
 	void setStatus(int status);
 	
+	Long getMatSelectedId();
+
+	void setMatSelectedId(Long matSelectedId);
+	
 	Long getFnSelectedId();
 
 	void setFnSelectedId(Long fnSelectedId);

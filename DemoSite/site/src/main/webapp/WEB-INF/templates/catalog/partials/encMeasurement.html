@@ -39,7 +39,7 @@
 							th:text="${var.name}"></option>
 					</select>
 				</div>
-				<div class="" id="sizeMeasurementDiv">
+				<div class="" id="sizeMeasurementDiv" style="float:left;">
 						<input type="radio" id="small" name="measurementOptions" value="smalloption" checked="checked"/>
 						<label for="small">S</label> 
 						<input type="radio" id="medium" name="measurementOptions" value="mediumoption"/>
@@ -49,13 +49,13 @@
 						<input type="radio" id="xlarge" name="measurementOptions" value="xlargeoption"/>
 						<label for="xlarge">XL</label>
 				</div>
-				<div class="form50" id="preferredMeasurement">
+				<div class="form50" id="preferredMeasurement" style="width: 500px;">
 					<input type="checkbox" id="preferredMeasurement" name="" value="" style="margin: 15px 0px 0px 15px;"/>
 					<span style="padding-left: 5px;">This is my Preferred Measurement</span>
 				</div>
 				<div class="form100">
 					<input id="selectMeasurement" type="submit" class="addToCart"
-						th:value="#{proudct.addToCart}" />
+						th:value="#{proudct.addToCart}" style="margin-right: 150px;"/>
 				</div>
 			</blc:form>
 		</div>
@@ -66,11 +66,11 @@
 				<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
 				<input type="hidden" name="quantity" value="1" />
 
-				<div class="form66">
+				<div class="form50">
 					<label for="name"><span>Measurement Name</span></label> <input
 						type="text" class="field50" name="name" />
 				</div>
-				<div class="form66">
+				<div class="form50">
 					<label for="description"><span>Measurement
 							Description</span></label> <input type="text" class="field50" name="description" />
 				</div>
@@ -152,7 +152,7 @@
 							imgsrc="/img/measurements/chest.png" desc="This is Seat Measurement"/>
 					</div>
 				<div class="form100">
-					<input type="submit" class="addToCart" th:value="#{product.buyNow}" />
+					<input type="submit" class="addToCart" th:value="#{product.buyNow}" style="margin-right: 150px;"/>
 				</div>
 			</blc:form>
 
@@ -169,7 +169,7 @@
 				<input type="hidden" name="measurementId" value="1" />
 				<div class="form100">
 					<input id="addNewMeasurement" type="submit" class="addToCart"
-						th:value="#{proudct.addToCart}" />
+						th:value="#{proudct.addToCart}" style="margin-right: 150px;"/>
 				</div>
 			</blc:form>
 		</div>

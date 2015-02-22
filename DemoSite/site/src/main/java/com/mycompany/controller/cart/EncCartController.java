@@ -29,6 +29,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -97,8 +98,8 @@ public class EncCartController extends CartController {
     	measurement.setCustomer(newCustomer);
     	newCustomer.addMeasurement(measurement);
        	newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
-           	
-    	//Add Measurement
+
+       	//Add Measurement
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
     	itemDTO.setMeasurement(measurement);
     	encOrderItemDTOService.save(itemDTO);
@@ -120,10 +121,15 @@ public class EncCartController extends CartController {
 	    measurement.setCustomer(newCustomer);
 
         //Add measurement changes to customer and reset it to request
-        newCustomer.addMeasurement(measurement);
+	    newCustomer.addMeasurement(measurement);
+	   /* System.out.println(request.getParameter(""));
+	    if(preferredMeasurement){
+	    	newCustomer.setPreferredMeasurement(measurement);
+	    }*/
+	    
         newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
         CustomerState.setCustomer(newCustomer);
- 
+
         //Add Measurement
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
     	itemDTO.setMeasurement(measurement);
@@ -156,7 +162,7 @@ public class EncCartController extends CartController {
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem,
             @ModelAttribute("measurementId") Long measurementId) throws IOException, PricingException, AddToCartException 
     	{
-    	
+    	//System.out.println(preferredMeasurement);
     		Measurement m = measurementService.readMeasurementById(measurementId);
     		EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);        	
         	itemDTO.setMeasurement(m);
@@ -175,7 +181,7 @@ public class EncCartController extends CartController {
     	List<Long> designIds = new ArrayList<Long>();
     	EncTailor tailor = itemDTO.getTailor();
     	Measurement measurement = itemDTO.getMeasurement();
-    	
+
     	for(EncDesign d: designs)
     	{
     		designIds.add(d.getId());

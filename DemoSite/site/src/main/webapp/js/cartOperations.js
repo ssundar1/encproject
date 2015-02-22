@@ -1,3 +1,19 @@
+function breadcumbClickEvent(current) {
+	 var href = $(current).attr("href");
+	 window.location.replace(href);
+}
+
+function yesClickMethod(current) {
+	var cat = $('#ch_material').attr('name');
+	if (cat.contains('blouse')) {
+		// similar behavior as an HTTP redirect
+		window.location.replace("/bls-material");
+	} else {
+		// similar behavior as an HTTP redirect
+		window.location.replace("/chud-material");
+	}
+}
+
 //for drag and drop event in home screen
 	function allowDrop(ev) {
 	    ev.preventDefault();
@@ -73,8 +89,11 @@ $(function() {
 	function showCheckMark(productId, orderType){
 		$('.progress').find('.active').next().next().addClass('blink');
 		$('.progress').find('.active').next().next().children('.title').addClass('tblink');
-		$('.progress').find('.active').next().next().children('.title').removeClass('dis');
-		$('#dialog-box').css({'display':'block'});
+		$('.progress').find('.active').next().next().removeClass('dis');
+		var pos = $('.progress').find('.active').next().next().children('.label').text();
+		if(pos == 3){
+			$('#dialog-box').css({'display':'block'});
+		}
 		$('.check').css('display','none');
 		$('.productActions' + productId).prev().children().children('.check').css('display','block');
 		$('.add_to_cart').removeClass('hidden');
@@ -365,9 +384,12 @@ $(function() {
 						if($('.check').is(":visible")){
 							$('.progress').find('.active').addClass('blink');
 							$('.progress').find('.active').children('.title').addClass('tblink');
-							$('.progress').find('.active').children('.title').removeClass('dis');
-							$('.progress').find('.active').removeClass('active')
-							$('#dialog-box').css({'display':'block'});
+							$('.progress').find('.active').removeClass('dis');
+							$('.progress').find('.active').removeClass('active');
+							var pos = $('.progress').find('.active').next().next().children('.label').text();
+							if(pos == 3){
+								$('#dialog-box').css({'display':'block'});
+							}
 						}
 						
 						// if user clicked on button, close the dialog	
@@ -379,25 +401,18 @@ $(function() {
 						
 						// if user clicked on choosematerial, show the dialog	
 						$('#ch_material').click(function () {
-							//$('#ch_material').attr('href', '/bls-material');
-							$('#dialog-box1').css({'display':'block'});
+							var id = $(this).parent().attr('id');
+							if(id > 1){
+								//$('#ch_material').attr('href', '/bls-material');
+								$('#dialog-box1').css({'display':'block'});
+							}else{
+								yesClickMethod(this);
+							}
 							return false;
 						});
 						// if user clicked on choosematerial, show the dialog	
 						$('#yes').click(function () {
-							var cat = $('#ch_material').attr('name');
-							if(cat.contains('blouse')){
-								// similar behavior as an HTTP redirect
-								window.location.replace("/bls-material");
-							}else {
-								// similar behavior as an HTTP redirect
-								window.location.replace("/chud-material");
-							}
-							// similar behavior as an HTTP redirect
-							//window.location.replace("/bls-material");
-							//window.location.assign("/bls-material")
-							/*// similar behavior as clicking on a link
-							window.location.href = "/bls-material";*/
+							yesClickMethod(this);
 							return false;
 						});
 						// if user clicked on choosematerial, show the dialog	

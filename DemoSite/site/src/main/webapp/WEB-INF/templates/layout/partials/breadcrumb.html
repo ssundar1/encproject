@@ -4,107 +4,89 @@
 				<span class="label">1</span> 
 				<a class="title">Choose_Material</a>
 			</div>
-			<div class="circle done" th:if="${status >= 1}">
+			<div class="circle done" th:if="${status >= 1}" id="ch_material" th:name="${type == null || type == 'blouse'}? 'blouse': 'chud'">
 				<span class="label">1</span> 
-				<a th:name="${type}" id="ch_material" class="title" href="#">Choose_Material</a>
+				<a class="title" href="#">Choose_Material</a>
 			</div>
 			
 			<span class="bar"  th:if="${status == 0}"></span>
-			<div class="circle"  th:if="${status == 0}">
+			<div class="circle dis"  th:if="${status == 0}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-fn-design': '/chud-design/chud-fn-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">2</span> 
-				<a th:if="${type == null}" class="title dis" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
-				<a th:if="${type == 'blouse'}" class="title dis" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
-				<a th:if="${type == 'chud'}" class="title dis" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
+				<a class="title">Choose_FrontNeck</a>
 			</div>
 			<span class="bar half"  th:if="${status == 1}"></span>
-			<div class="circle active"  th:if="${status == 1}">
+			<div class="circle active"  th:if="${status == 1}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-fn-design': '/chud-design/chud-fn-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">2</span> 
-				<a th:if="${type == null}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
-				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
-				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-fn-design">Choose_FrontNeck</a>
+				<a class="title" >Choose_FrontNeck</a>
 			</div>
 			<span class="bar done"  th:if="${status >= 2}"></span>
-			<div class="circle done"  th:if="${status >= 2}">
+			<div class="circle done"  th:if="${status >= 2}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-fn-design': '/chud-design/chud-fn-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">2</span> 
-				<a th:if="${type == null}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
-				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-fn-design">Choose_FrontNeck</a>
-				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-fn-design">Choose_FrontNeck</a>
+				<a class="title">Choose_FrontNeck</a>
 			</div>
 			
 			
 			<span class="bar" th:if="${1 >= status}"></span>
-			<div class="circle"  th:if="${1 >= status}">
+			<div class="circle dis"  th:if="${1 >= status}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-bn-design': '/chud-design/chud-bn-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">3</span> 
-				<a th:if="${type == null}" class="title dis" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-				<a th:if="${type == 'blouse'}" class="title dis" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-				<a th:if="${type == 'chud'}" class="title dis" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+				<a class="title">Choose_BackNeck</a>
 			</div>
 			<span class="bar half" th:if="${status == 2}"></span>
-			<div class="circle active"  th:if="${status == 2}">
+			<div class="circle active"  th:if="${status == 2}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-bn-design': '/chud-design/chud-bn-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">3</span> 
-				<a th:if="${type == null}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+				<a class="title">Choose_BackNeck</a>
 			</div>
 			<span class="bar done" th:if="${status >= 3}"></span>
-			<div class="circle done"  th:if="${status >= 3}">
+			<div class="circle done"  th:if="${status >= 3}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-bn-design': '/chud-design/chud-bn-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">3</span> 
-				<a th:if="${type == null}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-bn-design">Choose_BackNeck</a>
-				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-bn-design">Choose_BackNeck</a>
+				<a class="title">Choose_BackNeck</a>
 			</div>
 			
 			<span class="bar" th:if="${2 >= status}"></span>
-			<div class="circle"  th:if="${2 >= status}">
+			<div class="circle dis"  th:if="${2 >= status}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-sl-design': '/chud-design/chud-sl-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">4</span>
-				<a th:if="${type == null}" class="title dis" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
-				<a th:if="${type == 'blouse'}" class="title dis" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
-				<a th:if="${type == 'chud'}" class="title dis" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
+				<a class="title">Choose_Sleeve</a>
 			</div>
 			<span class="bar half" th:if="${status == 3}"></span>
-			<div class="circle active"  th:if="${status == 3}">
+			<div class="circle active"  th:if="${status == 3}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-sl-design': '/chud-design/chud-sl-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">4</span>
-				<a th:if="${type == null}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
-				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
-				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
+				<a  class="title" >Choose_Sleeve</a>
 			</div>
 			<span class="bar done" th:if="${status >= 4}"></span>
-			<div class="circle done"  th:if="${status >= 4}">
+			<div class="circle done"  th:if="${status >= 4}" th:href="${type == null || type == 'blouse'}? '/bls-design/bls-sl-design': '/chud-design/chud-sl-design'" onclick="breadcumbClickEvent(this)">
 				<span class="label">4</span>
-				<a th:if="${type == null}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
-				<a th:if="${type == 'blouse'}" class="title" href="/bls-design/bls-sl-design">Choose_Sleeve</a>
-				<a th:if="${type == 'chud'}" class="title" href="/chud-design/chud-sl-design">Choose_Sleeve</a>
+				<a class="title" >Choose_Sleeve</a>
 			</div>
 			
 			<span class="bar" th:if="${3 >= status}"></span>
-			<div class="circle"  th:if="${3 >= status}">
+			<div class="circle dis"  th:if="${3 >= status}" href="/bls-tailor"  onclick="breadcumbClickEvent(this)">
 				<span class="label">5</span> 
-				<a class="title dis" href="/bls-tailor">Choose_Tailors</a>
+				<a class="title" >Choose_Tailors</a>
 			</div>
 			<span class="bar half" th:if="${status == 4}"></span>
-			<div class="circle active"  th:if="${status == 4}">
+			<div class="circle active"  th:if="${status == 4}" href="/bls-tailor"  onclick="breadcumbClickEvent(this)">
 				<span class="label">5</span> 
-				<a class="title" href="/bls-tailor">Choose_Tailors</a>
+				<a class="title">Choose_Tailors</a>
 			</div>
 			<span class="bar done" th:if="${status >= 5}"></span>
-			<div class="circle done" th:if="${status >= 5}">
+			<div class="circle done" th:if="${status >= 5}" href="/bls-tailor"  onclick="breadcumbClickEvent(this)">
 				<span class="label">5</span> 
-				<a class="title" href="/bls-tailor">Choose_Tailors</a>
+				<a class="title">Choose_Tailors</a>
 			</div>
 			
 			<span class="bar" th:if="${4 >= status}"></span>
-			<div class="circle" th:if="${4 >= status}">
+			<div class="circle dis" th:if="${4 >= status}" href="/measurement"  onclick="breadcumbClickEvent(this)">
 				<span class="label">6</span> 
-				<a class="title dis" href="/measurement">Choose_Measurement</a>
+				<a class="title" >Choose_Measurement</a>
 			</div>
 			<span class="bar half" th:if="${status == 5}"></span>
-			<div class="circle active" th:if="${status == 5}">
+			<div class="circle active" th:if="${status == 5}" href="/measurement"  onclick="breadcumbClickEvent(this)">
 				<span class="label">6</span> 
-				<a class="title" href="/measurement">Choose_Measurement</a>
+				<a class="title" >Choose_Measurement</a>
 			</div>
 			<span class="bar done" th:if="${status >= 6}"></span>
-			<div class="circle done" th:if="${status >= 6}">
+			<div class="circle done" th:if="${status >= 6}" href="/measurement"  onclick="breadcumbClickEvent(this)">
 				<span class="label">6</span> 
-				<a class="title" href="/measurement">Choose_Measurement</a>
+				<a class="title" >Choose_Measurement</a>
 			</div>
 		</div>

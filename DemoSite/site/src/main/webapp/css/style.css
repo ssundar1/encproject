@@ -3486,12 +3486,17 @@ a.mover	{ background: #e40037; padding: 6px; margin: 0 0 350px; position: fixed;
 }
 
 .dis {
-       pointer-events: none;
-       cursor: default;
-    } 
+	pointer-events: none;
+	cursor: default;
+}
+
+.circle {
+	cursor: pointer;
+}
 
 /* blink for next step */
-@keyframes blink {  
+@
+keyframes blink {  
 	  50% {background-color: #E40037}
 }
 @-webkit-keyframes blink {

@@ -70,24 +70,24 @@ public class EncCategoryController extends CategoryController {
         ModelAndView m = handleRequestBase(request, response);
         
         Category category = (Category) request.getAttribute(EncCategoryHandlerMapping.CURRENT_CATEGORY_ATTRIBUTE_NAME);
-        
         if(category.getName().toLowerCase().contains(MATERIAL))
         {
-        	EncOrderItemDTO itemDTO = encOrderItemDTOService.createEncOrderItemDTO();
-        	itemDTO.setSessionId(request.getSession().getId());
-        	itemDTO.setIpAddress(request.getRemoteAddr());
-        	
-        	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
-        	itemDTO.setCustomerId(customer.getId());
-        	itemDTO.setCreationDate(Calendar.getInstance().getTime());
-        	encOrderItemDTOService.save(itemDTO);
-
-
         	if(category.getName().toLowerCase().contains(BLOUSE))        		
         		m.addObject("type", BLOUSE);
         	else
         		m.addObject("type", CHUD);
         	
+        	//Store Material to DTO    	
+        	EncOrderItemDTO itemDTO = null;
+        	
+        	itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+        	if(!(itemDTO == null || itemDTO.getStatus() > 1)){
+        		m.addObject("status", itemDTO.getStatus());
+        		m.addObject("prodselid", itemDTO.getMatSelectedId());
+        	}else{
+        		m.addObject("status", 0);
+        	}
+            
         	m.setViewName(MATERIAL_VIEW);
         }
         
@@ -113,23 +113,28 @@ public class EncCategoryController extends CategoryController {
         	else
         		m.addObject("type", CHUD);
 
+        	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+            m.addObject("status", itemDTO.getStatus());
+            
+            if(category.getName().contains(FRONT_NECK_DESIGN_CAT_NAME)){
+        		m.addObject("prodselid", itemDTO.getFnSelectedId());
+        	}else if(category.getName().contains(BACK_NECK_DESIGN_CAT_NAME)){
+        		m.addObject("prodselid", itemDTO.getBnSelectedId());
+        	}else if(category.getName().contains(SLEEVE_DESIGN_CAT_NAME)){
+        		m.addObject("prodselid", itemDTO.getSlSelectedId());
+        	}
+            
         }       	
         else if(category.getName().toLowerCase().contains(TAILOR)){  
         	//m.addObject("prodselid", itemsDTO.getTlSelectedId());
-        	m.setViewName(TAILOR_VIEW);
+        	
+        	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+            m.addObject("status", itemDTO.getStatus());
+            m.addObject("prodselid", itemDTO.getTlSelectedId());
+        	
+            m.setViewName(TAILOR_VIEW);
         }
         
-        EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
-        m.addObject("status", itemDTO.getStatus());
-        if(category.getName().contains(FRONT_NECK_DESIGN_CAT_NAME)){
-    		m.addObject("prodselid", itemDTO.getFnSelectedId());
-    	}else if(category.getName().contains(BACK_NECK_DESIGN_CAT_NAME)){
-    		m.addObject("prodselid", itemDTO.getBnSelectedId());
-    	}else if(category.getName().contains(SLEEVE_DESIGN_CAT_NAME)){
-    		m.addObject("prodselid", itemDTO.getSlSelectedId());
-    	}else if(category.getName().toLowerCase().contains(TAILOR)){
-    		m.addObject("prodselid", itemDTO.getTlSelectedId());
-    	}
         return m;
     }
     
