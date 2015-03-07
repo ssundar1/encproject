@@ -44,11 +44,11 @@ $(function(){
 	    $('#phone').val($('#billingPhone').val());
 	    $('#address').val($('#billingAddress').val());
 	    $('#city').val($('#billingCity').val());
-	    alert('state is '+ $('#billingState option:selected').text());
+	    //alert('state is '+ $('#billingState option:selected').text());
 	    $('#state').val($('#billingState option:selected').text());
 	    $('#postal_code').val($('#billingPostalCode').val());
 	  	  
-  	  alert('val changed');
+  	  //alert('val changed');
   	});
     
     /* Toggle visibility of payment methods */

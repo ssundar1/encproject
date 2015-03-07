@@ -14,6 +14,16 @@
     
 		<nav th:substituteby="layout/partials/breadcrumb" />
 		
+		<div id="dialog-box">
+				<div class="dialog-content">
+					<img class="bouncing" src="../img/handup.png" alt="Click Here!" height="60" width="60"/> 
+					<div STYLE="position:absolute;">
+						<CENTER><FONT SIZE="+1" COLOR="#E40037">Click Here! to Forward</FONT></CENTER>
+					</div>
+					<!-- <div id="dialog-message">Click me! if you want to proceed Next Step.</div>
+					<a href="#" class="button">Ok</a> -->
+				</div>
+			</div>
         
          <section id="left_filter"  class="border">
             <header><span th:text="#{category.filterResults}">Filter your results</span></header>
@@ -45,6 +55,9 @@
                     <span th:text="#{category.viewing}">Viewing</span> [[${category.name}]] ([[${result.startResult}]] - [[${result.endResult}]] <span th:text="#{category.of}">of</span> [[${result.totalResults}]])
                 </h1>
                 <div th:substituteby="catalog/partials/productSortOptions"></div>
+                <div style="float: right; width: 60%;">
+	                	<input type="hidden" name="" value="1" />
+	                </div>
             </header>
             
             <ul id="products" class="group">

@@ -981,7 +981,8 @@ li.promotion,  ul.promotion{
 
 
 #cart_products {
-    width: 580px;
+    /* width: 580px; */
+    width: 70%;
     float: left;
     margin-bottom: 20px;
 }
@@ -1126,10 +1127,33 @@ li.promotion,  ul.promotion{
 
 
 .order_summary {
-    width: 100%;
+    /* width: 100%; */
+    width: 77%;
     clear: both;
 }
 
+ .order_summary thead tr th {
+    	border: 1px solid black;
+    	border-collapse: collapse;
+        padding: 0 5px;
+        text-align: center;
+        font: bold 12px/15px Helvetica, sans-serif;
+        text-transform: uppercase;
+        /* color: #333; */
+        background-color: #E40037;
+        color: #fff;
+        /* vertical-align: top; */
+    }
+    
+     .order_summary tbody tr td {
+    	background: url("../img/sidebarbg.jpg") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    	border: 1px solid black;
+    	border-collapse: collapse;
+        padding: 5px;
+        text-align: center;
+        /* border-bottom: 1px dotted #C8C3C1; */
+    }
+    
 .multiship_summary {
     width: 80%;
     margin-left: 50px;
@@ -1166,7 +1190,8 @@ li.promotion,  ul.promotion{
     vertical-align:middle;
 }
 .order_summary tbody tr td{
-    vertical-align:top;
+    /* vertical-align:top; */
+    vertical-align:middle;
 }
 #cart_total {
     width: 260px;
@@ -1373,7 +1398,7 @@ ul#payment_methods li {
     }
     
     #left_column header h1 {
-        /* width: 55%; */width: 100%;
+        /* width: 55%; */width: 50%;
         font: bold 20px/24px 'Open Sans',Helvetica,sans-serif;
         color: #262322;
         float: left;
@@ -1384,11 +1409,13 @@ ul#payment_methods li {
         font-size: 12px;
         /*  margin-top: 6px;
         margin-right: -120px; */
-        margin-right: 32px;
-    	margin-top: -45px;
+       /*  margin-right: 32px;
+    	margin-top: -45px; */
+       margin-left: -20px;
         line-height: 14px;
         text-align: right;
-        float: right;
+        float: left;
+        width: 20%;
     }
     
         #left_column header #sort span.heading {
@@ -3853,12 +3880,14 @@ ul.checkout-bar a {
 	
 	/* background:#eee; */
 	/* styling of the dialog box, i have a fixed dimension for this demo */ 
-	width:250px; 
+	/* width:250px; */ 
+	width:65px;
 	
 	/* make sure it has the highest z-index */
 	position:fixed; 
-	z-index:5000; 
-	margin-left: 430px;
+	z-index:10000; 
+	/* margin-left: 430px; */
+	margin-left: 335px;
 
 	/* hide it by default */
 	display:none;
@@ -3890,11 +3919,22 @@ ul.checkout-bar a {
 #dialog-box .dialog-content {
 	/* style the content */
 	/* text-align:left;  */
-	padding:10px; 
+	/* padding:10px;  */
 	margin:0px;
 	color:#666; 
 	font-family:arial;
 	font-size:15px; 
+}
+
+.bouncing {
+  animation: bouncing 0.4s ease-out 0s infinite alternate;
+  margin-top: -35px;
+}
+
+@keyframes bouncing {
+  to {
+    margin-top: 8px;
+  }
 }
 
 a.button {

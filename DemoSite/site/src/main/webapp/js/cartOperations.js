@@ -90,10 +90,10 @@ $(function() {
 		$('.progress').find('.active').next().next().addClass('blink');
 		$('.progress').find('.active').next().next().children('.title').addClass('tblink');
 		$('.progress').find('.active').next().next().removeClass('dis');
-		var pos = $('.progress').find('.active').next().next().children('.label').text();
-		if(pos == 3){
+		//var pos = $('.progress').find('.active').next().next().children('.label').text();
+		//if(pos == 3){
 			$('#dialog-box').css({'display':'block'});
-		}
+		//}
 		$('.check').css('display','none');
 		$('.productActions' + productId).prev().children().children('.check').css('display','block');
 		$('.add_to_cart').removeClass('hidden');
@@ -131,6 +131,17 @@ $(function() {
 		return false;
 	});
 
+	$('body').on('click', 'input.small', function() {
+		var inputVal= $(".pp").val();
+		if(inputVal.length == 0){
+			$(".phnoevalerror").text("Please enter Phone number");
+			/*$(".pp").addClass("fieldError");*/
+		}else {
+			$(".phnoevalerror").text("");
+			/*$(".pp").removeClass("fieldError");*/
+		}
+	});
+	
 	// Intercept add to cart operations and perform them via AJAX instead
 	// This will trigger on any input with class "addToCart" or "addToWishlist"
 	$('body')
@@ -145,6 +156,10 @@ $(function() {
 								.find('span.error');
 						$productOptionsSpan = $container
 								.find('span.productOptionsSpan');
+						
+						var res = $('#preferredMeasurement').is(":checked");
+						$("#cv").val(res);
+						
 						if ($container.length == 0) {
 							var myId = $button.parent().attr('id').substring(
 									'productOptions'.length);
@@ -386,10 +401,10 @@ $(function() {
 							$('.progress').find('.active').children('.title').addClass('tblink');
 							$('.progress').find('.active').removeClass('dis');
 							$('.progress').find('.active').removeClass('active');
-							var pos = $('.progress').find('.active').next().next().children('.label').text();
-							if(pos == 3){
+							//var pos = $('.progress').find('.active').next().next().children('.label').text();
+							//if(pos == 3){
 								$('#dialog-box').css({'display':'block'});
-							}
+							//}
 						}
 						
 						// if user clicked on button, close the dialog	
@@ -401,8 +416,9 @@ $(function() {
 						
 						// if user clicked on choosematerial, show the dialog	
 						$('#ch_material').click(function () {
-							var id = $(this).parent().attr('id');
-							if(id > 1){
+							//var id = $(this).parent().attr('id');
+							var id = $('.progress').find('.active').next().next().children('.label').text();
+							if(id >= 3){
 								//$('#ch_material').attr('href', '/bls-material');
 								$('#dialog-box1').css({'display':'block'});
 							}else{
@@ -955,6 +971,32 @@ $(function() {
 											}
 										});
 						
+						$(".primaryphone")
+						.keydown(
+								function(e) {
+									// Allow: backspace, delete, tab,
+									// escape, enter and .
+									if ($.inArray(e.keyCode, [ 46, 8,
+											9, 27, 13, 110, 190 ]) !== -1
+											||
+											// Allow: Ctrl+A
+											(e.keyCode == 65 && e.ctrlKey === true)
+											||
+											// Allow: home, end, left,
+											// right
+											(e.keyCode >= 35 && e.keyCode <= 39)) {
+										// let it happen, don't do
+										// anything
+										return;
+									}
+									// Ensure that it is a number and
+									// stop the keypress
+									if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57))
+											&& (e.keyCode < 96 || e.keyCode > 105)) {
+										e.preventDefault();
+									}
+								});
+						
 						if ($('#measurementdropdown option').length < 1) {
 
 							// If there are no previously added measurements,
@@ -1179,6 +1221,10 @@ $(function() {
 				$("#measurementDropDown").hide();
 				$("#selectMeasurement").hide();
 				$("#offshelf").hide();
+				
+				$("#sizeMeasurementDiv").show();
+				$("#preferredMeasurementDiv").show();
+				
 				var $descOp = $(this).attr('desc');
 				$sec = $(this).parent().parent().parent().parent();
 				// console.log('tagname:'+$sec.get(0).tagName);
@@ -1200,6 +1246,10 @@ $(function() {
 				$("#measurementDropDown").show();
 				$("#selectMeasurement").show();
 				$("#offshelf").hide();
+				
+				$("#sizeMeasurementDiv").hide();
+				$("#preferredMeasurementDiv").show();
+				
 				var $descOp = $(this).attr('desc');
 				$sec = $(this).parent().parent().parent().parent();
 				// console.log('tagname:'+$sec.get(0).tagName);
@@ -1220,6 +1270,10 @@ $(function() {
 				$("#measurementDropDown").hide();
 				$("#selectMeasurement").hide();
 				$("#offshelf").show();
+				
+				$("#sizeMeasurementDiv").hide();
+				$("#preferredMeasurementDiv").hide();
+				
 				var $descOp = $(this).attr('desc');
 				$sec = $(this).parent().parent().parent().parent();
 				// console.log('tagname:'+$sec.get(0).tagName);
@@ -1234,7 +1288,7 @@ $(function() {
 				return true;
 
 			});
-
+	
 	// Setup form validation on the #register-form element
 	$("#addnew").validate({
 
@@ -2838,4 +2892,16 @@ $(function() {
 						$($pTag).text("");
 
 					});
+	
+	$('.pp').on('blur', function() {
+		var inputVal = $(this).val();
+		if (inputVal.length == 0) {
+			$(".phnoevalerror").text("Please enter Phone number");
+			 $(this).addClass("fieldError"); 
+		} else {
+			$(".phnoevalerror").text("");
+			 $(this).removeClass("fieldError"); 
+		}
+	});
+	
 });

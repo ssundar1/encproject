@@ -13,10 +13,10 @@
             </div>
             <div class="form30 margin20">
                 <label for="phone"><span th:text="#{cart.phone}">Phone</span></label> <span class="error_spacer" th:if="${#fields.hasErrors('address.firstName') or #fields.hasErrors('address.lastName')}">error</span>
-                <input type="tel" id="address.phonePrimary" name="address.phonePrimary" th:if="*{address.phonePrimary != null}" th:value="*{address.phonePrimary.phoneNumber}" class="field30 cloneable" />
-                <input type="tel" id="address.phonePrimary" name="address.phonePrimary" th:if="*{address.phonePrimary == null}" value="" class="field30 cloneable" />
+                <input type="tel" id="address.phonePrimary" name="address.phonePrimary" th:if="*{address.phonePrimary != null}" th:value="*{address.phonePrimary.phoneNumber}" class="field30 cloneable primaryphone pp" maxlength="10"/>
+                <input type="tel" id="address.phonePrimary" name="address.phonePrimary" th:if="*{address.phonePrimary == null}" value="" class="field30 cloneable primaryphone pp" maxlength="10" />
+                <span class="phnoevalerror" style="color: #E40037;"></span>
             </div>
-
             <div class="clearfix"></div>
 
             <div class="form50">
@@ -26,20 +26,21 @@
 
             <div class="clearfix"></div>
 
-            <div class="form30">
+           <div class="form30">
                 <label for="city"><span th:text="#{cart.cityState}">City / State</span></label> <span class="error" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span> <br
                     th:if="${#fields.hasErrors('address.city')} and ${#fields.hasErrors('address.state')}" /> <span class="error" th:if="${#fields.hasErrors('address.state')}"
                     th:errors="*{address.state}"></span> <input type="text" th:field="*{address.city}" class="field25 cloneable"
                     th:classappend="${#fields.hasErrors('address.city')}? 'fieldError'" /> <select id="state" th:field="*{address.state}" size="1" style="width: 48px;"
                     class="cloneable" th:classappend="${#fields.hasErrors('address.state')}? 'fieldError'">
                     <option value="">--</option>
-                    <option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option>
+                    <option value="TN">TN</option>
+                   <!--  <option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option> -->
                 </select>
             </div>
 
             <div class="form25 margin20">
                 <label for="postal_code"><span th:text="#{cart.postalCode}">Postal Code</span></label> <span class="error" th:if="${#fields.hasErrors('address.postalCode')}" th:errors="*{address.postalCode}"></span>
-                <input type="text" th:field="*{address.postalCode}" class="field25 cloneable" th:classappend="${#fields.hasErrors('address.postalCode')}? 'fieldError'" />
+                <input type="text" th:field="*{address.postalCode}" class="field25 cloneable primaryphone" th:classappend="${#fields.hasErrors('address.postalCode')}? 'fieldError'" maxlength="7"/>
                 
                 
             </div>
@@ -51,9 +52,9 @@
                 <div id="shipping_total" blc:price="${cart.totalShipping}" />
             </div>
 
-            <div>
+             <div>
             <input type="hidden" name="fulfillmentOptionId" value="1" />
-                <input id="select_shipping" type="submit" class="small dark" value="SUBMIT"  />
+                <input id="select_shipping" type="submit" class="small dark" value="SUBMIT" style="background: none no-repeat scroll 40% 50% rgb(228, 0, 55); float: none; margin-bottom: 0px; text-indent: 0px; white-space: nowrap; font-size: 120%; height: 40px; width: 115px;"/>
             </div>
 
         </div>

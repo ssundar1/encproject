@@ -122,10 +122,10 @@ public class EncCartController extends CartController {
 
         //Add measurement changes to customer and reset it to request
 	    newCustomer.addMeasurement(measurement);
-	   /* System.out.println(request.getParameter(""));
-	    if(preferredMeasurement){
+
+	    if(request.getParameter("checkboxvalues").equalsIgnoreCase("true")){
 	    	newCustomer.setPreferredMeasurement(measurement);
-	    }*/
+	    }
 	    
         newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
         CustomerState.setCustomer(newCustomer);
@@ -162,7 +162,7 @@ public class EncCartController extends CartController {
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem,
             @ModelAttribute("measurementId") Long measurementId) throws IOException, PricingException, AddToCartException 
     	{
-    	//System.out.println(preferredMeasurement);
+    		System.out.println(measurementId);
     		Measurement m = measurementService.readMeasurementById(measurementId);
     		EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);        	
         	itemDTO.setMeasurement(m);

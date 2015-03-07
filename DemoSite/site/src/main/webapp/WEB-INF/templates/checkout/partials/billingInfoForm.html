@@ -71,7 +71,7 @@
   			<input name="description" type="hidden" value="test"/> 
    	  <input name="email" type="hidden" size="60" value="test@abc.com"/>
    <input name="secure_hash" type="hidden" size="60" th:value="*{secureHash}"/>
-            <input type="submit" class="medium" th:value="#{cart.completOrder}" th:disabled="${!validShipping}" th:classappend="${validShipping}? 'red' : 'gray'"/>
+            <input type="submit" class="medium" th:value="#{cart.completOrder}" th:disabled="${!validShipping}" th:classappend="${validShipping}? 'red' : 'gray'" style="background: none no-repeat scroll 40% 50% rgb(228, 0, 55); float: none; margin-bottom: 0px; text-indent: 0px; white-space: nowrap; font-size: 120%; height: 50px; width: 155px;"/>
         </div>
 
     </div>

@@ -30,6 +30,9 @@
 	                    <span th:text="#{category.viewing}">Viewing</span> Back Neck Designs ([[${result.startResult}]] - [[${result.endResult}]] <span th:text="#{category.of}">of</span> [[${result.totalResults}]])
 	                </h1>
 	                <div th:substituteby="catalog/partials/productSortOptions"></div>
+	                <div style="float: right; width: 60%;">
+	                	<input type="hidden" name="" value="1" />
+	                </div>
 	            </header>
 	            
 	            <ul id="products" class="group">

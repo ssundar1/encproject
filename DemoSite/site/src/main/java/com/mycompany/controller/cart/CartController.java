@@ -18,6 +18,7 @@ package com.mycompany.controller.cart;
 
 
 import org.broadleafcommerce.core.catalog.domain.Product;
+import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.order.service.exception.AddToCartException;
 import org.broadleafcommerce.core.order.service.exception.ProductOptionValidationException;
 import org.broadleafcommerce.core.order.service.exception.RemoveFromCartException;
@@ -30,15 +31,22 @@ import org.broadleafcommerce.core.web.order.model.AddToCartItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.enclothe.core.dispute.domain.Dispute;
+import com.enclothe.core.measurement.domain.Measurement;
+import com.enclothe.core.measurement.service.MeasurementService;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

@@ -29,7 +29,14 @@
 	                <h1 th:inline="text">
 	                    <span th:text="#{category.viewing}">Viewing</span> Tailors ([[${result.startResult}]] - [[${result.endResult}]] <span th:text="#{category.of}">of</span> [[${result.totalResults}]])
 	                </h1>
+	                <div class="" id="preferredTailorDiv" style="float: left; width: 25%;">
+						<input type="checkbox" id="preferredTailor" name="preferredTailorOption" value=""/>
+						<span style="padding-left: 5px;">This is my Preferred Tailor</span>
+					</div>
 	                <div th:substituteby="catalog/partials/productSortOptions"></div>
+	                <div style="float: right; width: 60%;">
+	                	<input type="hidden" name="" value="1" />
+	                </div>
 	            </header>
 	            
 	            <ul id="products" class="group">

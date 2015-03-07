@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import org.broadleafcommerce.core.catalog.domain.Category;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.enclothe.core.measurement.domain.Measurement;
+import com.enclothe.core.measurement.service.MeasurementService;
 import com.enclothe.core.product.domain.EncDesign;
 import com.enclothe.core.product.domain.EncMaterial;
 import com.enclothe.core.product.domain.EncTailor;
@@ -52,6 +55,9 @@ public class EncSelectProductController{
     
     @Resource(name = "encOrderItemDTOService")
     protected EncOrderItemDTOService encOrderItemDTOService;
+    
+    @Resource(name = "encMeasurementService")
+    protected MeasurementService measurementService;
 
     @RequestMapping(value = "/selectmaterialbck", produces = "application/json")
     public @ResponseBody Map<String, Object> selectMaterialBackselectMaterial(HttpServletRequest request, HttpServletResponse response, Model model,
@@ -126,13 +132,24 @@ public class EncSelectProductController{
 
     	model.addObject("status", 5);
     	
-    	/*EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
+    	EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
     	if(newCustomer.getPreferredMeasurement() != null){
-    		System.out.println(newCustomer.getPreferredMeasurement());
-    	}*/
+    		model.addObject("measurement", newCustomer.getPreferredMeasurement());
+    	}
+    	
     	model.setViewName(MEASUREMENT_VIEW);
        return model ;
     }    
+    
+    @RequestMapping(value = "measurements/{id}", method = RequestMethod.GET)
+    public String viewMeasurementDetails(HttpServletRequest request, Model model, @PathVariable("id") Long id) {
+    	
+    	Measurement m = measurementService.readMeasurementById(id);
+    	System.out.println(m.getHeight());
+    	model.addAttribute("measurement", m);
+
+    	return MEASUREMENT_VIEW;
+    }
 
     @RequestMapping(value = "/adddesignbck", produces = "application/json")
     public @ResponseBody Map<String, Object> addDesignAndBack(HttpServletRequest request, HttpServletResponse response, Model model,
