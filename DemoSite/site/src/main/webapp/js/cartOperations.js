@@ -130,12 +130,23 @@ $(function() {
 		$.fancybox.open(extendedOptions);
 		return false;
 	});
+	
+	$('body').on('click', 'input#use_shipping_address', function() {
+		var ship = $('#use_shipping_address').is(":checked");
+		if(ship){
+			$(".d").removeAttr('disabled');
+		}else{
+			$(".d").attr('disabled','disabled');
+		}
+	});
 
 	$('body').on('click', 'input.small', function() {
 		var inputVal= $(".pp").val();
 		if(inputVal.length == 0){
 			$(".phnoevalerror").text("Please enter Phone number");
 			/*$(".pp").addClass("fieldError");*/
+		}else if(inputVal.length < 10){			
+			$(".phnoevalerror").text("Please enter min 10 digit number");
 		}else {
 			$(".phnoevalerror").text("");
 			/*$(".pp").removeClass("fieldError");*/
@@ -437,7 +448,6 @@ $(function() {
 							return false;
 						});
 
-						
 						/*$('#tab-container').easytabs();
 						
 						$(".ui-tabs-panel").each(function(i){
@@ -2896,9 +2906,14 @@ $(function() {
 	$('.pp').on('blur', function() {
 		var inputVal = $(this).val();
 		if (inputVal.length == 0) {
+			 $(".d").attr('disabled','disabled');
 			$(".phnoevalerror").text("Please enter Phone number");
 			 $(this).addClass("fieldError"); 
-		} else {
+		}else if(inputVal.length < 10){
+			 $(".d").attr('disabled','disabled');
+			$(".phnoevalerror").text("Please enter min 10 digit number");
+		}else {
+			$(".d").removeAttr('disabled');
 			$(".phnoevalerror").text("");
 			 $(this).removeClass("fieldError"); 
 		}

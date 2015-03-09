@@ -18,13 +18,14 @@
         <div class="form30 margin20">
             <label for="lastName"><span th:text="#{cart.lastName}">Last Name</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.lastName')}" th:errors="*{address.lastName}"></span>
-            <input type="text" id="billingLastName" th:field="*{address.lastName}" class="field30 required clearable" th:classappend="${#fields.hasErrors('address.lastName')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="billingLastName" name="billingLastName"  th:field="*{address.lastName}" class="field30 required clearable" th:classappend="${#fields.hasErrors('address.lastName')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div class="form30 margin20">
             <label for="phone"><span th:text="#{cart.phone}">Phone</span></label>
             <span class="error_spacer" th:if="${#fields.hasErrors('address.firstName') or #fields.hasErrors('address.lastName')}">error</span>
-           <input type="tel" id="billingPhone" name="address.phonePrimary" th:if="*{address.phonePrimary!=null}" th:value="*{address.phonePrimary.phoneNumber}" class="field30 clearable" />
+           <input type="tel" id="billingPhone" name="address.phonePrimary" th:if="*{address.phonePrimary!=null}" th:value="*{address.phonePrimary.phoneNumber}" class="field30 clearable primaryphone pp" maxlength="12"/>
+           <span class="phnoevalerror" style="color: #E40037;"></span>
         </div>
 
         <div class="clearfix"></div>
@@ -45,15 +46,16 @@
             <input type="text" id="billingCity" name="address.city" th:value="*{address.city}" class="field25 required clearable" th:classappend="${#fields.hasErrors('address.city')}? 'fieldError'" th:disabled="${!validShipping}" />
 
             <select id="billingState" name="address.state" th:value="*{address.state}" size="1" style="width: 48px;" class="required clearable" th:classappend="${#fields.hasErrors('address.state')}? 'fieldError'" th:disabled="${!validShipping}">
-                <option value="">--</option>
-                <option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option>
+               <option value="">--</option>
+                    <option value="TN" text="TN">TN</option>
+                    <!-- <option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option> -->
             </select>
         </div>
 
         <div class="form25 margin20">
             <label for="postal_code"><span th:text="#{cart.postalCode}">Postal Code</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.postalCode')}" th:errors="*{address.postalCode}"></span>
-            <input type="text" id="billingPostalCode" name="address.postalCode"  th:value="*{address.postalCode}" class="field25 clearable" th:classappend="${#fields.hasErrors('address.postalCode')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="billingPostalCode" name="address.postalCode"  th:value="*{address.postalCode}" class="field25 clearable primaryphone" th:classappend="${#fields.hasErrors('address.postalCode')}? 'fieldError'" th:disabled="${!validShipping}" maxlength="7"/>
         </div>
 
         <div style="float:right;">
@@ -71,7 +73,7 @@
   			<input name="description" type="hidden" value="test"/> 
    	  <input name="email" type="hidden" size="60" value="test@abc.com"/>
    <input name="secure_hash" type="hidden" size="60" th:value="*{secureHash}"/>
-            <input type="submit" class="medium" th:value="#{cart.completOrder}" th:disabled="${!validShipping}" th:classappend="${validShipping}? 'red' : 'gray'" style="background: none no-repeat scroll 40% 50% rgb(228, 0, 55); float: none; margin-bottom: 0px; text-indent: 0px; white-space: nowrap; font-size: 120%; height: 50px; width: 155px;"/>
+            <input type="submit" class="medium d" th:value="#{cart.completOrder}" disabled="disabled" th:disabled="${!validShipping}" th:classappend="${validShipping}? 'red' : 'gray'" style="background: none no-repeat scroll 40% 50% rgb(228, 0, 55); float: none; margin-bottom: 0px; text-indent: 0px; white-space: nowrap; font-size: 120%; height: 50px; width: 155px;"/>
         </div>
 
     </div>

@@ -155,11 +155,12 @@ public class MeasurementImpl implements Measurement {
     @AdminPresentation(friendlyName = "MeasurementImpl_Seat", order = 190, group = "MeasurementImpl_Measurement",
     visibility = VisibilityEnum.HIDDEN_ALL) 
     protected float seat;
-
+    
     @Column(name = "END_DATE")
     @AdminPresentation(friendlyName = "MeasurementImpl_End_Date", order = 200, group = "MeasurementImpl_Measurement",
     visibility = VisibilityEnum.HIDDEN_ALL) 
     protected Date endDate;
+    
     
     @Embedded
     protected Auditable auditable = new Auditable();
@@ -369,5 +370,6 @@ public class MeasurementImpl implements Measurement {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
 
 }
