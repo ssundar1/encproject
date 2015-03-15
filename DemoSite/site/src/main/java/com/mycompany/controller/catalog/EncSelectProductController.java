@@ -44,7 +44,9 @@ public class EncSelectProductController{
 	public static final String DESIGN_VIEW = "/design";
 	public static final String BLOUSE_DESIGN_VIEW = "/bls-design/bls-fn-design";
 	public static final String CHUDI_DESIGN_VIEW = "/chud-design/chud-fn-design";
-	public static final String MEASUREMENT_VIEW = "catalog/encmeasurement";
+	//public static final String MEASUREMENT_VIEW = "catalog/encmeasurement";
+	public static final String MEASUREMENT_VIEW_WITHOUTDATA = "catalog/encmeasurement";
+	public static final String MEASUREMENT_VIEW_WITHDATA = "catalog/encmeasurementdata";
 	public static final String ERROR_MATERIAL_VIEW = "catalog/materialerror";
 	public static final String BLOUSE = "blouse";
 	public static final String CHUD = "chud";
@@ -135,9 +137,12 @@ public class EncSelectProductController{
     	EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
     	if(newCustomer.getPreferredMeasurement() != null){
     		model.addObject("measurement", newCustomer.getPreferredMeasurement());
+    		model.setViewName(MEASUREMENT_VIEW_WITHDATA);
+    	}else{
+    		model.setViewName(MEASUREMENT_VIEW_WITHOUTDATA);
     	}
     	
-    	model.setViewName(MEASUREMENT_VIEW);
+    	
        return model ;
     }    
     
@@ -148,7 +153,7 @@ public class EncSelectProductController{
     	System.out.println(m.getHeight());
     	model.addAttribute("measurement", m);
 
-    	return MEASUREMENT_VIEW;
+    	return MEASUREMENT_VIEW_WITHDATA;
     }
 
     @RequestMapping(value = "/adddesignbck", produces = "application/json")

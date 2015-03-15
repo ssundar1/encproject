@@ -63,95 +63,95 @@
 
 		<div class="add_to_cart" id="addNew">
 
-			<blc:form id="addnew" method="POST" th:action="@{/enccart/addtocart}">
+			<blc:form id="addnew" method="POST" th:action="@{/enccart/addtocart}" th:object="${measurement}">
 				<!-- <input type="hidden" name="productId" th:value="${material.id}" /> -->
 				<input type="hidden" name="quantity" value="1" />
 				<input type="hidden" name="checkboxvalues" id="cv" />
 
 				<div class="form50">
 					<label for="name"><span>Measurement Name</span></label> <input
-						type="text" class="field50" name="name"  />
+						type="text" class="field50" name="name" th:value="${measurement.name}" />
 				</div>
 				<div class="form50">
 					<label for="description"><span>Measurement
-							Description</span></label> <input type="text" class="field50" name="description"  />
+							Description</span></label> <input type="text" class="field50" name="description" th:value="${measurement.description}" />
 				</div>
 
 				<div class="form50">
 					<label for="height"><span>Height
-					</span></label> <input type="text" class="field50" name="height" id="height" imgsrc="/img/measurements/chest.png" desc="This is Height Measurement" />
+					</span></label> <input type="text" class="field50" name="height" id="height" imgsrc="/img/measurements/chest.png" desc="This is Height Measurement" th:value="${measurement.height}"/>
 
 				</div>
 				<div class="form50">
 					<label for="chest"><span>Chest
 					</span></label> <input type="text" class="field50" name="chest" id="chest"
-							imgsrc="/img/measurements/chest.png" desc="This is Chest Measurement"  />
+							imgsrc="/img/measurements/chest.png" desc="This is Chest Measurement" th:value="${measurement.chest}" />
 
 				</div>
 
 				<div class="form50">
 					<label for="bust"><span>Bust
 					</span></label> <input type="text" class="field50" name="bust" id="bust"
-							imgsrc="/img/measurements/chest.png" desc="This is Bust Measurement"  />
+							imgsrc="/img/measurements/chest.png" desc="This is Bust Measurement" th:value="${measurement.bust}" />
 				</div>
 				<div class="form50">
 					<label for="dartLine"><span>Dart line
 					</span></label> <input type="text" class="field50" name="dartLine" id="dartLine"
-							imgsrc="/img/measurements/chest.png" desc="This is Dart Line Measurement"  />
+							imgsrc="/img/measurements/chest.png" desc="This is Dart Line Measurement" th:value="${measurement.dartline}" />
 				</div>
 				<div class="form50">
 					<label for="waist"><span>Waist
 					</span></label> <input type="text" class="field50" name="waist" id="waist"
-							imgsrc="/img/measurements/waist.png" desc="This is waist Measurement"  />
+							imgsrc="/img/measurements/waist.png" desc="This is waist Measurement" th:value="${measurement.waist}" />
 				</div>
 				<div class="form50">
 					<label for="hip"><span>Hip
 					</span></label> <input type="text" class="field50" name="hip" id="hip"
-							imgsrc="/img/measurements/chest.png" desc="This is Hip Measurement"  />
+							imgsrc="/img/measurements/chest.png" desc="This is Hip Measurement" th:value="${measurement.hip}" />
 				</div>
 				<div class="form50">
 					<label for="shoulder"><span>Shoulder
 					</span></label> <input type="text" class="field50" name="shoulder" id="shoulder"
-							imgsrc="/img/measurements/shoulder.png" desc="This is Shoulder Measurement"  />
+							imgsrc="/img/measurements/shoulder.png" desc="This is Shoulder Measurement" th:value="${measurement.shoulder}" />
 				</div>
 				<div class="form50">
 					<label for="sleeveLength"><span>Sleeve Length
 					</span></label> <input type="text" class="field50" name="sleeveLength" id="sleeveLength"
-							imgsrc="/img/measurements/chest.png" desc="This is Sleeve Lenghth Measurement"  />
+							imgsrc="/img/measurements/chest.png" desc="This is Sleeve Lenghth Measurement" th:value="${measurement.sleeveLength}" />
 				</div>
 				<div class="form50"><label for="nwaist"><span>NWaist </span></label> <input
 							type="text" class="field50" name="nwaist" id="nwaist"
-							imgsrc="/img/measurements/chest.png" desc="This is Nwaist Measurement" />
+							imgsrc="/img/measurements/chest.png" desc="This is Nwaist Measurement" th:value="${measurement.NWaist}"/>
 					</div>
 					<div class="form50"><label for="armhole"><span>ARM_HOLE </span></label> <input type="text"
 							class="field50" name="armhole" id="armhole"
-							imgsrc="/img/measurements/chest.png" desc="This is Arm Hole Measurement" />
+							imgsrc="/img/measurements/chest.png" desc="This is Arm Hole Measurement" th:value="${measurement.armHole}"/>
 					</div>
 					<div class="form50"><label for="tsleeve"><span>T_SLEEVE </span></label> <input type="text"
 							class="field50" name="tsleeve" id="tsleeve"
-							imgsrc="/img/measurements/chest.png" desc="This is T_Sleeve Measurement" />
+							imgsrc="/img/measurements/chest.png" desc="This is T_Sleeve Measurement" th:value="${measurement.TSleeve}"/>
 					</div>
 					<div class="form50">
 
 						<label for="bsleeve"><span>B_SLEEVE </span></label> <input type="text" class="field50" name="bsleeve" id="bsleeve"
-							imgsrc="/img/measurements/chest.png" desc="This is B_Sleeve Measurement" />
+							imgsrc="/img/measurements/chest.png" desc="This is B_Sleeve Measurement" th:value="${measurement.BSleeve}"/>
 					</div>
 					<div class="form50"><label for="fneck"><span>F_NECK </span></label> <input type="text"
 							class="field50" name="fneck" id="fneck"
-							imgsrc="/img/measurements/waist.png" desc="This is F_Neck Measurement" />
+							imgsrc="/img/measurements/waist.png" desc="This is F_Neck Measurement" th:value="${measurement.FrontNeck}"/>
 					</div>
 					<div class="form50"><label for="bneck"><span>B_NECK </span></label> <input type="text"
 							class="field50" name="bneck" id="bneck"
-							imgsrc="/img/measurements/chest.png" desc="This is B_Neck Measurement" />
+							imgsrc="/img/measurements/chest.png" desc="This is B_Neck Measurement" th:value="${measurement.BackNeck}"/>
 					</div>
 					<div class="form50">
 						<label for="pantheight"><span>PANT_HEIGHT </span></label> <input type="text" class="field50" name="pantheight" id="pantheight"
-							imgsrc="/img/measurements/shoulder.png" desc="This is Pant Height Measurement" />
+							imgsrc="/img/measurements/shoulder.png" desc="This is Pant Height Measurement" th:value="${measurement.PantHeight}"/>
 					</div>
 					<div class="form50">
 						<label for="seat"><span>SEAT </span></label> <input
 							type="text" class="field50" name="seat" id="seat"
-							imgsrc="/img/measurements/chest.png" desc="This is Seat Measurement" />
+							imgsrc="/img/measurements/chest.png" desc="This is Seat Measurement" th:value="${measurement.Seat}"/>
 					</div>
 				<div class="form100">
 					<input type="submit" class="addToCart" th:value="#{proudct.addToCart}" style="background: no-repeat scroll 40% 50% #e40037; float: none; width: 150px; height: 50px; margin-bottom: 0; height: none; width: none; text-indent: 0; white-space: nowrap;"/>
