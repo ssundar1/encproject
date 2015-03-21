@@ -49,9 +49,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.enclothe.core.dm.order.domain.EncOrder;
 import com.enclothe.core.payment.domain.Payment;
 import com.enclothe.core.payment.service.PaymentService;
 import com.enclothe.core.web.checkout.model.EncBillingInfoForm;
+import com.enclothe.web.checkout.EncOrderInfoForm;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -90,7 +92,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     */
     @RequestMapping("")
     public String checkout(HttpServletRequest request, HttpServletResponse response, Model model,
-            @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm,
+            @ModelAttribute("orderInfoForm") EncOrderInfoForm orderInfoForm,
             @ModelAttribute("shippingInfoForm") ShippingInfoForm shippingForm,
             @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm, RedirectAttributes redirectAttributes) throws PricingException {
         prepopulateCheckoutForms(CartState.getCart(), orderInfoForm, shippingForm, billingForm);
@@ -100,7 +102,11 @@ public class CheckoutController extends BroadleafCheckoutController {
     
     @RequestMapping(value = "/savedetails", method = RequestMethod.POST)
     public String saveGlobalOrderDetails(HttpServletRequest request, Model model, 
-            @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm, BindingResult result) throws ServiceException {
+            @ModelAttribute("orderInfoForm") EncOrderInfoForm orderInfoForm, 
+            BindingResult result) throws ServiceException {
+    	
+    	EncOrder cart = (EncOrder) CartState.getCart();    	
+    	cart.setAdditionalInfo(orderInfoForm.getAdditionalInfo());
         return super.saveGlobalOrderDetails(request, model, orderInfoForm, result);
     }
     
@@ -111,7 +117,7 @@ public class CheckoutController extends BroadleafCheckoutController {
 
     @RequestMapping(value="/singleship", method = RequestMethod.POST)
     public String saveSingleShip(HttpServletRequest request, HttpServletResponse response, Model model,
-            @ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm,
+            @ModelAttribute("orderInfoForm") EncOrderInfoForm orderInfoForm,
             @ModelAttribute("billingInfoForm") EncBillingInfoForm billingForm,
             @ModelAttribute("shippingInfoForm") ShippingInfoForm shippingForm, 
             BindingResult result) throws PricingException, ServiceException {
@@ -254,7 +260,7 @@ public class CheckoutController extends BroadleafCheckoutController {
     
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String testSecureCreditCardCheckout(HttpServletRequest request, HttpServletResponse response,
-    		@ModelAttribute("orderInfoForm") OrderInfoForm orderInfoForm) throws CheckoutException, PricingException, ServiceException {
+    		@ModelAttribute("orderInfoForm") EncOrderInfoForm orderInfoForm) throws CheckoutException, PricingException, ServiceException {
         //prepopulateCheckoutForms(CartState.getCart(), null, shippingForm, billingForm);
         System.out.println("This is a test method");
         //
@@ -265,13 +271,14 @@ public class CheckoutController extends BroadleafCheckoutController {
         //return super.completeSecureCreditCardCheckout(request, response, model, billingForm, result);
     }
 
-    protected void prepopulateOrderInfoForm(Order cart, OrderInfoForm orderInfoForm) {
+    protected void prepopulateOrderInfoForm(Order cart, EncOrderInfoForm orderInfoForm) {
         if (orderInfoForm != null) {
             orderInfoForm.setEmailAddress(cart.getEmailAddress());
+            orderInfoForm.setAdditionalInfo(((EncOrder)cart).getAdditionalInfo());
         }
     }
             
-    protected void prepopulateCheckoutForms(Order cart, OrderInfoForm orderInfoForm, ShippingInfoForm shippingForm, 
+    protected void prepopulateCheckoutForms(Order cart, EncOrderInfoForm orderInfoForm, ShippingInfoForm shippingForm, 
             EncBillingInfoForm billingForm) throws PricingException {
         List<FulfillmentGroup> groups = cart.getFulfillmentGroups();
         

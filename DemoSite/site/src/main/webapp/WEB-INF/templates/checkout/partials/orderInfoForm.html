@@ -14,6 +14,9 @@
                     <label for="emailAddress"><span th:text="#{cart.emailAddress}">Email Address</span></label>
                     <span class="error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span> 
                     <input type="text" th:field="*{emailAddress}" class="field50" th:classappend="${#fields.hasErrors('emailAddress')}? 'fieldError'" />
+                    
+                    ADDITIONAL COMMENTS (Please input any addition information you wish to provide)
+            		<textarea rows="4" cols="50" th:field="*{additionalInfo}"/>
                 </div>
                 
                 <div style="clear: both;"></div>
@@ -29,6 +32,8 @@
         <div class="group order-info">          
             <h3><span th:text="#{cart.emailAddress}">EmailAddress</span></h3>
             <p th:text="*{emailAddress}"></p>
+            ADDITIONAL COMMENTS (Please input any addition information you wish to provide)
+            <textarea rows="4" cols="50" th:text="*{additionalInfo}" disabled="disabled"/>
         </div>
     </div>
 </div>

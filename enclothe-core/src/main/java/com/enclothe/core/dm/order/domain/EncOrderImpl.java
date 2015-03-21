@@ -19,15 +19,18 @@ import org.hibernate.annotations.Index;
 @Table(name = "ENC_ORDER")
 public class EncOrderImpl extends OrderImpl implements EncOrder {
 
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = AddressImpl.class, optional=false)
+  /*  @ManyToOne(cascade = CascadeType.ALL, targetEntity = AddressImpl.class, optional=false)
     @JoinColumn(name = "ADDRESS_ID")
     @Index(name="CUSTOMERADDRESS_ADDRESS_INDEX", columnNames={"ADDRESS_ID"})
-    protected Address billingAddress;
+    protected Address billingAddress; */
     
     @Column(name = "RAW_RESPONSE")
     protected String rawResponse;
     
-	@Override
+    @Column(name = "ADDITIONAL_INFO")
+    protected String additionalInfo;
+    
+	/*@Override
 	public Address getAddress() {
 		
 		return billingAddress;
@@ -37,7 +40,7 @@ public class EncOrderImpl extends OrderImpl implements EncOrder {
 	public void setAddress(Address address) {
 		this.billingAddress = address;
 
-	}
+	}*/
 
 	@Override
 	public String getRawResponse() {		
@@ -48,6 +51,16 @@ public class EncOrderImpl extends OrderImpl implements EncOrder {
 	public void setRawResponse(String resp) {
 		this.rawResponse = resp;
 
+	}
+
+	@Override
+	public String getAdditionalInfo() {		
+		return additionalInfo;
+	}
+
+	@Override
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;	
 	}
 
 }

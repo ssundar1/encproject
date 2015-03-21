@@ -57,7 +57,8 @@ public class EncCategoryController extends CategoryController {
 	private static final String FRONT_NECK_DESIGN_CAT_NAME = "Front_Neck_Design";
 	private static final String BACK_NECK_DESIGN_CAT_NAME = "Back_Neck_Design";
 	private static final String SLEEVE_DESIGN_CAT_NAME = "Sleeve_Design";
-	private static final String TAILOR_CAT_NAME = "Tailor";
+//	private static final String TAILOR_CAT_NAME = "Tailor";
+	private static final Long PICKUP_MATERIAL = 10l;
 	
     @Resource(name="blCatalogService")
     protected CatalogService catalogService;
@@ -108,12 +109,25 @@ public class EncCategoryController extends CategoryController {
         	else if(catg.contains(SLEEVE_DESIGN_CAT_NAME))
         		m.setViewName(SL_DESIGN_VIEW);
 
-        	if(category.getName().toLowerCase().contains(BLOUSE))        		
-        		m.addObject("type", BLOUSE);
-        	else
-        		m.addObject("type", CHUD);
-
         	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+        	
+        	if(category.getName().toLowerCase().contains(BLOUSE))
+        	{
+        		m.addObject("type", BLOUSE);
+        	}
+        	else
+        	{
+        		m.addObject("type", CHUD);
+        	}
+        	
+    		if (itemDTO.getMaterial() == null)
+    		{
+    			//set pick up material by default
+    			EncMaterial material = (EncMaterial) catalogService.findProductById(PICKUP_MATERIAL);
+    			itemDTO.setMaterial(material);
+    			encOrderItemDTOService.save(itemDTO);
+    		}
+
             m.addObject("status", itemDTO.getStatus());
             
             if(category.getName().contains(FRONT_NECK_DESIGN_CAT_NAME)){
