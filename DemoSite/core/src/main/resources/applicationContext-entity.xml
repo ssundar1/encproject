@@ -24,7 +24,8 @@
     	 <bean id="org.broadleafcommerce.profile.core.domain.Customer"
         class="com.enclothe.core.customer.domain.EncCustomerImpl"
         scope="prototype"/>     
-        
+        <bean id="org.broadleafcommerce.core.order.domain.Order" 
+        class="com.enclothe.core.dm.order.domain.EncOrderImpl" scope="prototype"/>
         <bean id="com.enclothe.core.measurement.domain.Measurement" 
         class="com.enclothe.core.measurement.domain.MeasurementImpl" 
         scope="prototype"/>

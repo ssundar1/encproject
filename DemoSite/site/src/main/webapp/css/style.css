@@ -1068,7 +1068,7 @@ li.promotion,  ul.promotion{
 #checkout_content #cart_total #total_table .subtotal td {padding-top: 10px;}
 #checkout_content #cart_total #total_table .subtotal td.price {font-size: 24px;}
 
-#checkout_content .order-info.edit-order-info { width: 282px;}
+#checkout_content .order-info.edit-order-info { width: 800px;}
 #checkout_content .order-info.edit-order-info .submit-row { margin-left: -5px; padding-top: 10px; }
 
 #wishlist_items {
