@@ -12,13 +12,13 @@
         <div class="form30">
             <label for="firstName"><span th:text="#{cart.firstName}">First Name</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.firstName')}" th:errors="*{address.firstName}"></span>
-            <input type="text" id="billingFirstName" name="address.firstName"  th:value="*{address.firstName}" class="field30 required clearable" th:classappend="${#fields.hasErrors('address.firstName')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="billingFirstName" name="address.firstName"  th:value="*{address.firstName}" class="field30 required clearable let" th:classappend="${#fields.hasErrors('address.firstName')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div class="form30 margin20">
             <label for="lastName"><span th:text="#{cart.lastName}">Last Name</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.lastName')}" th:errors="*{address.lastName}"></span>
-            <input type="text" id="billingLastName" name="billingLastName"  th:field="*{address.lastName}" class="field30 required clearable" th:classappend="${#fields.hasErrors('address.lastName')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="billingLastName" name="billingLastName"  th:field="*{address.lastName}" class="field30 required clearable let" th:classappend="${#fields.hasErrors('address.lastName')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div class="form30 margin20">
@@ -33,7 +33,7 @@
         <div class="form50">
             <label for="address1"><span th:text="#{cart.address}">Address</span></label>
             <span class="error" th:if="${#fields.hasErrors('address.addressLine1')}" th:errors="*{address.addressLine1}"></span>
-            <input type="text" id="billingAddress" name="address.addressLine1" th:value="*{address.addressLine1}" class="field100 required clearable" th:classappend="${#fields.hasErrors('address.addressLine1')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="billingAddress" name="address.addressLine1" th:value="*{address.addressLine1}" class="field100 required clearable letnos" th:classappend="${#fields.hasErrors('address.addressLine1')}? 'fieldError'" th:disabled="${!validShipping}" />
         </div>
 
         <div class="clearfix"></div>
@@ -43,7 +43,7 @@
             <span class="error" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
             <br th:if="${#fields.hasErrors('address.city')} and ${#fields.hasErrors('address.state')}"/>
             <span class="error" th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"></span>
-            <input type="text" id="billingCity" name="address.city" th:value="*{address.city}" class="field25 required clearable" th:classappend="${#fields.hasErrors('address.city')}? 'fieldError'" th:disabled="${!validShipping}" />
+            <input type="text" id="billingCity" name="address.city" th:value="*{address.city}" class="field25 required clearable let" th:classappend="${#fields.hasErrors('address.city')}? 'fieldError'" th:disabled="${!validShipping}" />
 
             <select id="billingState" name="address.state" th:value="*{address.state}" size="1" style="width: 48px;" class="required clearable" th:classappend="${#fields.hasErrors('address.state')}? 'fieldError'" th:disabled="${!validShipping}">
                <option value="">--</option>

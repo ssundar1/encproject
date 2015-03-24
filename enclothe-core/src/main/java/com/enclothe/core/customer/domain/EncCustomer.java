@@ -3,7 +3,9 @@ package com.enclothe.core.customer.domain;
 import java.util.Map;
 
 import org.broadleafcommerce.profile.core.domain.Customer;
+
 import com.enclothe.core.measurement.domain.Measurement;
+import com.enclothe.core.product.domain.EncTailor;
 
 public interface EncCustomer extends Customer{
 
@@ -17,8 +19,8 @@ public interface EncCustomer extends Customer{
 
 	public void setPreferredMeasurement(Measurement preferredMeasurement);
 
-	public Measurement getPreferredTailor();
+	public EncTailor getPreferredTailor();
 
-	public void setPreferredTailor(Measurement preferredTailor);
+	public void setPreferredTailor(EncTailor preferredTailor);
 	
 }

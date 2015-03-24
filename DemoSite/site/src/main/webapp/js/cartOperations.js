@@ -153,6 +153,16 @@ $(function() {
 		}
 	});
 	
+	$('body').on('click', 'input.addPrefTailor', function() {
+		var res = $('#preferredTailor').is(":checked");
+		$("#cv").val(res);
+	});
+	
+	$('body').on('click', 'input.addPrefMeasurement', function() {
+		var res = $('#preferredMeasurement').is(":checked");
+		$("#cv").val(res);
+	});
+	
 	// Intercept add to cart operations and perform them via AJAX instead
 	// This will trigger on any input with class "addToCart" or "addToWishlist"
 	$('body')
@@ -167,9 +177,6 @@ $(function() {
 								.find('span.error');
 						$productOptionsSpan = $container
 								.find('span.productOptionsSpan');
-						
-						var res = $('#preferredMeasurement').is(":checked");
-						$("#cv").val(res);
 						
 						if ($container.length == 0) {
 							var myId = $button.parent().attr('id').substring(
@@ -499,85 +506,105 @@ $(function() {
 						
 						$("#sizeMeasurementDiv #small").click(function() {
 
-							$("div #height").val("1");
-							$("div #chest").val("1");
-							$("div #bust").val("1");
-							$("div #dartLine").val("1");
-							$("div #waist").val("1");
-							$("div #hip").val("1");
-							$("div #shoulder").val("1");
-							$("div #sleeveLength").val("1");
-							$("div #nwaist").val("1");
-							$("div #armhole").val("1");
-							$("div #tsleeve").val("1");
-							$("div #bsleeve").val("1");
-							$("div #fneck").val("1");
-							$("div #bneck").val("1");
-							$("div #pantheight").val("1");
-							$("div #seat").val("1");
+							$("div #height").val("120");
+							$("div #chest").val("91");
+							$("div #bust").val("84");
+							$("div #dartLine").val("84");
+							$("div #waist").val("81");
+							$("div #hip").val("81");
+							$("div #shoulder").val("91");
+							$("div #sleeveLength").val("81");
+							$("div #nwaist").val("81");
+							$("div #armhole").val("81");
+							$("div #tsleeve").val("91");
+							$("div #bsleeve").val("91");
+							$("div #fneck").val("81");
+							$("div #bneck").val("81");
+							$("div #pantheight").val("120");
+							$("div #seat").val("81");
 
 						});
 						$("#sizeMeasurementDiv #medium").click(function() {
 
-							$("div #height").val("2");
-							$("div #chest").val("2");
-							$("div #bust").val("2");
-							$("div #dartLine").val("2");
-							$("div #waist").val("2");
-							$("div #hip").val("2");
-							$("div #shoulder").val("2");
-							$("div #sleeveLength").val("2");
-							$("div #nwaist").val("2");
-							$("div #armhole").val("2");
-							$("div #tsleeve").val("2");
-							$("div #bsleeve").val("2");
-							$("div #fneck").val("2");
-							$("div #bneck").val("2");
-							$("div #pantheight").val("2");
-							$("div #seat").val("2");
+							$("div #height").val("140");
+							$("div #chest").val("97");
+							$("div #bust").val("94");
+							$("div #dartLine").val("90");
+							$("div #waist").val("86");
+							$("div #hip").val("97");
+							$("div #shoulder").val("102");
+							$("div #sleeveLength").val("97");
+							$("div #nwaist").val("97");
+							$("div #armhole").val("97");
+							$("div #tsleeve").val("102");
+							$("div #bsleeve").val("102");
+							$("div #fneck").val("97");
+							$("div #bneck").val("97");
+							$("div #pantheight").val("140");
+							$("div #seat").val("97");
 
 						});
 						$("#sizeMeasurementDiv #large").click(function() {
 
-							$("div #height").val("2");
-							$("div #chest").val("2");
-							$("div #bust").val("2");
-							$("div #dartLine").val("2");
-							$("div #waist").val("2");
-							$("div #hip").val("2");
-							$("div #shoulder").val("2");
-							$("div #sleeveLength").val("2");
-							$("div #nwaist").val("2");
-							$("div #armhole").val("2");
-							$("div #tsleeve").val("2");
-							$("div #bsleeve").val("2");
-							$("div #fneck").val("2");
-							$("div #bneck").val("2");
-							$("div #pantheight").val("2");
-							$("div #seat").val("2");
+							$("div #height").val("160");
+							$("div #chest").val("100");
+							$("div #bust").val("104");
+							$("div #dartLine").val("102");
+							$("div #waist").val("91");
+							$("div #hip").val("102");
+							$("div #shoulder").val("112");
+							$("div #sleeveLength").val("102");
+							$("div #nwaist").val("102");
+							$("div #armhole").val("102");
+							$("div #tsleeve").val("112");
+							$("div #bsleeve").val("112");
+							$("div #fneck").val("102");
+							$("div #bneck").val("102");
+							$("div #pantheight").val("160");
+							$("div #seat").val("102");
 
 						});
 						$("#sizeMeasurementDiv #xlarge").click(function() {
 
-							$("div #height").val("2");
-							$("div #chest").val("2");
-							$("div #bust").val("2");
-							$("div #dartLine").val("2");
-							$("div #waist").val("2");
-							$("div #hip").val("2");
-							$("div #shoulder").val("2");
-							$("div #sleeveLength").val("2");
-							$("div #nwaist").val("2");
-							$("div #armhole").val("2");
-							$("div #tsleeve").val("2");
-							$("div #bsleeve").val("2");
-							$("div #fneck").val("2");
-							$("div #bneck").val("2");
-							$("div #pantheight").val("2");
-							$("div #seat").val("2");
+							$("div #height").val("180");
+							$("div #chest").val("104");
+							$("div #bust").val("114");
+							$("div #dartLine").val("112");
+							$("div #waist").val("102");
+							$("div #hip").val("112");
+							$("div #shoulder").val("122");
+							$("div #sleeveLength").val("112");
+							$("div #nwaist").val("112");
+							$("div #armhole").val("112");
+							$("div #tsleeve").val("122");
+							$("div #bsleeve").val("122");
+							$("div #fneck").val("112");
+							$("div #bneck").val("112");
+							$("div #pantheight").val("180");
+							$("div #seat").val("112");
 
 						});
+						
+						$("#sizeMeasurementDiv #xxlarge").click(function() {
 
+							$("div #height").val("200");
+							$("div #chest").val("112");
+							$("div #bust").val("125");
+							$("div #dartLine").val("120");
+							$("div #waist").val("107");
+							$("div #hip").val("117");
+							$("div #shoulder").val("128");
+							$("div #sleeveLength").val("117");
+							$("div #nwaist").val("117");
+							$("div #armhole").val("117");
+							$("div #tsleeve").val("128");
+							$("div #bsleeve").val("128");
+							$("div #fneck").val("117");
+							$("div #bneck").val("117");
+							$("div #pantheight").val("200");
+							$("div #seat").val("117");
+
+						});
 						// allow only no in input field
 						$("#height")
 								.keydown(
@@ -980,6 +1007,33 @@ $(function() {
 												e.preventDefault();
 											}
 										});
+						
+						$('.let')	
+						.keypress(
+								function(e) {
+									//only allow letters
+									 if ((e.shiftKey && e.keyCode == 45) || e.which != 8 && e.which != 0) {
+									        if (e.which == 45 || e.which == 95 || (e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122))
+									            return true;
+									        return false;
+									    }
+									    return true;
+									
+								});
+						
+						$('.letnos')	
+						.keypress(
+								function(e) {
+									// return true for 1234567890A-Za-z,/
+									//44-, and 47-/
+									if ((e.shiftKey && e.keyCode == 45) || e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+								        if (e.which == 44 || e.which == 45 || e.which == 47 || e.which == 95 || (e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122))
+								            return true;
+								        return false;
+								    }
+								    return true;
+									
+								});
 						
 						$(".primaryphone")
 						.keydown(

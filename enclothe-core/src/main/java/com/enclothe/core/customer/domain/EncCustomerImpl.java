@@ -21,6 +21,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.enclothe.core.measurement.domain.Measurement;
 import com.enclothe.core.measurement.domain.MeasurementImpl;
+import com.enclothe.core.product.domain.EncTailor;
 import com.enclothe.core.product.domain.EncTailorImpl;
 
 @Entity
@@ -64,7 +65,7 @@ public class EncCustomerImpl extends CustomerImpl implements EncCustomer {
 	  
 	@OneToOne(targetEntity=EncTailorImpl.class, optional=true)
 	@JoinColumn(name="DEF_TAILOR_ID")	  
-	protected Measurement preferredTailor;
+	protected EncTailor preferredTailor;
 	
    	public Measurement getPreferredMeasurement() {
 		return preferredMeasurement;
@@ -74,11 +75,11 @@ public class EncCustomerImpl extends CustomerImpl implements EncCustomer {
 		this.preferredMeasurement = preferredMeasurement;
 	}
 
-	public Measurement getPreferredTailor() {
+	public EncTailor getPreferredTailor() {
 		return preferredTailor;
 	}
 
-	public void setPreferredTailor(Measurement preferredTailor) {
+	public void setPreferredTailor(EncTailor preferredTailor) {
 		this.preferredTailor = preferredTailor;
 	}
 		

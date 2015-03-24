@@ -131,6 +131,11 @@ public class EncCategoryController extends CategoryController {
         	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
             m.addObject("status", itemDTO.getStatus());
             m.addObject("prodselid", itemDTO.getTlSelectedId());
+            
+            EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
+        	if(newCustomer.getPreferredTailor() != null){
+        		m.addObject("tailor", newCustomer.getPreferredTailor().getId());
+        	}
         	
             m.setViewName(TAILOR_VIEW);
         }
