@@ -36,24 +36,24 @@
                     <li th:each="doi : *{discreteOrderItems}" th:text="${doi.quantity + ' x ' + doi.name}" />
                 </ul>
             </td>
-            <td th:if="${item.designs != null}">
-            <img th:if="*{designs[0].media['primary']}" th:src="@{*{designs[0].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[0].name}" style="width: 80px; height: 80px;"/>
-            <a th:text="*{designs[0].name}"></a><!-- th:href="@{*{designs[0].url}}"  -->
-            </td>
-            <td th:if="${item.designs != null}">
-            <img th:if="*{designs[1].media['primary']}" th:src="@{*{designs[1].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[1].name}" style="width: 80px; height: 80px;"/>
-            <a th:text="*{designs[1].name}"></a><!-- th:href="@{*{designs[1].url}}"  -->
-            </td>
-            <td th:if="${item.designs != null}">
-            <img th:if="*{designs[2].media['primary']}" th:src="@{*{designs[2].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[2].name}" style="width: 80px; height: 80px;"/>
-            <a th:text="*{designs[2].name}"></a><!-- th:href="@{*{designs[2].url}}"  -->
-            </td>
-            <td th:if="${item.tailor != null}">
-            <img th:if="*{tailor.media['primary']}" th:src="@{*{tailor.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{tailor.name}" style="width: 80px; height: 80px;"/>
-            <a th:text="*{tailor.name}"></a><!-- th:href="@{*{tailor.url}}"  -->
+            <td>            
+            <img th:if="!${#lists.isEmpty(item.designs)}" th:src="@{*{designs[0].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[0].name}" style="width: 80px; height: 80px;"/>
+            <a th:if="!${#lists.isEmpty(item.designs)}" th:text="*{designs[0].name}"></a><!-- th:href="@{*{designs[0].url}}"  -->
             </td>
             <td>
-            <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
+            <img th:if="!${#lists.isEmpty(item.designs)}" th:src="@{*{designs[1].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[1].name}" style="width: 80px; height: 80px;"/>
+            <a th:if="!${#lists.isEmpty(item.designs)}" th:text="*{designs[1].name}"></a><!-- th:href="@{*{designs[1].url}}"  -->
+            </td>
+            <td>
+            <img th:if="!${#lists.isEmpty(item.designs)}" th:src="@{*{designs[2].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[2].name}" style="width: 80px; height: 80px;"/>
+            <a th:if="!${#lists.isEmpty(item.designs)}" th:text="*{designs[2].name}"></a><!-- th:href="@{*{designs[2].url}}"  -->
+            </td>
+            <td>
+            <img  th:if="${item.tailor != null}" th:src="@{*{tailor.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{tailor.name}" style="width: 80px; height: 80px;"/>
+            <a  th:if="${item.tailor != null}" th:text="*{tailor.name}"></a><!-- th:href="@{*{tailor.url}}"  -->
+            </td>
+            <td>
+            <a  th:if="${item.measurement != null}" th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
             </td>
             <td align="center">
                 <blc:form method="POST" th:action="@{/cart/updateQuantity}">
