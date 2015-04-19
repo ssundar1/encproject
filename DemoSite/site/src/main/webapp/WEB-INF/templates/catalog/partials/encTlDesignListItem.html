@@ -6,6 +6,7 @@
     <img th:if="*{media['primary']}" th:src="@{*{media['primary'].url} + '?browse'}" alt="Designs" />
     <img class="check" src="../img/green_tick.png" style="position: absolute; width:50px; height:50px; top: -10px; left: 180px; display: none;" alt="check" />
     <img class="check" th:if="${prodselid} == *{id}" src="../img/green_tick.png" style="position: absolute; width:50px; height:50px; top: -10px; left: 180px;" alt="check" />
+    <span class="text" th:if="${tailor} == *{id}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: red; background: none repeat scroll 0% 0% white;">This is your preferred Tailor</span>
     <div class="price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
         <div blc:price="*{salePrice}" th:if="*{onSale}" th:classappend="*{defaultSku.onSale}? 'sale'"></div>
         <div blc:price="*{retailPrice}" th:classappend="*{onSale}? 'has-sale'"></div>
@@ -56,8 +57,9 @@
         <blc:form method="POST" th:action="@{/addtailor}">
             <input type="hidden" name="tailorId" th:value="*{id}" />
             <input type="hidden" name="quantity" value="1" />
+            <input type="hidden" name="checkboxvalues" id="cv" />
             <input type="hidden" name="hasProductOptions" th:value="*{!#lists.isEmpty(productOptions)}" />
-            <input type="submit" class="addToCart" th:value="#{product.chooseTailor}"/>
+            <input type="submit" class="addToCart addPrefTailor" th:value="#{product.chooseTailor}"/>
         </blc:form>
     </div>
 

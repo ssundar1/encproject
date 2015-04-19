@@ -33,7 +33,7 @@
                 <span class="error" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
                 <input type="password" th:field="*{passwordConfirm}" class="field50" th:classappend="${#fields.hasErrors('passwordConfirm')}? 'fieldError'" />
             </div>          
-            <div class="form50">
+        <!--     <div class="form50">
                 <label for="measurement.name"><span th:text="#{register.measurement.name}">Measurement Name</span></label>                
                 <input type="text" th:field="*{measurement.name}" class="field50"  />
             </div>  
@@ -45,7 +45,7 @@
                 <label for="measurement.hip"><span th:text="#{register.measurement.hip}">Hip Length</span></label>
                 <span class="error" th:if="${#fields.hasErrors('measurement.hip')}" th:errors="*{measurement.hip}"></span>                
                 <input type="text" th:field="*{measurement.hip}" class="field50"   th:classappend="${#fields.hasErrors('measurement.hip')}? 'fieldError'" />
-            </div>                             
+            </div> -->                             
             <div class="login_register">
                 <input class="register_button big red" type="submit" th:value="#{register.register}"/>
             </div>

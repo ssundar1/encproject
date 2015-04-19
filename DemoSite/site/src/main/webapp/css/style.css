@@ -143,6 +143,11 @@ textarea {
     display: inline;
 }
 
+.subscript{
+	bottom: -1.5em;
+    position: relative;
+}
+
 .field100, .field66, .field50, .field35, .field30, .field25 {
     padding: 7px 10px;
     background: #F5F4F1;
@@ -3928,7 +3933,9 @@ ul.checkout-bar a {
 
 .bouncing {
   animation: bouncing 0.4s ease-out 0s infinite alternate;
-  margin-top: -35px;
+  /* margin-top: -35px; */
+  margin-left: -50px;
+  margin-top: -25px;
 }
 
 @keyframes bouncing {
@@ -3937,6 +3944,11 @@ ul.checkout-bar a {
   }
 }
 
+.rotate {
+	-ms-transform: rotate(50deg); /* IE 9 */
+    -webkit-transform: rotate(50deg); /* Chrome, Safari, Opera */
+    transform: rotate(50deg);
+}
 a.button {
 	/* styles for button */
 	margin: 10px 0 0 auto;

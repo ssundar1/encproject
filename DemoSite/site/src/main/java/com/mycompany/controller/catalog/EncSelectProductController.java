@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import org.broadleafcommerce.core.catalog.domain.Category;
 import org.broadleafcommerce.core.catalog.service.CatalogService;
+import org.broadleafcommerce.profile.core.service.CustomerService;
 import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,6 +55,9 @@ public class EncSelectProductController{
 	
     @Resource(name = "blCatalogService")
     protected CatalogService catalogService;
+    
+    @Resource(name="blCustomerService")
+    protected CustomerService customerService;
     
     @Resource(name = "encOrderItemDTOService")
     protected EncOrderItemDTOService encOrderItemDTOService;
@@ -212,11 +216,23 @@ public class EncSelectProductController{
     	EncDesign design = (EncDesign) catalogService.findProductById(designId);
     	responseMap.put("productId", designId);
     	responseMap.put("productName", design.getName());
+    	
+    	String cat = design.getCategory();
+		if(cat.contains("Front_Neck_Design")){
+			itemDTO.setStatus(2);
+			itemDTO.setFnSelectedId(designId);
+		}else if ( cat.contains("Back_Neck_Design")){
+			itemDTO.setStatus(3);
+			itemDTO.setBnSelectedId(designId);
+		}else if(cat.contains("Sleeve_Design")){
+			itemDTO.setStatus(4);
+			itemDTO.setSlSelectedId(designId);
+		}
+		
     	//responseMap.put("itemDTO", itemDTO);
     	for(int i=0; i < designs.size(); i++)
     	{
     		EncDesign e = designs.get(i);
-    		
     		//if design already exists, then just return success
     		if(e.getId().equals(designId))
     			return responseMap;
@@ -229,7 +245,6 @@ public class EncSelectProductController{
     		{
     			designs.set(i, design);
     			
-    			
     			encOrderItemDTOService.save(itemDTO);
     			return responseMap;
     			//return "true";
@@ -237,19 +252,7 @@ public class EncSelectProductController{
     	}
     	designs.add(design);
 
-    	String category = design.getCategory();
-		if(category.contains("Front_Neck_Design")){
-			itemDTO.setStatus(2);
-			itemDTO.setFnSelectedId(designId);
-		}else if ( category.contains("Back_Neck_Design")){
-			itemDTO.setStatus(3);
-			itemDTO.setBnSelectedId(designId);
-		}else if(category.contains("Sleeve_Design")){
-			itemDTO.setStatus(4);
-			itemDTO.setSlSelectedId(designId);
-		}
 
-		
     	//responseMap.put("itemDTO", itemDTO);
     	encOrderItemDTOService.save(itemDTO);    	
     	
@@ -272,6 +275,7 @@ public class EncSelectProductController{
     		return responseMap;
     	}
     	
+    	
     	//Add design to DTO. Retrieve designs already in DTO
     	EncTailor tailor = (EncTailor) catalogService.findProductById(tailorId);    	
     	itemDTO.setTailor(tailor);
@@ -279,6 +283,14 @@ public class EncSelectProductController{
     	itemDTO.setTlSelectedId(tailorId);
     	responseMap.put("productId", tailorId);
     	responseMap.put("productName", tailor.getName());
+    	
+    	//save tailor if user choose preferedTailor checkbox
+    	EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
+    	if(request.getParameter("checkboxvalues").equalsIgnoreCase("true")){
+	    	newCustomer.setPreferredTailor(tailor);
+	    }
+    	newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
+        CustomerState.setCustomer(newCustomer);
     	
     	encOrderItemDTOService.save(itemDTO);
     	//EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
