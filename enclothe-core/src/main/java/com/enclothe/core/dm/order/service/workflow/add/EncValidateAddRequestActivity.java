@@ -41,7 +41,7 @@ public class EncValidateAddRequestActivity extends ValidateAddRequestActivity {
         EncDesign design = null;
         
         int i = 0;
-        List<Long> validatedDesignSkus = new ArrayList<Long>();
+        List<Long> validatedDesignSkus = new ArrayList<Long>();        
         for(Long designId: orderItemRequestDTO.getDesigns())
         {
         	design = (EncDesign) catalogService.findProductById(designId);        	

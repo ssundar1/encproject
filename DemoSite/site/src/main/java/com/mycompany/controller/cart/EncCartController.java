@@ -156,13 +156,18 @@ public class EncCartController extends CartController {
         return super.add(request, response, model, addToCartItem);
     }    
     
+    @RequestMapping(value = "/addmaterialtocart", produces = { "application/json" })
+    public String addMaterialToCart(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
+            @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem) throws IOException, PricingException, AddToCartException 
+    	{    		
+           	return super.add(request, response, model, addToCartItem);
+        }
     
     @RequestMapping(value = "/addtocartdummymeasurement", produces = { "text/html", "*/*" })
     public String addWithDummyMeasurement(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes,
             @ModelAttribute("addToCartItem") EncOrderItemRequestDTO addToCartItem,
             @ModelAttribute("measurementId") Long measurementId) throws IOException, PricingException, AddToCartException 
-    	{
-    		System.out.println(measurementId);
+    	{    		
     		Measurement m = measurementService.readMeasurementById(measurementId);
     		EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);        	
         	itemDTO.setMeasurement(m);

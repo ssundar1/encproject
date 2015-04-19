@@ -36,23 +36,23 @@
                     <li th:each="doi : *{discreteOrderItems}" th:text="${doi.quantity + ' x ' + doi.name}" />
                 </ul>
             </td>
-            <td>
+            <td th:if="${designs != null}">
             <img th:if="*{designs[0].media['primary']}" th:src="@{*{designs[0].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[0].name}" style="width: 80px; height: 80px;"/>
             <a th:text="*{designs[0].name}"></a><!-- th:href="@{*{designs[0].url}}"  -->
             </td>
-            <td>
+            <td th:if="${designs != null}">
             <img th:if="*{designs[1].media['primary']}" th:src="@{*{designs[1].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[1].name}" style="width: 80px; height: 80px;"/>
             <a th:text="*{designs[1].name}"></a><!-- th:href="@{*{designs[1].url}}"  -->
             </td>
-            <td>
+            <td th:if="${designs != null}">
             <img th:if="*{designs[2].media['primary']}" th:src="@{*{designs[2].media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{designs[2].name}" style="width: 80px; height: 80px;"/>
             <a th:text="*{designs[2].name}"></a><!-- th:href="@{*{designs[2].url}}"  -->
             </td>
-            <td>
+            <td th:if="${tailor != null}">
             <img th:if="*{tailor.media['primary']}" th:src="@{*{tailor.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{tailor.name}" style="width: 80px; height: 80px;"/>
             <a th:text="*{tailor.name}"></a><!-- th:href="@{*{tailor.url}}"  -->
             </td>
-            <td>
+            <td th:if="${measurement != null}" >
             <a th:href="@{*{'measurements/'+ measurement.id}}" th:text="*{measurement.name}">   </a>
             </td>
             <td align="center">

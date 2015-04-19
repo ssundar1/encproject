@@ -94,7 +94,8 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		this.designSkus = designSkus;
 		
 		//Once the Design Sku are set recalculate base retail and sale price
-		reCalculateBaseRetailAndSalePrice(designSkus);
+		if (designSkus != null )
+			reCalculateBaseRetailAndSalePrice(designSkus);
 	}
 
 	public EncTailor getTailor() {
@@ -121,6 +122,9 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 
 	private void reCalculateBaseRetailAndSalePrice(Collection<Sku> skus)
 	{
+		if(skus == null)
+			return;
+		
 		for(Sku sku: skus)
 		{
 			if(this.baseRetailPrice == null)
@@ -179,13 +183,18 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		Money skuSalePrice = (getSku().getSalePrice() == null ? null : getSku()
 				.getSalePrice());
 
-		for(Sku sku: getDesignSkus())
+		List<Sku> designSkus = getDesignSkus();
+		if(designSkus != null)
 		{
-			if (skuSalePrice != null)
-				if(sku.getSalePrice() != null)
-					skuSalePrice = skuSalePrice.add(sku.getSalePrice());
-				else
-					skuSalePrice = skuSalePrice.add(sku.getRetailPrice());
+			for(Sku sku: designSkus)
+			{
+				if (skuSalePrice != null)
+					if(sku.getSalePrice() != null)
+						skuSalePrice = skuSalePrice.add(sku.getSalePrice());
+					else
+						skuSalePrice = skuSalePrice.add(sku.getRetailPrice());
+			}
+
 		}
 		
 		
@@ -227,12 +236,16 @@ public class EncOrderItemImpl extends DiscreteOrderItemImpl implements
 		}
 		Money skuRetailPrice = getSku().getRetailPrice();
 
-		for(Sku sku: getDesignSkus())
+		List<Sku> designSkus = getDesignSkus();
+		if(designSkus != null)
 		{
-			if (sku.getRetailPrice() != null)
-				skuRetailPrice = skuRetailPrice.add(sku.getRetailPrice());					
-		}
-		
+			for(Sku sku: designSkus)
+			{
+				if (sku.getRetailPrice() != null)
+					skuRetailPrice = skuRetailPrice.add(sku.getRetailPrice());					
+			}
+			
+		}		
 		
 		if (getTailorSku() != null && getTailorSku().getRetailPrice() != null)
 			skuRetailPrice = skuRetailPrice.add(getTailorSku().getRetailPrice());

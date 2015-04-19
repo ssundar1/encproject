@@ -1,5 +1,6 @@
 package com.enclothe.core.dm.order.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,8 +10,8 @@ public class EncOrderItemRequestDTO extends AddToCartItem{
 
 	    
     protected Long material;
-    protected List<Long> designs;
-    protected List<Long> designSkus;
+    protected List<Long> designs = new ArrayList<Long>();
+    protected List<Long> designSkus = new ArrayList<Long>();
     protected Long tailor;
     protected Long tailorSku;
     protected Long measurementId;

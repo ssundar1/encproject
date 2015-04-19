@@ -43,7 +43,7 @@ public class EncSelectProductController{
 
 	public static final String DESIGN_VIEW = "/design";
 	public static final String BLOUSE_DESIGN_VIEW = "/bls-design/bls-fn-design";
-	public static final String CHUDI_DESIGN_VIEW = "/chud-design/chud-fn-design";
+	public static final String CHUD_DESIGN_VIEW = "/chud-design/chud-fn-design";
 	//public static final String MEASUREMENT_VIEW = "catalog/encmeasurement";
 	public static final String MEASUREMENT_VIEW_WITHOUTDATA = "catalog/encmeasurement";
 	public static final String MEASUREMENT_VIEW_WITHDATA = "catalog/encmeasurementdata";
@@ -122,8 +122,25 @@ public class EncSelectProductController{
     
     //This method redirects to design once the material is selected
     @RequestMapping("/choosedesignwomaterial")
-    public String chooseDesign(HttpServletRequest request, HttpServletResponse response, Model model) {    	
-       return "forward:" + DESIGN_VIEW ;
+    public String chooseDesign(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@ModelAttribute("type") String type) {
+
+    	//Store Material to DTO    	
+    	EncOrderItemDTO itemDTO = null;
+    	itemDTO = encOrderItemDTOService.createEncOrderItemDTO();    	
+		itemDTO.setSessionId(request.getSession().getId());
+		itemDTO.setIpAddress(request.getRemoteAddr());
+		
+		//Dummy Material
+		EncMaterial material = (EncMaterial) catalogService.findProductById(10l);
+		itemDTO.setMaterial(material);
+		
+		itemDTO.setStatus(1);
+		encOrderItemDTOService.save(itemDTO);
+		if(type.equals("blouse"))
+			return "forward:" + BLOUSE_DESIGN_VIEW ;
+		else
+			return "forward:" + CHUD_DESIGN_VIEW ;
     }    
 
     

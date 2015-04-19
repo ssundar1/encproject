@@ -21,8 +21,8 @@ import com.enclothe.core.product.domain.EncTailor;
 
 	public class EncOrderItemRequest extends DiscreteOrderItemRequest {
   
-	    protected List<EncDesign> designs;
-	    protected List<Sku> designSkus;
+	    protected List<EncDesign> designs = new ArrayList<EncDesign>();
+	    protected List<Sku> designSkus = new ArrayList<Sku>();
 	    protected EncTailor tailor;
 	    protected Sku tailorSku;
 	    protected Measurement measurement;
@@ -109,10 +109,15 @@ import com.enclothe.core.product.domain.EncTailor;
 		{
 			Money retailPrice = this.sku.getRetailPrice();
 			
-			for(Sku sku: getDesignSkus())
+			List<Sku> designSkus = getDesignSkus();
+			
+			if(designSkus != null)
 			{
-				if (sku.getRetailPrice() != null)
-					retailPrice = retailPrice.add(sku.getRetailPrice());					
+				for(Sku sku: designSkus)
+				{
+					if (sku.getRetailPrice() != null)
+						retailPrice = retailPrice.add(sku.getRetailPrice());					
+				}
 			}
 			
 			if (getTailorSku() != null && getTailorSku().getRetailPrice() != null)
@@ -128,12 +133,17 @@ import com.enclothe.core.product.domain.EncTailor;
 			if(salePrice == null)
 				return salePrice;
 			
-			for(Sku sku: getDesignSkus())
+			List<Sku> designSkus = getDesignSkus();
+			
+			if(designSkus != null)
 			{
-				if (sku.getSalePrice() != null)
-					salePrice = salePrice.add(sku.getSalePrice());
-				else
-					salePrice = salePrice.add(sku.getRetailPrice());
+				for(Sku sku: designSkus)
+				{
+					if (sku.getSalePrice() != null)
+						salePrice = salePrice.add(sku.getSalePrice());
+					else
+						salePrice = salePrice.add(sku.getRetailPrice());
+				}
 			}
 			
 			if (getTailorSku() != null)

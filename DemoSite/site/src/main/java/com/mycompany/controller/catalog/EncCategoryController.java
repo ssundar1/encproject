@@ -45,6 +45,7 @@ import com.enclothe.web.catalog.EncCategoryHandlerMapping;
 public class EncCategoryController extends CategoryController {
 
 	private static final String MATERIAL_VIEW = "catalog/encmaterial";
+	private static final String MATERIAL_CHECKOUT_VIEW = "catalog/encmaterialcheckout";
 	private static final String FN_DESIGN_VIEW = "catalog/encdesignfn";
 	private static final String BN_DESIGN_VIEW = "catalog/encdesignbn";
 	private static final String SL_DESIGN_VIEW = "catalog/encdesignsl";
@@ -89,7 +90,12 @@ public class EncCategoryController extends CategoryController {
         		m.addObject("status", 0);
         	}
             
-        	m.setViewName(MATERIAL_VIEW);
+        	String checkOut = request.getParameter("ck");
+        	
+        	if("true".equals(checkOut))
+        		m.setViewName(MATERIAL_CHECKOUT_VIEW);
+        	else
+        		m.setViewName(MATERIAL_VIEW);
         }
         
         else if(category.getName().toLowerCase().contains(DESIGN))
