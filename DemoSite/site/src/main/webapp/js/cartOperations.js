@@ -1947,7 +1947,6 @@ $(function() {
 			}).hover(function() {
 						var $this = $(this);
 						$imgSrc = $this.attr('imgsrc');
-						$sec = $this.parent().parent().parent().parent();
 						// console.log('tagname:'+$sec.get(0).tagName);
 						$sec2 = $sec.next();
 						// $ch1 = $sec2.find('#options');

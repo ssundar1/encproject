@@ -95,15 +95,19 @@ public class EncCartController extends CartController {
     	//measurement.setCustomer(CustomerState.getCustomer(request));
     	//measurementService.saveMeasurement(measurement);
     	EncCustomer newCustomer = (EncCustomer) CustomerState.getCustomer();
-    	measurement.setCustomer(newCustomer);
-    	newCustomer.addMeasurement(measurement);
-       	newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
-
-       	//Add Measurement
     	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
-    	itemDTO.setMeasurement(measurement);
-    	encOrderItemDTOService.save(itemDTO);
-    	
+    	if(measurement.getName() != null && !measurement.getName().equals("") )
+    	{
+    		measurement.setCustomer(newCustomer);
+    		newCustomer.addMeasurement(measurement);
+    		newCustomer = (EncCustomer) customerService.saveCustomer(newCustomer);
+
+           	//Add Measurement
+        	
+        	itemDTO.setMeasurement(measurement);
+        	encOrderItemDTOService.save(itemDTO);
+    	}
+
     	populateAddToCartItem(itemDTO, addToCartItem);
         return super.addJson(request, response, model, addToCartItem);
     }
@@ -135,7 +139,8 @@ public class EncCartController extends CartController {
     	itemDTO.setMeasurement(measurement);
     	encOrderItemDTOService.save(itemDTO);
 
-    	populateAddToCartItem(itemDTO, addToCartItem);
+    	if(itemDTO != null)
+    		populateAddToCartItem(itemDTO, addToCartItem);
     	
         String respURL = super.add(request, response, model, addToCartItem);
         return respURL;
@@ -182,20 +187,33 @@ public class EncCartController extends CartController {
     			EncOrderItemRequestDTO addToCartItem)
     {
     	EncMaterial material = itemDTO.getMaterial();
-    	List<EncDesign> designs = itemDTO.getDesigns();
-    	List<Long> designIds = new ArrayList<Long>();
-    	EncTailor tailor = itemDTO.getTailor();
-    	Measurement measurement = itemDTO.getMeasurement();
-
-    	for(EncDesign d: designs)
+    	
+    	if(itemDTO.getDesigns() != null && itemDTO.getDesigns().size() > 0)
     	{
-    		designIds.add(d.getId());
+        	List<EncDesign> designs = itemDTO.getDesigns();
+        	List<Long> designIds = new ArrayList<Long>();
+
+        	for(EncDesign d: designs)
+        	{
+        		designIds.add(d.getId());
+        	}
+        	addToCartItem.setDesigns(designIds);
     	}
     	
-    	addToCartItem.setProductId(material.getId());
-    	addToCartItem.setMaterial(material.getId());
-    	addToCartItem.setDesigns(designIds);
-    	addToCartItem.setTailor(tailor.getId());
-    	addToCartItem.setMeasurementId(measurement.getId());
+    	
+    	EncTailor tailor = itemDTO.getTailor();
+    	if(tailor != null)
+    		addToCartItem.setTailor(tailor.getId());
+    	
+    	Measurement measurement = itemDTO.getMeasurement();
+
+    	if(measurement != null)
+    		addToCartItem.setMeasurementId(measurement.getId());
+    	
+    	if(material != null)
+    	{
+    		addToCartItem.setProductId(material.getId());
+    		addToCartItem.setMaterial(material.getId());
+    	}
     }
 }

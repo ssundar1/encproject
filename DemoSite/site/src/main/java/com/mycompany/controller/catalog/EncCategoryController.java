@@ -60,6 +60,7 @@ public class EncCategoryController extends CategoryController {
 	private static final String SLEEVE_DESIGN_CAT_NAME = "Sleeve_Design";
 //	private static final String TAILOR_CAT_NAME = "Tailor";
 	private static final Long PICKUP_MATERIAL = 10l;
+	private static final String PICKUP = "pk";
 	
     @Resource(name="blCatalogService")
     protected CatalogService catalogService;
@@ -67,10 +68,44 @@ public class EncCategoryController extends CategoryController {
     @Resource(name = "encOrderItemDTOService")
     protected EncOrderItemDTOService encOrderItemDTOService;
 	
+    private EncOrderItemDTO createItemDTOWithPickupMaterial(HttpServletRequest request)
+    {
+    	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+    	
+    	if(itemDTO == null || itemDTO.getStatus() == 5)	
+    	{	itemDTO = encOrderItemDTOService.createEncOrderItemDTO();    	
+    		itemDTO.setSessionId(request.getSession().getId());
+    		itemDTO.setIpAddress(request.getRemoteAddr());
+    	}
+    	else
+    	{
+    		itemDTO.setStatus(0);
+    		itemDTO.setFnSelectedId(null);
+    		itemDTO.setBnSelectedId(null);
+    		itemDTO.setSlSelectedId(null);
+    		itemDTO.setTlSelectedId(null);
+    		itemDTO.setMaterial(null);
+    		itemDTO.setDesigns(null);
+    		itemDTO.setTailor(null);
+    	}
+    	
+    	EncCustomer customer = (EncCustomer) CustomerState.getCustomer(request);
+    	itemDTO.setCustomerId(customer.getId());
+    	itemDTO.setCreationDate(Calendar.getInstance().getTime());
+    	
+		//set pick up material by default
+		EncMaterial material = (EncMaterial) catalogService.findProductById(PICKUP_MATERIAL);
+		itemDTO.setMaterial(material);
+		itemDTO.setStatus(1);
+    	encOrderItemDTOService.save(itemDTO);
+
+    	return itemDTO;
+    }
+    
 	//Change the view to our new view     
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView m = handleRequestBase(request, response);
-        
+                
         Category category = (Category) request.getAttribute(EncCategoryHandlerMapping.CURRENT_CATEGORY_ATTRIBUTE_NAME);
         if(category.getName().toLowerCase().contains(MATERIAL))
         {
@@ -103,7 +138,7 @@ public class EncCategoryController extends CategoryController {
         	//m.addObject("material", request.getAttribute("material"));
         	
         	String catg = category.getName();
-        	
+
         	/*//Store Material to DTO
         	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
         	Long encM =  itemDTO.getMaterial().getId();*/
@@ -115,7 +150,12 @@ public class EncCategoryController extends CategoryController {
         	else if(catg.contains(SLEEVE_DESIGN_CAT_NAME))
         		m.setViewName(SL_DESIGN_VIEW);
 
-        	EncOrderItemDTO itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+        	EncOrderItemDTO itemDTO = null;
+        	
+        	if(!"true".equals(request.getParameter(PICKUP)))
+        		itemDTO = encOrderItemDTOService.retrieveItemDTO(request);
+        	else
+        		itemDTO = createItemDTOWithPickupMaterial(request);
         	
         	if(category.getName().toLowerCase().contains(BLOUSE))
         	{
@@ -126,14 +166,6 @@ public class EncCategoryController extends CategoryController {
         		m.addObject("type", CHUD);
         	}
         	
-    		if (itemDTO.getMaterial() == null)
-    		{
-    			//set pick up material by default
-    			EncMaterial material = (EncMaterial) catalogService.findProductById(PICKUP_MATERIAL);
-    			itemDTO.setMaterial(material);
-    			encOrderItemDTOService.save(itemDTO);
-    		}
-
             m.addObject("status", itemDTO.getStatus());
             
             if(category.getName().contains(FRONT_NECK_DESIGN_CAT_NAME)){

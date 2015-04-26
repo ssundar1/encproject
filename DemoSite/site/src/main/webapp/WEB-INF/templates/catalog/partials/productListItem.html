@@ -26,7 +26,7 @@
     </div>
 
     <div class="add_to_cart" th:classappend="${cart.containsSku(#object.defaultSku)}? ' hidden'">
-        <blc:form method="POST" th:action="@{/enccart/addmaterialtocart}">
+        <blc:form method="POST" th:action="@{/enccart/addtocart}">
             <input type="hidden" name="productId" th:value="*{id}" />
             <input type="hidden" name="quantity" value="1" />            
 
