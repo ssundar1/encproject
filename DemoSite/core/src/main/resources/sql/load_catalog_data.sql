@@ -18,15 +18,23 @@ INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGO
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2007,'Choose Design','Blouse_Front_Neck_Design','/bls-design/bls-fn-design',2,CURRENT_TIMESTAMP);
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2008,'Choose Design','Blouse_Back_Neck_Design','/bls-design/bls-bn-design',2,CURRENT_TIMESTAMP);
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2009,'Choose Design','Blouse_Sleeve_Design','/bls-design/bls-sl-design',2,CURRENT_TIMESTAMP);
+
+
+INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (3002,'Choose Chudidhar Design','Chud_Designs','/bls-design',2,CURRENT_TIMESTAMP);
+INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (3007,'Choose Chudidhar Design','Chud_Front_Neck_Design','/chud-design/chud-fn-design',2,CURRENT_TIMESTAMP);
+INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (3008,'Choose Chudidhar Design','Chud_Back_Neck_Design','/chud-design/chud-bn-design',2,CURRENT_TIMESTAMP);
+INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (3009,'Choose Chudidhar Design','Chud_Sleeve_Design','/chud-design/chud-sl-design',2,CURRENT_TIMESTAMP);
+
+
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2010,'Choose Tailor','Tailor','/bls-tailor',2,CURRENT_TIMESTAMP);
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2003,'Choose Material','Blouse_Materials','/bls-material',2,CURRENT_TIMESTAMP);
+INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (3003,'Choose Material','Chudihar_Materials','/chud-material',2,CURRENT_TIMESTAMP);
+
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2004,'Embroidery','Embroidery','/embroidery',2,CURRENT_TIMESTAMP);
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2005,'Dress Makers','Dress_Makers','/new-to-hot-sauce',2,CURRENT_TIMESTAMP);
 INSERT INTO BLC_CATEGORY (CATEGORY_ID,DESCRIPTION,NAME,URL,DEFAULT_PARENT_CATEGORY_ID,ACTIVE_START_DATE) VALUES (2006,'FAQs','FAQs','/faq',2,CURRENT_TIMESTAMP);
 
 -- Builds the category hierarchy (simple in this case) - Root --> Nav --> All other categories
-INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2,1,1);
-INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2001,2,1);
 INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2002,2,3);
 INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2003,2,2);
 INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2004,2,4);
@@ -36,6 +44,16 @@ INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALU
 INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2008,2002,8);
 INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2009,2002,9);
 INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (2010,2,10);
+
+INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3002,2,3);
+INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3003,2,2);
+--INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3004,2,4);
+--INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3005,2,5);
+--INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3006,2,6);
+INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3007,3002,7);
+INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3008,3002,8);
+INSERT INTO BLC_CATEGORY_XREF (SUB_CATEGORY_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (3009,3002,9);
+
 
 -- Add in any applicable search facets for the given category
 INSERT INTO BLC_FIELD (FIELD_ID, ENTITY_TYPE, PROPERTY_NAME, ABBREVIATION, SEARCHABLE, FACET_FIELD_TYPE) VALUES (1, 'PRODUCT', 'manufacturer', 'mfg', TRUE, 's');
@@ -101,6 +119,56 @@ INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_
 INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (18,2003,'/bls-material/bridal_blouse_design18','Surya',FALSE);
 INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (19,2003,'/bls-material/bridal_blouse_design19','Surya',FALSE);
 
+
+
+--Chudihar products
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (20,3003,'/chud-material/chud_design1','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (21,3003,'/chud-material/chud_design2','XYZ',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (22,3003,'/chud-material/chud_design3','Garden Row',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (23,3003,'/chud-material/chud_design4','Uma',TRUE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (24,3003,'/chud-material/chud_design5','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (25,3003,'/chud-material/chud_design6','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (26,3003,'/chud-material/chud_design7','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (27,3003,'/chud-material/chud_design8','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (28,3003,'/chud-material/chud_design9','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (29,3003,'/chud-material/chud_design10','Surya',FALSE);
+
+--Chudihar front neck design
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (30,3007,'/chud-design/chud-fn-design/chud_design1','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (31,3007,'/chud-design/chud-fn-design/chud_design2','XYZ',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (32,3007,'/chud-design/chud-fn-design/chud_design3','Garden Row',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (33,3007,'/chud-design/chud-fn-design/chud_design4','Uma',TRUE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (34,3007,'/chud-design/chud-fn-design/chud_design5','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (35,3007,'/chud-design/chud-fn-design/chud_design6','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (36,3007,'/chud-design/chud-fn-design/chud_design7','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (37,3007,'/chud-design/chud-fn-design/chud_design8','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (38,3007,'/chud-design/chud-fn-design/chud_design9','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (39,3007,'/chud-design/chud-fn-design/chud_design10','Surya',FALSE);
+-- Chudihar back nect desig
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (40,3008,'/chud-design/chud-bn-design/chud_design1','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (41,3008,'/chud-design/chud-bn-design/chud_design2','XYZ',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (42,3008,'/chud-design/chud-bn-design/chud_design3','Garden Row',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (43,3008,'/chud-design/chud-bn-design/chud_design4','Uma',TRUE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (44,3008,'/chud-design/chud-bn-design/chud_design5','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (45,3008,'/chud-design/chud-bn-design/chud_design6','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (46,3008,'/chud-design/chud-bn-design/chud_design7','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (47,3008,'/chud-design/chud-bn-design/chud_design8','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (48,3008,'/chud-design/chud-bn-design/chud_design9','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (49,3008,'/chud-design/chud-bn-design/chud_design10','Surya',FALSE);
+
+--Chudihar sleeve desig
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (50,3009,'/chud-design/chud-sl-design/chud_design1','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (51,3009,'/chud-design/chud-sl-design/chud_design2','XYZ',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (52,3009,'/chud-design/chud-sl-design/chud_design3','Garden Row',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (53,3009,'/chud-design/chud-sl-design/chud_design4','Uma',TRUE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (54,3009,'/chud-design/chud-sl-design/chud_design5','Uma',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (55,3009,'/chud-design/chud-sl-design/chud_design6','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (56,3009,'/chud-design/chud-sl-design/chud_design7','Surya',TRUE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (57,3009,'/chud-design/chud-sl-design/chud_design8','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (58,3009,'/chud-design/chud-sl-design/chud_design9','Surya',FALSE);
+INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (59,3009,'/chud-design/chud-sl-design/chud_design10','Surya',FALSE);
+
+
 INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (10, 'blouse', 1);
 INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (11, 'blouse', 0);
 INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (12, 'blouse', 0);
@@ -111,6 +179,17 @@ INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (16, 'blouse', 0);
 INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (17, 'blouse', 0);
 INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (18, 'blouse', 0);
 INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (19, 'blouse', 0);
+
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (20, 'chud', 1);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (21, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (22, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (23, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (24, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (25, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (26, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (27, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (28, 'chud', 0);
+INSERT INTO ENC_MATERIAL (PRODUCT_ID, TYPE, IS_DUMMY) VALUES (29, 'chud', 0);
 
 -- Merchandise (products with options)
 INSERT INTO BLC_PRODUCT (PRODUCT_ID,  DEFAULT_CATEGORY_ID, URL, MANUFACTURE, IS_FEATURED_PRODUCT) VALUES (100,2004,'/embroidery/bls_design_embroidery','UMA Collections',FALSE);
@@ -142,7 +221,7 @@ INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRIC
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (5,5,'Fashion Embroidery','If you want hot, this is the chile to choose. Native to the Carribean, Yucatan and Northern Coast of South America, the Habanero presents itself in a variety of colors ranging from light green to a bright red. The Habanero''s bold heat, unique flavor and aroma has made it the favorite of chile lovers.',6.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (6,6,'Silk Ribbon design','Our ribbons are ideal for those interested in all creative crafts, such as embroidery, greeting cards, quilting, dolls, miniature work, scrapbooking, jewellery and sugarcraft, as well as fans, celebration bonbonnieres, hats and restoration work.  We have ribbon assortments in stunning colours, which are ideal, not only for weddings, but for all invitations',6.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (7,7,'Stone Embroidery','The stone embroidery is designed for suiting the distinct taste of fashion conscious customers, the creations are available in both vibrant and bold colors. Not only this, Utsav also presents customization of art work for making the demands of international customers. ',11.99,'Y','Y',CURRENT_TIMESTAMP);
-INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (8,8,'Mirror Embroidery',' Shisha the Hindi word for (little glass) embroidery is also known as mirror-work or abla embroidery. Originally, pieces of mica were used as the mirrors, but later, thin blown-glass pieces were broken and used. Today, small mirrors are commercially available for shisha embroidery. If you use these, make sure to file the edges first so the mirrors arenâ€™t sharp.',4.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (8,8,'Mirror Embroidery',' Shisha the Hindi word for (little glass) embroidery is also known as mirror-work or abla embroidery. Originally, pieces of mica were used as the mirrors, but later, thin blown-glass pieces were broken and used. Today, small mirrors are commercially available for shisha embroidery. If you use these, make sure to file the edges first so the mirrors arenÃ¢â‚¬â„¢t sharp.',4.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (9,9,'Cotton embroidery design','The stone embroidery is designed for suiting the distinct taste of fashion conscious customers, the creations are available in both vibrant and bold colors. Not only this, Utsav also presents customization of art work for making the demands of international customers.',12.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (10,10,'Pick Up Material','I have my Own Material',0.00,'N','N',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (11,11,'Run stitch embroidery design','The running stitch or straight stitch is the basic stitch in hand-sewing and embroidery, on which all other forms of sewing are based. The stitch is worked by passing the needle in and out of the fabric.',3.99,'Y','Y',CURRENT_TIMESTAMP);
@@ -151,6 +230,50 @@ INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRIC
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (14,14,'Rubber Embroidery design','This sauce gets its great flavor from aged peppers and cane vinegar. It will enhance the flavor of most any meal.',5.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (15,15,'Gajji Lace embroidery designs','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (16,16,'Cross stitch design','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+
+-- Chudidhar Sku configuration
+
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE, INVENTORY_TYPE) VALUES (20,20,'Chudihar material','outing is an occasion where every one display thier charm by dressing up well and hence the Chudidhar designs ',10.99,'Y','Y',CURRENT_TIMESTAMP, 'BASIC');
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE, INVENTORY_TYPE) VALUES (21,21,'Chudihar material product21','Weaves of North India Just like Chikankari and Phulkari, Kashmiri embroidery work and weaving style is very famous amongst the North Indians',10.99,'Y','Y',CURRENT_TIMESTAMP, 'BASIC');
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE, INVENTORY_TYPE) VALUES (22,22,'Chudihar material product22','Weaves of North India Material 22 Just like Chikankari and Phulkari, Kashmiri embroidery work and weaving style is very famous amongst the North Indians',10.99,'Y','Y',CURRENT_TIMESTAMP, 'BASIC');
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (23,23,'Chudihar material product23','Wedding is an occasion where every one display thier charm by dressing up well and hence the wedding blouse Embroidery. ',4.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (24,24,'Chudihar material product24','Formal Chudihars are never associated with an occasion rather creates festivity among the office mates and hence the chudihar Embroider.',6.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (25,25,'Chudihar material product25','If you want hot, this is the chile to choose. Native to the Carribean, Yucatan and Northern Coast of South America, the Habanero presents itself in a variety of colors ranging from light green to a bright red. The Habanero''s bold heat, unique flavor and aroma has made it the favorite of chile lovers.',6.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (26,26,'Chudihar material product26','Our ribbons are ideal for those interested in all creative crafts, such as embroidery, greeting cards, quilting, dolls, miniature work, scrapbooking, jewellery and sugarcraft, as well as fans, celebration bonbonnieres, hats and restoration work.  We have ribbon assortments in stunning colours, which are ideal, not only for weddings, but for all invitations',6.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (27,27,'Chudihar material product27','The stone embroidery is designed for suiting the distinct taste of fashion conscious customers, the creations are available in both vibrant and bold colors. Not only this, Utsav also presents customization of art work for making the demands of international customers. ',11.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (28,28,'Chudihar material product28',' Shisha the Hindi word for (little glass) embroidery is also known as mirror-work or abla embroidery. Originally, pieces of mica were used as the mirrors, but later, thin blown-glass pieces were broken and used. Today, small mirrors are commercially available for shisha embroidery. If you use these, make sure to file the edges first so the mirrors arenÃ¢â‚¬â„¢t sharp.',4.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (29,29,'Chudihar material product29','The stone embroidery is designed for suiting the distinct taste of fashion conscious customers, the creations are available in both vibrant and bold colors. Not only this, Utsav also presents customization of art work for making the demands of international customers.',12.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (30,30,'Chudihar Design product30','I have my Own Material',0.00,'N','N',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (31,31,'Chudihar Design product31','The running stitch or straight stitch is the basic stitch in hand-sewing and embroidery, on which all other forms of sewing are based. The stitch is worked by passing the needle in and out of the fabric.',3.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (32,32,'Chudihar Design product32','Balochi embroidery is one of the oldest in the history. Balochi female dresses are very famous because of their unique embroidery patterns adopted from the very native land',4.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (33,33,'Chudihar Design product33','f you want to know the secrets of making great bead embroidery, here are my top five to get you started. But be warned: once you start making gorgeous pieces of bead embroidery jewelry, you won''t want to stop!',3.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (34,34,'Chudihar Design product34','This sauce gets its great flavor from aged peppers and cane vinegar. It will enhance the flavor of most any meal.',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (35,35,'Chudihar Design product35','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (36,36,'Chudihar Design product36','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (37,37,'Chudihar Design product37','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (38,38,'Chudihar Design product38','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (39,39,'Chudihar Design product39','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (40,40,'Chudihar Design product40','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (41,41,'Chudihar Design product41','The running stitch or straight stitch is the basic stitch in hand-sewing and embroidery, on which all other forms of sewing are based. The stitch is worked by passing the needle in and out of the fabric.',3.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (42,42,'Chudihar Design product41','Balochi embroidery is one of the oldest in the history. Balochi female dresses are very famous because of their unique embroidery patterns adopted from the very native land',4.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (43,43,'Chudihar Design product42','f you want to know the secrets of making great bead embroidery, here are my top five to get you started. But be warned: once you start making gorgeous pieces of bead embroidery jewelry, you won''t want to stop!',3.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (44,44,'Chudihar Design product43','This sauce gets its great flavor from aged peppers and cane vinegar. It will enhance the flavor of most any meal.',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (45,45,'Chudihar Design product44','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (46,46,'Chudihar Design product45','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (47,47,'Chudihar Design product46','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (48,48,'Chudihar Design product47','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (49,49,'Chudihar Design product48','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (50,50,'Chudihar Design product49','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (51,51,'Chudihar Design product50','The running stitch or straight stitch is the basic stitch in hand-sewing and embroidery, on which all other forms of sewing are based. The stitch is worked by passing the needle in and out of the fabric.',3.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (52,52,'Chudihar Design product51','Balochi embroidery is one of the oldest in the history. Balochi female dresses are very famous because of their unique embroidery patterns adopted from the very native land',4.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (53,53,'Chudihar Design product51','f you want to know the secrets of making great bead embroidery, here are my top five to get you started. But be warned: once you start making gorgeous pieces of bead embroidery jewelry, you won''t want to stop!',3.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (54,54,'Chudihar Design product52','This sauce gets its great flavor from aged peppers and cane vinegar. It will enhance the flavor of most any meal.',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (55,55,'Chudihar Design product53','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (56,56,'Chudihar Design product54','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (57,57,'Chudihar Design product56','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (58,58,'Chudihar Design product57','Italian cross-stitch and Montenegrin stitch are reversible, meaning the work looks the same on ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (59,59,'Chudihar Design product59','Gajji silk fabric with black cotton thread repeating embroidery pattern. All embroidery work done by hand by women artisans in Gujarat, India. ',5.99,'Y','Y',CURRENT_TIMESTAMP);
+
 
 --bundle1 Skus
 INSERT INTO BLC_SKU (SKU_ID,ACTIVE_END_DATE,ACTIVE_START_DATE,AVAILABLE_FLAG,DESCRIPTION,CONTAINER_SHAPE,DEPTH,DIMENSION_UNIT_OF_MEASURE,GIRTH,HEIGHT,CONTAINER_SIZE,WIDTH,DISCOUNTABLE_FLAG,FULFILLMENT_TYPE,INVENTORY_TYPE,IS_MACHINE_SORTABLE,LONG_DESCRIPTION,NAME,RETAIL_PRICE,SALE_PRICE,TAXABLE_FLAG,WEIGHT,WEIGHT_UNIT_OF_MEASURE,DEFAULT_PRODUCT_ID) VALUES (9992,{ts '2099-04-05 00:00:00'},{ts '2001-02-24 00:00:00'},null,null,null,null,null,null,null,null,null,null,null,null,true,null,'bundle1',13,3,null,null,null,992);
@@ -189,7 +312,7 @@ INSERT INTO BLC_PRODUCT_OPTION_VALUE (PRODUCT_OPTION_VALUE_ID, ATTRIBUTE_VALUE, 
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (100,100,'Japanese geisha','Men s Habanero collection standard short sleeve screen-printed tee shirt in soft 30 singles cotton in regular fit.',14.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (200,200,'Cool Neck for ladies dress','Women''s Habanero collection standard short sleeve screen-printed tee shirt in soft 30 singles cotton in regular fit.',14.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (300,300,'Traditional Ladies dress','This hand-drawn logo shirt for men features a regular fit in three different colors',15.99,'Y','Y',CURRENT_TIMESTAMP);
-INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (400,400,'IndianÂ ethnic Wear',' Collection(Women s)This hand-drawn logo shirt for women features a regular fit in three different colors',15.99,'Y','Y',CURRENT_TIMESTAMP);
+INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (400,400,'IndianÃ‚Â ethnic Wear',' Collection(Women s)This hand-drawn logo shirt for women features a regular fit in three different colors',15.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (500,500,'Fancy Tunic','Don''t you just love our mascot? Get your very own shirt today!',15.99,'Y','Y',CURRENT_TIMESTAMP);
 INSERT INTO BLC_SKU (SKU_ID,DEFAULT_PRODUCT_ID,NAME,LONG_DESCRIPTION,RETAIL_PRICE,TAXABLE_FLAG,DISCOUNTABLE_FLAG,ACTIVE_START_DATE) VALUES (600,600,'Khatli panching design (Women''s)','Don''t you just love our mascot? Get your very own shirt today!',15.99,'Y','Y',CURRENT_TIMESTAMP);
 
@@ -444,6 +567,51 @@ INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) V
 INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (500,2004,5);
 INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (600,2004,6);
 
+--Chudihar entires to be added
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (20,3003,1);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (21,3003,2);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (22,3003,3);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (23,3003,4);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (24,3003,5);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (25,3003,6);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (26,3003,7);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (27,3003,8);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (28,3003,9);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (29,3003,10);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (30,3007,19);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (31,3007,11);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (32,3007,12);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (33,3007,13);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (34,3007,14);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (35,3007,15);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (36,3007,16);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (37,3007,17);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (38,3007,18);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (39,3007,19);
+
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (49,3008,10);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (40,3008,19);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (41,3008,11);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (42,3008,12);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (43,3008,13);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (44,3008,14);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (45,3008,15);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (46,3008,16);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (47,3008,17);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (48,3008,18);
+
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (59,3009,10);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (50,3009,19);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (51,3009,11);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (52,3009,12);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (53,3009,13);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (54,3009,14);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (55,3009,15);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (56,3009,16);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (57,3009,17);
+INSERT INTO BLC_CATEGORY_PRODUCT_XREF (PRODUCT_ID, CATEGORY_ID, DISPLAY_ORDER) VALUES (58,3009,18);
+
+
 ------------------------------------------------------------------------------------------------------------------
 -- Load Catalog - Step 4:  Media Items used by products
 -- ========================================================
@@ -509,6 +677,66 @@ INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50003,'/cmsstatic
 INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60001,'/cmsstatic/img/merch/chud_des(16).jpg','Heat Clinic Mascot Women''s Black','primary');
 INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60002,'/cmsstatic/img/merch/chud_des(17).jpg','Heat Clinic Mascot Women''s Red','primary');
 INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60003,'/cmsstatic/img/merch/chud_des(18).jpg','Heat Clinic Mascot Women''s Silver','primary');
+
+-- Chud Material
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50011,'/cmsstatic/img/merch/Material/chud_des(1).jpg','Chudidhar Material 1''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50012,'/cmsstatic/img/merch/Material/chud_des(2).jpg','Chudidhar Material 2''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50013,'/cmsstatic/img/merch/Material/chud_des(3).jpg','Chudidhar Material 3''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50014,'/cmsstatic/img/merch/Material/chud_des(4).jpg','Chudidhar Material 4''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50015,'/cmsstatic/img/merch/Material/chud_des(5).jpg','Chudidhar Material 5''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50016,'/cmsstatic/img/merch/Material/chud_des(6).jpg','Chudidhar Material 6''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50017,'/cmsstatic/img/merch/Material/chud_des(7).jpg','Chudidhar Material 7''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50018,'/cmsstatic/img/merch/Material/chud_des(8).jpg','Chudidhar Material 8''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50019,'/cmsstatic/img/merch/Material/chud_des(9).jpg','Chudidhar Material 9''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (50020,'/cmsstatic/img/merch/Material/chud_des(10).jpg','Chudidhar Material 10''s Silver','primary');
+
+
+--Chudidhar front neck
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60013,'/cmsstatic/img/merch/FrontNeck/chud_des(1).jpg','FrontNeck Chudidhar design 1''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60023,'/cmsstatic/img/merch/FrontNeck/chud_des(2).jpg','FrontNeck Chudidhar design 2''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60033,'/cmsstatic/img/merch/FrontNeck/chud_des(3).jpg','FrontNeck Chudidhar design 3''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60043,'/cmsstatic/img/merch/FrontNeck/chud_des(4).jpg','FrontNeck Chudidhar design 4''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60053,'/cmsstatic/img/merch/FrontNeck/chud_des(5).jpg','FrontNeck Chudidhar design 5''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60063,'/cmsstatic/img/merch/FrontNeck/chud_des(6).jpg','FrontNeck Chudidhar design 6''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60073,'/cmsstatic/img/merch/FrontNeck/chud_des(6).jpg','FrontNeck Chudidhar design 7''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60083,'/cmsstatic/img/merch/FrontNeck/chud_des(6).jpg','FrontNeck Chudidhar design 8''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60093,'/cmsstatic/img/merch/FrontNeck/chud_des(7).jpg','FrontNeck Chudidhar design 9''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60103,'/cmsstatic/img/merch/FrontNeck/chud_des(8).jpg','FrontNeck Chudidhar design 10''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60113,'/cmsstatic/img/merch/FrontNeck/chud_des(9).jpg','FrontNeck Chudidhar design 11''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60123,'/cmsstatic/img/merch/FrontNeck/chud_des(10).jpg','FrontNeck Chudidhar design 12''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60133,'/cmsstatic/img/merch/FrontNeck/chud_des(21).jpg','FrontNeck Chudidhar design 13''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60143,'/cmsstatic/img/merch/FrontNeck/chud_des(22).jpg','FrontNeck Chudidhar design 14''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60153,'/cmsstatic/img/merch/FrontNeck/chud_des(23).jpg','FrontNeck Chudidhar design 15''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60163,'/cmsstatic/img/merch/FrontNeck/chud_des(24).jpg','FrontNeck Chudidhar design 16''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (60173,'/cmsstatic/img/merch/FrontNeck/chud_des(25).jpg','FrontNeck Chudidhar design 17''s Silver','primary');
+
+--Chudidhar back neck
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70013,'/cmsstatic/img/merch/BackNeck/chud_des(12).jpg','BackNeck Chudidhar design 1''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70023,'/cmsstatic/img/merch/BackNeck/chud_des(1).jpg','BackNeck Chudidhar design 2''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70033,'/cmsstatic/img/merch/BackNeck/chud_des(2).jpg','BackNeck Chudidhar design 3''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70043,'/cmsstatic/img/merch/BackNeck/chud_des(3).jpg','BackNeck Chudidhar design 4''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70053,'/cmsstatic/img/merch/BackNeck/chud_des(4).jpg','BackNeck Chudidhar design 5''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70063,'/cmsstatic/img/merch/BackNeck/chud_des(5).jpg','BackNeck Chudidhar design 6''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70073,'/cmsstatic/img/merch/BackNeck/chud_des(6).jpg','BackNeck Chudidhar design 7''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70083,'/cmsstatic/img/merch/BackNeck/chud_des(7).jpg','BackNeck Chudidhar design 8''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70093,'/cmsstatic/img/merch/BackNeck/chud_des(8).jpg','BackNeck Chudidhar design 9''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70010,'/cmsstatic/img/merch/BackNeck/chud_des(9).jpg','BackNeck Chudidhar design 10''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70011,'/cmsstatic/img/merch/BackNeck/chud_des(10).jpg','BackNeck Chudidhar design 11''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (70012,'/cmsstatic/img/merch/BackNeck/chud_des(12).jpg','BackNeck Chudidhar design 12''s Silver','primary');
+
+--Chudidhar Sleeve Design
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80013,'/cmsstatic/img/merch/Sleeve/chud_des(1).jpg','Sleeve Chudidhar design 1''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80023,'/cmsstatic/img/merch/Sleeve/chud_des(2).jpg','Sleeve Chudidhar design 2''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80033,'/cmsstatic/img/merch/Sleeve/chud_des(3).jpg','Sleeve Chudidhar design 3''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80043,'/cmsstatic/img/merch/Sleeve/chud_des(4).jpg','Sleeve Chudidhar design 4''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80053,'/cmsstatic/img/merch/Sleeve/chud_des(5).jpg','Sleeve Chudidhar design 5''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80063,'/cmsstatic/img/merch/Sleeve/chud_des(6).jpg','Sleeve Chudidhar design 6''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80073,'/cmsstatic/img/merch/Sleeve/chud_des(7).jpg','Sleeve Chudidhar design 7''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80083,'/cmsstatic/img/merch/Sleeve/chud_des(8).jpg','Sleeve Chudidhar design 8''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80093,'/cmsstatic/img/merch/Sleeve/chud_des(9).jpg','Sleeve Chudidhar design 9''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80010,'/cmsstatic/img/merch/Sleeve/chud_des(10).jpg','Sleeve Chudidhar design 10''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80011,'/cmsstatic/img/merch/Sleeve/chud_des(11).jpg','Sleeve Chudidhar design 11''s Silver','primary');
+INSERT INTO BLC_MEDIA (MEDIA_ID, URL, TITLE, ALT_TEXT) VALUES (80012,'/cmsstatic/img/merch/Sleeve/chud_des(10).jpg','Sleeve Chudidhar design 12''s Silver','primary');
 
 ------------------------------------------------------------------------------------------------------------------
 -- Load Catalog - Step 5:  Mapping for product to media
@@ -576,6 +804,49 @@ INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (400,40
 INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (500,50002,'alt2');
 INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (600,60003,'alt2');
 
+--Chudidhar entries
+
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (20,50011,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (21,50012,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (22,50013,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (23,50014,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (24,50015,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (25,50016,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (26,50017,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (27,50018,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (28,50019,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (29,50020,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (30,60083,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (31,60093,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (32,60103,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (33,60113,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (34,60123,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (35,60133,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (36,60143,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (37,60153,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (38,60163,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (39,60173,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (40,70012,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (41,70013,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (42,70023,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (43,70033,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (44,70043,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (45,70053,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (46,70063,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (47,70073,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (48,70083,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (49,70093,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (50,80010,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (51,80013,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (52,80023,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (53,80033,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (54,80043,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (56,80053,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (57,80063,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (58,80073,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (59,80083,'primary');
+INSERT INTO BLC_SKU_MEDIA_MAP (BLC_SKU_SKU_ID, MEDIA_ID, MAP_KEY) VALUES (55,80093,'primary');
+
 
 ------------------------------------------------------------------------------------------------------------------
 -- Load Catalog - Step 5: Asset Items (media)
@@ -624,24 +895,56 @@ INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL
 INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (1901,'image/jpg','FILESYSTEM','/img/merch/chud_des(10).jpg','Roasted Red Pepper and Chipotle Hot Sauce Bottle');
 INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (1902,'image/jpg','FILESYSTEM','/img/merch/chud_des(20).jpg','Roasted Red Pepper and Chipotle Hot Sauce Close-up');
 
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (10001,'image/jpg','FILESYSTEM','/img/merch/bls_des(11).jpg','Hawt Like a Habanero Men''s Black');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (10002,'image/jpg','FILESYSTEM','/img/merch/bls_des(12).jpg','Hawt Like a Habanero Men''s Red');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (10003,'image/jpg','FILESYSTEM','/img/merch/bls_des(13).jpg','Hawt Like a Habanero Men''s Silver');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (20001,'image/jpg','FILESYSTEM','/img/merch/bls_des(14).jpg','Hawt Like a Habanero Women''s Black');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (20002,'image/jpg','FILESYSTEM','/img/merch/bls_des(15).jpg','Hawt Like a Habanero Women''s Red');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (20003,'image/jpg','FILESYSTEM','/img/merch/bls_des(16).jpg','Hawt Like a Habanero Women''s Silver');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (30001,'image/jpg','FILESYSTEM','/img/merch/chud_des(7).jpg','Heat Clinic Hand-Drawn Men''s Black');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (30002,'image/jpg','FILESYSTEM','/img/merch/chud_des(8).jpg','Heat Clinic Hand-Drawn Men''s Red');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (30003,'image/jpg','FILESYSTEM','/img/merch/chud_des(9).jpg','Heat Clinic Hand-Drawn Men''s Silver');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (40001,'image/jpg','FILESYSTEM','/img/merch/chud_des(10).jpg','Heat Clinic Hand-Drawn Women''s Black');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (40002,'image/jpg','FILESYSTEM','/img/merch/chud_des(11).jpg','Heat Clinic Hand-Drawn Women''s Red');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (40003,'image/jpg','FILESYSTEM','/img/merch/chud_des(12).jpg','Heat Clinic Hand-Drawn Women''s Silver');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50001,'image/jpg','FILESYSTEM','/img/merch/chud_des(13).jpg','Heat Clinic Mascot Men''s Black');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50002,'image/jpg','FILESYSTEM','/img/merch/chud_des(14).jpg','Heat Clinic Mascot Men''s Red');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50003,'image/jpg','FILESYSTEM','/img/merch/chud_des(15).jpg','Heat Clinic Mascot Men''s Silver');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60001,'image/jpg','FILESYSTEM','/img/merch/chud_des(16).jpg','Heat Clinic Mascot Women''s Black');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60002,'image/jpg','FILESYSTEM','/img/merch/chud_des(17).jpg','Heat Clinic Mascot Women''s Red');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60003,'image/jpg','FILESYSTEM','/img/merch/chud_des(18).jpg','Heat Clinic Mascot Women''s Silver');
+--Chudichar entires
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50011,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(1).jpg','Front Neck design asset 1''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50012,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(2).jpg','Front Neck design asset 2''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50013,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(3).jpg','Front Neck design asset 3''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50014,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(4).jpg','Front Neck design asset 4''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50015,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(5).jpg','Front Neck design asset 5''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50016,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(6).jpg','Front Neck design asset 6''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50017,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(7).jpg','Front Neck design asset 7''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50018,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(8).jpg','Front Neck design asset 8''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50019,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(9).jpg','Front Neck design asset 9''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (50020,'image/jpg','FILESYSTEM','/img/merch/Material/chud_des(10).jpg','Front Neck design asset 10''s Silver');
+
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60013,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(1).jpg','Front Neck design asset 1''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60023,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(2).jpg','Front Neck design asset 2''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60033,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(3).jpg','Front Neck design asset 3''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60043,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(4).jpg','Front Neck design asset 4''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60053,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(5).jpg','Front Neck design asset 5''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60063,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(6).jpg','Front Neck design asset 6''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60073,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(7).jpg','Front Neck design asset 7''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60083,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(8).jpg','Front Neck design asset 8''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60093,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(9).jpg','Front Neck design asset 9''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70013,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(1).jpg','Back Neck design asset 1''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70023,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(10).jpg','Back Neck design asset 2''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70033,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(2).jpg','Back Neck design asset 3''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70043,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(3).jpg','Back Neck design asset 4''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70053,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(4).jpg','Back Neck design asset 5''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70063,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(5).jpg','Back Neck design asset 6''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70073,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(6).jpg','Back Neck design asset 7''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70083,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(7).jpg','Back Neck design asset 8''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (70093,'image/jpg','FILESYSTEM','/img/merch/BackNeck/chud_des(8).jpg','Back Neck design asset 9''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60103,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(8).jpg','Front Neck design asset 10''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60113,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(9).jpg','Front Neck design asset 11''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60123,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(10).jpg','Front Neck design asset 12''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60133,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(21).jpg','Front Neck design asset 13''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60143,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(22).jpg','Front Neck design asset 14''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60153,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(23).jpg','Front Neck design asset 15''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60163,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(24).jpg','Front Neck design asset 16''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60173,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(25).jpg','Front Neck design asset 17''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60183,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/chud_des(18).jpg','Front Neck design asset 18''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (60193,'image/jpg','FILESYSTEM','/img/merch/FrontNeck/bls_des(19).jpg','Sleeve design asset 1''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80001,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(7).jpg','Sleeve design asset 1''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80002,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(8).jpg','Sleeve design asset 2''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80003,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(9).jpg','Sleeve design asset 3''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80011,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(1).jpg','Sleeve design asset 4''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80012,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(10).jpg','Sleeve design asset 5''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80013,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(2).jpg','Sleeve design asset 6''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80014,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(3).jpg','Sleeve design asset 7''s Black');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80015,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(4).jpg','Sleeve design asset 8''s Red');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80016,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(5).jpg','Sleeve design asset 9''s Silver');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (80017,'image/jpg','FILESYSTEM','/img/merch/Sleeve/chud_des(6).jpg','Sleeve design asset 10''s Black');
 
 
 
@@ -734,6 +1037,40 @@ INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (5, 'blouse', 'Blouse_
 INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (6, 'blouse', 'Blouse_Back_Neck_Design');
 INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (7, 'blouse','Blouse_Sleeve_Design');
 INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (8, 'blouse','Blouse_Sleeve_Design');
+
+--Chudihar entries
+
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (30, 'Chudidhar','Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (31, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (32, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (33, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (34, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (35, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (36, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (37, 'Chudidhar','Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (38, 'Chudidhar','Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (39, 'Chudidhar', 'Chudidhar_Front_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (40, 'Chudidhar', 'Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (41, 'Chudidhar', 'Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (42, 'Chudidhar', 'Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (43, 'Chudidhar', 'Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (44, 'Chudidhar', 'Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (45, 'Chudidhar','Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (46, 'Chudidhar','Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (47, 'Chudidhar', 'Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (48, 'Chudidhar','Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (49, 'Chudidhar','Chudidhar_Back_Neck_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (50, 'Chudidhar', 'Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (51, 'Chudidhar', 'Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (52, 'Chudidhar', 'Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (53, 'Chudidhar', 'Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (54, 'Chudidhar', 'Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (55, 'Chudidhar','Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (56, 'Chudidhar','Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (57, 'Chudidhar', 'Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (58, 'Chudidhar','Chudidhar_Sleeve_Design');
+INSERT INTO ENC_DESIGN (PRODUCT_ID, TYPE,CATEGORY) VALUES (59, 'Chudidhar','Chudidhar_Sleeve_Design');
+
 
 UPDATE `broadleaf`.`enc_material` SET `SP_ID`='1' WHERE `PRODUCT_ID`='10';
 UPDATE `broadleaf`.`enc_material` SET `SP_ID`='1' WHERE `PRODUCT_ID`='11';
