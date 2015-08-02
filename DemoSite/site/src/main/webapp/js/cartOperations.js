@@ -35,7 +35,7 @@ function yesClickMethod(current) {
 	    ev.preventDefault();
 	    var data = ev.dataTransfer.getData("text");
 	    //ev.target.appendChild(document.getElementById(data));
-	    window.location.href = data.replace("bls", "chud");
+	    window.location.href = data.replace(/bls/gi, "chud");
 	}
 $(function() {
 	// Set up basic options for the cart fancybox
